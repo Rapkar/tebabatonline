@@ -57,7 +57,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container-fluid">
             @auth
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,7 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('auth.Logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -85,10 +85,17 @@
 
                         <ul class="navbar-nav">
                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"  aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre  >پست ها</a>
+                            <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts" >
+                                <a class="dropdown-item" href="{{ route('newpost') }}">افزودن پست</a>
+                                <a class="dropdown-item" href="{{ route('posts') }}">لیست پست ها</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#"  aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre  >محصولات</a>
                             <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts" >
-                                <a class="dropdown-item" href="{{ route('newpost') }}">افزودن محصول</a>
-                                <a class="dropdown-item" href="#">لیست محصولات</a>
+                                <a class="dropdown-item" href="{{ route('newproduct') }}">افزودن محصول</a>
+                                <a class="dropdown-item" href="{{ route('products') }}">لیست محصولات</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -110,7 +117,7 @@
                                 تنظیمات
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">حمل ایم</a>
+                                <a class="dropdown-item" href="#"></a>
                                 <a class="dropdown-item" href="#">کارکرد دیگر</a>
                                 <a class="dropdown-item" href="#">何かがここにあります</a>
                             </div>

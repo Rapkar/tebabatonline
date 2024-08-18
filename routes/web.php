@@ -5,17 +5,82 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+    /***********************************************/
+    /**                                           **/
+    /**                                           **/
+    /*************** Admin Panel *******************/
+    /**                                           **/
+    /**                                           **/
+    /********************* *************************/
+
+
 Route::prefix('adminpanel')->group(function () {
+
+    /********************* *************************/
+    /*************** User Manager *******************/
+    /********************* *************************/
+
     Route::get('newuser', [App\Http\Controllers\AdminPanel\UserController::class, 'create'])->name('newuser');
-    Route::get('edituser', [App\Http\Controllers\AdminPanel\UserController::class, 'edit'])->name('edituser');
+    Route::get('edit/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'edit'])->name('edit');
+    Route::post('update/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'update'])->name('update');
     Route::get('users', [App\Http\Controllers\AdminPanel\UserController::class, 'index'])->name('users');
     Route::post('store', [App\Http\Controllers\AdminPanel\UserController::class, 'store'])->name('store');
     Route::get('delete/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'delete'])->name('delete');
+                
+                
+    //Ajax
+    Route::post('getusersbyrole', [App\Http\Controllers\AdminPanel\UserController::class, 'getusersbyrole'])->name('getusersbyrole');
+
+
     
-    
-    // posts Routes
-    
+    /********************* *************************/
+    /*************** Post Manager *******************/
+    /********************* *************************/
     Route::get('newpost', [App\Http\Controllers\AdminPanel\PostController::class, 'create'])->name('newpost');
+    Route::get('edit/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'edit'])->name('edit');
+    Route::post('update/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'update'])->name('update');
     Route::get('posts', [App\Http\Controllers\AdminPanel\PostController::class, 'index'])->name('posts');
+    Route::post('store', [App\Http\Controllers\AdminPanel\PostController::class, 'store'])->name('store');
+    Route::get('delete/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'delete'])->name('delete');
+
+    
+    Route::get('postnewcat', [App\Http\Controllers\AdminPanel\CategoryController::class, 'create'])->name('postnewcat');
+    Route::get('postcats', [App\Http\Controllers\AdminPanel\CategoryController::class, 'index'])->name('postcats');
+     
+                
+    //Ajax
+    // Route::post('getusersbyrole', [App\Http\Controllers\AdminPanel\PostController::class, 'getusersbyrole'])->name('getusersbyrole');
+
+
+        
+    /********************* *************************/
+    /*************** Product Manager *******************/
+    /********************* *************************/
+    Route::get('newproduct', [App\Http\Controllers\AdminPanel\PostController::class, 'create'])->name('newproduct');
+    Route::get('edit/productid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'edit'])->name('edit');
+    Route::post('update/productid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'update'])->name('update');
+    Route::get('products', [App\Http\Controllers\AdminPanel\PostController::class, 'index'])->name('products');
+    Route::post('store', [App\Http\Controllers\AdminPanel\PostController::class, 'store'])->name('store');
+    Route::get('delete/productid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'delete'])->name('delete');
+                
+                
+    //Ajax
+    // Route::post('getusersbyrole', [App\Http\Controllers\AdminPanel\PostController::class, 'getusersbyrole'])->name('getusersbyrole');
+
+
+
 
 });
+
+
+
+
+    /***********************************************/
+    /**                                           **/
+    /**          we                                 **/
+    /*************** Front side *******************/
+    /**                                           **/
+    /**                                           **/
+    /********************* *************************/

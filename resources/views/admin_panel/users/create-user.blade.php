@@ -7,7 +7,7 @@
   <div class="form-group  mb-4">
     <label for="name" class="col-sm-2 control-label">نام کاربر:</label>
     <div class="col-sm-10">
-      <input type="text" id="name" name="name" class="form-control" placeholder="نام کاربر" required>
+      <input type="text" id="name" name="name"  class="form-control" placeholder="نام کاربر" required>
     </div>
   </div>
   <div class="form-group  mb-4">

@@ -85,10 +85,21 @@
 
                         <ul class="navbar-nav">
                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"  aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre  >پست ها</a>
+                            <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts" >
+                                <a class="dropdown-item" href="{{ route('newpost') }}">افزودن پست</a>
+                                <a class="dropdown-item" href="{{ route('posts') }}">لیست پست ها</a>
+                                <a class="dropdown-item" href="{{ route('postnewcat') }}">افزودن دسته بندی</a>
+                                <a class="dropdown-item" href="{{ route('postcats') }}">لیست دسته بندی ها </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#"  aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre  >محصولات</a>
                             <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts" >
-                                <a class="dropdown-item" href="{{ route('newpost') }}">افزودن محصول</a>
-                                <a class="dropdown-item" href="{{ route('posts') }}">لیست محصولات</a>
+                                <a class="dropdown-item" href="{{ route('newproduct') }}">افزودن محصول</a>
+                                <a class="dropdown-item" href="{{ route('products') }}">لیست محصولات</a>
+                                <a class="dropdown-item" href="{{ route('products') }}">افزودن دسته بندی</a>
+                                <a class="dropdown-item" href="{{ route('products') }}">لیست دسته بندی ها </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

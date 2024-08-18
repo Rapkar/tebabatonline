@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-rtl/dist/css/bootstrap-rtl.min.css';
 
+import './adminpanel/core';
 // Import TinyMCE initialization
 import 'tinymce/tinymce';
 import 'tinymce/skins/ui/oxide/skin';
