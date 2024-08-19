@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function index(Request $request)
+    {
+        // $users = User::all();
+        $categories = Category::all();
+
+        // $users = User::whereHas('roles', function ($query) {
+        //     $query->where('name', 'admin');
+        // })->get();
+        return view('admin_panel.categories.list-category', compact( 'categories'));
+    }
     public function create(Request $request)
     {
         $categories = Category::all();
@@ -15,21 +25,28 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
-        $validator = $this->validator($request);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+
         // S
-        $user = new Category();
-        $user->name = $request->input('name');
-        $user->content = $request->input('content');
-        $user->order = $request->input('order');
-        $user->save();
+        $Category = new Category();
+        $Category->name = $request->input('name');
+        $Category->content = $request->input('content');
+        $Category->order = $request->input('order');
+        $Category->save();
 
 
         // $role = Role::find($request->input('role'));
         // $user = User::find($user->id);
         // $role->users()->attach($user->id);
         return redirect()->route('postcats'); // redirect to the users index page
+    }
+    public function delete($id)
+    {
+        $Category = Category::find($id);
+        if ($Category) {
+            $Category->delete();
+            return redirect()->route('postcats');
+        } else {
+            // handle error
+        }
     }
 }

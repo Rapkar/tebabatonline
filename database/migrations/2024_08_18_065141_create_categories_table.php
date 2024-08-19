@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('content');
-            $table->bigInteger('order');
+            $table->bigInteger('order')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/login', [App\Http\Controllers\HomeController::class, 'index'])->name('login');
 
 
     /***********************************************/
@@ -47,7 +47,9 @@ Route::prefix('adminpanel')->group(function () {
 
     
     Route::get('postnewcat', [App\Http\Controllers\AdminPanel\CategoryController::class, 'create'])->name('postnewcat');
+    Route::post('postnewcat', [App\Http\Controllers\AdminPanel\CategoryController::class, 'store'])->name('postnewcat');
     Route::get('postcats', [App\Http\Controllers\AdminPanel\CategoryController::class, 'index'])->name('postcats');
+    Route::get('deletecat/catid={id}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'delete'])->name('deletecat');
      
                 
     //Ajax
@@ -84,3 +86,4 @@ Route::prefix('adminpanel')->group(function () {
     /**                                           **/
     /**                                           **/
     /********************* *************************/
+Route::get('/', [App\Http\Controllers\Website\home::class, 'index'])->name('home');

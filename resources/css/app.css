@@ -11,3 +11,42 @@ a.navbar-brand{
     position: relative;
     max-width: 300px;
 }
+#catlist{
+    border-right: 1px solid;
+    padding-right: 2rem !important;
+}
+#catlist div{
+    cursor: pointer;   
+}
+#catlist p{
+    background-color: #ddd;
+  padding: 0.3rem;
+}
+#catlist h2{
+    background-color: #868686;
+    padding: 0.3rem;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+}
+/* #catlist div::before{
+    content: '';
+    position: relative;
+    right: -30px;
+    background-color: #000;
+    width: 15px;
+    height: 15px;
+    display: block;
+    border: 2px solid #eee;
+    top: 1.5rem;
+} */
+#catlist{
+    list-style: none;
+    padding: 0;
+}
+#catlist li:hover{
+background-color: #ddd;
+}
+#catlist .subcategory{
+    padding-right: 1rem;
+}

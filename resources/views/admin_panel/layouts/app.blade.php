@@ -126,7 +126,16 @@
                                 <a class="dropdown-item" href="#">何かがここにあります</a>
                             </div>
                         </li>
-
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                وبسایت
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#"></a>
+                                <a class="dropdown-item" href="{{route('home')}}">وبسایت</a>
+                                <a class="dropdown-item" href="#">فروشگاه</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>
