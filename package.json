@@ -19,6 +19,7 @@
         "dropzone": "^6.0.0-beta.2",
         "jquery": "^3.7.1",
         "sortablejs": "^1.15.2",
+        "swiper": "^11.1.9",
         "tinymce": "^7.3.0"
     }
 }

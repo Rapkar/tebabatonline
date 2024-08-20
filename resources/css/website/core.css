@@ -1,0 +1,249 @@
+@font-face {
+    font-family: 'Yekan';
+    src: url('./fonts/Yekan.eot');
+    src: url('./fonts/Yekan.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Yekan.woff2') format('woff2'),
+        url('./fonts/Yekan.woff') format('woff'),
+        url('./fonts/Yekan.ttf') format('truetype'),
+        url('./fonts/Yekan.svg#Yekan') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+	font-family: Yekan Bakh FaNum;
+	font-style: normal;
+	font-weight: 100;
+	src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-thin.woff') format('woff'),   
+	url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-thin.woff2') format('woff2');		
+}
+
+@font-face {
+	font-family: Yekan Bakh FaNum;
+	font-style: normal;
+	font-weight: 300;
+	src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-Light.woff') format('woff'),   
+	url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-Light.woff2') format('woff2');	
+}
+
+@font-face {
+	font-family: Yekan Bakh FaNum;
+	font-style: normal;
+	font-weight: normal;
+	src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-Regular.woff') format('woff'),   
+	url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-Regular.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: Yekan Bakh FaNum;
+	font-style: normal;
+	font-weight: 600;
+	src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-SemiBold.woff') format('woff'),   
+	url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-SemiBold.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: Yekan Bakh FaNum;
+	font-style: normal;
+	font-weight: bold;
+	src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-Bold.woff') format('woff'),   
+	url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-Bold.woff2') format('woff2'); 
+}
+
+@font-face {
+	font-family: Yekan Bakh FaNum;
+	font-style: normal;
+	font-weight: 800;
+	src: url('./fonts/YekanBakhFaNum/woff/Yekan Bakh FaNum-ExtraBold.woff') format('woff'),   
+	url('./fonts/YekanBakhFaNum/woff2/Yekan Bakh FaNum-ExtraBold.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: Yekan Bakh FaNum;
+	font-style: normal;
+	font-weight: 900;
+	src: url('./fonts/YekanBakhFaNum/woff/Yekan Bakh FaNum-Black.woff') format('woff'),   
+	url('./fonts/YekanBakhFaNum/woff2/Yekan Bakh FaNum-Black.woff2') format('woff2');		 
+}
+
+@font-face {
+	font-family: Yekan Bakh FaNum;
+	font-style: normal;
+	font-weight: 950;
+	src: url('./fonts/YekanBakhFaNum/woff/Yekan Bakh FaNum-ExtraBlack.woff') format('woff'),   
+	url('./fonts/YekanBakhFaNum/woff2/Yekan Bakh FaNum-ExtraBlack.woff2') format('woff2');		 
+}
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input {
+    font-family: 'Yekan' , 'Yekan Bakh FaNum' !important;
+}
+
+.logo {
+    width: 160px;
+    height: 70px;
+    object-fit: contain;
+    max-width: 300px;
+    display: block;
+    position: relative;
+}
+
+a.navbar-brand {
+    position: relative;
+    max-width: 300px;
+}
+
+header form {
+    position: relative;
+    width: 100%;
+}
+
+header form input[type='text'] {
+    background-color: rgba(244, 244, 244, 1);
+    font-size: 14px;
+    color: rgba(100, 100, 100, 1);
+    width: 100%;
+    border: none;
+    height: 46px;
+    border-radius: 25px;
+    padding: 1rem;
+    text-indent: 32px;
+}
+
+header form button[type='submit'] {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    background-color: transparent;
+
+}
+
+header .menu {
+    background-color: rgba(240, 240, 240, 1);
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+header .menu a {
+    margin: 0;
+    font-weight: 600;
+    font-size: 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+header .menu ul {
+    padding: 0;
+}
+
+header .menu li {
+    padding-left: 1.5rem;
+}
+
+header .menu li a.active {
+    color: rgba(247, 166, 47) !important;
+    background-color: #f7a72f36 !important;
+    border-radius: 50px;
+    padding: 8px 13px !important;
+}
+
+header .menu .shoppingcard ul {
+    margin: 0 !important;
+}
+
+header .menu .shoppingcard li::before {
+    content: '';
+
+}
+
+header .menu .shoppingcard li::after {
+    content: '';
+
+}
+
+header .menu .shoppingcard .cart-icon {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 5px;
+}
+header .menu .shoppingcard  .minicart{
+background-color: rgba(247, 166, 47) ;
+border-radius: 30px;
+position: relative;
+color: #fff;
+min-width: 125px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+header .menu .shoppingcard  .minicart .quanity{
+    position: absolute;
+    background-color: #fff;
+    color: rgba(247, 166, 47);
+    border-radius: 30px;
+    top: -3px;
+    width: 10px;
+    height: 10px;
+    left: -12px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 11px;
+}
+.title{
+    font-weight: 600;
+    font-size: 26px;
+    color:#000
+}
+
+
+footer{
+    min-height: 300px;
+    background-color: transparent;
+    background-image: linear-gradient(159deg, #4DCBD3 4%, #007C7E 63%);}
+footer h2{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+}
+footer  a{
+    color: #fff;
+text-decoration: none;
+    font-size: 20px;
+}
+footer ul{
+    list-style: none;
+    padding: 0;
+
+}
+footer ul li {
+    padding: 7px
+}
+footer ul li a{
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+
+}
+.ftanimate svg
+{
+    bottom: -9rem;
+    position: relative;
+    z-index: -1;
+}
