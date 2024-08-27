@@ -50,3 +50,20 @@ background-color: #ddd;
 #catlist .subcategory{
     padding-right: 1rem;
 }
+.status{
+    width: 15px;
+    height: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.green{
+    background-color: #007C7E;
+
+}
+.red{
+    background-color: #bd110c;
+
+}

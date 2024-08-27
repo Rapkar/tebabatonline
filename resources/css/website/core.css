@@ -9,69 +9,71 @@
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
-	font-family: Yekan Bakh FaNum;
-	font-style: normal;
-	font-weight: 100;
-	src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-thin.woff') format('woff'),   
-	url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-thin.woff2') format('woff2');		
+    font-family: Yekan Bakh FaNum;
+    font-style: normal;
+    font-weight: 100;
+    src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-thin.woff') format('woff'),
+        url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-thin.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: Yekan Bakh FaNum;
-	font-style: normal;
-	font-weight: 300;
-	src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-Light.woff') format('woff'),   
-	url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-Light.woff2') format('woff2');	
+    font-family: Yekan Bakh FaNum;
+    font-style: normal;
+    font-weight: 300;
+    src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-Light.woff') format('woff'),
+        url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-Light.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: Yekan Bakh FaNum;
-	font-style: normal;
-	font-weight: normal;
-	src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-Regular.woff') format('woff'),   
-	url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-Regular.woff2') format('woff2');		 
+    font-family: Yekan Bakh FaNum;
+    font-style: normal;
+    font-weight: normal;
+    src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-Regular.woff') format('woff'),
+        url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-Regular.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: Yekan Bakh FaNum;
-	font-style: normal;
-	font-weight: 600;
-	src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-SemiBold.woff') format('woff'),   
-	url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-SemiBold.woff2') format('woff2');		 
+    font-family: Yekan Bakh FaNum;
+    font-style: normal;
+    font-weight: 600;
+    src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-SemiBold.woff') format('woff'),
+        url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: Yekan Bakh FaNum;
-	font-style: normal;
-	font-weight: bold;
-	src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-Bold.woff') format('woff'),   
-	url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-Bold.woff2') format('woff2'); 
+    font-family: Yekan Bakh FaNum;
+    font-style: normal;
+    font-weight: bold;
+    src: url('./fonts/YekanBakhFaNum/woff/YekanBakhFaNum-Bold.woff') format('woff'),
+        url('./fonts/YekanBakhFaNum/woff2/YekanBakhFaNum-Bold.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: Yekan Bakh FaNum;
-	font-style: normal;
-	font-weight: 800;
-	src: url('./fonts/YekanBakhFaNum/woff/Yekan Bakh FaNum-ExtraBold.woff') format('woff'),   
-	url('./fonts/YekanBakhFaNum/woff2/Yekan Bakh FaNum-ExtraBold.woff2') format('woff2');		 
+    font-family: Yekan Bakh FaNum;
+    font-style: normal;
+    font-weight: 800;
+    src: url('./fonts/YekanBakhFaNum/woff/Yekan Bakh FaNum-ExtraBold.woff') format('woff'),
+        url('./fonts/YekanBakhFaNum/woff2/Yekan Bakh FaNum-ExtraBold.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: Yekan Bakh FaNum;
-	font-style: normal;
-	font-weight: 900;
-	src: url('./fonts/YekanBakhFaNum/woff/Yekan Bakh FaNum-Black.woff') format('woff'),   
-	url('./fonts/YekanBakhFaNum/woff2/Yekan Bakh FaNum-Black.woff2') format('woff2');		 
+    font-family: Yekan Bakh FaNum;
+    font-style: normal;
+    font-weight: 900;
+    src: url('./fonts/YekanBakhFaNum/woff/Yekan Bakh FaNum-Black.woff') format('woff'),
+        url('./fonts/YekanBakhFaNum/woff2/Yekan Bakh FaNum-Black.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: Yekan Bakh FaNum;
-	font-style: normal;
-	font-weight: 950;
-	src: url('./fonts/YekanBakhFaNum/woff/Yekan Bakh FaNum-ExtraBlack.woff') format('woff'),   
-	url('./fonts/YekanBakhFaNum/woff2/Yekan Bakh FaNum-ExtraBlack.woff2') format('woff2');		 
+    font-family: Yekan Bakh FaNum;
+    font-style: normal;
+    font-weight: 950;
+    src: url('./fonts/YekanBakhFaNum/woff/Yekan Bakh FaNum-ExtraBlack.woff') format('woff'),
+        url('./fonts/YekanBakhFaNum/woff2/Yekan Bakh FaNum-ExtraBlack.woff2') format('woff2');
 }
+
 a,
 p,
 h1,
@@ -81,7 +83,7 @@ h4,
 h5,
 h6,
 input {
-    font-family: 'Yekan' , 'Yekan Bakh FaNum' !important;
+    font-family: 'Yekan', 'Yekan Bakh FaNum' !important;
 }
 
 .logo {
@@ -180,18 +182,20 @@ header .menu .shoppingcard .cart-icon {
     position: absolute;
     right: 5px;
 }
-header .menu .shoppingcard  .minicart{
-background-color: rgba(247, 166, 47) ;
-border-radius: 30px;
-position: relative;
-color: #fff;
-min-width: 125px;
+
+header .menu .shoppingcard .minicart {
+    background-color: rgba(247, 166, 47);
+    border-radius: 30px;
+    position: relative;
+    color: #fff;
+    min-width: 125px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-header .menu .shoppingcard  .minicart .quanity{
+
+header .menu .shoppingcard .minicart .quanity {
     position: absolute;
     background-color: #fff;
     color: rgba(247, 166, 47);
@@ -206,44 +210,298 @@ header .menu .shoppingcard  .minicart .quanity{
     display: flex;
     font-size: 11px;
 }
-.title{
+
+.title {
     font-weight: 600;
     font-size: 26px;
-    color:#000
+    color: #000
 }
 
 
-footer{
+footer {
     min-height: 300px;
     background-color: transparent;
-    background-image: linear-gradient(159deg, #4DCBD3 4%, #007C7E 63%);}
-footer h2{
+    background-image: linear-gradient(159deg, #4DCBD3 4%, #007C7E 63%);
+}
+
+footer h2 {
     color: #fff;
     font-size: 20px;
     font-weight: 700;
 }
-footer  a{
+
+footer a {
     color: #fff;
-text-decoration: none;
+    text-decoration: none;
     font-size: 20px;
 }
-footer ul{
+
+footer ul {
     list-style: none;
     padding: 0;
 
 }
+
 footer ul li {
     padding: 7px
 }
-footer ul li a{
+
+footer ul li a {
     color: #fff;
     font-size: 16px;
     font-weight: 400;
 
 }
-.ftanimate svg
-{
+
+.ftanimate svg {
     bottom: -9rem;
     position: relative;
     z-index: -1;
+}
+
+i {
+    font-family: FontAwesome !important;
+    font-weight: 900;
+    font-style: normal;
+}
+
+.headerslider img {
+    width: 100%;
+}
+
+/* .headerslider  .swiper-slide{
+padding: 1rem; */
+/* } */
+.headerslider .swiper-button-next,
+.headerslider .swiper-button-prev {
+    color: #000;
+}
+
+.headerslider .swiper-button-next::after,
+.headerslider .swiper-button-prev::after {
+    font-size: 25px;
+}
+
+.headerslider {
+    min-height: 496px;
+    display: block;
+}
+
+.headerslider .swiper-slide .item {
+    background-size: cover;
+    background-position: center;
+    min-height: 496px;
+    position: relative;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: baseline;
+    padding: 5rem
+}
+
+.headerslider * {
+    margin-left: auto;
+}
+
+.headerslider h2 {
+    color: #BAFFE0;
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.headerslider h3 {
+    color: #fff;
+    font-size: 27px;
+    font-weight: 900;
+}
+
+.headerslider p {
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.headerslider a {
+    transition: all 0.3s ease-in;
+    opacity: 1;
+    color: #3E3E3E;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #f3f3f3;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.headerslider a:hover {
+    transition: all 0.3s ease-in;
+    opacity: 0.8;
+}
+
+.swiper-pagination {
+    border-radius: 25px;
+    width: fit-content !important;
+    margin: auto;
+    float: none;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 0px 5px;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #000 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orderalert {
+    min-height: 240px;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.orderalert h2 {
+    color: #3d4f3e;
+    font-size: 35px;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.orderalert p {
+    color: #161616;
+    background-color: #9cc2df !important;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.orderalert a {
+    background-color: #F7A62F;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 24px;
+    text-decoration: none;
+}
+.bggray{
+    background-color: #B1B1B11C;
+}
+.bggray a{
+    color: #161616;
+}
+.blogslider a ,.bggray a{
+    text-decoration: none !important;
+}
+.blogslider h5
+{
+  color:rgb(247,166,47);
+  text-decoration: none;
+  justify-content: center;
+  margin: auto;
+  padding-bottom: 1rem;
+}
+.blogslider p{
+    color: #7f7f7f;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    min-height: 7rem;
+    max-height: 6rem;
+    overflow: hidden;
+}
+.blogslider img{
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    margin: auto;
+    height: 250px;
+}
+.blogslider h2{
+    font-size: 20px;
+    font-weight: #474747;
+}
+.blogslider .card:hover .head{
+    position: relative;
+}
+.blogslider .card .head::after{
+    transition: all 0.3s ease-in;
+    
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 205px;
+        right: 0;
+    left: 0;
+    margin: auto;
+    background-color: #00000033;
+    opacity: 0;
+}
+.blogslider .card:hover .head::after{
+    transition: all 0.3s ease-in;
+    opacity: 1;
+
+}
+.counter{
+    min-height: 511px;
+}
+.counter h2{
+    font-size: 27px;
+    color: #fff;
+    font-weight: 700;
+}
+.counter p{
+    font-size: 16px;
+    color: #fff;
+    font-weight: 700;
+    margin-top: 1rem;
+    padding: 0;
+}
+.counter .items div{
+    font-size: 13px;
+    color: #fff;
+    font-weight: 600;
+    padding-left: 10px;
+    }
+.counter span{
+    font-size: 24px;
+    font-family: Yekan Bakh FaNum;
+    color: #7f7f7f;
+    background-color: #fff;
+    min-width: 108px;
+    min-height: 46px;
+    max-height: 46px;
+    max-width: fit-content;
+    max-width: 108px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 16px;
+}
+.counter .items div{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+}
+.blogsliderpaginate
+{
+    position: relative;
+    width: 100px;
+    height: 80px;
+}
+.blogsliderpaginate .swiper-button-next, .blogsliderpaginate .swiper-button-prev,.swiper-button-prev:after, .swiper-button-next:after{
+    color: #000;
+    font-size: 20px !important;
 }

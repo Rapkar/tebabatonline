@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('content');
+            $table->string('expert')->nullable();
             $table->string('image')->nullable();
             $table->string('status');
+            $table->string('slug')->unique();
             $table->bigInteger('count')->default(0);
             $table->timestamps();
         });

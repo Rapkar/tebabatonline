@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/login', [App\Http\Controllers\HomeController::class, 'index'])->name('login');
+Route::get('/auth', [App\Http\Controllers\HomeController::class, 'index'])->name('auth');
 
 
     /***********************************************/
@@ -39,8 +39,8 @@ Route::prefix('adminpanel')->group(function () {
     /*************** Post Manager *******************/
     /********************* *************************/
     Route::get('newpost', [App\Http\Controllers\AdminPanel\PostController::class, 'create'])->name('newpost');
-    Route::get('edit/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'edit'])->name('edit');
-    Route::post('update/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'update'])->name('update');
+    Route::get('edit/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'edit'])->name('editpost');
+    Route::post('update/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'update'])->name('updatepost');
     Route::get('posts', [App\Http\Controllers\AdminPanel\PostController::class, 'index'])->name('posts');
     Route::post('store', [App\Http\Controllers\AdminPanel\PostController::class, 'store'])->name('store');
     Route::get('delete/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'delete'])->name('delete');
@@ -87,3 +87,5 @@ Route::prefix('adminpanel')->group(function () {
     /**                                           **/
     /********************* *************************/
 Route::get('/', [App\Http\Controllers\Website\home::class, 'index'])->name('home');
+Route::get('articles/{slug}', [App\Http\Controllers\Website\home::class, 'articles'])->name('articles');
+

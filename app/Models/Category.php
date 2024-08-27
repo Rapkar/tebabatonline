@@ -17,4 +17,8 @@ class Category extends Model
     {
         return $this->belongsTo(\App\Models\Category::class, 'order');
     }
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }
