@@ -36,8 +36,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">تصویر شاخص:</label>
-                    <div class="dropzone" id="myDropzone">
-                        <input type="file" name="image" />
+                    <div class="dropzone" id="postimg">
                     </div>
                 </div>
                 <div class="form-group mb-4">

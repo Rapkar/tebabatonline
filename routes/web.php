@@ -32,7 +32,8 @@ Route::prefix('adminpanel')->group(function () {
                 
     //Ajax
     Route::post('getusersbyrole', [App\Http\Controllers\AdminPanel\UserController::class, 'getusersbyrole'])->name('getusersbyrole');
-
+    Route::post('upload', [App\Http\Controllers\AdminPanel\MediaController::class, 'uploadfile'])->name('uploadfile');
+   
 
     
     /********************* *************************/

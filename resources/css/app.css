@@ -67,3 +67,12 @@ background-color: #ddd;
     background-color: #bd110c;
 
 }
+.dz-success-mark svg{
+    fill: #2c8c00;
+}
+.dz-error-message svg{
+    fill: #bd110c;
+}
+.dz-progress{
+    display: none;
+}
