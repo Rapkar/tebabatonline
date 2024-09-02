@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-<form id="createUserForm" action="{{route('update')}}" method="post" class="form-horizontal row">
+<form id="createUserForm" action="{{ route('store') }}" method="post" class="form-horizontal row">
     @csrf
   <div class="form-group  mb-4">
     <label for="name" class="col-sm-2 control-label">نام کاربر:</label>

@@ -15,7 +15,7 @@ class PostController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255'],
-            'image' => 'required|image|mimes:jpeg,png,gif|max:2048',
+            'image' => ['required ', 'string', 'max:255'],
         ]);
     }
     public function index(Request $request)
@@ -41,10 +41,10 @@ class PostController extends Controller
         $Post->content = $request->input('content');
         $Post->expert = $request->input('expert');
         $Post->slug = $request->input('slug');
-        $imageName = time().'.'.$request->image->getClientOriginalExtension();
-        $url=$request->image->storeAs('images', $imageName);
+        // $imageName = time().'.'.$request->image->getClientOriginalExtension();
+        // $url=$request->image->storeAs('images', $imageName);
         
-        $Post->image =$url;
+        $Post->image =$request->input('image');;
         $Post->status = $request->input('status');
         $Post->save();
 

@@ -8,12 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>طبابت آنلاین</title>
+    <title>{{$title ?? 'Default Title' }}</title>
 
     <!-- Fonts -->
 
     <!-- Scripts -->
-    @vite([ 'resources/js/app.js'])
+    @vite([ 'resources/js/adminpanel/core.js','resources/js/app.js'])
 </head>
 
 <body>
@@ -95,9 +95,9 @@
                             <a class="nav-link dropdown-toggle" href="#"  aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre  >محصولات</a>
                             <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts" >
                                 <a class="dropdown-item" href="{{ route('newproduct') }}">افزودن محصول</a>
-                                <a class="dropdown-item" href="{{ route('products') }}">لیست محصولات</a>
-                                <a class="dropdown-item" href="{{ route('products') }}">افزودن دسته بندی</a>
-                                <a class="dropdown-item" href="{{ route('products') }}">لیست دسته بندی ها </a>
+                                <a class="dropdown-item" href="{{ route('productlist') }}">لیست محصولات</a>
+                                <a class="dropdown-item" href="{{ route('productnewcat') }}">افزودن دسته بندی</a>
+                                <a class="dropdown-item" href="{{ route('productscats') }}">لیست دسته بندی ها </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -107,11 +107,11 @@
                                 <a class="dropdown-item" href="{{ route('users') }}">لیست کاربران</a>
                             </div>
                         </li>
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#"  aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre  >پزشک</a>
+                            <a class="nav-link dropdown-toggle" href="#"  aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre  >سفارشات</a>
                             <div class="dropdown-menu dropdown-menu-right " aria-labelledby="users" >
-                                <a class="dropdown-item" href="#">کاربر</a>
-                                <a class="dropdown-item" href="#">لیست کاربران</a>
+                                <a class="dropdown-item" href="#">لیست سفارشات</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

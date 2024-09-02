@@ -1,4 +1,4 @@
-.logo{
+.logo {
     width: 300px;
     height: 100px;
     object-fit: contain;
@@ -7,28 +7,33 @@
     position: relative;
 }
 
-a.navbar-brand{
+a.navbar-brand {
     position: relative;
     max-width: 300px;
 }
-#catlist{
+
+#catlist {
     border-right: 1px solid;
     padding-right: 2rem !important;
 }
-#catlist div{
-    cursor: pointer;   
+
+#catlist div {
+    cursor: pointer;
 }
-#catlist p{
+
+#catlist p {
     background-color: #ddd;
-  padding: 0.3rem;
+    padding: 0.3rem;
 }
-#catlist h2{
+
+#catlist h2 {
     background-color: #868686;
     padding: 0.3rem;
     font-size: 14px;
     color: #fff;
     font-weight: 600;
 }
+
 /* #catlist div::before{
     content: '';
     position: relative;
@@ -40,17 +45,20 @@ a.navbar-brand{
     border: 2px solid #eee;
     top: 1.5rem;
 } */
-#catlist{
+#catlist {
     list-style: none;
     padding: 0;
 }
-#catlist li:hover{
-background-color: #ddd;
+
+#catlist li:hover {
+    background-color: #ddd;
 }
-#catlist .subcategory{
+
+#catlist .subcategory {
     padding-right: 1rem;
 }
-.status{
+
+.status {
     width: 15px;
     height: 15px;
     border-radius: 10px;
@@ -59,20 +67,147 @@ background-color: #ddd;
     align-items: center;
     margin: auto;
 }
-.green{
+
+.green {
     background-color: #007C7E;
 
 }
-.red{
+
+.red {
     background-color: #bd110c;
 
 }
-.dz-success-mark svg{
+
+.dz-success-mark svg {
     fill: #2c8c00;
 }
-.dz-error-message svg{
+
+.dz-error-message svg {
     fill: #bd110c;
 }
-.dz-progress{
+
+.dz-progress {
     display: none;
+}
+
+/* Dropzone container */
+.dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+    padding: 20px;
+    text-align: center;
+    transition: border 0.3s ease-in-out;
+}
+
+/* Dropzone hover effect */
+.dropzone:hover {
+    border-color: #0087F7;
+    background-color: #f5f5f5;
+}
+
+/* Dropzone active state */
+.dropzone.dz-drag-hover {
+    border-color: #0087F7;
+    background-color: #f5f5f5;
+}
+
+/* Dropzone preview container */
+.dropzone .dz-preview {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 16px;
+    min-height: 100px;
+}
+
+/* Dropzone file preview */
+.dropzone .dz-preview .dz-image {
+    border-radius: 3px;
+    background: #999;
+    width: 100px;
+    height: 100px;
+}
+
+.dropzone .dz-preview .dz-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Dropzone file name */
+.dropzone .dz-preview .dz-details .dz-filename {
+    white-space: nowrap;
+}
+
+.dropzone .dz-preview .dz-details .dz-filename:hover span {
+    border: 1px solid #0087F7;
+    background-color: #f5f5f5;
+}
+
+.dropzone .dz-preview .dz-details .dz-filename span,
+.dropzone .dz-preview .dz-details .dz-size span {
+    background-color: #f5f5f5;
+    padding: 0 0.4em;
+    border-radius: 3px;
+}
+
+/* Dropzone progress bar */
+.dropzone .dz-preview .dz-progress {
+    position: absolute;
+    top: 100px;
+    left: 6px;
+    right: 6px;
+    height: 6px;
+    background: #d7d7d7;
+    display: none;
+}
+
+.dropzone .dz-preview .dz-progress .dz-upload {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: #0087F7;
+}
+
+/* Dropzone remove button */
+.dropzone .dz-preview .dz-remove {
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    border: none;
+}
+
+.dropzone .dz-preview .dz-remove:hover {
+    text-decoration: underline;
+}
+
+/* Dropzone error message */
+.dropzone .dz-preview .dz-error-message {
+    color: #b94a48;
+    display: none;
+}
+
+.dropzone .dz-preview.dz-error .dz-error-message,
+.dropzone .dz-preview.dz-error .dz-error-mark {
+    display: block;
+}
+
+.dz-button {
+    content: 'fa fa-upload';
+    visibility: hidden;
+}
+
+.dz-button::after {
+    content: '';
+    font-size: 36px;
+    font-weight: 900;
+    width: 100px;
+    height: 100px;
+    /* background-color: #007C7E; */
+    visibility: visible;
+    background-size: contain;
+    display: block;
+    background-image: url('../images/upload.png');
 }

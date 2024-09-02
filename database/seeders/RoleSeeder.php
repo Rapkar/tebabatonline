@@ -23,9 +23,9 @@ class RoleSeeder extends Seeder
             'description' => 'owner level',
         ]);
         Role::create([
-            'name' => 'doctor',
-            'persian_name' => 'دکتر',
-            'description' => 'doctor level',
+            'name' => 'Medic',
+            'persian_name' => 'طبیب',
+            'description' => 'Medic level',
         ]);
         Role::create([
             'name' => 'user',

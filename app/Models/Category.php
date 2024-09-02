@@ -21,4 +21,8 @@ class Category extends Model
     {
         return $this->belongsToMany(Post::class);
     }
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }
