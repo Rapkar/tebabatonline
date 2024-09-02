@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\MedicMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 Auth::routes();
@@ -27,7 +28,7 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     Route::get('edit/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'edit'])->name('edit');
     Route::post('update/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'update'])->name('updateuser');
     Route::get('users', [App\Http\Controllers\AdminPanel\UserController::class, 'index'])->name('users');
-    Route::post('store', [App\Http\Controllers\AdminPanel\UserController::class, 'store'])->name('store');
+    Route::post('usersstore', [App\Http\Controllers\AdminPanel\UserController::class, 'store'])->name('userstore');
     Route::get('delete/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'delete'])->name('delete');
 
 
@@ -44,7 +45,7 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     Route::get('edit/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'edit'])->name('editpost');
     Route::post('update/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'update'])->name('updatepost');
     Route::get('posts', [App\Http\Controllers\AdminPanel\PostController::class, 'index'])->name('posts');
-    Route::post('store', [App\Http\Controllers\AdminPanel\PostController::class, 'store'])->name('store');
+    Route::post('poststore', [App\Http\Controllers\AdminPanel\PostController::class, 'store'])->name('poststore');
     Route::get('delete/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'delete'])->name('delete');
 
 
@@ -95,13 +96,13 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
 /********************* *************************/
  
 
-Route::prefix('medicpanel')->middleware(AdminMiddleware::class)->group(function () {
+Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function () {
 
     /********************* *************************/
     /*************** User Manager *******************/
     /********************* *************************/
 
-    Route::get('/', [App\Http\Controllers\AdminPanel\UserController::class, 'create'])->name('newuser');
+    // Route::get('/', [App\Http\Controllers\AdminPanel\UserController::class, 'create'])->name('newuser');
 
 
 

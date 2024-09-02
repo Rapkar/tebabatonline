@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h1>افزودن پست جدید</h1>
-            <form action="{{ route('store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('poststore') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mb-4">
                     <label for="title">تیتر:</label>
