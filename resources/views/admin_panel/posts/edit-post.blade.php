@@ -36,8 +36,13 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">تصویر شاخص:</label>
-                    <div class="dropzone" id="postimg">
-                        <input type="hidden" id="image" name="image">
+                    <div class="dz-preview dz-file-preview">
+                        <div class="dz-image">
+                            <img data-dz-thumbnail src="{{ url($post->image) }}" />
+                        </div>
+                    </div>
+                    <div  class="dropzone" id="postimg">
+                        <input type="hidden" value="{{$post->image}}" id="image" name="image">
                     </div>
                 </div>
                 <div class="form-group mb-4">

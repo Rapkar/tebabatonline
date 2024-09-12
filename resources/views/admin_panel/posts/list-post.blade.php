@@ -27,10 +27,13 @@
           <a   href="{{ route('articles', $post->slug) }}" target="_new" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="نمایش پست"> نمایش </a>
         </td>
       </tr>
+
       @endforeach
+   
       <!-- More users list goes here -->
     </tbody>
   </table>
+  @include('admin_panel.layouts.pagination')
 </div>
 
 @endsection

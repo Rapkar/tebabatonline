@@ -18,11 +18,12 @@ class UserController extends Controller
     {
         // $users = User::all();
         $roles = Role::all();
-
+        $title=__("admin.Users Page");
         $users = User::whereHas('roles', function ($query) {
             $query->where('name', 'admin');
-        })->get();
-        return view('admin_panel.users.list-user', compact('users', 'roles'));
+        })->take(10)->get();
+        $items=User::paginate(10);
+        return view('admin_panel.users.list-user', compact('users', 'roles','title','items'));
    
 
        
@@ -31,8 +32,9 @@ class UserController extends Controller
     }
     public function create(Request $request)
     {
+        $title=__("admin.Create User Page");
         $roles = Role::all();
-        return view('admin_panel.users.create-user', compact('roles'));
+        return view('admin_panel.users.create-user', compact('roles','title'));
     }
     protected function validator( $request)
     {
@@ -113,7 +115,8 @@ class UserController extends Controller
     {
         $user = User::all()->find($id);
         $roles = Role::all();
-        return view('admin_panel.users.edit-user', compact('user', 'roles'));
+        $title=__("admin.Edit User Page");
+        return view('admin_panel.users.edit-user', compact('user', 'roles','title'));
     }
     public function getusersbyrole(Request $request){
         $roles = Role::all();

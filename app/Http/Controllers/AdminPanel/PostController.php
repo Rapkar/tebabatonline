@@ -16,18 +16,32 @@ class PostController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255'],
             'image' => ['required ', 'string', 'max:255'],
+        ], [
+            'name.required' => __("admin.The name field is required."),
+            'name.string' => __('admin.The name must be a string.'),
+            'name.max' => __('admin.The name must not be greater than :max characters.'),
+            'name.unique' => __('admin.The name has already been taken.'),
+            'slug.required' => __('admin.The slug field is required.'),
+            'slug.string' => __('admin.The slug must be a string.'),
+            'slug.max' => __('admin.The slug must not be greater than :max characters.'),
+            'slug.unique' => __('admin.The slug has already been taken.'),
+            'image.required' => __("admin.The image field is required."),
+            'image.string' => __("admin.The image must be a string."),
+            'image.max' => __("admin.The image must not be greater than :max characters."),
         ]);
     }
     public function index(Request $request)
     {
-        $posts = Post::all();
-
-        return view('admin_panel.posts.list-post',compact('posts'));
+        $title=__("admin.Post Page");
+        $posts = Post::take(10)->get();
+        $items = Post::paginate(10);
+        return view('admin_panel.posts.list-post',compact('posts','title','items'));
     }
     public function create(Request $request)
     {
+        $title=__("admin.Create Post Page");
         $categories=Category::all();
-        return view('admin_panel.posts.create-post',compact('categories'));
+        return view('admin_panel.posts.create-post',compact('categories','title'));
     }
     public function store(Request $request)
     {
@@ -40,21 +54,11 @@ class PostController extends Controller
         $Post->name = $request->input('name');
         $Post->content = $request->input('content');
         $Post->expert = $request->input('expert');
-        $Post->slug = $request->input('slug');
-        // $imageName = time().'.'.$request->image->getClientOriginalExtension();
-        // $url=$request->image->storeAs('images', $imageName);
-        
+        $Slug = $request->input('slug');
+        $Post->slug = str_replace(" ","_",$Slug);
         $Post->image =$request->input('image');;
         $Post->status = $request->input('status');
         $Post->save();
-
-        // if($request->input('category')){
-        //     foreach($request->input('category') as $category){
-        //         $category = Category::find($category);
-        //         $Post = Post::find($Post->id);
-        //         $category->posts()->attach($Post->id);
-        //     }
-        // }
         if($request->input('category')){
             $categories = $request->input('category');
             $Post = Post::find($Post->id);
@@ -63,6 +67,7 @@ class PostController extends Controller
                 $Post->categories()->attach($category->id);
             }
         }
+        $validator=['sd'=>'sd'];
 
         return redirect()->route('posts'); // redirect to the users index page
     }
@@ -79,27 +84,18 @@ class PostController extends Controller
     public function edit($id){
         $post = Post::all()->find($id);
         $categories=Category::all();
-        // $role = Category::all()->find($request->input('role'));
           $cats=$post->categories()->get();
           $ids=[];
           foreach($cats as $cat){
             $ids[]=$cat->id;
           }
-        //   dd($ids);
-        // dd($posts->name);
-         return view('admin_panel.posts.edit-post',compact('post','categories','ids'));
+        $title=__("admin.Edit Post Page");  
+         return view('admin_panel.posts.edit-post',compact('post','categories','ids','title'));
     }
     public function update(Request $request, $id)
     {
         $Post =Post::find($id);
-        // if ($request->method() == 'GET') {
-        //     #return redirect()->back()->withInput();
-        // }
-    
-        // $validator = $this->validator($request);
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
+
         $Post->name = $request->input('name');
         $Post->content = $request->input('content');
         $Post->expert = $request->input('expert');

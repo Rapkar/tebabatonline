@@ -9,15 +9,15 @@
                 @csrf
                 <div class="form-group mb-4">
                     <label for="title">تیتر:</label>
-                    <input type="text" name="name" class="form-control" required>
+                    <input required type="text" value="{{ old('name') }}" name="name"  class="form-control" >
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">محتوا:</label>
-                    <textarea id="postcontent"  name="content"></textarea>
+                    <textarea id="postcontent" value="{{ old('content') }}" required name="content">{{ old('content') }}</textarea>
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">خلاصه:</label>
-                    <textarea rows="6" id="expert" value="" name="expert" class=" form-control w-100"></textarea>
+                    <textarea rows="6" id="expert" required value="{{ old('expert') }}" name="expert" class=" form-control w-100">{{ old('expert') }}</textarea>
                 </div>
                 <div class="form-group mb-4 col-lg-6">
                 <label for="body">دسته بندی:</label>
@@ -31,7 +31,7 @@
                     <label for="body">آدرس لینک:</label> 
                     website.com/<b>post1</b><br>
                    
-                        <input require  type="text" class="form-control" placeholder="آدرس پست من " name="slug" />
+                        <input required  type="text"  value="{{ old('slug') }}" class="form-control" placeholder="آدرس پست من " name="slug" />
                    
                 </div>
                 <div class="form-group mb-4">

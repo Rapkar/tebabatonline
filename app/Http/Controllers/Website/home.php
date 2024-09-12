@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\AdminPanel\Message;
 use App\Jobs\SendMessage;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +16,7 @@ class home extends Controller
 {
     public function index()
     {
+       
         $posts = Post::all();
         $posts = Post::whereHas('categories', function ($query) {
             $query->where('name', 'home');
@@ -36,6 +38,15 @@ class home extends Controller
         }
         $post->increment('count');
         return view('website.single-post', compact('post'));
+    }
+    public function products($slug){
+
+        $product = Product::where('slug', $slug)->first();
+        if (!$product) {
+            return abort(404);
+        }
+        $product->increment('count');
+        return view('website.single-product', compact('product'));
     }
     public function messages() {
         $messages = Message::with('user')->get()->append('time');

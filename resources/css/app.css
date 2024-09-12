@@ -6,7 +6,11 @@
     display: block;
     position: relative;
 }
+.navbar{
+    transition: all 1s;
+    opacity: 1;
 
+}
 a.navbar-brand {
     position: relative;
     max-width: 300px;
@@ -209,5 +213,5 @@ a.navbar-brand {
     visibility: visible;
     background-size: contain;
     display: block;
-    background-image: url('../images/upload.png');
+    background-image: url('../../images/upload.png');
 }

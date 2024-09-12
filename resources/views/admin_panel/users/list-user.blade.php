@@ -37,6 +37,7 @@
             <!-- More users list goes here -->
         </tbody>
     </table>
+    @include('admin_panel.layouts.pagination')
 </div>
 
 @endsection

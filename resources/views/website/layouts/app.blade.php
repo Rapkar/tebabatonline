@@ -15,7 +15,7 @@
     <!-- <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"> -->
 
     <!-- Scripts -->
-    @vite([ 'resources/js/website/core.js'])
+    @vite([  'resources/js/website/core.js'])
 </head>
 
 <body>
@@ -55,15 +55,7 @@
                                 <a class="dropdown-item" href="{{ route('postcats') }}">لیست دسته بندی ها </a>
                             </div> -->
                                     </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link  " href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>خدمات ما</a>
-                                        <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts">
-                                            <a class="dropdown-item" href="{{ route('newproduct') }}">افزودن محصول</a>
-                                            <a class="dropdown-item" href="{{ route('products') }}">لیست محصولات</a>
-                                            <a class="dropdown-item" href="{{ route('products') }}">افزودن دسته بندی</a>
-                                            <a class="dropdown-item" href="{{ route('products') }}">لیست دسته بندی ها </a>
-                                        </div>
-                                    </li>
+
                                     <li class="nav-item dropdown">
                                         <a class="nav-link" href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>فروشگاه</a>
                                     </li>

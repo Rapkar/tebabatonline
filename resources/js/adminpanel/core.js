@@ -1,3 +1,9 @@
+import '../bootstrap';
+import '../../css/app.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-rtl/dist/css/bootstrap-rtl.min.css';
+import 'bootstrap/dist/css/bootstrap-utilities.css';
+import 'bootstrap/dist/css/bootstrap-utilities.rtl.css';
 import $ from 'jquery';
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 import TomSelect from "tom-select";
@@ -24,7 +30,7 @@ import 'tinymce/plugins/preview';
 import 'tinymce/plugins/emoticons';
 import 'tinymce/plugins/directionality';
 import 'tinymce/plugins/emoticons/js/emojiimages';
-
+import 'bootstrap/js/dist/alert';
 
 
 $("#access").on("change", function () {
@@ -85,9 +91,13 @@ if (mainContainer) {
 // 	allowEmptyOption: true,
 // 	create: true
 // });
+
+if (document.getElementById('category')) {
 new TomSelect("#category", {
   maxItems: 3
 });
+}
+if (document.getElementById('status')) {
 new TomSelect("#status", {
   create: true,
   sortField: {
@@ -95,6 +105,7 @@ new TomSelect("#status", {
     direction: "asc"
   }
 });
+}
 
 const myDropzoneElement = document.getElementById('postimg');
 if (myDropzoneElement) {
@@ -124,6 +135,7 @@ if (myDropzoneElement) {
     }
   });
 }
+let images=[];
 document.addEventListener('DOMContentLoaded', function() {
   const mulltiimg = document.getElementsByClassName('postimg');
   if (mulltiimg.length > 0) {
@@ -143,9 +155,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       });
       this.on("success", function (file, responseText) {
-        $("#image").val(responseText.location)
+        images.push(responseText.location);
+        $("#gallery").val(images)
       });
+      console.log( $("#gallery").val());
       this.on("addedfile", function (file) {
+     
       
 
       });
@@ -157,6 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 // // Initialize TinyMCE
 const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (document.getElementById('status')) {
 window.addEventListener('DOMContentLoaded', () => {
   tinymce.init({
     selector: '#postcontent',
@@ -238,3 +254,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
   });
 });
+}

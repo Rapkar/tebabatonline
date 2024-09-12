@@ -12,16 +12,17 @@ class CategoryController extends Controller
     {
         // $users = User::all();
         $categories = Category::all();
-
+        $title=__("admin.Categories Page");
         // $users = User::whereHas('roles', function ($query) {
         //     $query->where('name', 'admin');
         // })->get();
-        return view('admin_panel.categories.list-category', compact( 'categories'));
+        return view('admin_panel.categories.list-category', compact( 'categories','title'));
     }
     public function create(Request $request)
     {
+        $title=__("admin.Create Categories Page");
         $categories = Category::all();
-        return view('admin_panel.categories.create-category', compact('categories'));
+        return view('admin_panel.categories.create-category', compact('categories','title'));
     }
     public function store(Request $request)
     {

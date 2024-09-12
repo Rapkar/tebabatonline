@@ -8,9 +8,10 @@ use App\Models\Post;
 use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+
 class ProductController extends Controller
 {
-    protected function validator( $request)
+    protected function validator($request)
     {
         $data = $request->all();
         return Validator::make($data, [
@@ -21,23 +22,37 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {
-        $products = Product::all();
-        $title=__("admin.Product Page");
-        return view('admin_panel.products.list-product',compact('products','title'));
+        $products = Product::take(10)->get();
+        $items = Post::paginate(10);
+        $title = __("admin.Product Page");
+        return view('admin_panel.products.list-product', compact('products', 'title','items'));
     }
     public function create(Request $request)
     {
-        $categories=Category::all();
-        $title=__("admin.Product Add");
-        return view('admin_panel.products.create-product',compact('categories','title'));
+        $categories = Category::all();
+        $title = __("admin.Create Product Page");
+        return view('admin_panel.products.create-product', compact('categories', 'title'));
     }
     public function store(Request $request)
     {
-        // $validator = $this->validator($request);
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
-        // S
+        $data = $request->all();
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:255'],
+            'image' => ['required ', 'string', 'max:255'],
+        ], [
+            'name.required' => __("admin.The name field is required."),
+            'name.string' => __('admin.The name must be a string.'),
+            'name.max' => __('admin.The name must not be greater than :max characters.'),
+            'name.unique' => __('admin.The name has already been taken.'),
+            'slug.required' => __('admin.The slug field is required.'),
+            'slug.string' => __('admin.The slug must be a string.'),
+            'slug.max' => __('admin.The slug must not be greater than :max characters.'),
+            'slug.unique' => __('admin.The slug has already been taken.'),
+            'image.required' => __("admin.The image field is required."),
+            'image.string' => __("admin.The image must be a string."),
+            'image.max' => __("admin.The image must not be greater than :max characters."),
+        ]);
         $Product = new Product();
         $Product->name = $request->input('name');
         $Product->content = $request->input('content');
@@ -48,8 +63,10 @@ class ProductController extends Controller
         $Product->discount = $request->input('discount');
         // $imageName = time().'.'.$request->image->getClientOriginalExtension();
         // $url=$request->image->storeAs('images', $imageName);
-        
-        $Product->image =$request->input('image');;
+
+        $Product->image = $request->input('image');
+
+        $Product->gallery = $request->input('gallery')[0];
         $Product->status = $request->input('status');
         $Product->save();
 
@@ -60,16 +77,16 @@ class ProductController extends Controller
         //         $category->posts()->attach($Post->id);
         //     }
         // }
-        if($request->input('category')){
+        if ($request->input('category')) {
             $categories = $request->input('category');
             $Product = Product::find($Product->id);
-            foreach($categories as $category) {
+            foreach ($categories as $category) {
                 $category = Category::find($category);
                 $Product->categories()->attach($category->id);
             }
         }
 
-        return redirect()->route('products'); // redirect to the users index page
+        return redirect()->route('productlist'); // redirect to the users index page
     }
     public function delete($id)
     {
@@ -81,26 +98,28 @@ class ProductController extends Controller
             // handle error
         }
     }
-    public function edit($id){
+    public function edit($id)
+    {
         $post = Post::all()->find($id);
-        $categories=Category::all();
+        $categories = Category::all();
         // $role = Category::all()->find($request->input('role'));
-          $cats=$post->categories()->get();
-          $ids=[];
-          foreach($cats as $cat){
-            $ids[]=$cat->id;
-          }
+        $cats = $post->categories()->get();
+        $ids = [];
+        foreach ($cats as $cat) {
+            $ids[] = $cat->id;
+        }
         //   dd($ids);
         // dd($posts->name);
-         return view('admin_panel.posts.edit-post',compact('post','categories','ids'));
+        $title = __("admin.Edit Product Page");
+        return view('admin_panel.posts.edit-post', compact('post', 'categories', 'ids', 'title'));
     }
     public function update(Request $request, $id)
     {
-        $Post =Post::find($id);
+        $Post = Post::find($id);
         // if ($request->method() == 'GET') {
         //     #return redirect()->back()->withInput();
         // }
-    
+
         // $validator = $this->validator($request);
         // if ($validator->fails()) {
         //     return redirect()->back()->withErrors($validator)->withInput();
@@ -111,14 +130,14 @@ class ProductController extends Controller
         $Post->slug = $request->input('slug');
         // $imageName = time().'.'.$request->image->getClientOriginalExtension();
         // $url=$request->image->storeAs('images', $imageName);
-        
+
         // $Post->image =$url;
         $Post->status = $request->input('status');
         $Post->save();
-      #  $user->address = $request->input('address');
-    
+        #  $user->address = $request->input('address');
 
-    
-        return redirect()->route('posts'); // redirect to the users index page
+
+
+        return redirect()->route('products'); // redirect to the users index page
     }
 }

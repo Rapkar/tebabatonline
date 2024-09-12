@@ -1,9 +1,10 @@
+
 import '../bootstrap';
 import '../../css/website/core.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-rtl/dist/css/bootstrap-rtl.min.css';
+
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
 import { Pagination, Navigation, EffectFade } from "swiper/modules";

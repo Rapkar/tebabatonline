@@ -24,13 +24,14 @@
         <td>
           <a href="{{ route('editproduct', $product->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> ویرایش </a>
           <a href="{{ route('deleteproduct', $product->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="حذف"> حذف </a>
-          <a   href="{{ route('productlist', $product->slug) }}" target="_new" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="نمایش پست"> نمایش </a>
+          <a   href="{{ route('products', $product->slug) }}" target="_new" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="نمایش پست"> نمایش </a>
         </td>
       </tr>
       @endforeach
       <!-- More users list goes here -->
     </tbody>
   </table>
+  @include('admin_panel.layouts.pagination')
 </div>
 
 @endsection

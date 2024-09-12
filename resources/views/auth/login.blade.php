@@ -41,10 +41,10 @@
 
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
+                                <div class="form-check d-flex justify-content-start ">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
+                                    <label class="form-check-label ms-5" for="remember">
                                         {{ __('auth.Remember') }}
                                     </label>
                                 </div>

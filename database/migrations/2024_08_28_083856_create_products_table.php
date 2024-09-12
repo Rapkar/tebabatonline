@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->string('expert')->nullable();
             $table->string('image')->nullable();
-            $table->string('gallery')->nullable();
+            $table->text('gallery')->nullable();
             $table->string('status');
             $table->string('slug')->unique();
             $table->bigInteger('count')->default(0);
