@@ -23,13 +23,13 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     /********************* *************************/
     /*************** User Manager *******************/
     /********************* *************************/
-
+    Route::get('/',  [App\Http\Controllers\AdminPanel\PostController::class, 'index']);
     Route::get('newuser', [App\Http\Controllers\AdminPanel\UserController::class, 'create'])->name('newuser');
     Route::get('edit/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'edit'])->name('edit');
     Route::post('update/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'update'])->name('updateuser');
     Route::get('users', [App\Http\Controllers\AdminPanel\UserController::class, 'index'])->name('users');
     Route::post('usersstore', [App\Http\Controllers\AdminPanel\UserController::class, 'store'])->name('userstore');
-    Route::get('delete/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'delete'])->name('delete');
+    Route::get('delete/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'delete'])->name('userdelete');
 
 
     //Ajax
@@ -49,15 +49,15 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     Route::get('delete/postid={id}', [App\Http\Controllers\AdminPanel\PostController::class, 'delete'])->name('delete');
 
 
-    Route::get('postnewcat', [App\Http\Controllers\AdminPanel\CategoryController::class, 'create'])->name('postnewcat');
-    Route::post('postnewcat', [App\Http\Controllers\AdminPanel\CategoryController::class, 'store'])->name('postnewcat');
-    Route::get('postcats', [App\Http\Controllers\AdminPanel\CategoryController::class, 'index'])->name('postcats');
+    Route::get('post_newcat/type={type}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'create'])->name('post_newcat');
+    Route::post('postnewcat/type={type}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'store'])->name('postsnewcat');
+    Route::get('postscats/type={type}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'index'])->name('postscats');
     Route::get('deletecat/catid={id}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'delete'])->name('deletecat');
 
 
-    Route::get('productnewcat', [App\Http\Controllers\AdminPanel\CategoryController::class, 'create'])->name('productnewcat');
-    Route::post('productnewcat', [App\Http\Controllers\AdminPanel\CategoryController::class, 'store'])->name('productnewcat');
-    Route::get('productcats', [App\Http\Controllers\AdminPanel\CategoryController::class, 'index'])->name('productscats');
+    Route::get('product_newcat/type={type}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'create'])->name('product_newcat');
+    Route::post('productsnewcat/type={type}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'store'])->name('productsnewcat');
+    Route::get('productcats/type={type}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'index'])->name('productscats');
     Route::get('deletecat/catid={id}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'delete'])->name('deletecat');
 
 
@@ -79,6 +79,13 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
 
     //Ajax
     // Route::post('getusersbyrole', [App\Http\Controllers\AdminPanel\PostController::class, 'getusersbyrole'])->name('getusersbyrole');
+
+    // Route::get('neworder', [App\Http\Controllers\AdminPanel\ProductController::class, 'create'])->name('newproduct');
+    // Route::get('edit/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'edit'])->name('editproduct');
+    // Route::post('update/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'update'])->name('update');
+    Route::get('orders', [App\Http\Controllers\AdminPanel\OrderController::class, 'index'])->name('orderlist');
+    // Route::post('store', [App\Http\Controllers\AdminPanel\ProductController::class, 'store'])->name('productstore');
+    // Route::get('delete/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'delete'])->name('deleteproduct');
 
 
 
@@ -102,7 +109,7 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
     /*************** User Manager *******************/
     /********************* *************************/
 
-    // Route::get('/', [App\Http\Controllers\AdminPanel\UserController::class, 'create'])->name('newuser');
+     Route::get('/', [App\Http\Controllers\MedicPanel\MedicController::class, 'index'])->name('Dashboard');
 
 
 

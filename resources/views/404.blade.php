@@ -7,14 +7,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} - 404</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite([ 'resources/js/app.js'])
+    @vite([ 'resources/js/adminpanel/core.js','resources/css/app.css'])
 </head>
 <body>
  <!-- Error 404 Template 1 - Bootstrap Brain Component -->
@@ -28,10 +28,10 @@
             <span class="display-1 fw-bold">0</span>
             <span class="display-1 fw-bold bsb-flip-h">4</span>
           </h2>
-          {{ __('ssss') }}
+       
           <h3 class="h2 mb-2">Oops! You're lost.</h3>
           <p class="mb-5">The page you are looking for was not found.</p>
-          <a class="btn bsb-btn-5xl btn-dark rounded-pill px-5 fs-6 m-0" href="#!" role="button">Back to Home</a>
+          <a class="btn bsb-btn-5xl btn-dark rounded-pill px-5 fs-6 m-0" href="{{ route('home') }}" role="button">Back to Home</a>
         </div>
       </div>
     </div>

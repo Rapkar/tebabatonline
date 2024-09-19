@@ -14,15 +14,32 @@ class Categories extends Seeder
     public function run(): void
     {
         Category::create([
-            'name' => 'home',
+            'name' => 'home-post',
+            'Label' => 'home',
             'content' => 'home posts',
             'order' => '0',
+            'type' => 'posts',
         ]);
         Category::create([
-            'name' => 'popular',
+            'name' => 'popular-post',
+            'Label' => 'popular',
             'content' => 'popular posts',
             'order' => '0',
+            'type' => 'posts',
         ]);
-
+        Category::create([
+            'name' => 'home-product',
+            'Label' => 'home',
+            'content' => 'home posts',
+            'order' => '0',
+            'type' => 'products',
+        ]);
+        Category::create([
+            'name' => 'popular-product',
+            'Label' => 'popular',
+            'content' => 'popular posts',
+            'order' => '0',
+            'type' => 'products',
+        ]);
     }
 }

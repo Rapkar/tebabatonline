@@ -87,7 +87,7 @@ input {
 }
 
 .logo {
-    width: 160px;
+    width: 130px;
     height: 70px;
     object-fit: contain;
     max-width: 300px;
@@ -104,7 +104,15 @@ header form {
     position: relative;
     width: 100%;
 }
+.nav-link {
 
+font-weight: 700 !important;
+line-height: 26px;
+text-align: left;
+color: var(--Color, #017072) !important;
+margin-left: 1rem;
+
+}
 header form input[type='text'] {
     background-color: rgba(244, 244, 244, 1);
     font-size: 14px;
@@ -128,20 +136,22 @@ header form button[type='submit'] {
 }
 
 header .menu {
-    background-color: rgba(240, 240, 240, 1);
-    font-weight: 600;
+    font-weight: 600; 
     font-size: 15px;
     margin-top: 1rem;
     color: #333;
-    text-decoration: none;
+    text-decoration: none
 }
 
 header .menu a {
     margin: 0;
     font-weight: 600;
     font-size: 15px;
-    color: #333;
+    color: #017072;
     text-decoration: none;
+ 
+
+
 }
 
 header .menu ul {
@@ -174,36 +184,41 @@ header .menu .shoppingcard li::after {
 }
 
 header .menu .shoppingcard .cart-icon {
+ 
+}
+header .menu .shoppingcard .user-icon {
     background-color: #fff;
     padding: 5px;
     border-radius: 30px;
     width: 30px;
     height: 30px;
     position: absolute;
-    right: 5px;
+    left: 5px;
 }
 
 header .menu .shoppingcard .minicart {
-    background-color: rgba(247, 166, 47);
+    background-color: #DB7108;
     border-radius: 30px;
     position: relative;
     color: #fff;
-    min-width: 125px;
+    min-width: 105px;
     height: 40px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 0 10px;
 }
 
-header .menu .shoppingcard .minicart .quanity {
+header .menu .shoppingcard  .quanity {
     position: absolute;
-    background-color: #fff;
-    color: rgba(247, 166, 47);
+    background: var(--Color, #017072);
+    font-size: 12px;
+    color: #fff;
     border-radius: 30px;
     top: -3px;
     width: 10px;
     height: 10px;
-    left: -12px;
+    right:0;
     padding: 10px;
     justify-content: center;
     align-items: center;

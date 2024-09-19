@@ -2,12 +2,18 @@
 
 @section('content')
 <div class="container">
-<form id="createUserForm" action="{{route('postnewcat')}}" method="post" class="form-horizontal row">
+<form id="createUserForm" action="{{route( $type.'newcat',$type)}}" method="post" class="form-horizontal row">
     @csrf
   <div class="form-group  mb-4">
     <label for="name" class="col-sm-2 control-label">نام دسته بندی:</label>
     <div class="col-sm-10">
-      <input type="text" id="name" name="name"  class="form-control" placeholder="نام دسته بندی:" required>
+      <input type="text" id="name" name="name"  class="form-control" placeholder="home-posts" required>
+    </div>
+  </div>
+  <div class="form-group  mb-4">
+    <label for="label" class="col-sm-2 control-label">اتیکت  دسته بندی:</label>
+    <div class="col-sm-10">
+      <input type="text" id="label" name="label"  class="form-control" placeholder="home" required>
     </div>
   </div>
   <div class="form-group  mb-4">

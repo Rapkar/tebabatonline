@@ -30,7 +30,7 @@
                 <td>{{ $user->phone }}</td>
                 <td>
                     <a href="{{ route('edit', $user->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> ویرایش </a>
-                    <a href="{{ route('delete', $user->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="حذف"> حذف </a>
+                    <a href="{{ route('userdelete', $user->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="حذف"> حذف </a>
                 </td>
             </tr>
             @endforeach

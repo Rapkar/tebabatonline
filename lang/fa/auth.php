@@ -15,6 +15,7 @@ return [
 
     'Email' => 'آدرس ایمیل',
     'Name' => 'نام',
+    'Address'=>'آدرس',
     'Register' => 'فرم عضویت ',
     'Login' => 'فرم ورود',
     'Password' => 'رمز ورود ',

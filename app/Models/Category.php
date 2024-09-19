@@ -25,4 +25,8 @@ class Category extends Model
     {
         return $this->belongsToMany(Product::class);
     }
+    public function categorizable()
+    {
+        return $this->morphTo();
+    }
 }

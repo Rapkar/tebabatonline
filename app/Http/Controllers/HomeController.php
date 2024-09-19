@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $role = Auth::user()->roles()->find(Auth::id());
             $title=__("admin.Home Page");
-          return view('admin_panel.home',compact('role','title'));
+        //   return view('admin_panel.home',compact('role','title'));
         
     }
 }

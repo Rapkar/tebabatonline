@@ -2,7 +2,7 @@
 @foreach($subcategories as $subcategory)
 <?php $i = 1; ?>
 <div  order="{{$category->order}}" class="nested-sortable nested{{$i}}">
-    <p>{{ $category->name }}</p>
+    <p>{{ $category->label }}</p>
 
     @if(count($subcategory->subcategory))
     <?php $i++ ?>

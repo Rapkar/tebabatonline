@@ -122,27 +122,27 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>پست ها</a>
+                    <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>بیماران</a>
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts">
-                        <a class="dropdown-item" href="{{ route('newpost') }}">افزودن پست</a>
-                        <a class="dropdown-item" href="{{ route('posts') }}">لیست پست ها</a>
-                        <a class="dropdown-item" href="{{ route('post_newcat','posts') }}">افزودن دسته بندی</a>
-                        <a class="dropdown-item" href="{{ route('postscats','posts') }}">لیست دسته بندی ها </a>
+                        <a class="dropdown-item" href="{{ route('Dashboard') }}">فرم های جدید</a>
+                        <a class="dropdown-item" href="{{ route('Dashboard') }}">سوابق ویزیت ها</a>
+                        <a class="dropdown-item" href="{{ route('Dashboard') }}">محاسبه قیمت دارو</a>
+                        <a class="dropdown-item" href="{{ route('Dashboard') }}">واریزی ها </a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>محصولات</a>
+                    <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> داروها و توصیه ها</a>
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts">
-                        <a class="dropdown-item" href="{{ route('newproduct') }}">افزودن محصول</a>
-                        <a class="dropdown-item" href="{{ route('productlist') }}">لیست محصولات</a>
-                        <a class="dropdown-item" href="{{ route('product_newcat','products') }}">افزودن دسته بندی</a>
-                        <a class="dropdown-item" href="{{ route('productscats','products') }}">لیست دسته بندی ها </a>
+                        <a class="dropdown-item" href="{{ route('Dashboard') }}">داروها</a>
+                        <a class="dropdown-item" href="{{ route('Dashboard') }}">اقلام</a>
+                        <a class="dropdown-item" href="{{ route('Dashboard') }}">ساخت داروی جدید</a>
+                        <a class="dropdown-item" href="{{ route('Dashboard') }}">توصیه های درمانی</a>
+                        <a class="dropdown-item" href="{{ route('Dashboard') }}">مشکلات</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>کاربران</a>
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="users">
-                        <a class="dropdown-item" href="{{ route('newuser') }}">افزودن کاربر</a>
                         <a class="dropdown-item" href="{{ route('users') }}">لیست کاربران</a>
                     </div>
                 </li>
@@ -153,16 +153,7 @@
                         <a class="dropdown-item" href="#">لیست سفارشات</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        تنظیمات
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#"></a>
-                        <a class="dropdown-item" href="#">محصولات</a>
-                        <a class="dropdown-item" href="#">پست ها</a>
-                    </div>
-                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         نمایش
