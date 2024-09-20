@@ -17,12 +17,15 @@ class home extends Controller
     public function index()
     {
        
-        $posts = Post::all();
+        // $posts = Post::all();
         $posts = Post::whereHas('categories', function ($query) {
-            $query->where('name', 'home');
+            $query->where('name', 'home-post');
         })->get();
-        
-        return view('website.home', compact('posts'));
+        $products = Product::whereHas('categories', function ($query) {
+            $query->where('name', 'home-product');
+        })->get();
+      
+        return view('website.home', compact('posts','products'));
     }
     public function chat()
     {

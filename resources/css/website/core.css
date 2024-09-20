@@ -320,19 +320,19 @@ padding: 1rem; */
 }
 
 .headerslider h2 {
-    color: #BAFFE0;
+    color: #017072;
     font-size: 40px;
     font-weight: 900;
 }
 
 .headerslider h3 {
-    color: #fff;
+    color: #017072;
     font-size: 27px;
     font-weight: 900;
 }
 
 .headerslider p {
-    color: #fff;
+    color: #017072;
     font-size: 17px;
     font-weight: 400;
 }
@@ -340,12 +340,16 @@ padding: 1rem; */
 .headerslider a {
     transition: all 0.3s ease-in;
     opacity: 1;
-    color: #3E3E3E;
-    font-size: 14px;
+    color: #fff;
+    font-size:32px;
     font-weight: 700;
-    background-color: #f3f3f3;
+    background: #DB7108;
     padding: 10px;
     text-decoration: none;
+    border-radius: 25px;
+    height: 62px;
+    display: inline-block;
+    margin-top: 4rem;
 }
 
 .headerslider a:hover {
@@ -519,4 +523,91 @@ padding: 1rem; */
 .blogsliderpaginate .swiper-button-next, .blogsliderpaginate .swiper-button-prev,.swiper-button-prev:after, .swiper-button-next:after{
     color: #000;
     font-size: 20px !important;
+}
+.swiper-pagination-clickable .swiper-pagination-bullet{
+    min-width: 34px;
+  height: 4px;
+  border-radius: 0;
+}
+.mensec{
+    background: #007A7D;
+
+}
+.mensec h2{
+
+font-size: 64px;
+font-weight: 600;
+line-height: 83.2px;
+text-align: left;
+color: #FFFFFF;
+}
+.mensec p{
+color: #fff;
+font-size: 24px;
+font-weight: 500;
+line-height: 40px;
+text-align: center;
+
+}
+.mensec .men
+{
+    background-image: url(http://127.0.0.1:8000/images/website/img.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+}
+.mensec .men ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 85%;
+    top: -30px;
+    position: relative;
+  
+}
+.mensec .men ul li{
+    margin: 0.5rem;
+}
+.mensec .men ul a{
+    transition: all 0.5s ;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 41.6px;
+    text-align: right;
+    color: #007C7E;
+    background-color: #fff;
+    white-space:nowrap;
+    min-width: fit-content;
+    max-width: fit-content;
+    display: flex;
+    text-decoration: none;
+    padding: 0px 10px;
+  border-radius: 25px;
+  border-bottom: 1px solid #fff;
+}
+.mensec .men ul a:hover{
+    transition: all 0.5s ;
+    color: #fff;
+    background-color: transparent;
+    border-radius: 0;
+}
+.popular-products{
+    background: #D9EEEE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border-radius: 0 0 46% 54% / 50% 50% 15% 15%;
+    margin-bottom: -12rem;
+    position: relative;
+    z-index: 9;
+}
+.popular-products h2{
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+    color: #017072;
 }

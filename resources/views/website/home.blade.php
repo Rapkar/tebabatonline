@@ -2,26 +2,41 @@
 
 @section('content')
 <div class="container">
-    <div class="container px-5">
+    <div class=" px-5">
         <div class="swiper headerslider mt-5">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div class="item" style="background-image: url({{ asset('images/website/slide1.webp') }})">
-                        <h2>طبابت آنلاین</h2>
-                        <h3>ویزیت آنلاین، مزاج شناسی و مشاوره</h3>
-                        <p>با طبابت آنلاین دیگر طبابت و درمان از دسترس هیچ کس دور نیست</p>
-                        <p>طبابت آنلاین = طبیب در دستان شما</p>
-                        <a href="#">ویزیت آنلاین</a>
+                    <div class="row">
+
+                        <div class="col-lg-6 d-flex align-items-center justify-content-center flex-column">
+                            <h2>طبابت آنلاین</h2>
+                            <h3>ویزیت آنلاین، مزاج شناسی و مشاوره</h3>
+                            <p>با طبابت آنلاین دیگر طبابت و درمان از دسترس هیچ کس دور نیست</p>
+                            <p>طبابت آنلاین = طبیب در دستان شما</p>
+                            <a href="#">ویزیت آنلاین</a>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="{{asset('images/website/slide2.webp')}}">
+                        </div>
                     </div>
+
                 </div>
                 <div class="swiper-slide">
-                    <div class="item" style="background-image: url({{ asset('images/website/slide2.webp') }})">
-                        <h2>تا زمانی که طبیب تو آنلاینه (طبابت آنلاین)</h2>
-                        <h3>تو نباید از هیچ بیماری‌ای درد بکشی</h3>
-                        <p>میتونی همه دردها و مشکلاتت رو به طبابت آنلاین بگی و براشون راهکار بگیری</p>
-                        <a href="#">همین حالا ویزیت شو</a>
+                    <div class="row">
+
+                        <div class="col-lg-6 d-flex align-items-center justify-content-center flex-column ">
+                            <h2>تا زمانی که طبیبت آنلاینه</h2>
+                            <h3>تو نباید از هیچ بیماری ای درد بکشی !</h3>
+                            <p>میتونی همه ی مشکلاتت رو به طبابت آنلاین بگی و براشون راهکار بگیری</p>
+                            <a href="#">ویزیت آنلاین</a>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="{{asset('images/website/slide1.webp')}}">
+                        </div>
                     </div>
+
                 </div>
+
             </div>
             <div>
                 <div class="swiper-button-next"></div>
@@ -31,8 +46,37 @@
             <div class="swiper-pagination"></div>
         </div>
     </div>
-    <div class="row mt-5">
-        <div class="col-lg-5  highlight ">
+
+
+
+</div>
+<div class="container-fluid popular-products d-flex flex-column">
+    <h2>محصولات پرفروش</h2>
+    <div class="swiper productslider mt-5 w-100">
+            <div class="swiper-wrapper">
+                @foreach($products as $product)
+                @if($product->status==1)
+                <a href="#" class="swiper-slide">
+                    <div class="card">
+                        <div class="head">
+                            <img src="{{ asset('storage/uploads/'.$product->image) }}" alt="posttitle">
+                        </div>
+                        <h2>{{$product->name}}</h2>
+                        <p>{{$product->expert}}</p>
+                        <h5 href="#">ادامه مطلب</h5>
+                    </div>
+                </a>
+                @endif
+                @endforeach
+
+            </div>
+
+            <div class="swiper-pagination"></div>
+        </div>
+</div>
+<div class="container-fluid mensec pt-5">
+    <div class="row pt-5 ">
+        <div class="col-lg-12 pt-5  highlight d-flex flex-column justify-content-center align-items-center ">
             <h2 class="mb-5 pb-5 mt-5 pt-5 title">بیماری ها بر اساس اعضای بدن</h2>
 
 
@@ -40,32 +84,57 @@
             <p>شما می‌تونید بر اساس هر عضو، بیماری‌های اون قسمت رو بررسی کنید و راهکارهای درمانی‌شو مورد مطالعه قرار بدید</p>
             <p>پس همین حالا با کلیک روی هر قسمتی از بدن، بیماری های مربوط به عضو رو ببینید</p>
         </div>
-        <div class="col-lg-7">
-            <img src="{{ asset('images/website/img.webp') }}">
+        <div class="col-lg-12 justify-content-center d-flex men" style="background-image: url({{ asset('images/website/img.webp') }});">
+            <div class="row">
+                <div class="col-lg-6 d-flex align-items-center justify-content-end">
+                    <ul>
+                        <li><a href="#">مشکلات روحی روانی</a></li>
+                        <li style="margin-right: -1rem;"><a href="#">نوزادان و کودکان</a></li>
+                        <li style="margin-right: -2rem;"><a href="#">مشکلات پوستی</a></li>
+                        <li style="margin-right: -3rem;"><a href="#">چاقی و لاغری</a></li>
+                        <li style="margin-right: -4rem;"><a href="#">کیست و سرطان ها</a></li>
+                        <li style="margin-left: 3rem;margin-right: -3rem;"><a href="#">دستگاه تناسلی اقایان و بانوان</a></li>
+                        <li><a href="#">پاها</a></li>
+                        <li><a href="#">رگ ها و اندام عصبی</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 d-flex align-items-center justify-content-start">
+                    <ul class="align-items-end">
+                        <li><a href="#">سر(چشم،گوش،بینی و... )</a></li>
+                        <li style="margin-left: -1rem;"><a href="#">خواب</a></li>
+                        <li style="margin-left: -2rem;"><a href="#">گردن و گلو (مری و...)</a></li>
+                        <li style="margin-left: -8rem;"><a href="#">قفسه سینه(قلب،ریه , ..)</a></li>
+                        <li style="margin-left: -4rem;"><a href="#">شکم، معده، کبد</a></li>
+                        <li style="margin-right: 3rem;margin-left: -3rem;"><a href="#">طبایع چهارگانه</a></li>
+                        <li><a href="#">عضلات</a></li>
+                        <li><a href="#">استخوان ها و مفاصل</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
     </div>
-    <div class="row mt-5">
-        <div class="col-lg-8">
-            <h2 class="title"> خدمات ما </h2>
-        </div>
-        <div class="col-lg-4">
-            <ul>
-                <li><a href="#"><i class="far fa-address-card"></i></a></li>
-                <li><a href="#"><i class="far fa-grin-alt"></i></a></li>
-                <li><a href="#"></a><i class="fas fa-hand-holding-medical"></i></li>
-                <li><a href="#"></a><i class="fas fa-heartbeat"></i></li>
-                <li><a href="#"></a><i class="fas fa-hand-holding-heart"></i></li>
-                <li><a href="#"><i class="fas fa-photo-video"></i></a></li>
-            </ul>
-        </div>
+</div>
+<div class="container ">
+    <div class="orderalert " style="background-image: url({{ asset('images/website/TrackOrders.webp') }})">
+        <h2>پیگیری سفارشات</h2>
+        <p>کاربران عزیز شما میتوانید با کلیک بر روی دکمه زیر سفارشات خود را پیگیری کنید</p>
+        <a href="#">پیگیری سفارشات</a>
     </div>
-    <div class="container ">
-        <div class="orderalert" style="background-image: url({{ asset('images/website/TrackOrders.webp') }})">
-            <h2>پیگیری سفارشات</h2>
-            <p>کاربران عزیز شما میتوانید با کلیک بر روی دکمه زیر سفارشات خود را پیگیری کنید</p>
-            <a href="#">پیگیری سفارشات</a>
-        </div>
+</div>
+<div class="row mt-5">
+    <div class="col-lg-8">
+        <h2 class="title"> خدمات ما </h2>
+    </div>
+    <div class="col-lg-4">
+        <ul>
+            <li><a href="#"><i class="far fa-address-card"></i></a></li>
+            <li><a href="#"><i class="far fa-grin-alt"></i></a></li>
+            <li><a href="#"></a><i class="fas fa-hand-holding-medical"></i></li>
+            <li><a href="#"></a><i class="fas fa-heartbeat"></i></li>
+            <li><a href="#"></a><i class="fas fa-hand-holding-heart"></i></li>
+            <li><a href="#"><i class="fas fa-photo-video"></i></a></li>
+        </ul>
     </div>
 </div>
 <div class="container-fluid bggray  pb-3 mb-5">
@@ -84,7 +153,7 @@
 
             </div>
         </div>
-        <div class="swiper blogslider mt-5">
+        <div class="swiper blogslider mt-5 w-100">
             <div class="swiper-wrapper">
                 @foreach($posts as $post)
                 @if($post->status==1)

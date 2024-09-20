@@ -18,28 +18,6 @@ class ProductController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255'],
             'image' => ['required ', 'string', 'max:255'],
-        ]);
-    }
-    public function index(Request $request)
-    {
-        $products = Product::take(10)->get();
-        $items = Post::paginate(10);
-        $title = __("admin.Product Page");
-        return view('admin_panel.products.list-product', compact('products', 'title','items'));
-    }
-    public function create(Request $request)
-    {
-        $categories = Category::all();
-        $title = __("admin.Create Product Page");
-        return view('admin_panel.products.create-product', compact('categories', 'title'));
-    }
-    public function store(Request $request)
-    {
-        $data = $request->all();
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255'],
-            'image' => ['required ', 'string', 'max:255'],
         ], [
             'name.required' => __("admin.The name field is required."),
             'name.string' => __('admin.The name must be a string.'),
@@ -53,6 +31,30 @@ class ProductController extends Controller
             'image.string' => __("admin.The image must be a string."),
             'image.max' => __("admin.The image must not be greater than :max characters."),
         ]);
+    }
+    public function index(Request $request)
+    {
+        $products = Product::take(10)->get();
+        $items = product::paginate(10);
+        $title = __("admin.Product Page");
+        return view('admin_panel.products.list-product', compact('products', 'title', 'items'));
+    }
+    public function create(Request $request)
+    {
+        $categories = Category::where('type', '=', 'products')->get();
+        $title = __("admin.Create Product Page");
+        return view('admin_panel.products.create-product', compact('categories', 'title'));
+    }
+    public function store(Request $request)
+    {
+
+
+        $validator = $this->validator($request);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+  
+
         $Product = new Product();
         $Product->name = $request->input('name');
         $Product->content = $request->input('content');
@@ -90,28 +92,27 @@ class ProductController extends Controller
     }
     public function delete($id)
     {
-        $Post = Post::find($id);
+        $Post = Product::find($id);
         if ($Post) {
             $Post->delete();
-            return redirect()->route('posts');
+            return redirect()->route('productlist');
         } else {
-            // handle error
+            dd("post not found");
         }
     }
     public function edit($id)
     {
-        $post = Post::all()->find($id);
-        $categories = Category::all();
+        $product = Product::all()->find($id);
+        $categories = Category::where('type', '=', 'products')->get();
         // $role = Category::all()->find($request->input('role'));
-        $cats = $post->categories()->get();
+        $cats = $product->categories()->get();
         $ids = [];
         foreach ($cats as $cat) {
             $ids[] = $cat->id;
         }
-        //   dd($ids);
-        // dd($posts->name);
+
         $title = __("admin.Edit Product Page");
-        return view('admin_panel.posts.edit-post', compact('post', 'categories', 'ids', 'title'));
+        return view('admin_panel.products.edit-product', compact('product', 'categories', 'ids', 'title'));
     }
     public function update(Request $request, $id)
     {

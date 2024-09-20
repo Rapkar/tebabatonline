@@ -73,7 +73,7 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     Route::get('edit/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'edit'])->name('editproduct');
     Route::post('update/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'update'])->name('update');
     Route::get('products', [App\Http\Controllers\AdminPanel\ProductController::class, 'index'])->name('productlist');
-    Route::post('store', [App\Http\Controllers\AdminPanel\ProductController::class, 'store'])->name('productstore');
+    Route::post('productstore', [App\Http\Controllers\AdminPanel\ProductController::class, 'store'])->name('productstore');
     Route::get('delete/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'delete'])->name('deleteproduct');
 
 

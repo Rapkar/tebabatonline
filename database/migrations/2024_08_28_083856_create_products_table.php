@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('content');
+            $table->longText('content');
             $table->float('price');
-            $table->float('discount');
+            $table->float('discount')->default(0);
             // $table->bigInteger('count');
             $table->integer('quantity');
-            $table->string('expert')->nullable();
+            $table->mediumText('expert')->nullable();
             $table->string('image')->nullable();
             $table->text('gallery')->nullable();
             $table->string('status');

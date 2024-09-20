@@ -40,7 +40,7 @@ class PostController extends Controller
     public function create(Request $request)
     {
         $title=__("admin.Create Post Page");
-        $categories=Category::all();
+        $categories = Category::where('type','=','posts')->get();
         return view('admin_panel.posts.create-post',compact('categories','title'));
     }
     public function store(Request $request)
@@ -67,7 +67,7 @@ class PostController extends Controller
                 $Post->categories()->attach($category->id);
             }
         }
-        $validator=['sd'=>'sd'];
+        
 
         return redirect()->route('posts'); // redirect to the users index page
     }
@@ -83,12 +83,13 @@ class PostController extends Controller
     }
     public function edit($id){
         $post = Post::all()->find($id);
-        $categories=Category::all();
+        $categories = Category::where('type','=','posts')->get();
           $cats=$post->categories()->get();
           $ids=[];
           foreach($cats as $cat){
             $ids[]=$cat->id;
           }
+         
         $title=__("admin.Edit Post Page");  
          return view('admin_panel.posts.edit-post',compact('post','categories','ids','title'));
     }

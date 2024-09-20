@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">محتوا:</label>
-                    <textarea required id="postcontent"  name="content">{{ old('content') }}</textarea>
+                    <textarea  id="postcontent"  name="content">{{ old('content') }}</textarea>
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">خلاصه:</label>
@@ -50,13 +50,13 @@
                 <div class="form-group mb-4">
                     <label for="body">تصویر شاخص:</label>
                     <div class="dropzone" id="postimg">
-                        <input type="hidden" name="image" />
+                        <input type="hidden"id="image" name="image" >
                     </div>
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">تصاویر محصول</label>
                     <div class="dropzone postimg">
-                        <input type="hidden" id="gallery" name="gallery[]" />
+                        <input type="hidden" id="gallery" name="gallery[]"  >
                     </div>
                 </div>
                 <div class="form-group mb-4">

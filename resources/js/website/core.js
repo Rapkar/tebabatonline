@@ -12,9 +12,8 @@ import { Pagination, Navigation, EffectFade } from "swiper/modules";
 var headerslider = new Swiper(".headerslider", {
   slidesPerView: 1,
   spaceBetween: 20,
-  modules: [EffectFade, Navigation, Pagination],
+  modules: [ Navigation, Pagination],
   loop: false,
-  effect: "fade",
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
@@ -25,6 +24,30 @@ var headerslider = new Swiper(".headerslider", {
   },
 });
 var blogslider = new Swiper(".blogslider", {
+  slidesPerView: 4,
+  spaceBetween: 20,
+  modules: [ Navigation],
+
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  breakpoints: {
+    // For small screens (e.g. mobile), show only 1 item
+    0: {
+      slidesPerView: 4,
+    },
+    // For medium screens (e.g. tablet), show 2 items
+    768: {
+      slidesPerView: 4,
+    },
+    // For large screens (e.g. desktop), show all 4 items
+    1024: {
+      slidesPerView: 4,
+    },
+  },
+});
+var productslider = new Swiper(".productslider", {
   slidesPerView: 4,
   spaceBetween: 20,
   modules: [ Navigation],
