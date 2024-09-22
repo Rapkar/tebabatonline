@@ -3,16 +3,16 @@
 @section('content')
 <div class="container">
     <div class=" px-5">
-        <div class="swiper headerslider mt-5">
+        <div class="swiper headerslider ">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
+                <div class="swiper-slide" style="background: linear-gradient(270.37deg, #FFFFFF 0.31%, #EBEBEB 99.69%);">
                     <div class="row">
 
                         <div class="col-lg-6 d-flex align-items-center justify-content-center flex-column">
                             <h2>طبابت آنلاین</h2>
                             <h3>ویزیت آنلاین، مزاج شناسی و مشاوره</h3>
                             <p>با طبابت آنلاین دیگر طبابت و درمان از دسترس هیچ کس دور نیست</p>
-                            <p>طبابت آنلاین = طبیب در دستان شما</p>
+                            <p><b>طبابت آنلاین = طبیب در دستان شما</b></p>
                             <a href="#">ویزیت آنلاین</a>
                         </div>
                         <div class="col-lg-6">
@@ -21,7 +21,7 @@
                     </div>
 
                 </div>
-                <div class="swiper-slide">
+                <div class="swiper-slide" style="">
                     <div class="row">
 
                         <div class="col-lg-6 d-flex align-items-center justify-content-center flex-column ">
@@ -38,11 +38,6 @@
                 </div>
 
             </div>
-            <div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-
             <div class="swiper-pagination"></div>
         </div>
     </div>
@@ -52,27 +47,36 @@
 </div>
 <div class="container-fluid popular-products d-flex flex-column">
     <h2>محصولات پرفروش</h2>
-    <div class="swiper productslider mt-5 w-100">
-            <div class="swiper-wrapper">
-                @foreach($products as $product)
-                @if($product->status==1)
-                <a href="#" class="swiper-slide">
-                    <div class="card">
-                        <div class="head">
-                            <img src="{{ asset('storage/uploads/'.$product->image) }}" alt="posttitle">
-                        </div>
-                        <h2>{{$product->name}}</h2>
-                        <p>{{$product->expert}}</p>
-                        <h5 href="#">ادامه مطلب</h5>
+    <div class="swiper productslider mt-5 w-100 container mb-5">
+        <div class="swiper-wrapper">
+            @foreach($products as $product)
+            @if($product->status==1)
+            <a href="{{route('products', $product->slug)}}" class="swiper-slide">
+                <div class="card pb-4">
+                    <div class="head">
+                        <img src="{{ asset($product->image) }}" alt="posttitle">
                     </div>
-                </a>
-                @endif
-                @endforeach
+                    <h2>{{$product->name}}</h2>
+                    <p>{{$product->expert}}</p>
+                    
+                    <h5 class="d-flex"  href="#">{{$product->price}} تومان</h5>
+                    <form method="post" name="addtocart" action="{{ route('addtocart',$product->id)}}" >
+                            @csrf
+                            <input type="hidden" value="{{$product->id}}">
+                            <button type="submit">افزودن به سبد خرید</button>
+                        </form>
+                </div>
+            </a>
+            @endif
+            @endforeach
 
-            </div>
-
-            <div class="swiper-pagination"></div>
         </div>
+
+    </div>
+    <div class="productnav ">
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
 </div>
 <div class="container-fluid mensec pt-5">
     <div class="row pt-5 ">
@@ -84,7 +88,7 @@
             <p>شما می‌تونید بر اساس هر عضو، بیماری‌های اون قسمت رو بررسی کنید و راهکارهای درمانی‌شو مورد مطالعه قرار بدید</p>
             <p>پس همین حالا با کلیک روی هر قسمتی از بدن، بیماری های مربوط به عضو رو ببینید</p>
         </div>
-        <div class="col-lg-12 justify-content-center d-flex men" style="background-image: url({{ asset('images/website/img.webp') }});">
+        <div class="col-lg-12 justify-content-center d-flex men" style="background-image: url({{ asset('images/website/img.webp') }})">
             <div class="row">
                 <div class="col-lg-6 d-flex align-items-center justify-content-end">
                     <ul>
@@ -157,7 +161,7 @@
             <div class="swiper-wrapper">
                 @foreach($posts as $post)
                 @if($post->status==1)
-                <a href="#" class="swiper-slide">
+                <div href="#" class="swiper-slide">
                     <div class="card">
                         <div class="head">
                             <img src="{{ asset('storage/uploads/'.$post->image) }}" alt="posttitle">
@@ -165,8 +169,9 @@
                         <h2>{{$post->name}}</h2>
                         <p>{{$post->expert}}</p>
                         <h5 href="#">ادامه مطلب</h5>
+
                     </div>
-                </a>
+                </div>
                 @endif
                 @endforeach
 
@@ -180,7 +185,6 @@
 <div class="container">
     <div class="counter px-5 py-5" style="background-image: url({{ asset('images/website/slide4.webp') }})">
         <h2>خلاصه ای درباره ما</h2>
-        <p class="col-lg-7">سال‌ها قبل از اینکه طب اسلامی به شکل امروزی گسترش پیدا کند و اصلاً کسی طب اسلامی را بشناسد، هر زمان از جلوی بیمارستان‌ها عبور می‌کردم و چشمم به مردم دردمند می‌افتاد، در درون خودم به این فکر می‌افتادم که ای کاش میشد برای این عزیزان رنجور کاری کرد؛ تا با تحقیقات و مطالعاتی که داشتم، متوجه شدم در سراسر دنیا هر ملت و قومیتی غیر از طب رایج و جدید، مکاتب درمانی خاص خود را دارند که از آن برای درمان بیماری‌ها استفاده می‌کنند و سرآمد همه مکاتب درمانی، طب اسلامی بود که از جانب پروردگار (خالق بدن‌ها) از طریق وحی به پیغمبر اکرم (صلی‌الله‌علیه‌وآله) و اهل‌بیت (علیهم‌السلام) و پس از آنها به ما انسان‌ها رسیده و ما اگر خود، راهکار درمانی رسیده از جانب آفریننده این بدن را به کار نبندیم، هر چه درد بکشیم و از سلامتی به دور باشیم، خود این را انتخاب کرده‌ایم، چرا که خداوند راه رسیدن به سلامتی را به ما نشان داده، اما ما با به کار نبستن این رو‌ش‌های درمانی، خود را از این راهکار محروم نموده‌ایم</p>
         <div class="col-lg-6">
             <div class="row items">
                 <div class="col-lg-6">بیش از ۱۵ سال فعالیت در زمینه طب اسلامی <span>15+</span> </div>
@@ -191,5 +195,27 @@
         </div>
     </div>
 </div>
-<input type="text" name="chat">
+<div class="expret container">
+    <h2 class="py-5">خلاصه ای درباره ما</h2>
+    <img class="w-100" src="{{asset('images/expret.webp') }}">
+    <div class="d-flex justify-content-center flex-column pt-4" style="background: linear-gradient(180deg, #C7E3E3 0%, rgba(227, 241, 241, 0.36) 99.99%, rgba(255, 255, 255, 0.58) 100%);">
+        <p>
+            سال‌ها قبل از اینکه طب اسلامی به شکل امروزی گسترش پیدا کند و اصلاً کسی طب اسلامی را بشناسد، هر زمان از جلوی بیمارستان‌ها عبور می‌کردم و چشمم به مردم دردمند می‌افتاد، در درون خودم به این فکر می‌افتادم که ای کاش میشد برای این عزیزان رنجور کاری کرد؛ تا با تحقیقات و مطالعاتی که داشتم، متوجه شدم در سراسر دنیا هر ملت و قومیتی غیر از طب رایج و جدید، مکاتب درمانی خاص خود را دارند که از آن برای درمان بیماری‌ها استفاده می‌کنند و سرآمد همه مکاتب درمانی، طب اسلامی بود که از جانب پروردگار (خالق بدن‌ها) از طریق وحی به پیغمبر اکرم (صلی‌الله‌علیه‌وآله) و اهل‌بیت (علیهم‌السلام) و پس از آنها به ما انسان‌ها رسیده و ما اگر خود، راهکار درمانی رسیده از جانب آفریننده این بدن را به کار نبندیم، هر چه درد بکشیم و از سلامتی به دور باشیم، خود این را انتخاب کرده‌ایم، چرا که خداوند راه رسیدن به سلامتی را به ما نشان داده، اما ما با به کار نبستن این رو‌ش‌های درمانی، خود را از این راهکار محروم نموده‌ایم
+        </p>
+    </div>
+    <div class="row counter mt-3">
+        <div class="col-lg-3">
+            <p>+15</p><span>بیش از ۱۵ سال فعالیت در زمینه طب اسلامی</span>
+        </div>
+        <div class="col-lg-3">
+            <p>10K</p><span>بیش از ۱۰ هزار درمان موفق</span>
+        </div>
+        <div class="col-lg-3">
+            <p>100%</p><span>۹۸٪ رضایت مشتریان</span>
+        </div>
+        <div class="col-lg-3">
+            <p>98%</p><span>۱۰۰٪ تضمین کیفیت محصول</span>
+        </div>
+    </div>
+</div>
 @endsection

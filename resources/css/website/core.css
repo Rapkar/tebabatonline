@@ -73,7 +73,9 @@
     src: url('./fonts/YekanBakhFaNum/woff/Yekan Bakh FaNum-ExtraBlack.woff') format('woff'),
         url('./fonts/YekanBakhFaNum/woff2/Yekan Bakh FaNum-ExtraBlack.woff2') format('woff2');
 }
-
+html,body{
+    overflow-x: hidden;
+}
 a,
 p,
 h1,
@@ -98,6 +100,12 @@ input {
 a.navbar-brand {
     position: relative;
     max-width: 300px;
+}
+.head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
 }
 
 header form {
@@ -236,15 +244,20 @@ header .menu .shoppingcard  .quanity {
 footer {
     min-height: 300px;
     background-color: transparent;
-    background-image: linear-gradient(159deg, #4DCBD3 4%, #007C7E 63%);
+    background: #017072;
+
 }
 
 footer h2 {
     color: #fff;
-    font-size: 20px;
+    font-size: 32px;
     font-weight: 700;
 }
-
+footer h3,footer h4{
+    color: #fff;
+    font-weight: 700;
+    font-size: 28px;
+}
 footer a {
     color: #fff;
     text-decoration: none;
@@ -263,9 +276,12 @@ footer ul li {
 
 footer ul li a {
     color: #fff;
-    font-size: 16px;
-    font-weight: 400;
 
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 45px;
+    text-align: right;
+    
 }
 
 .ftanimate svg {
@@ -344,12 +360,16 @@ padding: 1rem; */
     font-size:32px;
     font-weight: 700;
     background: #DB7108;
-    padding: 10px;
+    padding: 10px 45px;
     text-decoration: none;
     border-radius: 25px;
     height: 62px;
     display: inline-block;
     margin-top: 4rem;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .headerslider a:hover {
@@ -379,35 +399,38 @@ padding: 1rem; */
 }
 
 .orderalert {
-    min-height: 240px;
+    min-height: 420px;
     background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 3rem;
 }
 
 .orderalert h2 {
-    color: #3d4f3e;
+    color: #fff;
     font-size: 35px;
     font-weight: 800;
     margin-bottom: 2rem;
 }
 
 .orderalert p {
-    color: #161616;
-    background-color: #9cc2df !important;
+    color: #fff;
     padding: 3px;
     border-radius: 10px;
 }
 
 .orderalert a {
-    background-color: #F7A62F;
-    color: #fff;
+    background-color: #fff;
+    color: #007A7D;
     font-size: 15px;
     font-weight: 600;
     padding: 12px 24px;
     text-decoration: none;
+    border-radius: 31px;
 }
 .bggray{
     background-color: #B1B1B11C;
@@ -598,16 +621,129 @@ text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 700px;
     border-radius: 0 0 46% 54% / 50% 50% 15% 15%;
     margin-bottom: -12rem;
     position: relative;
     z-index: 9;
 }
+.productslider a{
+    text-decoration: none;
+}
 .popular-products h2{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+    color: #017072;
+}
+.popular-products .card p{
+font-size: 16px;
+font-weight: 500;
+line-height: 20px;
+text-align: center;
+color: #0000007D;
+
+}
+.popular-products .card h2{
+font-size: 24px;
+font-weight: 600;
+line-height: 40px;
+text-align: center;
+text-decoration: none !important;
+
+}
+
+.popular-products .card a{
+    text-decoration: none !important;
+}
+.popular-products .card h5{
+font-size: 16px;
+font-weight: 500;
+line-height: 20px;
+text-align: center;
+color: #004647;
+display: flex;
+justify-content: center;
+}
+.popular-products .card img{
+    max-width: 100%;
+    height: 259px;
+    object-fit: cover;
+    object-position: center;
+}
+.popular-products .card button{
+
+font-size: 16px;
+font-weight: 600;
+line-height: 20px;
+text-align: center;
+background:  #E87400;
+border-radius: 35px;
+margin: auto;
+display: flex;
+color: #fff;
+border: none;
+padding: 5px;
+justify-content: center;
+margin-top: 5px;
+
+}
+.expret h2{
     font-size: 64px;
     font-weight: 600;
     line-height: 40px;
     text-align: center;
     color: #017072;
+}
+.expret p{
+font-size: 28px;
+font-weight: 400;
+line-height: 55px;
+text-align: center;
+color:  #007C7E;
+max-width: 80%;
+margin: auto;
+}
+.counter p{
+    background: linear-gradient(180deg, #007C7E 0%, #D9EEEE 100%);
+    width: 183px;
+    height: 183px;
+border-radius: 100px;
+color: #fff;
+
+font-size: 64px;
+font-weight: 400;
+line-height: 50px;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.counter span{
+font-size: 20px;
+font-weight: 400;
+line-height: 50px;
+text-align: center;
+margin: auto;
+min-width: 240px;
+margin-top: 1rem;
+}
+.popular-products .productnav{
+
+    width: 150px;
+    display: flex;
+    position: absolute;
+    bottom: 3rem;
+}
+.popular-products .swiper-button-prev::after,.popular-products  .swiper-rtl .swiper-button-next::after
+   , .popular-products   .swiper-button-next::after,.popular-products .swiper-rtl .swiper-button-prev::after
+    {
+        background:   #017072;
+color: #fff;
+  padding: 10px;
+  border-radius: 48px;
+  min-width: 39px;
+  display: flex;
+  justify-content: center;
 }

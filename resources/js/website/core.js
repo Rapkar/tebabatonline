@@ -12,16 +12,13 @@ import { Pagination, Navigation, EffectFade } from "swiper/modules";
 var headerslider = new Swiper(".headerslider", {
   slidesPerView: 1,
   spaceBetween: 20,
-  modules: [ Navigation, Pagination],
+  modules: [  Pagination],
   loop: false,
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
   },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
+
 });
 var blogslider = new Swiper(".blogslider", {
   slidesPerView: 4,

@@ -116,29 +116,29 @@ class ProductController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $Post = Post::find($id);
+        $Product = Product::find($id);
         // if ($request->method() == 'GET') {
         //     #return redirect()->back()->withInput();
         // }
 
-        // $validator = $this->validator($request);
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
-        $Post->name = $request->input('name');
-        $Post->content = $request->input('content');
-        $Post->expert = $request->input('expert');
-        $Post->slug = $request->input('slug');
-        // $imageName = time().'.'.$request->image->getClientOriginalExtension();
-        // $url=$request->image->storeAs('images', $imageName);
+        $validator = $this->validator($request);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $Product->name = $request->input('name');
+        $Product->content = $request->input('content');
+        $Product->expert = $request->input('expert');
+        $Product->slug = $request->input('slug');
+        $Product->image = $request->input('image');
 
-        // $Post->image =$url;
-        $Post->status = $request->input('status');
-        $Post->save();
+        $Product->gallery = $request->input('gallery')[0];
+        $Product->status = $request->input('status');
+    
+        $Product->save();
         #  $user->address = $request->input('address');
 
 
 
-        return redirect()->route('products'); // redirect to the users index page
+        return redirect()->route('productlist'); // redirect to the users index page
     }
 }

@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h1>افزودن محصول جدید</h1>
-            <form action="{{ route('productstore') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('updateproduct',$product->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group mb-4">
                     <label for="title">تیتر:</label>
@@ -44,7 +44,7 @@
                     <label for="body">آدرس لینک:</label> 
                     website.com/<b>post1</b><br>
                    
-                        <input require  type="text" class="form-control" value="{{ old('slug') }}" placeholder="آدرس پست من " name="slug" />
+                        <input require  type="text" class="form-control" value="{{@$product->slug}}" placeholder="آدرس پست من " name="slug" />
                    
                 </div>
                 <div class="form-group mb-4">

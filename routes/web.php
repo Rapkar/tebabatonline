@@ -71,7 +71,7 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     /********************* *************************/
     Route::get('newproduct', [App\Http\Controllers\AdminPanel\ProductController::class, 'create'])->name('newproduct');
     Route::get('edit/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'edit'])->name('editproduct');
-    Route::post('update/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'update'])->name('update');
+    Route::post('updateproduct/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'update'])->name('updateproduct');
     Route::get('products', [App\Http\Controllers\AdminPanel\ProductController::class, 'index'])->name('productlist');
     Route::post('productstore', [App\Http\Controllers\AdminPanel\ProductController::class, 'store'])->name('productstore');
     Route::get('delete/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'delete'])->name('deleteproduct');
@@ -128,3 +128,4 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
 Route::get('/', [App\Http\Controllers\Website\home::class, 'index'])->name('home');
 Route::get('articles/{slug}', [App\Http\Controllers\Website\home::class, 'articles'])->name('articles');
 Route::get('products/{slug}', [App\Http\Controllers\Website\home::class, 'products'])->name('products');
+Route::post('addtocart/{id}', [App\Http\Controllers\Website\home::class, 'addproduct'])->name('addtocart');
