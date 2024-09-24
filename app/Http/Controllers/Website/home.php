@@ -16,7 +16,8 @@ class home extends Controller
 {
     public function index()
     {
-
+        $user=Auth::user();
+        // dd(Auth::user()->hasRole('user'));
         // $posts = Post::all();
         $posts = Post::whereHas('categories', function ($query) {
             $query->where('name', 'home-post');
@@ -24,8 +25,16 @@ class home extends Controller
         $products = Product::whereHas('categories', function ($query) {
             $query->where('name', 'home-product');
         })->get();
-
-        return view('website.home', compact('posts', 'products'));
+        $cart = session()->get('cart', []);
+        $orderitems=[];
+        foreach($cart as $item){
+            $orderitems[$item]=Product::all()->find($item);
+        }
+        // $order = Product::whereIn('id', $cart)->get();
+        
+        $orderitems=array_unique($orderitems);
+        $cart=count($cart);
+        return view('website.home', compact('posts', 'products','cart','orderitems'));
     }
     public function chat()
     {
@@ -74,7 +83,34 @@ class home extends Controller
     }
     public function addproduct($id)
     {
-        $product=Product::find($id);
-        dd($product->name);
+        // Find the product by ID
+        $product = Product::find($id);
+
+        // Check if the product exists
+        if ($product) {
+
+
+            // if (Auth::check()) {
+                // Retrieve the current cart from the session or initialize it
+                $cart = session()->get('cart', []);
+
+                // Add the product ID to the cart array
+                $cart[] = $product->id;
+
+                // Save the updated cart back to the session
+                session()->put('cart', $cart);
+
+                // Optional: Provide feedback to the user
+                return response()->json([
+                    'message' => "Product '{$product->name}' has been added to your cart.",
+                    'cart' => count($cart),
+                ]);
+            } else {
+                // Handle the case where the product does not exist
+                return response()->json([
+                    'error' => 'Product not found.',
+                ], 404);
+            }
+        // } 
     }
 }

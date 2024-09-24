@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\MedicMiddleware;
+use App\Http\Middleware\UserMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 Auth::routes();
@@ -129,3 +130,16 @@ Route::get('/', [App\Http\Controllers\Website\home::class, 'index'])->name('home
 Route::get('articles/{slug}', [App\Http\Controllers\Website\home::class, 'articles'])->name('articles');
 Route::get('products/{slug}', [App\Http\Controllers\Website\home::class, 'products'])->name('products');
 Route::post('addtocart/{id}', [App\Http\Controllers\Website\home::class, 'addproduct'])->name('addtocart');
+
+
+Route::prefix('userpanel')->middleware(UserMiddleware::class)->group(function () {
+
+    /********************* *************************/
+    /*************** User Manager *******************/
+    /********************* *************************/
+
+     Route::get('/', [App\Http\Controllers\UserPanel\UserController::class, 'index'])->name('userDashboard');
+
+
+
+});
