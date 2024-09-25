@@ -63,7 +63,7 @@
                             @auth
                             <ul class="col-lg-12 d-flex">
                                 <li class="col-lg-4 d-flex align-items-center  justify-content-center pt-1" style="white-space: nowrap;">
-                                    <a href="#">
+                                    <a href="{{route('userDashboard')}}">
                                         {{ Auth::user()->name }}
                                         <img class="user-icon" src="{{ asset('images/user.svg') }}" alt="user-icon">
                                     </a>

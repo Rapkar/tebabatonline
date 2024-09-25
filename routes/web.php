@@ -24,7 +24,7 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     /********************* *************************/
     /*************** User Manager *******************/
     /********************* *************************/
-    Route::get('/',  [App\Http\Controllers\AdminPanel\PostController::class, 'index']);
+    Route::get('/',  [App\Http\Controllers\AdminPanel\PostController::class, 'index'])->name('adminDashboard');
     Route::get('newuser', [App\Http\Controllers\AdminPanel\UserController::class, 'create'])->name('newuser');
     Route::get('edit/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'edit'])->name('edit');
     Route::post('update/userid={id}', [App\Http\Controllers\AdminPanel\UserController::class, 'update'])->name('updateuser');
@@ -110,7 +110,7 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
     /*************** User Manager *******************/
     /********************* *************************/
 
-     Route::get('/', [App\Http\Controllers\MedicPanel\MedicController::class, 'index'])->name('Dashboard');
+     Route::get('/', [App\Http\Controllers\MedicPanel\MedicController::class, 'index'])->name('medicDashboard');
 
 
 

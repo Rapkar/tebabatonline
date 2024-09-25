@@ -69,6 +69,13 @@ var productslider = new Swiper(".productslider", {
   },
 });
 
+
+
+
+
+// add product to mini cart
+
+
 if ($('form[name="addtocart"]').length) {
   // Attach a submit event handler to the form
   $('form[name="addtocart"]').on('submit', function(event) {

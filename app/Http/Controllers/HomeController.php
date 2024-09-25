@@ -26,8 +26,15 @@ class HomeController extends Controller
     public function index()
     {
         $role = Auth::user()->roles()->find(Auth::id());
-            $title=__("admin.Home Page");
-          return view('admin_panel.home',compact('role','title'));
-        
+        $title = __("admin.Home Page");
+        if (Auth::user()->hasRole('admin')) {
+            return redirect()->route('adminDashboard');
+        } else if (Auth::user()->hasRole('medic')) {
+            return redirect()->route('medicDashboard');
+        } else if (Auth::user()->hasRole('user') || Auth::user()->hasRole('admin')) {
+            return redirect()->route('userDashboard');
+        } else {
+            return redirect()->route('home');
+        }
     }
 }

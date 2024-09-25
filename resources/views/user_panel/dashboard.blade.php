@@ -26,7 +26,13 @@
                     <td><a href="">لیست علاقه مندی ها</a></td>
                 </tr>
                 <tr>
-                    <td><a href="">خروج</a></td>
+                    <td><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" >خروج</a>
+                
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+                </td>
                 </tr>
                 </tbody>
             </table>

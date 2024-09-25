@@ -497,7 +497,7 @@ padding: 1rem; */
     content: '';
     position: absolute;
     width: 100%;
-    height: 205px;
+    height: 270;
     right: 0;
     left: 0;
     margin: auto;
@@ -509,6 +509,12 @@ padding: 1rem; */
     transition: all 0.3s ease-in;
     opacity: 1;
 
+}
+
+.blogslider .card {
+    background: #E3F2F2;
+    border: none;
+    border-radius: 20px;
 }
 
 .counter {
@@ -875,6 +881,76 @@ form.added button {
     pointer-events: auto;
 }
 
+.support h2.title {
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+    color: #017072;
+
+}
+
+
+.support h3 {
+
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+    color: #017072;
+}
+
+.support h4 {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 40px;
+    text-align: center;
+
+    color: #017072;
+}
+
+.support>p {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+    color: #017072;
+}
+
+.support .content-box .col-lg-4 .item {
+    padding: 3rem;
+    margin-bottom: 3rem;
+}
+
+.support .item {
+    max-width: 300px;
+    min-width: 100%;
+    background: linear-gradient(180deg, #C7E3E3 0%, rgba(227, 241, 241, 0.36) 99.99%, rgba(255, 255, 255, 0.58) 100%);
+    border-radius: 15px;
+    min-height: 300px;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.support .item img {
+    background-color: #fff;
+    border-radius: 50px;
+    border: 5px solid #fff;
+    object-fit: none;
+    min-width: 100px;
+}
+
+.blogs .title {
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 40px;
+    text-align: center;
+    color: #017072;
+}
+
 /* user panel */
 table {
     border: 1px solid black;
@@ -893,11 +969,13 @@ table tr {
 
 
 }
-table tr a{
+
+table tr a {
     text-decoration: none;
     color: #017072 !important;
 
 }
-table tr td{
-padding: 0 1rem;
+
+table tr td {
+    padding: 0 1rem;
 }

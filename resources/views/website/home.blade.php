@@ -119,6 +119,64 @@
 
     </div>
 </div>
+<section class=" mt-5 d-flex flex-column justify-content-center align-items-center text-center support">
+
+    <h2 class="title"> خدمات ما </h2>
+    <p class="mt-4" >درباره خدمات ما اطلاعات بیشتر کسب کنید</p>
+
+
+    <div class="container content-box mt-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="item">
+                    <img src="{{asset('images/website/lifestyles.png') }}">
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="item">
+                <img src="{{asset('images/website/lunch.png') }}">
+                    
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="item">
+                <img src="{{asset('images/website/direct.png') }}">
+
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="item">
+                <img src="{{asset('images/website/prescription.png') }}">
+
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="item">
+                <img src="{{asset('images/website/shop.png') }}">
+
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="item">
+                <img src="{{asset('images/website/tutrial.png') }}">
+
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <div class="container ">
     <div class="orderalert " style="background-image: url({{ asset('images/website/TrackOrders.webp') }})">
         <h2>پیگیری سفارشات</h2>
@@ -126,34 +184,71 @@
         <a href="#">پیگیری سفارشات</a>
     </div>
 </div>
-<div class="row mt-5">
-    <div class="col-lg-8">
-        <h2 class="title"> خدمات ما </h2>
+<section class=" mt-5 d-flex flex-column justify-content-center align-items-center text-center support">
+
+    <h2 class="title"> چرا طبابت آنلاین؟</h2>
+    <p class="mt-4" >در مورد ویزیت آنلاین، چندین مزیت وجود داره که ممکنه شما رو ترغیب کنه تا ویزیت آنلاین رو انتخاب کنید:</p>
+
+
+    <div class="container content-box mt-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="item">
+                    <img src="{{asset('images/website/lifestyles.png') }}">
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="item">
+                <img src="{{asset('images/website/lunch.png') }}">
+                    
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="item">
+                <img src="{{asset('images/website/direct.png') }}">
+
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="item">
+                <img src="{{asset('images/website/prescription.png') }}">
+
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="item">
+                <img src="{{asset('images/website/shop.png') }}">
+
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="item">
+                <img src="{{asset('images/website/tutrial.png') }}">
+
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-lg-4">
-        <ul>
-            <li><a href="#"><i class="far fa-address-card"></i></a></li>
-            <li><a href="#"><i class="far fa-grin-alt"></i></a></li>
-            <li><a href="#"></a><i class="fas fa-hand-holding-medical"></i></li>
-            <li><a href="#"></a><i class="fas fa-heartbeat"></i></li>
-            <li><a href="#"></a><i class="fas fa-hand-holding-heart"></i></li>
-            <li><a href="#"><i class="fas fa-photo-video"></i></a></li>
-        </ul>
-    </div>
-</div>
-<div class="container-fluid bggray  pb-3 mb-5">
+</section>
+
+<div class="container-fluid pb-3 mb-5 mt-5 blogs">
     <div class="container">
         <div class="row">
-            <div class="d-flex justify-content-between align-items-center">
-                <h2>وبلاگ</h2>
-                <div class="d-flex align-items-center flex-column">
-                    <a href="#">دیدن همه</a>
-                    <div class="blogsliderpaginate">
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+            <div class="d-flex justify-content-center align-items-center text-center">
+                <h2 class="title" >وبلاگ</h2>
 
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -164,7 +259,7 @@
                 <div href="#" class="swiper-slide">
                     <div class="card">
                         <div class="head">
-                            <img src="{{ asset('storage/uploads/'.$post->image) }}" alt="posttitle">
+                            <img src="{{ asset( $post->image) }}" alt="posttitle">
                         </div>
                         <h2>{{$post->name}}</h2>
                         <p>{{$post->expert}}</p>
@@ -182,19 +277,7 @@
 
     </div>
 </div>
-<div class="container">
-    <div class="counter px-5 py-5" style="background-image: url({{ asset('images/website/slide4.webp') }})">
-        <h2>خلاصه ای درباره ما</h2>
-        <div class="col-lg-6">
-            <div class="row items">
-                <div class="col-lg-6">بیش از ۱۵ سال فعالیت در زمینه طب اسلامی <span>15+</span> </div>
-                <div class="col-lg-6">بیش از ۱۰ هزار درمان موفق <span>10K</span> </div>
-                <div class="col-lg-6">۱۰۰٪ تضمین کیفیت محصول <span class="100">100%</span> </div>
-                <div class="col-lg-6">۹۸٪ رضایت مشتریان <span class="100">98%</span> </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="expret container">
     <h2 class="py-5">خلاصه ای درباره ما</h2>
     <img class="w-100" src="{{asset('images/expret.webp') }}">
