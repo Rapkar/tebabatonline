@@ -60,7 +60,7 @@
                     <p>{{$product->expert}}</p>
 
                     <h5 class="d-flex" href="#">{{$product->price}} تومان</h5>
-                    <form method="post" name="addtocart" action="{{ route('addtocart',$product->id)}}">
+                    <form method="post" name="addtocart"   class="addtocart" action="{{ route('addtocart',$product->id)}}">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                         <button type="submit">افزودن به سبد خرید</button>

@@ -130,6 +130,7 @@ Route::get('/', [App\Http\Controllers\Website\home::class, 'index'])->name('home
 Route::get('articles/{slug}', [App\Http\Controllers\Website\home::class, 'articles'])->name('articles');
 Route::get('products/{slug}', [App\Http\Controllers\Website\home::class, 'products'])->name('products');
 Route::post('addtocart/{id}', [App\Http\Controllers\Website\home::class, 'addproduct'])->name('addtocart');
+Route::post('removefromcart/{id}', [App\Http\Controllers\Website\home::class, 'removefromcart'])->name('removefromcart');
 
 
 Route::prefix('userpanel')->middleware(UserMiddleware::class)->group(function () {

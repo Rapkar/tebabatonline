@@ -74,30 +74,8 @@
                                         <span class="quanity">{{$cart}}</span>
 
                                     </a>
-                                    <div class="minicart pt-5 d-flex flex-column">
-                                        <ul class="mt-4 pt-4">
-                                        @if(is_array($orderitems))
-                                            @foreach($orderitems as $item)
+                                    @include('website.layouts.minicart',$orderitems)
 
-                                            <li class="d-flex justify-content-between">
-                                                <a href="{{$item->slug}}">{{$item->name}}</a>
-                                                <img class="mw-100 w-50" src="{{$item->image}}">
-                                                <p class="count"><input class="count" name="quanity" type="number"  value="3"></p>
-                                                <span class="remove">&#128465; </span>
-                                            </li>
-                                            @endforeach
-                                            @else
-                                            <li>محصولی وجود ندارد</li>
-                                            @endif
-                                        </ul>
-                                        <div class="row d-flex align-items-center w-100 mt-4 pt-2">
-                                            <div class="col-lg-6 d-flex">
-                                                <a href="#" class="buy"> پرداخت</a>
-                                            </div>
-                                            <div class="col-lg-6 d-flex">145000</div>
-                                        </div>
-                                        
-                                    </div>
                                 </li>
 
                             </ul>
@@ -116,30 +94,7 @@
                                         <span class="quanity">{{$cart}}</span>
 
                                     </a>
-                                    <div class="minicart pt-5 d-flex flex-column">
-                                        <ul class="mt-4 pt-4">
-                                        @if(is_array($orderitems))
-                                            @foreach($orderitems as $item)
-
-                                            <li class="d-flex justify-content-between">
-                                                <a href="{{$item->slug}}">{{$item->name}}</a>
-                                                <img class="mw-100 w-50" src="{{$item->image}}">
-                                                <p class="count"><input class="count" name="quanity" type="number"  value="3"></p>
-                                                <span class="remove">&#128465; </span>
-                                            </li>
-                                            @endforeach
-                                            @else
-                                            <li>محصولی وجود ندارد</li>
-                                            @endif
-                                        </ul>
-                                        <div class="row d-flex align-items-center w-100 mt-4 pt-2">
-                                            <div class="col-lg-6 d-flex">
-                                                <a href="#" class="buy"> پرداخت</a>
-                                            </div>
-                                            <div class="col-lg-6 d-flex">145000</div>
-                                        </div>
-                                        
-                                    </div>
+                                    @include('website.layouts.minicart',$orderitems)
                                 </li>
 
                             </ul>

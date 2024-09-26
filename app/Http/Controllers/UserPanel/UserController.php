@@ -23,7 +23,7 @@ class UserController extends Controller
         $cart = session()->get('cart', []);
         $orderitems=[];
         foreach($cart as $item){
-            $orderitems[$item]=Product::all()->find($item);
+            $orderitems[]=Product::all()->find($item);
         }
         // $order = Product::whereIn('id', $cart)->get();
         

@@ -16,7 +16,7 @@ class home extends Controller
 {
     public function index()
     {
-        $user=Auth::user();
+        $user = Auth::user();
         // dd(Auth::user()->hasRole('user'));
         // $posts = Post::all();
         $posts = Post::whereHas('categories', function ($query) {
@@ -26,15 +26,19 @@ class home extends Controller
             $query->where('name', 'home-product');
         })->get();
         $cart = session()->get('cart', []);
-        $orderitems=[];
-        foreach($cart as $item){
-            $orderitems[$item]=Product::all()->find($item);
+        $orderitems = [];
+        foreach ($cart as $item) {
+            $orderitems[] = Product::all()->find($item);
         }
         // $order = Product::whereIn('id', $cart)->get();
-        
-        $orderitems=array_unique($orderitems);
-        $cart=count($cart);
-        return view('website.home', compact('posts', 'products','cart','orderitems'));
+
+        $orderitems = array_unique($orderitems);
+        // dd($orderitems);
+        // foreach($orderitems as $item){
+        //     echo $item->slug;
+        // }
+        $cart = count($cart);
+        return view('website.home', compact('posts', 'products', 'cart', 'orderitems'));
     }
     public function chat()
     {
@@ -53,13 +57,22 @@ class home extends Controller
     }
     public function products($slug)
     {
+        $cart = session()->get('cart', []);
+        
+        $orderitems = [];
+        foreach ($cart as $item) {
+            $orderitems[] = Product::all()->find($item);
+        }
+        // $order = Product::whereIn('id', $cart)->get();
 
+        $orderitems = array_unique($orderitems);
+        $cart = count($cart);
         $product = Product::where('slug', $slug)->first();
         if (!$product) {
             return abort(404);
         }
         $product->increment('count');
-        return view('website.single-product', compact('product'));
+        return view('website.single-product', compact('product','cart','orderitems'));
     }
     public function messages()
     {
@@ -88,29 +101,83 @@ class home extends Controller
 
         // Check if the product exists
         if ($product) {
-
-
             // if (Auth::check()) {
-                // Retrieve the current cart from the session or initialize it
-                $cart = session()->get('cart', []);
+            // Retrieve the current cart from the session or initialize it
+            $cart = session()->get('cart', []);
 
-                // Add the product ID to the cart array
-                $cart[] = $product->id;
+            // Add the product ID to the cart array
 
-                // Save the updated cart back to the session
-                session()->put('cart', $cart);
-
-                // Optional: Provide feedback to the user
-                return response()->json([
-                    'message' => "Product '{$product->name}' has been added to your cart.",
-                    'cart' => count($cart),
-                ]);
-            } else {
-                // Handle the case where the product does not exist
-                return response()->json([
-                    'error' => 'Product not found.',
-                ], 404);
+            $cart[] = $product->id;
+            // Save the updated cart back to the session
+            session()->put('cart', $cart);
+            $orderitems = [];
+            foreach ($cart as $item) {
+                $orderitems[$item] = Product::all()->find($item);
             }
+
+            $out = view('website.layouts.minicart', compact('orderitems'))->render();
+            // Optional: Provide feedback to the user
+            return response()->json([
+                'message' => "Product '{$product->name}' has been added to your cart.",
+                'cart' => count($cart),
+                'out' => $out
+            ]);
+        } else {
+            // Handle the case where the product does not exist
+            return response()->json([
+                'error' => 'Product not found.',
+            ], 404);
+        }
         // } 
     }
+
+    function removefromcart($id)
+    {
+        // Find the product by ID
+        $product = Product::find($id);
+    
+        // Check if the product exists
+        if ($product) {
+            // Retrieve the current cart from session
+            $cart = session()->get('cart', []);
+    
+            // Check if the product is in the cart
+            if (in_array($product->id, $cart)) {
+                // Remove the product ID from the cart array
+                $cart = array_filter($cart, function($item) use ($product) {
+                    return $item !== $product->id;
+                });
+    
+                // Save the updated cart back to the session
+                session()->put('cart', $cart);
+    
+                // Prepare order items for rendering
+                $orderitems = [];
+                foreach ($cart as $itemId) {
+                    $orderitems[$itemId] = Product::find($itemId);
+                }
+    
+                // Render the updated minicart view
+                $out = view('website.layouts.minicart', compact('orderitems'))->render();
+    
+                // Optional: Provide feedback to the user
+                return response()->json([
+                    'message' => "Product '{$product->name}' removed from your cart.",
+                    'cart' => count($cart),
+                    'out' => $out
+                ]);
+            } else {
+                // Handle case where product is not in cart
+                return response()->json([
+                    'error' => "Product '{$product->name}' is not in your cart.",
+                ], 404);
+            }
+        } else {
+            // Handle case where product does not exist
+            return response()->json([
+                'error' => 'Product not found.',
+            ], 404);
+        }
+    }
+    
 }

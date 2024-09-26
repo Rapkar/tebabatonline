@@ -722,7 +722,7 @@ padding: 1rem; */
     object-position: center;
 }
 
-.popular-products .card button {
+.addtocart  button {
 
     font-size: 16px;
     font-weight: 600;
@@ -950,6 +950,62 @@ form.added button {
     text-align: center;
     color: #017072;
 }
+/* single product  */
+.singleproduct h1{
+font-size: 40px;
+font-weight: 700;
+line-height: 52px;
+text-align: right;
+color: #004647;
+
+}
+.singleproduct .productimg{
+min-height: 500px;
+min-width: 500px;
+object-fit: cover;
+object-position: center;
+border-radius: 17px;
+}
+.singleproduct h2,.singleproduct h3{
+font-size: 20px;
+font-weight: 600;
+line-height: 26px;
+text-align: center;
+color: #017072;
+}
+.singleproduct h3{
+    font-weight: 300;
+}
+.singleproduct .services .col-lg-6{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+.singleproduct .services img{
+    max-width: 70px;
+}
+.singleproduct .services .addtocart button{
+    min-width: 75% !important;
+}
+.singleproduct .services .csbg{
+    background:  #F4F4F4;
+    padding: 3rem;
+    border-radius: 16px;
+    margin-top: 2rem;
+
+}
+.singleproduct .services p{
+color:#017072;
+font-size: 24px;
+font-weight: 600;
+line-height: 31.2px;
+text-align: left;
+
+}
+/* single product  */
+
 
 /* user panel */
 table {

@@ -97,7 +97,50 @@ if ($('form[name="addtocart"]').length) {
               product_id: productId // Send product ID
           },
           success: function(response) {
-             $('.cart-box .quanity').html(response.cart)
+            console.log(response.out );
+             $('.cart-box .quanity').html(response.cart);
+             $('.minicart').remove();
+             $(".cart-box,.headerslider").append(response.out);
+              self.addClass("added");
+              // setTimeout(function(){
+              //   self.find('button').html('افزودن به سبد خرید');
+              //   self.removeClass("added");
+              // }, 5000);
+              $(self).find("button").html(" افزوده شد &#10003;")
+          },
+          error: function(xhr) {
+              // Handle error response (e.g., show an error message)
+              alert(xhr.responseJSON.error || 'An error occurred.');
+          }
+      });
+  });
+}
+
+if ($('form.removefromcart').length) {
+  // Attach a submit event handler to the form
+  
+  $(document).on('submit', 'form.removefromcart', function(event) {
+    event.preventDefault();
+      var self=$(this);
+      // Get the product ID from the hidden input
+      var productId = $(this).find('input[name="product_id"]').val();
+
+      // Optional: Do something with the product ID (like logging)
+      
+
+      // Submit the form using AJAX
+      $.ajax({
+          url: $(this).attr('action'), // Form action URL
+          type: 'POST',
+          data: {
+            '_token': $('input[name="_token"]').val(), // Include CSRF token
+              product_id: productId // Send product ID
+          },
+          success: function(response) {
+            console.log(response.out );
+             $('.cart-box .quanity').html(response.cart);
+             $('.minicart').remove();
+             $(".cart-box,.headerslider").append(response.out);
               self.addClass("added");
               $(self).find("button").html(" افزوده شد &#10003;")
           },
