@@ -39,21 +39,37 @@
                         <nav class="navbar navbar-expand-lg   ">
                             <ul class="navbar-nav ">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>صفحه اصلی</a>
+                                    <a class="nav-link" href="{{route('home')}}">صفحه اصلی</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>خدمات ما</a>
+                                    <div class="dropdown-menu dropdown-menu-right " aria-labelledby="users">
+                                        <a class="dropdown-item" href="#">
+                                        <img src="{{ asset('images/website/menu_a.webp') }}">
+                                            ویزیت آنلاین
+                                            <p>برای ویزیت آنلاین همین حالا کلیک کن و فرم رو پر کن</p>
+                                            
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                        <img src="{{ asset('images/website/menu_b.webp') }}">
+                                            ویزیت آنلاین
+                                            <p>برای ویزیت آنلاین همین حالا کلیک کن و فرم رو پر کن</p>
+                                            
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                        <img src="{{ asset('images/website/menu_c.webp') }}">
+                                            ویزیت آنلاین
+                                            <p>برای ویزیت آنلاین همین حالا کلیک کن و فرم رو پر کن</p>
+                                            
+                                        </a>
+                                    </div>
                                 </li>
 
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>فروشگاه</a>
+                                    <a class="nav-link" href="{{route('shop')}}"  >فروشگاه</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link  " href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>فرم ویزیت و مشاوره</a>
-                                    <div class="dropdown-menu dropdown-menu-right " aria-labelledby="users">
-                                        <a class="dropdown-item" href="#">کاربر</a>
-                                        <a class="dropdown-item" href="#">لیست کاربران</a>
-                                    </div>
+                                    <a class="nav-link  " href="{{route('visit')}}">فرم ویزیت و مشاوره</a>
                                 </li>
                             </ul>
                         </nav>

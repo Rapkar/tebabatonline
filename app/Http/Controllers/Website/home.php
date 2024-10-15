@@ -11,6 +11,7 @@ use App\Jobs\SendMessage;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\helper;
 
 class home extends Controller
 {
@@ -58,7 +59,7 @@ class home extends Controller
     public function products($slug)
     {
         $cart = session()->get('cart', []);
-        
+
         $orderitems = [];
         foreach ($cart as $item) {
             $orderitems[] = Product::all()->find($item);
@@ -72,7 +73,7 @@ class home extends Controller
             return abort(404);
         }
         $product->increment('count');
-        return view('website.single-product', compact('product','cart','orderitems'));
+        return view('website.single-product', compact('product', 'cart', 'orderitems'));
     }
     public function messages()
     {
@@ -135,31 +136,31 @@ class home extends Controller
     {
         // Find the product by ID
         $product = Product::find($id);
-    
+
         // Check if the product exists
         if ($product) {
             // Retrieve the current cart from session
             $cart = session()->get('cart', []);
-    
+
             // Check if the product is in the cart
             if (in_array($product->id, $cart)) {
                 // Remove the product ID from the cart array
-                $cart = array_filter($cart, function($item) use ($product) {
+                $cart = array_filter($cart, function ($item) use ($product) {
                     return $item !== $product->id;
                 });
-    
+
                 // Save the updated cart back to the session
                 session()->put('cart', $cart);
-    
+
                 // Prepare order items for rendering
                 $orderitems = [];
                 foreach ($cart as $itemId) {
                     $orderitems[$itemId] = Product::find($itemId);
                 }
-    
+
                 // Render the updated minicart view
                 $out = view('website.layouts.minicart', compact('orderitems'))->render();
-    
+
                 // Optional: Provide feedback to the user
                 return response()->json([
                     'message' => "Product '{$product->name}' removed from your cart.",
@@ -179,5 +180,55 @@ class home extends Controller
             ], 404);
         }
     }
-    
+    public function shop()
+    {
+        $user = Auth::user();
+        // dd(Auth::user()->hasRole('user'));
+        // $posts = Post::all();
+        $posts = Post::whereHas('categories', function ($query) {
+            $query->where('name', 'home-post');
+        })->get();
+        $products = Product::all();
+        $cart = session()->get('cart', []);
+        $orderitems = [];
+        foreach ($cart as $item) {
+            $orderitems[] = Product::all()->find($item);
+        }
+        // $order = Product::whereIn('id', $cart)->get();
+
+        $orderitems = array_unique($orderitems);
+        // dd($orderitems);
+        // foreach($orderitems as $item){
+        //     echo $item->slug;
+        // }
+        $cart = count($cart);
+        return view('website.shop', compact('posts', 'products', 'cart', 'orderitems'));
+    }
+    public function visit()
+    {
+        $user = Auth::user();
+        // dd(Auth::user()->hasRole('user'));
+        // $posts = Post::all();
+        $posts = Post::whereHas('categories', function ($query) {
+            $query->where('name', 'home-post');
+        })->get();
+        $products = Product::all();
+        $cart = session()->get('cart', []);
+        $orderitems = [];
+        foreach ($cart as $item) {
+            $orderitems[] = Product::all()->find($item);
+        }
+        // $order = Product::whereIn('id', $cart)->get();
+
+        $orderitems = array_unique($orderitems);
+        // dd($orderitems);
+        // foreach($orderitems as $item){
+        //     echo $item->slug;
+        // }
+        $cart = count($cart);
+        $helper = new helper;
+        $states = $helper->getState();
+        // dd($states);
+        return view('website.visit', compact('posts', 'products', 'states', 'cart', 'orderitems'));
+    }
 }

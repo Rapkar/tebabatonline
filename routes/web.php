@@ -5,6 +5,7 @@ use App\Http\Middleware\MedicMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 Auth::routes();
 
 Route::get('/tebateba1', [App\Http\Controllers\HomeController::class, 'index'])->name('auth');
@@ -17,7 +18,7 @@ Route::get('/tebateba1', [App\Http\Controllers\HomeController::class, 'index'])-
 /**                                           **/
 /**                                           **/
 /********************* *************************/
- 
+
 
 Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function () {
 
@@ -102,7 +103,7 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
 /**                                           **/
 /**                                           **/
 /********************* *************************/
- 
+
 
 Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function () {
 
@@ -110,10 +111,7 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
     /*************** User Manager *******************/
     /********************* *************************/
 
-     Route::get('/', [App\Http\Controllers\MedicPanel\MedicController::class, 'index'])->name('medicDashboard');
-
-
-
+    Route::get('/', [App\Http\Controllers\MedicPanel\MedicController::class, 'index'])->name('medicDashboard');
 });
 
 
@@ -131,16 +129,14 @@ Route::get('articles/{slug}', [App\Http\Controllers\Website\home::class, 'articl
 Route::get('products/{slug}', [App\Http\Controllers\Website\home::class, 'products'])->name('products');
 Route::post('addtocart/{id}', [App\Http\Controllers\Website\home::class, 'addproduct'])->name('addtocart');
 Route::post('removefromcart/{id}', [App\Http\Controllers\Website\home::class, 'removefromcart'])->name('removefromcart');
+Route::get('shop', [App\Http\Controllers\Website\home::class, 'shop'])->name('shop');
+Route::get('visit', [App\Http\Controllers\Website\home::class, 'visit'])->name('visit');
 
 
 Route::prefix('userpanel')->middleware(UserMiddleware::class)->group(function () {
-
     /********************* *************************/
     /*************** User Manager *******************/
     /********************* *************************/
-
-     Route::get('/', [App\Http\Controllers\UserPanel\UserController::class, 'index'])->name('userDashboard');
-
-
-
+    Route::get('/', [App\Http\Controllers\UserPanel\UserController::class, 'index'])->name('userDashboard');
+    Route::get('/cart', [App\Http\Controllers\UserPanel\UserController::class, 'cart'])->name('cart');
 });

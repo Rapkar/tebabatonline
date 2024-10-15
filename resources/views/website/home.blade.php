@@ -45,7 +45,7 @@
 
 
 </div>
-<div class="container-fluid popular-products d-flex flex-column">
+<div class="container-fluid popular-products products  d-flex flex-column">
     <h2>محصولات پرفروش</h2>
     <div class="swiper productslider mt-5 w-100 container mb-5">
         <div class="swiper-wrapper">
@@ -81,7 +81,7 @@
 <div class="container-fluid mensec pt-5">
     <div class="row pt-5 ">
         <div class="col-lg-12 pt-5  highlight d-flex flex-column justify-content-center align-items-center ">
-            <h2 class="mb-5 pb-5 mt-5 pt-5 title">بیماری ها بر اساس اعضای بدن</h2>
+            <h2 class="   mt-5 pt-5 title">بیماری ها بر اساس اعضای بدن</h2>
 
 
             <p>ما برای راحتی شما عزیزان، در این قسمت تمام بیماری‌هایی که برای هر کس ممکنه به وجود بیاد رو بر اساس تک تک اعضای بدن دسته بندی کردیم</p>
@@ -261,7 +261,6 @@
                         <div class="head">
                             <img src="{{ asset( $post->image) }}" alt="posttitle">
                         </div>
-                        <h2>{{$post->name}}</h2>
                         <p>{{$post->expert}}</p>
                         <h5 href="#">ادامه مطلب</h5>
 
