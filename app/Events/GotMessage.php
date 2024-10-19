@@ -29,9 +29,10 @@ class GotMessage
      */
     public function broadcastOn(): array
     {
+        
         // $this->message is available here
         return [
-            new PrivateChannel("channel_for_everyone"),
+            new PrivateChannel("chat"),
         ];
     }
 }

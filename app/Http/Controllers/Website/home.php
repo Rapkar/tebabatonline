@@ -17,6 +17,7 @@ class home extends Controller
 {
     public function index()
     {
+    //    dd(Auth::check());
         $user = Auth::user();
         // dd(Auth::user()->hasRole('user'));
         // $posts = Post::all();

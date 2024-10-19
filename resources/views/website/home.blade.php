@@ -1,6 +1,8 @@
 @extends('website.layouts.app')
 
 @section('content')
+@include('website.chat')
+
 <div class="container">
     <div class=" px-5">
         <div class="swiper headerslider ">
@@ -45,6 +47,7 @@
 
 
 </div>
+
 <div class="container-fluid popular-products products  d-flex flex-column">
     <h2>محصولات پرفروش</h2>
     <div class="swiper productslider mt-5 w-100 container mb-5">

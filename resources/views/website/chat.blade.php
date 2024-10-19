@@ -1,51 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Room: </title>
-    @vite(['resources/css/app.css'])
-    @vite(['resources/js/app.js'])
-</head>
-<body>
-<div id="app">
-    <h2>Chat Room:  </h2>
-    <div id="messages"
-         style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px; height: 300px; overflow-y: scroll;">
+@auth
+<form id="chat-form" class="chat-form" action="{{route('sendmessage')}}" method="post">
+    @csrf
+    <div class="chhead">
+        <h2>ارتباط با: </h2>
+        <select>
+            <optgroup label="طبیب"> <!-- Label for the first group -->
+                <option value="1">طبیب شماره ۱</option>
+                <option value="2">طبیب شماره ۲</option>
+                <option value="3">طبیب شماره ۳</option>
+            </optgroup>
+
+            <option value="1">پشتیبان</option>
+
+
+        </select>
+    </div>
+
+
+    <div id="messages" class="chatbox">
         <!-- Messages will be displayed here -->
     </div>
     <input type="text" id="messageInput" placeholder="Type your message here..." autofocus>
-    <button onclick="sendMessage()">Send</button>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const roomId = "{{ $room->id }}";
-        Echo.channel(`chat.${roomId}`)
-            .listen('MessageSent', (e) => {
-                const messages = document.getElementById('messages');
-                const messageElement = document.createElement('div');
-                messageElement.innerHTML = `<strong>${e.userName}:</strong> ${e.message}`;
-                messages.appendChild(messageElement);
-                messages.scrollTop = messages.scrollHeight; // Scroll to the bottom
-            });
-    })
-
-    function sendMessage() {
-        const messageInput = document.getElementById('messageInput');
-        const message = messageInput.value;
-        messageInput.value = ''; // Clear input
-        const roomId = "{{$room->id}}"
-        fetch(`/rooms/${roomId}/message`, {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({message: message})
-        }).catch(error => console.error('Error:', error));
-    }
-
-</script>
-</body>
-</html>
+    <button>ارسال</button>
+</form>
+@endauth

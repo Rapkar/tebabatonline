@@ -1,4 +1,6 @@
 import '../bootstrap';
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
 import '../../css/website/core.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,7 +10,7 @@ import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
 import { Pagination, Navigation, EffectFade } from "swiper/modules";
 var headersliderd = document.querySelector('.headerslider');
-if (headersliderd!=null && headersliderd ) {
+if (headersliderd != null && headersliderd) {
   var headerslider = new Swiper(".headerslider", {
     slidesPerView: 1,
     spaceBetween: 20,
@@ -21,8 +23,8 @@ if (headersliderd!=null && headersliderd ) {
 
   });
 }
-  var blogsliderd = document.querySelector('.blogslider');
-  if (blogsliderd!=null && blogsliderd) { 
+var blogsliderd = document.querySelector('.blogslider');
+if (blogsliderd != null && blogsliderd) {
   var blogslider = new Swiper(".blogslider", {
     slidesPerView: 4,
     spaceBetween: 20,
@@ -49,8 +51,8 @@ if (headersliderd!=null && headersliderd ) {
   });
 }
 
-  var productsliders = document.querySelector('.productslider');
-  if ( productsliders!=null && productsliders) { 
+var productsliders = document.querySelector('.productslider');
+if (productsliders != null && productsliders) {
   var productslider = new Swiper(".productslider", {
     slidesPerView: 4,
     spaceBetween: 20,
@@ -289,3 +291,77 @@ if (document.getElementById('visitform')) {
 
 
 }
+// chat.js
+
+
+
+// Enable pusher logging - don't include this in production
+// Pusher.logToConsole = true;
+
+// var pusher = new Pusher('723614bfcaeb1ebf3619', {
+//   cluster: 'ap2'
+// });
+
+// var channel = pusher.subscribe('chat');
+// channel.bind('my-event', function(data) {
+//   console.log(JSON.stringify(data));
+// });
+
+
+
+
+window.Pusher = Pusher;
+
+// window.Echo = new Echo({
+//     broadcaster: 'reverb',
+//     key: import.meta.env.VITE_REVERB_APP_KEY,
+//     wsHost: import.meta.env.VITE_REVERB_HOST,
+//     wsPort: import.meta.env.VITE_REVERB_PORT ?? 8080,
+//     wssPort: import.meta.env.VITE_REVERB_PORT ?? 443,
+//     forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
+//     enabledTransports: ['ws', 'wss'],
+// });
+
+window.Echo = new Echo({
+  broadcaster: 'pusher',
+  key: '723614bfcaeb1ebf3619',
+  cluster: 'ap2',
+  forceTLS: true
+});
+
+var channel = window.Echo.channel('my-channel');
+channel.listen('.my-event', function (data) {
+  $("#messages").append(`<div>${data.message}</div>`); 
+
+});
+const userId = 2;
+
+window.Echo.private(`private-chat.${userId}`)
+    .listen('MessageSent', (e) => {
+        console.log(`New message from ${e.message.sender_id}: ${e.message.text}`);
+        $("#messages").append(`<div>${e.message.text}</div>`);
+
+        // Update your chat UI here with the new message
+    });
+
+$('#chat-form').on('submit', function (e) {
+  e.preventDefault();
+  const message = $('#messageInput').val(); // Ensure this matches your input ID
+
+  // Send AJAX POST request with CSRF token
+  $.ajax({
+    url: '/send-message',
+    type: 'POST',
+    data: {
+      message: message,
+      '_token': $('input[name="_token"]').val(),// Include CSRF token
+    },
+    success: function (response) {
+      $("#messages").append(`<div>${response.text}</div>`);
+      $('#messageInput').val(''); // Clear input field on success
+    },
+    error: function (xhr) {
+      console.error('Error:', xhr.responseText); // Handle error response
+    }
+  });
+});
