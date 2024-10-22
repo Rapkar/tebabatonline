@@ -7,7 +7,11 @@
     <link rel="icon" type="image/png" href="{{ asset('images/ico.png') }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    @if(Auth::check())
+    <meta name="user-id" content="{{ Auth::user()->id }}">
+    @else
+    <meta name="user-id" content="0"> <!-- Or handle as needed -->
+    @endif
     <title>طبابت آنلاین</title>
 
     <!-- Fonts -->
@@ -45,28 +49,28 @@
                                     <a class="nav-link" href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>خدمات ما</a>
                                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="users">
                                         <a class="dropdown-item" href="#">
-                                        <img src="{{ asset('images/website/menu_a.webp') }}">
+                                            <img src="{{ asset('images/website/menu_a.webp') }}">
                                             ویزیت آنلاین
                                             <p>برای ویزیت آنلاین همین حالا کلیک کن و فرم رو پر کن</p>
-                                            
+
                                         </a>
                                         <a class="dropdown-item" href="#">
-                                        <img src="{{ asset('images/website/menu_b.webp') }}">
+                                            <img src="{{ asset('images/website/menu_b.webp') }}">
                                             ویزیت آنلاین
                                             <p>برای ویزیت آنلاین همین حالا کلیک کن و فرم رو پر کن</p>
-                                            
+
                                         </a>
                                         <a class="dropdown-item" href="#">
-                                        <img src="{{ asset('images/website/menu_c.webp') }}">
+                                            <img src="{{ asset('images/website/menu_c.webp') }}">
                                             ویزیت آنلاین
                                             <p>برای ویزیت آنلاین همین حالا کلیک کن و فرم رو پر کن</p>
-                                            
+
                                         </a>
                                     </div>
                                 </li>
 
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link" href="{{route('shop')}}"  >فروشگاه</a>
+                                    <a class="nav-link" href="{{route('shop')}}">فروشگاه</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link  " href="{{route('visit')}}">فرم ویزیت و مشاوره</a>

@@ -1,7 +1,7 @@
 @extends('website.layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container pt-5 mt-5">
     <div class="row">
         <div class="col-lg-4">
             <table dir="rtl">
@@ -11,7 +11,7 @@
                         <h2>{{ Auth::user()->name }}</h2>
                         <p>{{ Auth::user()->phone }}</p>
                     </td>
-                    <td>Edit</td>
+                    <td><img src="{{ asset('images/edit.svg') }}"></td>
                 </tr>
                 <tr>
                     <td><a href="">سفارش ها</a></td>

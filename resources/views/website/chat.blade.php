@@ -1,26 +1,34 @@
 @auth
-<form id="chat-form" class="chat-form" action="{{route('sendmessage')}}" method="post">
+<img  class="chat-icon" src="{{ asset('images/chat.png') }}">
+
+<form id="chat-form" style="display: none;" class="chat-form" action="{{route('sendmessage')}}" method="post">
     @csrf
     <div class="chhead">
+    
         <h2>ارتباط با: </h2>
-        <select>
+        <select name="users">
             <optgroup label="طبیب"> <!-- Label for the first group -->
-                <option value="1">طبیب شماره ۱</option>
-                <option value="2">طبیب شماره ۲</option>
-                <option value="3">طبیب شماره ۳</option>
+                <option value="2">طبیب شماره ۱</option>
+                <option value="3">طبیب شماره ۲</option>
+                <option value="4">طبیب شماره ۳</option>
             </optgroup>
 
             <option value="1">پشتیبان</option>
 
 
         </select>
+        <img class="close" src="{{ asset('images/close.svg') }}">
     </div>
 
-
-    <div id="messages" class="chatbox">
+<div class="chatbox" >
+    <div id="messages  box" >
         <!-- Messages will be displayed here -->
+         <div class="textbar">
+         <button> <img src="{{ asset('images/send.svg') }}"></button>
+        <input type="text" id="messageInput" placeholder="پیام خود را وارد کنید..." autofocus>
+       
+        </div>
     </div>
-    <input type="text" id="messageInput" placeholder="Type your message here..." autofocus>
-    <button>ارسال</button>
+    </div>
 </form>
 @endauth

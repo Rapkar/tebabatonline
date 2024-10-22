@@ -1,7 +1,7 @@
 @extends('admin_panel.layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container ">
     <form id="createUserForm" action="{{route('updateuser', $user->id)}}" method="post" class="form-horizontal row">
         @csrf
         <div class="form-group  mb-4">

@@ -7,7 +7,7 @@ use App\Events\MessageSent;
 use App\Models\AdminPanel\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use Pusher\Pusher;
 class ChatController extends Controller
 {
     public function getUserIp() {
@@ -24,10 +24,11 @@ class ChatController extends Controller
     }
     public function sendMessage(Request $request) {
         $message = $request->input('message');
+        $receiver_id = $request->input('receiver_id');
         // $request->validate([
         //     'message' => 'required|string|max:255',
         // ]);
-        $user_id = 4;
+        $user_id = 2;
         if (Auth::check()) {
             // The user is logged in, retrieve the user ID
             $user_id =  Auth::id();
@@ -35,11 +36,27 @@ class ChatController extends Controller
         // Create a new message instance and save it to the database
      
         $message = Message::create([
-            'sender_id' => 2,
-            'receiver_id' =>4,
+            'sender_id' => $user_id,
+            'receiver_id' =>$receiver_id,
             'text' => $message,
         ]);
+        // broadcast(new MessageSent($message));
+        $options = array(
+            'cluster' => 'ap2',
+            
+            'useTLS' => true
+          );
+          $pusher = new Pusher(
+            '723614bfcaeb1ebf3619',
+            'a2838ce5a4460d3d26c7',
+            '1881515',
+            $options
+          );
+        $pusher->trigger('chat'.$message->receiver_id, 'message.sent', $message);
+        // event(new MessageSent($message ));
         broadcast(new MessageSent($message));
+        // $pusher->trigger('chat'.$message->receiver_id, 'message.sent', $message);
+
         return response()->json($message);
 
     }

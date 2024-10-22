@@ -322,27 +322,62 @@ window.Pusher = Pusher;
 //     enabledTransports: ['ws', 'wss'],
 // });
 
-window.Echo = new Echo({
-  broadcaster: 'pusher',
-  key: '723614bfcaeb1ebf3619',
+// window.Echo = new Echo({
+//   broadcaster: 'pusher',
+//   key: '723614bfcaeb1ebf3619',
+//   cluster: 'ap2',
+//   forceTLS: true
+// });
+// const userId = 2;
+// var channel = window.Echo.channel(`private-chat.${userId}`);
+// channel.listen('.my-event', function (data) {
+//   $("#messages").append(`<div>${data.message}</div>`); 
+
+// });
+
+
+// window.Echo.private(`private-chat.${userId}`)
+//     .listen('MessageSent', (e) => {
+//         console.log(`New message from ${e.message.sender_id}: ${e.message.text}`);
+//         $("#messages").append(`<div>${e.message.text}</div>`);
+
+//         // Update your chat UI here with the new message
+//     });
+
+Pusher.logToConsole = true;
+// const userId = parseInt($('select[name="users"]').val());
+const userId = document.querySelector('meta[name="user-id"]').getAttribute('content');
+// var pusher = new Pusher('723614bfcaeb1ebf3619', {
+//   cluster: 'ap2'
+// });
+var pusher = new Pusher("723614bfcaeb1ebf3619", {
   cluster: 'ap2',
-  forceTLS: true
+  channelAuthorization: {
+    endpoint: "/pusher_auth.php",
+    headers: { "X-CSRF-Token": ""+$('input[name="_token"]').val() + "" },
+  },
 });
-
-var channel = window.Echo.channel('my-channel');
-channel.listen('.my-event', function (data) {
-  $("#messages").append(`<div>${data.message}</div>`); 
-
+// Replace this with the actual user ID dynamically
+var channel = pusher.subscribe('chat'+userId);
+channel.bind('message.sent', function(data) {
+  var classes = 'ref';
+  if (data.sender_id == userId) {
+    classes = 'self';
+  }
+  $("#messages").append(`<div class="`+classes+`">${data.text}</div>`);
 });
-const userId = 2;
-
-window.Echo.private(`private-chat.${userId}`)
-    .listen('MessageSent', (e) => {
-        console.log(`New message from ${e.message.sender_id}: ${e.message.text}`);
-        $("#messages").append(`<div>${e.message.text}</div>`);
-
-        // Update your chat UI here with the new message
-    });
+// var channel = pusher.subscribe('channel_for_everyone');
+// // var channel = pusher.subscribe('channel_for_everyone');
+// channel.bind('message.sent', function (data) {
+//   alert(JSON.stringify(data));
+//   console.log('sss')
+//   // if(userId==text.sender)
+//   var classes = 'ref';
+//   if (data.sender_id == userId) {
+//     classes = 'self';
+//   }
+//   $("#messages").append(`<div class="` + classes + `">${data.text}</div>`);
+// });
 
 $('#chat-form').on('submit', function (e) {
   e.preventDefault();
@@ -353,11 +388,17 @@ $('#chat-form').on('submit', function (e) {
     url: '/send-message',
     type: 'POST',
     data: {
+      receiver_id: $('select[name="users"]').val(),
       message: message,
       '_token': $('input[name="_token"]').val(),// Include CSRF token
     },
     success: function (response) {
-      $("#messages").append(`<div>${response.text}</div>`);
+      // $("#messages").append(`<div>${response.text}</div>`);
+      var classes = 'ref';
+      if (response.sender_id == userId) {
+        classes = 'self';
+      }
+      $("#messages").append(`<div class="`+classes+`">${response.text}</div>`);
       $('#messageInput').val(''); // Clear input field on success
     },
     error: function (xhr) {
@@ -365,3 +406,9 @@ $('#chat-form').on('submit', function (e) {
     }
   });
 });
+$(".chat-icon").on("click",function(){
+  $("#chat-form").slideDown();
+})
+$('.close').on("click",function(){
+  $("#chat-form").slideUp();
+})

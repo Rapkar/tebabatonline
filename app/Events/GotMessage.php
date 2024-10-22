@@ -13,13 +13,13 @@ use Illuminate\Queue\SerializesModels;
 class GotMessage
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $message;
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct($message)
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -32,7 +32,7 @@ class GotMessage
         
         // $this->message is available here
         return [
-            new PrivateChannel("chat"),
+            new PrivateChannel('channel_for_everyone'),
         ];
     }
 }
