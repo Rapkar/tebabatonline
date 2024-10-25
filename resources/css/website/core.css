@@ -440,8 +440,23 @@ padding: 1rem; */
     display: flex;
     color: #fff;
 }
+.play-button ,.play-button span{
+    position: relative;
+}
+/* .visitform .play-button {
+    content: '';
+  background-image: url(../images/playd.png);
+  background-size: contain;
+  visibility: visible;
+  position: relative;
+  display: flex;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 35px;
+  height: 30px;
+} */
 
-.play::after {
+.headvisit span.play::after {
     content: '';
     background-image: url(../images/play.png);
     background-size: contain;
@@ -453,7 +468,48 @@ padding: 1rem; */
     width: 35px;
     height: 30px;
 }
-
+.headvisit span.pause::after {
+    content: '';
+    background-image: url(../images/pause.png);
+    background-size: contain;
+    visibility: visible;
+    position: relative;
+    display: flex;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 35px;
+    height: 30px;
+ 
+}
+.visitform   span.play::after{
+    content: '';
+    background-image: url(../images/playd.png);
+    background-size: contain;
+    visibility: visible;
+    position: relative;
+    display: flex;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 35px;
+    height: 30px;
+}
+.visitform   span.pause::after{
+    content: '';
+    background-image: url(../images/paused.png);
+    background-size: contain;
+    visibility: visible;
+    position: relative;
+    display: flex;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 35px;
+    height: 30px;
+}
+.visitform .titlebox{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
 .audio button {
     height: 36px;
     visibility: hidden;
@@ -795,8 +851,80 @@ padding: 1rem; */
     height: 259px;
     object-fit: cover;
     object-position: center;
+    border-radius: 15px;
+}
+.shop-header li a{
+    color: #017072;
+    font-size: 16px;
+    text-decoration: none;
+    padding-left: 1rem;
+    font-weight: 500;
+}
+.shop-header li a{
+
+}
+.shop-header ul{
+    list-style: none;
+    display: flex;
+padding: 0;
+}
+.products .sidebar{
+    border: 1px solid #017072;
+    border-radius: 15px;
+    padding: 0.5rem;
+}
+.products .sidebar hr{
+    border: 1px solid #017072; 
+    color: #017072; 
+    background-color: #017072; 
+}
+.products .sidebar h2{
+    font-size: 22px;
+    text-align: right;
+}
+.products .sidebar h3{
+    color: #017072;
+    font-size: 18px;
+    font-weight: 800;
+
+}
+.products .sidebar h4{
+    color: #E87400;
+    font-size: 16px;
+    font-weight: 800;
+}
+.products .sidebar h5{
+    color: #017072;
+    font-size: 14px;
+    font-weight: 800;
+}
+.products .sidebar h5 b{
+    color: #E87400;
+    font-size: 14px;
+    font-weight: 800;
 }
 
+
+.products .productslider{
+    padding-top: 1rem;
+}
+
+.products .productslider::before{
+    content: '';
+    width: 69%;
+    display: flex;
+    top: 0;
+    background-color: #01707280;
+    position: absolute;
+    z-index: 99999;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: relative;
+    width: 99%;
+    height: 1px;
+    top: -15px;
+}
 .addtocart button {
 
     font-size: 16px;
@@ -1163,7 +1291,7 @@ background-color: #d9eeee;
 }
 .visit label {
     color: #017072;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     line-height: 32.5px;
     text-align: right;
@@ -1223,7 +1351,11 @@ background-color: #d9eeee;
     border: 35px solid #D9EEEE;
 
 }
-.visit section button {
+.visit button.play-button{
+background-color: transparent;
+border: none;
+}
+.visit section button.next-button ,.visit section button.prev-button{
     background: #017072;
     width: 100px;
     height: 45px;
@@ -1385,4 +1517,38 @@ table tr td {
     min-height:40px;
     font-size: 14px;
     text-indent: 10px;
+}
+.visitform input[type="radio"]{
+    position: relative;
+}
+.visitform .radio input{
+    visibility: hidden;
+}
+.visitform .radio:before{
+    content: '';
+    background-color: #017072;
+    width: 37px;
+    height: 37px;
+    position: absolute;
+    display: flex;
+    border-radius: 50%;
+    top: 2px;
+    right: 3px;
+}
+.visitform .radio.active:after{
+    content: '';
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    display: flex;
+    background-image: url(../images/website/mark-w.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 2;
+    top: 1px;
+    bottom: 0;
+    left: auto;
+    right: 10px;
+    margin: auto;
 }

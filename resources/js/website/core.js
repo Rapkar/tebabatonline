@@ -199,7 +199,6 @@ if (document.getElementById('visitform')) {
       if (event.key === 'Enter') {
         event.preventDefault();
       }
-      console.log(currentStep, currentStep > 2);
       if (currentStep >= 2) {
         $('section[step="1"]').slideUp();
       }
@@ -354,17 +353,17 @@ var pusher = new Pusher("723614bfcaeb1ebf3619", {
   cluster: 'ap2',
   channelAuthorization: {
     endpoint: "/pusher_auth.php",
-    headers: { "X-CSRF-Token": ""+$('input[name="_token"]').val() + "" },
+    headers: { "X-CSRF-Token": "" + $('input[name="_token"]').val() + "" },
   },
 });
 // Replace this with the actual user ID dynamically
-var channel = pusher.subscribe('chat'+userId);
-channel.bind('message.sent', function(data) {
+var channel = pusher.subscribe('chat' + userId);
+channel.bind('message.sent', function (data) {
   var classes = 'ref';
   if (data.sender_id == userId) {
     classes = 'self';
   }
-  $("#messages").append(`<div class="`+classes+`">${data.text}</div>`);
+  $("#messages").append(`<div class="` + classes + `">${data.text}</div>`);
 });
 // var channel = pusher.subscribe('channel_for_everyone');
 // // var channel = pusher.subscribe('channel_for_everyone');
@@ -398,7 +397,7 @@ $('#chat-form').on('submit', function (e) {
       if (response.sender_id == userId) {
         classes = 'self';
       }
-      $("#messages").append(`<div class="`+classes+`">${response.text}</div>`);
+      $("#messages").append(`<div class="` + classes + `">${response.text}</div>`);
       $('#messageInput').val(''); // Clear input field on success
     },
     error: function (xhr) {
@@ -406,9 +405,60 @@ $('#chat-form').on('submit', function (e) {
     }
   });
 });
-$(".chat-icon").on("click",function(){
+
+$(".chat-icon").on("click", function () {
   $("#chat-form").slideDown();
 })
-$('.close').on("click",function(){
+$('.close').on("click", function () {
   $("#chat-form").slideUp();
 })
+
+$('.visitform input[type="checkbox"]').on('change', function () {
+
+  var nothing = $(this).parent().closest('.radiobox').find('.nothing').is(':checked');
+  if (this.checked && !nothing) {
+    $(this).parent().closest('label').removeClass('active');
+    $(this).parent().addClass('active');
+  } else if (this.checked && $(this).hasClass('nothing')) {
+    $(this).parent().closest('.radiobox').find('input').prop('checked', false);
+    $(this).parent().closest('.radiobox').find('label').removeClass('active');
+    $(this).parent().addClass('active');
+    $(this).prop('checked', true);
+  } else {
+    $(this).parent().closest('label').removeClass('active');
+    $(this).prop('checked', false);
+  }
+});
+
+$('.visitform input[type="radio"]').on('change', function () {
+  if (this.checked) {
+    $(this).parent().closest('.radiobox').find('.radio').removeClass('active');
+    $(this).parent().closest('label').addClass('active');
+  } else {
+    $(this).parent().closest('.radiobox').find('.radio').removeClass('active');
+
+  }
+});
+$(".play-button").on("click", function (e) {
+  e.preventDefault();
+  let id = jQuery(this).attr("attr-c");
+  let button = this;
+
+  const audio = jQuery("audio[attr-c='" + id + "']")[0];
+
+  if (audio.paused) {
+    audio.play();
+    $(this).find("span").removeClass("play");
+    $(this).find("span").addClass("pause");
+
+    // Add an event listener for the 'ended' event
+    audio.addEventListener('ended', function () {
+      $(button).find("span").removeClass("pause");
+      $(button).find("span").addClass("play");
+    });
+  } else {
+    audio.pause();
+    $(this).find("span").removeClass("pause");
+    $(this).find("span").addClass("play");
+  }
+});
