@@ -131,6 +131,7 @@ Route::post('addtocart/{id}', [App\Http\Controllers\Website\home::class, 'addpro
 Route::post('removefromcart/{id}', [App\Http\Controllers\Website\home::class, 'removefromcart'])->name('removefromcart');
 Route::get('shop', [App\Http\Controllers\Website\home::class, 'shop'])->name('shop');
 Route::get('visit', [App\Http\Controllers\Website\home::class, 'visit'])->name('visit');
+Route::get('diseases-based-on-body-parts', [App\Http\Controllers\Website\home::class, 'diseases'])->name('diseases');
 
 
 Route::prefix('userpanel')->middleware(UserMiddleware::class)->group(function () {

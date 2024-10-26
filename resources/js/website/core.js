@@ -50,6 +50,33 @@ if (blogsliderd != null && blogsliderd) {
     },
   });
 }
+var commetsslider = document.querySelector('.commetsslider');
+if (commetsslider != null && commetsslider) {
+  var blogslider = new Swiper(".commetsslider", {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    modules: [Navigation],
+
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      // For small screens (e.g. mobile), show only 1 item
+      0: {
+        slidesPerView: 3,
+      },
+      // For medium screens (e.g. tablet), show 2 items
+      768: {
+        slidesPerView: 3,
+      },
+      // For large screens (e.g. desktop), show all 4 items
+      1024: {
+        slidesPerView: 3,
+      },
+    },
+  });
+}
 
 var productsliders = document.querySelector('.productslider');
 if (productsliders != null && productsliders) {

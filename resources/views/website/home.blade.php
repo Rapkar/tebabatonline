@@ -63,7 +63,7 @@
                     <p>{{$product->expert}}</p>
 
                     <h5 class="d-flex" href="#">{{$product->price}} تومان</h5>
-                    <form method="post" name="addtocart"   class="addtocart" action="{{ route('addtocart',$product->id)}}">
+                    <form method="post" name="addtocart" class="addtocart" action="{{ route('addtocart',$product->id)}}">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                         <button type="submit">افزودن به سبد خرید</button>
@@ -124,8 +124,8 @@
 </div>
 <section class=" mt-5 d-flex flex-column justify-content-center align-items-center text-center support">
 
-    <h2 class="title"> خدمات ما </h2>
-    <p class="mt-4" >درباره خدمات ما اطلاعات بیشتر کسب کنید</p>
+    <h2 class="titleg"> خدمات ما </h2>
+    <p class="mt-4">درباره خدمات ما اطلاعات بیشتر کسب کنید</p>
 
 
     <div class="container content-box mt-5">
@@ -139,15 +139,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="item">
-                <img src="{{asset('images/website/lunch.png') }}">
-                    
-                    <h3>اصلاح سبک زندگی</h3>
-                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
-                </div>
-            </div>
-            <div class="col-lg-4 ">
-                <div class="item">
-                <img src="{{asset('images/website/direct.png') }}">
+                    <img src="{{asset('images/website/lunch.png') }}">
 
                     <h3>اصلاح سبک زندگی</h3>
                     <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
@@ -155,7 +147,15 @@
             </div>
             <div class="col-lg-4 ">
                 <div class="item">
-                <img src="{{asset('images/website/prescription.png') }}">
+                    <img src="{{asset('images/website/direct.png') }}">
+
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="item">
+                    <img src="{{asset('images/website/prescription.png') }}">
 
                     <h3>اصلاح سبک زندگی</h3>
                     <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
@@ -163,7 +163,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="item">
-                <img src="{{asset('images/website/shop.png') }}">
+                    <img src="{{asset('images/website/shop.png') }}">
 
                     <h3>اصلاح سبک زندگی</h3>
                     <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
@@ -171,7 +171,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="item">
-                <img src="{{asset('images/website/tutrial.png') }}">
+                    <img src="{{asset('images/website/tutrial.png') }}">
 
                     <h3>اصلاح سبک زندگی</h3>
                     <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
@@ -190,7 +190,7 @@
 <section class=" mt-5 d-flex flex-column justify-content-center align-items-center text-center support">
 
     <h2 class="title"> چرا طبابت آنلاین؟</h2>
-    <p class="mt-4" >در مورد ویزیت آنلاین، چندین مزیت وجود داره که ممکنه شما رو ترغیب کنه تا ویزیت آنلاین رو انتخاب کنید:</p>
+    <p class="mt-4">در مورد ویزیت آنلاین، چندین مزیت وجود داره که ممکنه شما رو ترغیب کنه تا ویزیت آنلاین رو انتخاب کنید:</p>
 
 
     <div class="container content-box mt-5">
@@ -204,15 +204,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="item">
-                <img src="{{asset('images/website/lunch.png') }}">
-                    
-                    <h3>اصلاح سبک زندگی</h3>
-                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
-                </div>
-            </div>
-            <div class="col-lg-4 ">
-                <div class="item">
-                <img src="{{asset('images/website/direct.png') }}">
+                    <img src="{{asset('images/website/lunch.png') }}">
 
                     <h3>اصلاح سبک زندگی</h3>
                     <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
@@ -220,7 +212,15 @@
             </div>
             <div class="col-lg-4 ">
                 <div class="item">
-                <img src="{{asset('images/website/prescription.png') }}">
+                    <img src="{{asset('images/website/direct.png') }}">
+
+                    <h3>اصلاح سبک زندگی</h3>
+                    <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="item">
+                    <img src="{{asset('images/website/prescription.png') }}">
 
                     <h3>اصلاح سبک زندگی</h3>
                     <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
@@ -228,7 +228,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="item">
-                <img src="{{asset('images/website/shop.png') }}">
+                    <img src="{{asset('images/website/shop.png') }}">
 
                     <h3>اصلاح سبک زندگی</h3>
                     <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
@@ -236,7 +236,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="item">
-                <img src="{{asset('images/website/tutrial.png') }}">
+                    <img src="{{asset('images/website/tutrial.png') }}">
 
                     <h3>اصلاح سبک زندگی</h3>
                     <h4>درباره اصلاح سبک زندگی اطلاعات بیشتر کسب کنید</h4>
@@ -250,7 +250,7 @@
     <div class="container">
         <div class="row">
             <div class="d-flex justify-content-center align-items-center text-center">
-                <h2 class="title" >وبلاگ</h2>
+                <h2 class="titleg">وبلاگ</h2>
 
 
             </div>
@@ -279,9 +279,58 @@
 
     </div>
 </div>
+<div class="comments container">
+    <h2 class="titleg">نظرات کاربران</h2>
+    <div class="commetsslider swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide ">
+                <div class="item">
+                <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <p>علی باقری</p>
+                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
+                </div>
+            </div>
+            <div class="swiper-slide  ">
+                <div class="item">
+                    <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <p>علی باقری</p>
+                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
+                </div>
+            </div>
+            <div class="swiper-slide ">
+                <div class="item">
+                <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <p>علی باقری</p>
+                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
+                </div>
+            </div>
+            <div class="swiper-slide  ">
+                <div class="item">
+                <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <p>علی باقری</p>
+                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
+                </div>
+            </div>
+            <div class="swiper-slide   ">
+                <div class="item">
+                <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <p>علی باقری</p>
+                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
+                </div>
+            </div>
+            <div class="swiper-slide ">
+                <div class="item">
+                <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <p>علی باقری</p>
+                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</div>
 <div class="expret container">
-    <h2 class="py-5">خلاصه ای درباره ما</h2>
+    <h2 class="titleg py-5">خلاصه ای درباره ما</h2>
     <img class="w-100" src="{{asset('images/expret.webp') }}">
     <div class="d-flex justify-content-center flex-column pt-4" style="background: linear-gradient(180deg, #C7E3E3 0%, rgba(227, 241, 241, 0.36) 99.99%, rgba(255, 255, 255, 0.58) 100%);">
         <p>

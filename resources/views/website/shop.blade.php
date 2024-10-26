@@ -11,14 +11,26 @@
                     <h2>
                         فیلتر ها
                     </h2>
-                    <label>
-                    فقط کالاهای موجود
-                    <input type="checkbox">
-                    </label>
+                    <div class="d-flex justify-content-between">
+                        فقط کالاهای موجود
+                        <label class="switch">
+
+                            <input type="checkbox">
+                            <span class="sliderw round"></span>
+                        </label>
+                    </div>
+
+
                     <hr>
                     <h3>فیلتر بر اساس قیمت</h3>
-                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                    <div class=" position-relative d-flex flex-column slidecontainer">
+                        <p>از 0 تومان</p>
+                        <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
+
+
+                        <p>تا 600/000 تومان</p>
+                        <input type="range" min="1" max="600" value="600" class="slider" id="myRange">
+                    </div>
                     <hr>
                     <h4>اخرین دیدگاه ها</h4>
                     <h5><b>احمد حاکمی </b>در درمان تیک و پرش عضلات در طب اسلامی سنتی</h5>

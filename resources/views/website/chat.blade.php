@@ -1,7 +1,7 @@
 @auth
 <img  class="chat-icon" src="{{ asset('images/chat.png') }}">
 
-<form id="chat-form" style="display: none;" class="chat-form" action="{{route('sendmessage')}}" method="post">
+<form id="chat-form" style="display: none;" class="chat-form" action="{{route('sendmessage',2)}}" method="post">
     @csrf
     <div class="chhead">
     

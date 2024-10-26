@@ -48,22 +48,21 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>خدمات ما</a>
                                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="users">
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{route('visit')}}">
                                             <img src="{{ asset('images/website/menu_a.webp') }}">
                                             ویزیت آنلاین
                                             <p>برای ویزیت آنلاین همین حالا کلیک کن و فرم رو پر کن</p>
 
                                         </a>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{route('diseases')}}">
                                             <img src="{{ asset('images/website/menu_b.webp') }}">
-                                            ویزیت آنلاین
-                                            <p>برای ویزیت آنلاین همین حالا کلیک کن و فرم رو پر کن</p>
-
+                                           بیماری ها بر اساس اعضای بدن 
+                                            <p>می تونی بر اساس تک تک اعضای بدن، بیماری ها رو بررسی کنی و راهکار های درمانی شو بخونی</p>
                                         </a>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{route('shop')}}">
                                             <img src="{{ asset('images/website/menu_c.webp') }}">
-                                            ویزیت آنلاین
-                                            <p>برای ویزیت آنلاین همین حالا کلیک کن و فرم رو پر کن</p>
+                                            فروشگاه داروها و محصولات ارگانیک
+                                            <p>با محصولات گیاهی ما بیماری خود را شفا ببخشید</p>
 
                                         </a>
                                     </div>
@@ -148,19 +147,19 @@
                         <li><a href="">درباره ما</a></li>
                         <li><a href="">ارتباط با ما</a></li>
                         <li><a href="">پیگیری پست</a></li>
-                        <li><a href="">فرم ویزیت و مشاوره</a></li>
+                        <li><a href="{{route('visit')}}">فرم ویزیت و مشاوره</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6 d-flex align-items-center justify-content-center flex-column">
                     <h2 class="text-center pb-4">شبکه های اجتماعی
                     </h2>
                     <ul class="d-flex align-items-center justify-content-center">
-                        <li><a href=""><img src="{{asset('images/Eita.svg') }}"></a></li>
-                        <li><a href=""><img src="{{asset('images/insta.svg') }}"></a></li>
-                        <li><a href=""><img src="{{asset('images/telegram.svg') }}"></a></li>
+                        <li><a href="https://eitaa.com/joinchat/972619795Cd4df4765f0"><img src="{{asset('images/Eita.svg') }}"></a></li>
+                        <li><a href="https://www.instagram.com/tabibet_online?igsh=NTc4MTIwNjQ2YQ=="><img src="{{asset('images/insta.svg') }}"></a></li>
+                        <li><a href="http://t.me/tebeslami_14"><img src="{{asset('images/telegram.svg') }}"></a></li>
                     </ul>
                     <h3>تماس با ما</h3>
-                    <h4>09355821032</h4>
+                    <h4><a href="te:09355821032">09355821032</a></h4>
                 </div>
             </div>
         </div>

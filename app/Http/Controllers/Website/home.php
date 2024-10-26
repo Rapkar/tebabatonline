@@ -232,4 +232,30 @@ class home extends Controller
         // dd($states);
         return view('website.visit', compact('posts', 'products', 'states', 'cart', 'orderitems'));
     }
+    public function diseases(){
+        $user = Auth::user();
+        // dd(Auth::user()->hasRole('user'));
+        // $posts = Post::all();
+        $posts = Post::whereHas('categories', function ($query) {
+            $query->where('name', 'home-post');
+        })->get();
+        $products = Product::all();
+        $cart = session()->get('cart', []);
+        $orderitems = [];
+        foreach ($cart as $item) {
+            $orderitems[] = Product::all()->find($item);
+        }
+        // $order = Product::whereIn('id', $cart)->get();
+
+        $orderitems = array_unique($orderitems);
+        // dd($orderitems);
+        // foreach($orderitems as $item){
+        //     echo $item->slug;
+        // }
+        $cart = count($cart);
+        $helper = new helper;
+        $states = $helper->getState();
+        return view('website.pages.diseases', compact('posts', 'products', 'states', 'cart', 'orderitems'));
+
+    }
 }

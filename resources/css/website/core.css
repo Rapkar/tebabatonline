@@ -257,6 +257,8 @@ header .menu .shoppingcard .quanity {
 
 .dropdown div.show img {
     width: 60px;
+    height: 60px;
+    object-fit: cover;
 }
 
 .dropdown div.show {
@@ -316,6 +318,13 @@ footer ul {
     list-style: none;
     padding: 0;
 
+}
+.titleg{
+    font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
+  color: #017072;
 }
 
 footer ul li {
@@ -905,6 +914,150 @@ padding: 0;
 }
 
 
+
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .sliderw {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc0;
+    border: 1px solid #017072;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .sliderw:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #017072;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .switch input:checked + .sliderw {
+    background-color: #0170728c;
+  }
+  
+  .switch input:focus + .sliderw {
+    box-shadow: 0 0 1px #0170728c;
+  }
+  
+  .switch input:checked + .sliderw:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .sliderw.round {
+    border-radius: 34px;
+  }
+  
+  .sliderw.round:before {
+    border-radius: 50%;
+  }
+
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+
+
+
+
+.slidecontainer {
+    width: 100%;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #6FB6B7;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #017072;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #017072;
+    cursor: pointer;
+  }
+
+
+
+
 .products .productslider{
     padding-top: 1rem;
 }
@@ -916,7 +1069,7 @@ padding: 0;
     top: 0;
     background-color: #01707280;
     position: absolute;
-    z-index: 99999;
+    z-index: 9;
     left: 0;
     right: 0;
     margin: auto;
@@ -943,13 +1096,6 @@ padding: 0;
 
 }
 
-.expret h2 {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 40px;
-    text-align: center;
-    color: #017072;
-}
 
 .expret p {
     font-size: 24px;
@@ -1084,16 +1230,6 @@ form.added button {
     pointer-events: auto;
 }
 
-.support h2.title {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 40px;
-    text-align: center;
-    color: #017072;
-
-}
-
-
 .support h3 {
 
     font-size: 20px;
@@ -1146,13 +1282,7 @@ form.added button {
     min-width: 100px;
 }
 
-.blogs .title {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 40px;
-    text-align: center;
-    color: #017072;
-}
+
 
 .spacer {
     background: #F4F4F4;
@@ -1551,4 +1681,55 @@ table tr td {
     left: auto;
     right: 10px;
     margin: auto;
+}
+.diseases .diseases-header{
+    height: 150px;
+    background-color: #D9EEEE;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.diseases .diseases-header h2
+{
+    color:#017072;
+    font-weight: 700;
+}
+.diseases .item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.diseases a.item {
+    font-size: 16px;
+    color: #017072 !important;
+    text-decoration: none !important;
+}
+.commetsslider .item
+{
+    width: 300px;
+  min-height: 300px;
+  padding-bottom: 3rem;
+  background-color: #E3F1F1;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5rem;
+}
+.commetsslider .item img{
+    position: absolute;
+  top: 1px;
+}
+.commetsslider  .swiper-slide{
+padding-top: 3rem;
+text-align: center;
+display:flex;
+justify-content: center;
+align-items: center
+;
 }

@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id(); // Auto-incrementing ID for the order item
+            $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade'); // Reference to the order
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade'); // Reference to the product
+            $table->mediumText('content'); // Quantity of the product ordered
+            $table->string('status');// Price of the product at the time of order
+            $table->timestamps(); // Created at and updated at timestamps
+ 
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        //
+    }
+};
