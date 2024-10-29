@@ -259,7 +259,7 @@
             <div class="swiper-wrapper">
                 @foreach($posts as $post)
                 @if($post->status==1)
-                <div href="#" class="swiper-slide">
+                <a href="{{ route('articles', $post->slug) }}" class="swiper-slide">
                     <div class="card">
                         <div class="head">
                             <img src="{{ asset( $post->image) }}" alt="posttitle">
@@ -268,7 +268,7 @@
                         <h5 href="#">ادامه مطلب</h5>
 
                     </div>
-                </div>
+                </a>
                 @endif
                 @endforeach
 
@@ -281,11 +281,11 @@
 </div>
 <div class="comments container">
     <h2 class="titleg">نظرات کاربران</h2>
-    <div class="commetsslider swiper">
+    <div class="commetsslider swiper mt-5">
         <div class="swiper-wrapper">
             <div class="swiper-slide ">
                 <div class="item">
-                <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <img src="{{ asset('images/comment.svg') }}" alt="">
                     <p>علی باقری</p>
                     <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
                 </div>
@@ -299,33 +299,35 @@
             </div>
             <div class="swiper-slide ">
                 <div class="item">
-                <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <img src="{{ asset('images/comment.svg') }}" alt="">
                     <p>علی باقری</p>
                     <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
                 </div>
             </div>
             <div class="swiper-slide  ">
                 <div class="item">
-                <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <img src="{{ asset('images/comment.svg') }}" alt="">
                     <p>علی باقری</p>
                     <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
                 </div>
             </div>
             <div class="swiper-slide   ">
                 <div class="item">
-                <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <img src="{{ asset('images/comment.svg') }}" alt="">
                     <p>علی باقری</p>
                     <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
                 </div>
             </div>
             <div class="swiper-slide ">
                 <div class="item">
-                <img src="{{ asset('images/comment.svg') }}" alt="">
+                    <img src="{{ asset('images/comment.svg') }}" alt="">
                     <p>علی باقری</p>
                     <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
                 </div>
             </div>
         </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
 
 </div>

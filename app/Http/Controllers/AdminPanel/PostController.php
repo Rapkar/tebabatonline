@@ -56,7 +56,7 @@ class PostController extends Controller
         $Post->expert = $request->input('expert');
         $Slug = $request->input('slug');
         $Post->slug = str_replace(" ","_",$Slug);
-        $Post->image =$request->input('image');;
+        $Post->image =$request->input('image');
         $Post->status = $request->input('status');
         $Post->save();
         if($request->input('category')){

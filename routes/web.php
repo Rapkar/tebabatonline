@@ -140,6 +140,8 @@ Route::prefix('userpanel')->middleware(UserMiddleware::class)->group(function ()
     /********************* *************************/
     Route::get('/', [App\Http\Controllers\UserPanel\UserController::class, 'index'])->name('userDashboard');
     Route::get('/cart', [App\Http\Controllers\UserPanel\UserController::class, 'cart'])->name('cart');
+Route::post('/storecomment', [App\Http\Controllers\Website\CommentController::class, 'storecomment'])->middleware('auth')->name('storecomment');
+
 });
 Route::post('/send-message{friend}', [App\Http\Controllers\ChatController::class, 'sendMessage'])->middleware('auth')->name('sendmessage');
 Route::get('/messages', [App\Http\Controllers\ChatController::class, 'getMessages'])->name('getmessage');

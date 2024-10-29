@@ -16,4 +16,8 @@ class Post extends Model
     {
         return $this->morphToMany(Category::class, 'categorizable');
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

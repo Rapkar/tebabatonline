@@ -12,12 +12,13 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\helper;
+use App\Models\Comment;
 
 class home extends Controller
 {
     public function index()
     {
-    //    dd(Auth::check());
+        //    dd(Auth::check());
         $user = Auth::user();
         // dd(Auth::user()->hasRole('user'));
         // $posts = Post::all();
@@ -50,12 +51,41 @@ class home extends Controller
     public function articles($slug)
     {
 
+        //    dd(Auth::check());
+        $user = Auth::user();
+        // dd(Auth::user()->hasRole('user'));
+        // $posts = Post::all();
+        $posts = Post::whereHas('categories', function ($query) {
+            $query->where('name', 'home-post');
+        })->get();
+        $products = Product::whereHas('categories', function ($query) {
+            $query->where('name', 'home-product');
+        })->get();
+        $cart = session()->get('cart', []);
+        $orderitems = [];
+        foreach ($cart as $item) {
+            $orderitems[] = Product::all()->find($item);
+        }
+        // $order = Product::whereIn('id', $cart)->get();
+
+        $orderitems = array_unique($orderitems);
+        // dd($orderitems);
+        // foreach($orderitems as $item){
+        //     echo $item->slug;
+        // }
+        $cart = count($cart);
+
         $post = Post::where('slug', $slug)->first();
         if (!$post) {
             return abort(404);
         }
         $post->increment('count');
-        return view('website.single-post', compact('post'));
+        $comments = $post->comments()->with('user')->get();
+        // foreach ($comments as $comment) {
+        //     dd($comment->user->name);
+        // }
+
+        return view('website.single-post', compact('post', 'cart', 'orderitems', 'comments'));
     }
     public function products($slug)
     {
@@ -232,7 +262,8 @@ class home extends Controller
         // dd($states);
         return view('website.visit', compact('posts', 'products', 'states', 'cart', 'orderitems'));
     }
-    public function diseases(){
+    public function diseases()
+    {
         $user = Auth::user();
         // dd(Auth::user()->hasRole('user'));
         // $posts = Post::all();
@@ -256,6 +287,5 @@ class home extends Controller
         $helper = new helper;
         $states = $helper->getState();
         return view('website.pages.diseases', compact('posts', 'products', 'states', 'cart', 'orderitems'));
-
     }
 }
