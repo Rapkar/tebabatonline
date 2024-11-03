@@ -1430,14 +1430,15 @@ background-color: #d9eeee;
 
 }
 .visit label.radio{
-    display: flex;
+    
  background-color: #fff;
   border-radius: 20px;
     flex-wrap: wrap;
-      height: 43px;
+      height: fit-content;
     flex-direction: row-reverse;
   justify-content: flex-end;
   margin-bottom: 10px;
+  text-indent: 40px;
 }
 
 .visit label.radio input{
@@ -1787,4 +1788,11 @@ align-items: center;
     min-width: 39px;
     display: flex;
     justify-content: center;
+}
+.dropzone .dz-button{
+    background-color: #097577;
+  height: 61px;
+  padding: 1rem;
+  color: #fff;
+  border: none;
 }

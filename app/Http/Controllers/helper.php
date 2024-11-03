@@ -27,12 +27,16 @@ class helper extends Controller
 
         // $cities=file_get_contents(asset('inc/city.json'));
         $cities = json_decode($cities);
+        $res = [];
         foreach ($cities as $city) {
             if ($city->province_id == $state) {
-                return $city;
-            } else {
-                return 'Not found!';
-            }
+                $res[] = $city;
+            }  
+        }
+        if (count($res) > 1) {
+            return  $res;
+        } else {
+            return 'Not found!';
         }
     }
 }

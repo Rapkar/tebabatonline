@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\UserMiddleware;
+
 return [
 
     /*
@@ -124,3 +127,4 @@ return [
     ],
 
 ];
+ 

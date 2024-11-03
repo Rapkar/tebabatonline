@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 class MedicMiddleware
 {
     /**
@@ -15,11 +17,12 @@ class MedicMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || !Auth::user()->hasRole('Medic')) {
-            abort(401, 'This action is unauthorized.');
+        if (Auth::check() && Auth::user()->hasRole('Medic')) {
+            Log::info('UserMiddleware executed', ['Medic' => Auth::user()]);
+            return $next($request);  
         }
     
-// dd($next);
-     return $next($request);
+
+     abort(401, 'This action is unauthorized.');
     }
 }

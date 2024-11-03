@@ -134,16 +134,16 @@ Route::get('visit', [App\Http\Controllers\Website\home::class, 'visit'])->name('
 Route::get('diseases-based-on-body-parts', [App\Http\Controllers\Website\home::class, 'diseases'])->name('diseases');
 
 
-Route::prefix('userpanel')->middleware(UserMiddleware::class)->group(function () {
+Route::prefix('userpanel')->middleware([UserMiddleware::class]) ->group(function () {
     /********************* *************************/
     /*************** User Manager *******************/
     /********************* *************************/
     Route::get('/', [App\Http\Controllers\UserPanel\UserController::class, 'index'])->name('userDashboard');
     Route::get('/cart', [App\Http\Controllers\UserPanel\UserController::class, 'cart'])->name('cart');
-Route::post('/storecomment', [App\Http\Controllers\Website\CommentController::class, 'storecomment'])->middleware('auth')->name('storecomment');
-
+    Route::post('/storecomment', [App\Http\Controllers\Website\CommentController::class, 'storecomment'])->middleware('auth')->name('storecomment');
 });
 Route::post('/send-message{friend}', [App\Http\Controllers\ChatController::class, 'sendMessage'])->middleware('auth')->name('sendmessage');
 Route::get('/messages', [App\Http\Controllers\ChatController::class, 'getMessages'])->name('getmessage');
 
- 
+
+Route::post('/getCityByState', [App\Http\Controllers\Website\EventController::class, 'getcitybystate'])->middleware('auth')->name('getcitybystate');

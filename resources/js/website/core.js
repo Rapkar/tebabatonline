@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-rtl/dist/css/bootstrap-rtl.min.css';
 import $ from 'jquery';
 import Swiper from 'swiper';
+import Dropzone from 'dropzone';
 import 'swiper/swiper-bundle.css';
 import { Pagination, Navigation, EffectFade } from "swiper/modules";
 var headersliderd = document.querySelector('.headerslider');
@@ -317,8 +318,34 @@ if (document.getElementById('visitform')) {
 
 
 }
-// chat.js
+const myDropzoneElement = document.getElementById('uservisitimg');
+if (myDropzoneElement) {
+  const myDropzoneElements = new Dropzone('div#uservisitimg', {
+    url: '/adminpanel/upload/',
+    maxFiles: 1,
+    acceptedFiles: '.jpg, .jpeg, .png, .webp',
+    addRemoveLinks: true,
+    clickable: true,
+    autoProcessQueue: true,
+    dictDefaultMessage: "تصویر مورد نظر را آپلود کنید",
+    headers: {
+      'X-CSRF-Token': $('input[name="_token"]').val() // Function to retrieve CSRF token
+    },
+    init: function () {
+      this.on("sending", function (file, xhr, formData) {
 
+      });
+      this.on("success", function (file, responseText) {
+        $("#image").val(responseText.location)
+      });
+      this.on("addedfile", function (file) {
+      
+
+      });
+
+    }
+  });
+}
 
 
 // Enable pusher logging - don't include this in production
@@ -488,4 +515,25 @@ $(".play-button").on("click", function (e) {
     $(this).find("span").removeClass("pause");
     $(this).find("span").addClass("play");
   }
+});
+$("select[name='states']").on('change', function () {
+  var state_id = $(this).val();
+  $.ajax({
+    url: '/getCityByState',
+    type: 'POST',
+    data: {
+      state_id: state_id,
+      '_token': $('input[name="_token"]').val(),// Include CSRF token
+    },
+    success: function (response) {
+      var elements = '';
+      response.forEach(element => {
+        elements += "<option value'" + element.id + "'>" + element.name + "</option>";
+      });
+      $('select[name="cities"]').html(elements);
+    },
+    error: function (xhr) {
+     alert('خطایی وجود دارد لطفا بعدا امتجان کنید');
+    }
+  });
 });

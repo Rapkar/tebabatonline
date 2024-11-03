@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         channels: __DIR__ . '/../routes/channels.php',
         health: '/up',
     )
+    
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(append: [
             EncryptCookies::class,
@@ -29,3 +30,5 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->create();
+ 
+

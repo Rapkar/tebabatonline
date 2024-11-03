@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 class AdminMiddleware
 {
     /**
@@ -17,11 +19,13 @@ class AdminMiddleware
     {
         
      
-            if (!Auth::check() || !Auth::user()->hasRole('admin')) {
-                abort(401, 'This action is unauthorized.');
+            if (Auth::check() &&  Auth::user()->hasRole('admin')) {
+                Log::info('UserMiddleware executed', ['admin' => Auth::user()]);
+
+                return $next($request);
             }
+            abort(401, 'This action is unauthorized.');
         
 
-        return $next($request);
     }
 }

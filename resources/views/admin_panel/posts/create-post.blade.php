@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">محتوا:</label>
-                    <textarea id="postcontent" value="{{ old('content') }}" required name="content">{{ old('content') }}</textarea>
+                    <textarea id="postcontent" value="{{ old('content') }}"  name="content">{{ old('content') }}</textarea>
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">خلاصه:</label>

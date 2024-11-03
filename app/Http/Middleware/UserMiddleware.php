@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 class UserMiddleware
 {
     /**
@@ -15,11 +16,13 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check() || !Auth::user()->hasRole('user')) {
-            abort(401, 'This action is unauthorized.');
+        if (Auth::check() && (Auth::user()->hasRole('user') || Auth::user()->hasRole('admin')) ) {
+            Log::info('UserMiddleware executed', ['user' => Auth::user()]);
+            return $next($request); 
         }
     
-// dd($next);
-     return $next($request);
+       
+    
+     abort(401, 'This action is unauthorized.');
     }
 }

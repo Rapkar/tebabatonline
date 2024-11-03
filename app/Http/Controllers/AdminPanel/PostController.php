@@ -106,11 +106,27 @@ class PostController extends Controller
         
         // $Post->image =$url;
         $Post->status = $request->input('status');
-        $Post->save();
+        
       #  $user->address = $request->input('address');
-    
+      if ($request->input('category')) {
+        $categories = $request->input('category');
 
-    
+        // Detach all current categories
+        $Post->categories()->detach();
+
+        // Attach new categories
+        foreach ($categories as $categoryId) {
+            $category = Category::find($categoryId);
+            if ($category) {
+                 $Post->categories()->attach($categoryId);
+            }
+        }
+    }else{
+        $Post->categories()->detach();
+
+    }
+    $Post->save();
+  
         return redirect()->route('posts'); // redirect to the users index page
     }
 }
