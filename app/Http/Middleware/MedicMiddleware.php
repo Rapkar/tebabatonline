@@ -17,12 +17,13 @@ class MedicMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->hasRole('Medic')) {
+        if (Auth::check() && (Auth::user()->hasRole('Medic')|| Auth::user()->hasRole('admin'))) {
             Log::info('UserMiddleware executed', ['Medic' => Auth::user()]);
             return $next($request);  
         }
     
-
-     abort(401, 'This action is unauthorized.');
+        $title = __("auth.Login");
+        return response()->view('auth.login', compact('title'));
+    
     }
 }

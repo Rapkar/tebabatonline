@@ -6,25 +6,24 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Visit;
 use Hekmatinasser\Verta\Verta;
-class MedicController extends Controller
+class PatientController extends Controller
 {
-    public function index(){
+    public function patient_examination($id){
+    // dd($id);
         $title = __("medic.Medic Page");
-        $items=Visit::all();
-        // dd($items);
+        $items=Visit::find($id);
+        //  dd($items->created_at);
         $result=[];
-        foreach ($items as $item) {
+   
             // dd($item->content);
-            $j_date = verta($item->created_at);
+            $j_date = verta($items->created_at);
             $formattedDate = $j_date->format('Y/m/d H:i:s');
             // or
             $formattedDate = $j_date->formatJalaliDateTime();
-            $result[] = ['data' => json_decode($item->content), 'date' => $formattedDate,'original'=>$item];
-        }
+            $result[] = ['data' => json_decode($items->content), 'date' => $formattedDate];
+        // dd($result);
 
     
-        return view('medic_panel.home',compact('title','result'));
-
+        return view('medic_panel.patient.patient',compact('title','result'));
     }
-
 }

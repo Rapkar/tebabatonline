@@ -17,19 +17,17 @@
         </thead>
         <tbody>
             <!-- Users list goes here -->
-
+             
             @foreach($result as $item)
            
             <tr>
-                <td>{{ $item['original']->id  }}</td>
                 <td>   {{$item['data']->name}} </td>
-                <td>  {{$item['data']->family}}  </td>
                 <td>   {{$item['data']->states}} </td>
                 <td>  {{$item['data']->cities}} </td>
-                <td>  {{$item['date']}} </td>
+                <td>  {{$item['data']->phone}} </td>
                 <td></td>
                 <td>
-                    <a href="{{route('patient_examination',$item['original']->id)}}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> بررسی </a>
+                    <a href=" " class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> ویرایش </a>
                     <a href=" " class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="حذف"> حذف </a>
                 </td>
             </tr>

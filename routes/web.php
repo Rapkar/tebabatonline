@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AdminPanel\ProductController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\MedicMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 Auth::routes();
 
@@ -112,6 +115,10 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
     /********************* *************************/
 
     Route::get('/', [App\Http\Controllers\MedicPanel\MedicController::class, 'index'])->name('medicDashboard');
+    Route::get('/visits', [App\Http\Controllers\MedicPanel\VisitControllr::class, 'visits'])->name('visits');
+
+    Route::get('/patient_examination/{id}', [App\Http\Controllers\MedicPanel\PatientController::class, 'patient_examination'])->middleware('auth')->name('patient_examination');
+
 });
 
 
@@ -127,23 +134,64 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
 Route::get('/', [App\Http\Controllers\Website\home::class, 'index'])->name('home');
 Route::get('articles/{slug}', [App\Http\Controllers\Website\home::class, 'articles'])->name('articles');
 Route::get('products/{slug}', [App\Http\Controllers\Website\home::class, 'products'])->name('products');
-Route::post('addtocart/{id}', [App\Http\Controllers\Website\home::class, 'addproduct'])->name('addtocart');
-Route::post('removefromcart/{id}', [App\Http\Controllers\Website\home::class, 'removefromcart'])->name('removefromcart');
+Route::post('addtocart/{id}', [App\Http\Controllers\UserPanel\CartController::class, 'addproduct'])->name('addtocart');
+Route::post('removefromcart/{cartid}/{productid}', [App\Http\Controllers\UserPanel\CartController::class, 'removefromcart'])->name('removefromcart');
 Route::get('shop', [App\Http\Controllers\Website\home::class, 'shop'])->name('shop');
 Route::get('visit', [App\Http\Controllers\Website\home::class, 'visit'])->name('visit');
 Route::get('diseases-based-on-body-parts', [App\Http\Controllers\Website\home::class, 'diseases'])->name('diseases');
 
 
-Route::prefix('userpanel')->middleware([UserMiddleware::class]) ->group(function () {
+Route::prefix('userpanel')->middleware([UserMiddleware::class])->group(function () {
     /********************* *************************/
     /*************** User Manager *******************/
     /********************* *************************/
     Route::get('/', [App\Http\Controllers\UserPanel\UserController::class, 'index'])->name('userDashboard');
-    Route::get('/cart', [App\Http\Controllers\UserPanel\UserController::class, 'cart'])->name('cart');
+    Route::get('/cart', [App\Http\Controllers\UserPanel\CartController::class, 'cart'])->name('cart');
+    Route::get('/payment', [App\Http\Controllers\UserPanel\PaymentController::class, 'payment'])->name('payment');
     Route::post('/storecomment', [App\Http\Controllers\Website\CommentController::class, 'storecomment'])->middleware('auth')->name('storecomment');
+    Route::post('/storevisit', [App\Http\Controllers\UserPanel\VisitControllr::class, 'storevisit'])->middleware('auth')->name('storevisit');
+    Route::get('/forms', [App\Http\Controllers\UserPanel\VisitControllr::class, 'forms'])->middleware('auth')->name('forms');
 });
+
 Route::post('/send-message{friend}', [App\Http\Controllers\ChatController::class, 'sendMessage'])->middleware('auth')->name('sendmessage');
 Route::get('/messages', [App\Http\Controllers\ChatController::class, 'getMessages'])->name('getmessage');
+Route::post('/update-quantity', [ProductController::class, 'updateQuantity'])->name('products.updateQuantity');
 
 
-Route::post('/getCityByState', [App\Http\Controllers\Website\EventController::class, 'getcitybystate'])->middleware('auth')->name('getcitybystate');
+Route::post('/getCityByState', [App\Http\Controllers\Website\EventController::class, 'getcitybystate'])->name('getcitybystate');
+
+
+
+
+// handler install
+
+Route::get('/migrate', function () {
+    try {
+        // Attempt to get PDO connection
+        DB::connection()->getPdo();
+        echo 'Connected to the database: ' . DB::connection()->getDatabaseName();
+    } catch (\Exception $e) {
+        echo 'Could not connect to the database: ' . $e->getMessage();
+    }
+
+
+    // Read the secret key from .env
+    $secretKey = env('MIGRATION_SECRET_KEY');
+
+    // Ensure the secret key is set
+    if (!$secretKey) {
+        return response('Migration secret key not set', 500);
+    }
+
+    // Check if the provided key matches the one in .env
+    if (request('key') !== $secretKey) {
+        return response('Unauthorized', 401);
+    }
+
+    // Run the migrations
+    Artisan::call('migrate');
+    Artisan::call('db:seed');
+
+    // return "Migrations completed successfully.";
+
+});

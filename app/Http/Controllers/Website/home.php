@@ -13,35 +13,34 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\helper;
 use App\Models\Comment;
+use App\Models\Cart;
 
 class home extends Controller
 {
     public function index()
     {
-        //    dd(Auth::check());
+
         $user = Auth::user();
-        // dd(Auth::user()->hasRole('user'));
-        // $posts = Post::all();
+
         $posts = Post::whereHas('categories', function ($query) {
             $query->where('name', 'home-post');
         })->get();
         $products = Product::whereHas('categories', function ($query) {
             $query->where('name', 'home-product');
         })->get();
-        $cart = session()->get('cart', []);
         $orderitems = [];
-        foreach ($cart as $item) {
-            $orderitems[] = Product::all()->find($item);
+        if (Auth::user()) {
+            $orderitems = Cart::where('user_id', $user->id)->with('products')->get();
         }
-        // $order = Product::whereIn('id', $cart)->get();
 
-        $orderitems = array_unique($orderitems);
-        // dd($orderitems);
-        // foreach($orderitems as $item){
-        //     echo $item->slug;
-        // }
-        $cart = count($cart);
-        return view('website.home', compact('posts', 'products', 'cart', 'orderitems'));
+        $cart = Cart::where('user_id', $user->id)->with('products')->first();
+        if ($cart ) {
+            $cart =  count($cart->products);
+        } else {
+            $cart = 0;
+        }
+        $comments = Comment::limit(8)->get();
+        return view('website.home', compact('posts', 'products', 'cart', 'orderitems', 'comments'));
     }
     public function chat()
     {
@@ -51,10 +50,8 @@ class home extends Controller
     public function articles($slug)
     {
 
-        //    dd(Auth::check());
         $user = Auth::user();
-        // dd(Auth::user()->hasRole('user'));
-        // $posts = Post::all();
+
         $posts = Post::whereHas('categories', function ($query) {
             $query->where('name', 'home-post');
         })->get();
@@ -69,10 +66,7 @@ class home extends Controller
         // $order = Product::whereIn('id', $cart)->get();
 
         $orderitems = array_unique($orderitems);
-        // dd($orderitems);
-        // foreach($orderitems as $item){
-        //     echo $item->slug;
-        // }
+
         $cart = count($cart);
 
         $post = Post::where('slug', $slug)->first();
@@ -81,9 +75,7 @@ class home extends Controller
         }
         $post->increment('count');
         $comments = $post->comments()->with('user')->get();
-        // foreach ($comments as $comment) {
-        //     dd($comment->user->name);
-        // }
+
 
         return view('website.single-post', compact('post', 'cart', 'orderitems', 'comments'));
     }
@@ -126,115 +118,7 @@ class home extends Controller
             'message' => "Message created and job dispatched.",
         ]);
     }
-    public function addproduct($id)
-    {
-        // Find the product by ID
-        $product = Product::find($id);
 
-        // Check if the product exists
-        if ($product) {
-            // if (Auth::check()) {
-            // Retrieve the current cart from the session or initialize it
-            $cart = session()->get('cart', []);
-
-            // Add the product ID to the cart array
-
-            $cart[] = $product->id;
-            // Save the updated cart back to the session
-            session()->put('cart', $cart);
-            $orderitems = [];
-            foreach ($cart as $item) {
-                $orderitems[$item] = Product::all()->find($item);
-            }
-
-            $out = view('website.layouts.minicart', compact('orderitems'))->render();
-            // Optional: Provide feedback to the user
-            return response()->json([
-                'message' => "Product '{$product->name}' has been added to your cart.",
-                'cart' => count($cart),
-                'out' => $out
-            ]);
-        } else {
-            // Handle the case where the product does not exist
-            return response()->json([
-                'error' => 'Product not found.',
-            ], 404);
-        }
-        // } 
-    }
-
-    function removefromcart($id)
-    {
-        // Find the product by ID
-        $product = Product::find($id);
-
-        // Check if the product exists
-        if ($product) {
-            // Retrieve the current cart from session
-            $cart = session()->get('cart', []);
-
-            // Check if the product is in the cart
-            if (in_array($product->id, $cart)) {
-                // Remove the product ID from the cart array
-                $cart = array_filter($cart, function ($item) use ($product) {
-                    return $item !== $product->id;
-                });
-
-                // Save the updated cart back to the session
-                session()->put('cart', $cart);
-
-                // Prepare order items for rendering
-                $orderitems = [];
-                foreach ($cart as $itemId) {
-                    $orderitems[$itemId] = Product::find($itemId);
-                }
-
-                // Render the updated minicart view
-                $out = view('website.layouts.minicart', compact('orderitems'))->render();
-
-                // Optional: Provide feedback to the user
-                return response()->json([
-                    'message' => "Product '{$product->name}' removed from your cart.",
-                    'cart' => count($cart),
-                    'out' => $out
-                ]);
-            } else {
-                // Handle case where product is not in cart
-                return response()->json([
-                    'error' => "Product '{$product->name}' is not in your cart.",
-                ], 404);
-            }
-        } else {
-            // Handle case where product does not exist
-            return response()->json([
-                'error' => 'Product not found.',
-            ], 404);
-        }
-    }
-    public function shop()
-    {
-        $user = Auth::user();
-        // dd(Auth::user()->hasRole('user'));
-        // $posts = Post::all();
-        $posts = Post::whereHas('categories', function ($query) {
-            $query->where('name', 'home-post');
-        })->get();
-        $products = Product::all();
-        $cart = session()->get('cart', []);
-        $orderitems = [];
-        foreach ($cart as $item) {
-            $orderitems[] = Product::all()->find($item);
-        }
-        // $order = Product::whereIn('id', $cart)->get();
-
-        $orderitems = array_unique($orderitems);
-        // dd($orderitems);
-        // foreach($orderitems as $item){
-        //     echo $item->slug;
-        // }
-        $cart = count($cart);
-        return view('website.shop', compact('posts', 'products', 'cart', 'orderitems'));
-    }
     public function visit()
     {
         $user = Auth::user();
@@ -287,5 +171,31 @@ class home extends Controller
         $helper = new helper;
         $states = $helper->getState();
         return view('website.pages.diseases', compact('posts', 'products', 'states', 'cart', 'orderitems'));
+    }
+    public function shop()
+    {
+        $user = Auth::user();
+        // dd(Auth::user()->hasRole('user'));
+        // $posts = Post::all();
+        $posts = Post::whereHas('categories', function ($query) {
+            $query->where('name', 'home-post');
+        })->get();
+        $products = Product::all();
+        $cart = session()->get('cart', []);
+        $orderitems = [];
+        foreach ($cart as $item) {
+            $orderitems[] = Product::all()->find($item);
+        }
+        // $order = Product::whereIn('id', $cart)->get();
+
+        $orderitems = array_unique($orderitems);
+        // dd($orderitems);
+        // foreach($orderitems as $item){
+        //     echo $item->slug;
+        // }
+        $cart = count($cart);
+        $comments = Comment::limit(5)->get();
+
+        return view('website.shop', compact('posts', 'products', 'cart', 'orderitems', 'comments'));
     }
 }

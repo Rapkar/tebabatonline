@@ -20,7 +20,7 @@
                     <td><a href="">علاقه مندی ها</a></td>
                 </tr>
                 <tr>
-                    <td><a href="">فرم های ویزیت</a></td>
+                <td><a href="{{route('forms')}}">فرم های ویزیت</a></td>
                 </tr>
                 <tr>
                     <td><a href="">لیست علاقه مندی ها</a></td>

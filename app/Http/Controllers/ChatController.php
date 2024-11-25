@@ -18,7 +18,6 @@ class ChatController extends Controller
             // Check for proxies
             return explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
         }
-        
         // Return remote address as a fallback
         return $_SERVER['REMOTE_ADDR'];
     }

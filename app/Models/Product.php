@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+
     use HasFactory;
+    protected $fillable = [
+        'id',
+        'quantity'
+    ];
     public function categories()
     {
         return $this->belongsToMany(Category::class);
@@ -16,5 +21,23 @@ class Product extends Model
     {
         return $this->morphToMany(Category::class, 'categorizable');
     }
+    public function incrementQuantity($amount = 1)
+    {
+        $this->increment('quantity', $amount);
+    }
 
+    public function decrementQuantity($amount = 1)
+    {
+        $this->decrement('quantity', $amount);
+    }
+
+    public function updateQuantity($newQuantity)
+    {
+        $this->update(['quantity' => $newQuantity]);
+    }
+
+    public function isInStock()
+    {
+        return $this->quantity > 0;
+    }
 }

@@ -11,18 +11,18 @@ class MediaController extends Controller
     {
         //  dd($request);
         // dd($request->file('file'));
-        if($request->file('file') != null){
-            $file=$request->file('file');
-        }else{
-            $file=$request->file('image');
+        if ($request->file('file') != null) {
+            $file = $request->file('file');
+        } else {
+            $file = $request->file('image');
         }
-        $imageName= time().' '.$file->getClientOriginalName();
-        $url=$request->file('file')->storeAs('images', $imageName);
+        $imageName = time() . ' ' . $file->getClientOriginalName();
+        $url = $request->file('file')->storeAs('images', $imageName);
         sleep(1);
         return response()->json([
             'success' => true,
-            'location' =>  asset('storage/uploads/' . $url),// Use asset() to return a full URL
-            'data' =>$request // Use asset() to return a full URL
+            'location' =>  url('storage/uploads/' . $url), // Use asset() to return a full URL
+            'data' => $request // Use asset() to return a full URL
         ]);
     }
 }

@@ -101,8 +101,8 @@ class PostController extends Controller
         $Post->content = $request->input('content');
         $Post->expert = $request->input('expert');
         $Post->slug = $request->input('slug');
-        // $imageName = time().'.'.$request->image->getClientOriginalExtension();
-        // $url=$request->image->storeAs('images', $imageName);
+        $Post->image =$request->input('image');
+ 
         
         // $Post->image =$url;
         $Post->status = $request->input('status');

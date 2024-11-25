@@ -141,4 +141,22 @@ class ProductController extends Controller
 
         return redirect()->route('productlist'); // redirect to the users index page
     }
+    public function updateQuantity(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:0',
+        ]);
+    
+        $product = Product::findOrFail($request->product_id);
+        $product->update(['quantity' => $request->quantity]);
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Quantity updated successfully',
+            'new_quantity' => $product->quantity
+        ]);
+    }
+    
+    
 }

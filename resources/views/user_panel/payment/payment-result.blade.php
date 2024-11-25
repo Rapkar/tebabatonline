@@ -4,7 +4,7 @@
 
     <div class="row pt-5">
         <div class=" col-lg-8 hasborder pb-4">
-            <h2 class="d-flex justify-content-start px-3 py-3">سبد خرید</h2>
+            <h2 class="d-flex justify-content-start px-3 py-3">آدرس و زمان ارسال</h2>
             @foreach($orderitems as $product)
             <div class="col-lg-12 d-flex align-items-center  px-4 py-4">
                 <img class="cart-img" src="{{$product->image}}">
@@ -18,7 +18,7 @@
 
             </div>
             <div class="col-lg-12 d-flex align-items-center">
-                <p class="count"><input class="count" attr-id="{{$product->id}}" name="quanity" type="number" value="1"></p>
+                <p class="count"><input class="count" name="quanity" type="number" value="1"></p>
                 <form method="post" class="removefromcart" name="removefromcart" action="{{ route('removefromcart',$product->id)}}">
                     @csrf
                     <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -48,7 +48,7 @@
                 </tr>
             </table>
 
-            <form action="{{route('payment')}}" name="">
+            <form name="">
                 @csrf
                 <button type="submit">تایید و تکمیل سفارش</button>
             </form>

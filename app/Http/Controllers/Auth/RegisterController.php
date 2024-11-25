@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Controllers\helper;
 class RegisterController extends Controller
 {
     /*
@@ -80,5 +80,13 @@ class RegisterController extends Controller
         $user->save();
         $user->roles()->attach('1');
         return $user;
+    }
+    public function showRegistrationForm()
+    {
+        // Add any data you want to pass to the view
+        $title = __("auth.Register");
+        $helper = new helper;
+        $states = $helper->getState();
+        return view('auth.register', compact('title','states'));
     }
 }

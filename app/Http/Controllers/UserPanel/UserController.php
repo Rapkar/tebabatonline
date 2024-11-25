@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Visit;
 use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {

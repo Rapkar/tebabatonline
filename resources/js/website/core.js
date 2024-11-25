@@ -79,9 +79,10 @@ if (commetsslider != null && commetsslider) {
   });
 }
 
-var productsliders = document.querySelector('.productslider');
+var productsliders = document.querySelector('.swiper.productslider');
+console.log(typeof(productsliders),productsliders);
 if (productsliders != null && productsliders) {
-  var productslider = new Swiper(".productslider", {
+  var productslider = new Swiper(".swiper.productslider", {
     slidesPerView: 4,
     spaceBetween: 20,
     modules: [Navigation],
@@ -134,16 +135,16 @@ if ($('form[name="addtocart"]').length) {
         product_id: productId // Send product ID
       },
       success: function (response) {
-        console.log(response.out);
+        console.log(response);
         $('.cart-box .quanity').html(response.cart);
         $('.minicart').remove();
         $(".cart-box,.headerslider").append(response.out);
         self.addClass("added");
-        // setTimeout(function(){
-        //   self.find('button').html('افزودن به سبد خرید');
-        //   self.removeClass("added");
-        // }, 5000);
-        $(self).find("button").html(" افزوده شد &#10003;")
+        setTimeout(function(){
+          self.find('button').html('افزودن به سبد خرید');
+          self.removeClass("added");
+        }, 5000);
+        // $(self).find("button").html(" افزوده شد &#10003;")
       },
       error: function (xhr) {
         // Handle error response (e.g., show an error message)
@@ -161,6 +162,7 @@ $(document).on('submit', 'form.removefromcart', function (event) {
   var self = $(this);
   // Get the product ID from the hidden input
   var productId = $(this).find('input[name="product_id"]').val();
+  var cart_id = $(this).find('input[name="cart_id"]').val();
 
   // Optional: Do something with the product ID (like logging)
 
@@ -171,15 +173,16 @@ $(document).on('submit', 'form.removefromcart', function (event) {
     type: 'POST',
     data: {
       '_token': $('input[name="_token"]').val(), // Include CSRF token
-      product_id: productId // Send product ID
+      product_id: productId ,// Send product ID
+      cart_id: productId // Send product ID
     },
     success: function (response) {
       console.log(response.out);
       $('.cart-box .quanity').html(response.cart);
       $('.minicart').remove();
       $(".cart-box,.headerslider").append(response.out);
-      self.addClass("added");
-      $(self).find("button").html(" افزوده شد &#10003;")
+      self.removeClass("added");
+      // $(self).find("button").html(" افزوده شد &#10003;")
     },
     error: function (xhr) {
       // Handle error response (e.g., show an error message)
@@ -339,7 +342,7 @@ if (myDropzoneElement) {
         $("#image").val(responseText.location)
       });
       this.on("addedfile", function (file) {
-      
+
 
       });
 
@@ -533,7 +536,36 @@ $("select[name='states']").on('change', function () {
       $('select[name="cities"]').html(elements);
     },
     error: function (xhr) {
-     alert('خطایی وجود دارد لطفا بعدا امتجان کنید');
+      alert('خطایی وجود دارد لطفا بعدا امتجان کنید');
     }
+  });
+});
+
+// product qunity
+// product quantity
+$("input.count").on("change", function() {
+  var product_id = $(this).attr('attr-id'); // Assuming you have a data attribute for product_id
+  var val = $(this).val();
+  console.log("ss");
+  $.ajax({
+      url: '/update-quantity',
+      type: 'POST',
+      data: {
+        product_id: product_id,
+        quantity: val,
+          '_token': $('meta[name="csrf-token"]').attr('content'), // Include CSRF token
+      },
+      success: function(response) {
+          if (response.success) {
+              alert(response.message);
+              // Update the quantity display if needed
+              $(this).val(response.new_quantity);
+          } else {
+              alert('Error updating quantity');
+          }
+      },
+      error: function(xhr) {
+          alert('An error occurred. Please try again later.');
+      }
   });
 });

@@ -63,11 +63,18 @@
                     <p>{{$product->expert}}</p>
 
                     <h5 class="d-flex" href="#">{{$product->price}} تومان</h5>
+                    @auth
                     <form method="post" name="addtocart" class="addtocart" action="{{ route('addtocart',$product->id)}}">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                         <button type="submit">افزودن به سبد خرید</button>
                     </form>
+                    @else
+                    <form method="get" class="addtocart" action="/login">
+                        @csrf
+                        <button type="submit">افزودن به سبد خرید</button>
+                    </form>
+                    @endauth
                 </div>
             </a>
             @endif
@@ -283,48 +290,16 @@
     <h2 class="titleg">نظرات کاربران</h2>
     <div class="commetsslider swiper mt-5">
         <div class="swiper-wrapper">
+            @foreach($comments as $comment)
             <div class="swiper-slide ">
                 <div class="item">
                     <img src="{{ asset('images/comment.svg') }}" alt="">
-                    <p>علی باقری</p>
-                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
+                    <p>{{$comment->user->name}}</p>
+                    <p>{{$comment->content}}</p>
                 </div>
             </div>
-            <div class="swiper-slide  ">
-                <div class="item">
-                    <img src="{{ asset('images/comment.svg') }}" alt="">
-                    <p>علی باقری</p>
-                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
-                </div>
-            </div>
-            <div class="swiper-slide ">
-                <div class="item">
-                    <img src="{{ asset('images/comment.svg') }}" alt="">
-                    <p>علی باقری</p>
-                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
-                </div>
-            </div>
-            <div class="swiper-slide  ">
-                <div class="item">
-                    <img src="{{ asset('images/comment.svg') }}" alt="">
-                    <p>علی باقری</p>
-                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
-                </div>
-            </div>
-            <div class="swiper-slide   ">
-                <div class="item">
-                    <img src="{{ asset('images/comment.svg') }}" alt="">
-                    <p>علی باقری</p>
-                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
-                </div>
-            </div>
-            <div class="swiper-slide ">
-                <div class="item">
-                    <img src="{{ asset('images/comment.svg') }}" alt="">
-                    <p>علی باقری</p>
-                    <p>از مشاورشون راضیم..کاملا مشکلم حل شد</p>
-                </div>
-            </div>
+            @endforeach
+ 
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>

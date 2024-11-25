@@ -23,18 +23,19 @@
 
                     <hr>
                     <h3>فیلتر بر اساس قیمت</h3>
-                    <div class=" position-relative d-flex flex-column slidecontainer">
+                    <div class=" position-relative d-flex flex-column slidecontainer mt-4">
+                      
+                        <input type="range" min="1" max="100" value="10" class="slider" id="min-price">
                         <p>از 0 تومان</p>
-                        <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
-
-
+                       
+                        <input type="range" min="1" max="600" value="100" class="slider" id="max-price">
                         <p>تا 600/000 تومان</p>
-                        <input type="range" min="1" max="600" value="600" class="slider" id="myRange">
                     </div>
                     <hr>
                     <h4>اخرین دیدگاه ها</h4>
-                    <h5><b>احمد حاکمی </b>در درمان تیک و پرش عضلات در طب اسلامی سنتی</h5>
-                    <h5><b>زهرا </b> در درمان تیک و پرش عضلات در طب اسلامی سنتی</h5>
+                    @foreach($comments as $comment)
+                    <h5><b>{{$comment->user->name}}:</b><br>{{$comment->content}}</h5>
+                    @endforeach
                 </div>
             </div>
         </div>

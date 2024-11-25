@@ -19,7 +19,8 @@ class EnsureUserHasRole
             // Redirect or abort if the user does not have the required role
             return redirect('/home')->with('error', 'You do not have access to this resource.');
         }
-        return $next($request);
+        $title = __("auth.Login");
+        return response()->view('auth.login', compact('title'));
     }
 
 }

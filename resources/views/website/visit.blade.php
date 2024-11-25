@@ -29,7 +29,7 @@
             برایتان سلامتی آرزومندیم. </p>
         <p><strong>برایتان سلامتی آرزومندیم.</strong></p>
     </div>
-    <form class="col-lg-12 mb-4 visitform " method="post" id="visitform">
+    <form class="col-lg-12 mb-4 visitform " method="post" action="{{route('storevisit')}}" id="visitform">
         @csrf
         <section step="1" class="row step active">
             <div class="row">
@@ -38,15 +38,15 @@
                         <label class="col-lg-6">
                             نام
                             @auth
-                            <input type='text' id="name" dir="ltr" name="name" value="{{Auth::user()->name }}">
+                            <input type='text' placeholder="نام" id="name" dir="ltr" name="name" value="{{Auth::user()->name }}">
                             @else
-                            <input type='text' id="name" dir="ltr" name="name">
+                            <input type='text' placeholder="نام" id="name" dir="ltr" name="name">
                             @endauth
                         </label>
 
                         <label class="col-lg-6">
                             نام خانوادگی
-                            <input type='text' name="name">
+                            <input type='text' placeholder="نام خانوادگی" name="family">
                         </label>
                     </div>
 
@@ -88,7 +88,7 @@
                     <div class="row">
                         <label class="col-lg-12">
                             شغل و فعالیت روزانه
-                            <input type='text' name="name">
+                            <input type='text' placeholder="معلم هستم متوسط" name="jobs">
                         </label>
 
                     </div>
@@ -98,7 +98,7 @@
                     <div class="row">
                         <label class="col-lg-12">
                             وزن
-                            <input type='number' min="10" dir="ltr" name="name">
+                            <input type='number' placeholder="72" min="10" dir="ltr" name="weight">
                         </label>
 
                     </div>
@@ -107,7 +107,7 @@
                     <div class="row">
                         <label class="col-lg-12">
                             قد
-                            <input type='number' min="10" dir="ltr" name="name">
+                            <input type='number' placeholder="172" min="10" dir="ltr" name="height">
                         </label>
                         <label class="col-lg-6"></label>
                     </div>
@@ -117,7 +117,7 @@
                     <div class="row">
                         <label class="col-lg-6">
                             جنسیت
-                            <select>
+                            <select name="gender">
                                 <option value="آقا">آقا</option>
                                 <option value="خانم">خانم</option>
                             </select>
@@ -125,7 +125,7 @@
 
                         <label class="col-lg-6">
                             وضعیت تاهل
-                            <select>
+                            <select name="relationship">
                                 <option value="مجرد">مجرد</option>
                                 <option value="متاهل">متاهل</option>
                                 <option value="مطلقه">مطلقه</option>
@@ -138,7 +138,7 @@
                     <div class="row">
                         <label class="col-lg-4">
                             تاریخ تولد
-                            <select name="day" class="text-center">
+                            <select name="age_day" class="text-center">
                                 @php
                                 $days = range(1, 31);
                                 @endphp
@@ -150,7 +150,7 @@
                         </label>
                         <label class="col-lg-4">
                             &nbsp;
-                            <select name="mounth" class="text-center">
+                            <select name="age_mounth" class="text-center">
                                 @php
                                 $mounths = range(1, 12);
                                 @endphp
@@ -162,7 +162,7 @@
                         </label>
                         <label class="col-lg-4">
                             &nbsp;
-                            <select name="year" class="text-center">
+                            <select name="age_year" class="text-center">
                                 @php
                                 $years = range(1320, 1404);
                                 @endphp
@@ -192,7 +192,7 @@
                                 <button class="play-button play" attr-c="2"> <span class="play"></span></button>
                                 لطفاً مشکل یا بیماری‌ خود را به طور کامل در کادر زیر بیان فرمایید
                             </div>
-                            <textarea type='text' name="name"></textarea>
+                            <textarea type='text' name="problem"></textarea>
                         </label>
                     </div>
 
@@ -212,29 +212,29 @@
                     <div class="row radiobox ">
                         <label class="col-lg-5 radio">
                             نفخ
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" value="نفخ" name="digestive_problems">
                         </label>
                         <label class="col-lg-6 radio">
                             ترش کردن
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" value=" ترش کردن" name="digestive_problems">
                         </label>
                         <label class="col-lg-5 radio">
                             ورم معده
-                            <input type="checkbox">
+                            <input type="checkbox" value=" ورم معده" name="digestive_problems">
                         </label>
                         <label class="col-lg-6 radio">
                             سر و صدا و قار و قور شکم
-                            <input type="checkbox">
+                            <input type="checkbox" value="سر و صدا و قار و قور شکم" name="digestive_problems">
                         </label>
                         <label class="col-lg-5 radio">
                             دفع زیاد گاز معده
-                            <input type="checkbox">
+                            <input type="checkbox" value="دفع زیاد گاز معده" name="digestive_problems">
                         </label>
                         <label class="col-lg-6 radio">
                             هیچکدام
-                            <input class="mr-3 active nothing" type="checkbox">
+                            <input class="mr-3 active nothing" type="checkbox" value="هیچکدام" name="digestive_problems">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="digestive_problems_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -252,25 +252,25 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             2 یا 3 مرتبه
-                            <input type="radio" name="r">
+                            <input type="radio" value="2 یا 3 مرتبه" name="bowel_movement">
                         </label>
                         <label class="col-lg-6 radio">
                             1 یا 2 مرتبه
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" value=" 1 یا 2 مرتبه" name="bowel_movement">
                         </label>
                         <label class="col-lg-6 radio">
                             کمتر از دو بار و گاهی هم روز در میان
-                            <input type="radio" name="r">
+                            <input type="radio" value="کمتر از دو بار و گاهی هم روز در میان" name="bowel_movement">
                         </label>
                         <label class="col-lg-5 radio">
                             هر چند روز یکبار کار می‌کند
-                            <input type="radio" name="r">
+                            <input type="radio" value="هر چند روز یکبار کار می‌کند" name="bowel_movement">
                         </label>
                         <label class="col-lg-12 radio">
                             گاهی شل و گاهی سفت است
-                            <input type="radio" name="r">
+                            <input type="radio" value="گاهی شل و گاهی سفت است" name="bowel_movement">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="bowel_movement_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 2 -->
@@ -289,14 +289,14 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="diabetes">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" value="خیر" name="diabetes">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="diabetes_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -314,11 +314,11 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="Hypertension">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" value="خیر" name="Hypertension">
                         </label>
 
                         <textarea placeholder="توضیحات بیشتر"></textarea>
@@ -339,14 +339,14 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="Hyperlipidemia">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" value="خیر" name="Hyperlipidemia">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="Hyperlipidemia_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 3 -->
@@ -365,14 +365,14 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="hotfeet">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" value="خیر" name="hotfeet">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="hotfeet_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -391,14 +391,14 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="thyroid">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" value="خیر" name="thyroid">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="thyroid_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-12"><button class="next-button  ">بعدی</button> <button class="prev-button">قبلی</button></div>
@@ -422,23 +422,23 @@
                     <div class="row radiobox ">
                         <label class="col-lg-5 radio">
                             سفید
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" value="سفید" name="color">
                         </label>
                         <label class="col-lg-6 radio">
                             سرخ و سفید
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" value="سرخ و سفید" name="color">
                         </label>
                         <label class="col-lg-5 radio">
                             گندمگون
-                            <input type="checkbox">
+                            <input type="checkbox" value="گندمگون" name="color">
                         </label>
                         <label class="col-lg-6 radio">
                             سبزه
-                            <input type="checkbox">
+                            <input type="checkbox" value="سبزه" name="color">
                         </label>
 
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="color-des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -456,14 +456,14 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="Numbness">
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" value="خیر" name="Numbness">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="Numbness_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 2 -->
@@ -482,14 +482,14 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="Spasms">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" value="خیر" name="Spasms">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="Spasms_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -507,14 +507,14 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" name="itching">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" name="itching">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="itching_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -533,7 +533,7 @@
                     <div class="row radiobox justify-content-between ">
 
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="itchingw_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 3 -->
@@ -552,14 +552,14 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="lethargy">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" value="خیر" name="lethargy">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="lethargy_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -604,14 +604,14 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="anemia">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" value="خیر" name="anemia">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="anemia_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-12"><button class="next-button  ">بعدی</button> <button class="prev-button">قبلی</button></div>
@@ -636,13 +636,13 @@
                     <div class="row radiobox ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" value="بلی" name="hotflash">
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" value="خیر" name="hotflash">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="hotflash_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -660,14 +660,14 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="Polydipsia">
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" value="خیر" name="Polydipsia">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="Polydipsia_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 2 -->
@@ -686,21 +686,21 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             1 یا 2 لیوان یا کمتر
-                            <input type="radio" name="r">
+                            <input type="radio" value=" 1 یا 2 لیوان یا کمتر" name="daily_water_intake">
                         </label>
-                        <label class="col-lg-5 radio">
+                        <label class="col-lg-5 radio" name="daily_water_intake">
                             3 یا 4 لیوان
-                            <input type="radio" name="r">
+                            <input type="radio" value=" 3 یا 4 لیوان" name="daily_water_intake">
                         </label>
                         <label class="col-lg-5 radio">
                             5 تا 7 لیوان
-                            <input type="radio" name="r">
+                            <input type="radio" value="5 تا 7 لیوان" name="daily_water_intake">
                         </label>
                         <label class="col-lg-5 radio">
                             بیشتر از 7 لیوان
-                            <input type="radio" name="r">
+                            <input type="radio" value="بیشتر از 7 لیوان" name="daily_water_intake">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="daily_water_intake-des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -718,11 +718,11 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" value="بلی" name="sweating">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" value="خیر" name="sweating">
                         </label>
 
                         <textarea placeholder="توضیحات بیشتر"></textarea>
@@ -742,9 +742,16 @@
                         </div>
                     </label>
                     <div class="row radiobox justify-content-between ">
+                        <label class="col-lg-5 radio">
+                            بلی
+                            <input type="radio" value="بلی" name="bitter_mouth">
+                        </label>
+                        <label class="col-lg-5 radio">
+                            خیر
+                            <input type="radio" value="خیر" name="bitter_mouth">
+                        </label>
 
-
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="bitter_mouth_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 3 -->
@@ -764,22 +771,22 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-12 radio">
                             بله، زود از کوره در میروم و زود هم آرام میشم و همه چیز رو سریع فراموش می‌کنم
-                            <input type="radio" name="r">
+                            <input type="radio" name="angry">
                         </label>
                         <label class="col-lg-6 radio">
                             بله، زود عصبانی میشم، اما سریع آروم نمیشم و مدتی طول می‌کشه تا عصبانیتم فروکش کنه
-                            <input type="radio" name="r">
+                            <input type="radio" name="angry">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر، زود عصبانی نمیشم و کلاً آدم آرومی هستم
-                            <input type="radio" name="r">
+                            <input type="radio" name="angry">
                         </label>
                         <label class="col-lg-12 radio  ">
 
                             برای عصبانی شدن، اول خیلی خودخوری می‌کنم و افکار آزاردهنده مثل خوره در مغزم جولان میدن و بعد از خودخوری فراوان مثل کوه آتشفشان منفجر میشم و عصبانیتم رو نشون میدم و برای آروم شدن هم مدتی طول می‌کشه تا آروم بشم
-                            <input type="radio" name="r">
+                            <input type="radio" name="angry">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="angry_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
 
@@ -805,13 +812,13 @@
                     <div class="row radiobox ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" name="anxiety">
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" name="anxiety">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="anxiety_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -829,14 +836,14 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" name="hairy_body">
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" name="hairy_body">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="hairy_body_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 2 -->
@@ -855,13 +862,13 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بله
-                            <input type="radio" name="r">
+                            <input type="radio" name="a_mole">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" name="a_mole">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="a_mole_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -879,14 +886,14 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" name="sleep">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" name="sleep">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="sleep_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -905,22 +912,22 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             ۱۰ دقیقه الی یک ربع
-                            <input type="radio" name="r">
+                            <input type="radio" name="sleep_time">
                         </label>
                         <label class="col-lg-5 radio">
                             حدود نیم ساعت
-                            <input type="radio" name="r">
+                            <input type="radio" name="sleep_time">
                         </label>
                         <label class="col-lg-5 radio">
                             تقریبا یک ساعت
-                            <input type="radio" name="r">
+                            <input type="radio" name="sleep_time">
                         </label>
                         <label class="col-lg-5 radio">
                             چند ساعت طول می‌کشه تا خوابم ببره
-                            <input type="radio" name="r">
+                            <input type="radio" name="sleep_time">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="sleep_time_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 3 -->
@@ -940,13 +947,13 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بله
-                            <input type="radio" name="r">
+                            <input type="radio" name="sleep_relax">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" name="sleep_relax">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="sleep_relax_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -965,13 +972,13 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-12 radio">
                             همش خواب‌های آشفته، ترسناک و پریشان کننده می‌بینم
-                            <input type="radio" name="r">
+                            <input type="radio" name="sleep_problem">
                         </label>
                         <label class="col-lg-12 radio">
                             در عمق خواب فرو نمیرم و تمام اتفاقات اطرافم رو حتی زمانی که خوابیدم حس می‌کنم
-                            <input type="radio" name="r">
+                            <input type="radio" name="sleep_problem">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="sleep_problem_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
 
@@ -997,13 +1004,13 @@
                     <div class="row radiobox justify-content-center ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="checkbox" name="r">
+                            <input  type="checkbox" name="drooling">
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" name="drooling">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="drooling_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -1021,14 +1028,14 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" name="drooling_pillow">
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" name="drooling_pillow">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="drooling_pillow_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 2 -->
@@ -1047,13 +1054,13 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بله
-                            <input type="radio" name="r">
+                            <input type="radio" name="drooling_slimy">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" name="drooling_slimy">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="drooling_slimy_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -1071,14 +1078,14 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" name="sputum">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" name="sputum">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="sputum_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -1097,22 +1104,22 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             ۱۰ دقیقه الی یک ربع
-                            <input type="radio" name="r">
+                            <input type="radio" name="coldhand">
                         </label>
                         <label class="col-lg-5 radio">
                             حدود نیم ساعت
-                            <input type="radio" name="r">
+                            <input type="radio" name="coldhand">
                         </label>
                         <label class="col-lg-5 radio">
                             تقریبا یک ساعت
-                            <input type="radio" name="r">
+                            <input type="radio" name="coldhand">
                         </label>
                         <label class="col-lg-5 radio">
                             چند ساعت طول می‌کشه تا خوابم ببره
-                            <input type="radio" name="r">
+                            <input type="radio" name="coldhand">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="coldhand_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 3 -->
@@ -1132,13 +1139,13 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بله
-                            <input type="radio" name="r">
+                            <input  type="radio" name="love_he_heat">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" name="love_the_heat">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="love_the_heat" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -1157,13 +1164,13 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بله
-                            <input type="radio" name="r">
+                            <input type="radio" name="urine">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" name="urine">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="urine_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -1181,7 +1188,7 @@
                     </label>
                     <div class="row  justify-content-between ">
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="wake_count" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
 
@@ -1208,13 +1215,13 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" name="menstruation">
                         </label>
                         <label class="col-lg-6 radio ">
                             خیر
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" name="menstruation">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="menstruation_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -1232,14 +1239,14 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" name="r">
+                            <input type="radio" name="menstruation_problem">
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" name="r">
+                            <input type="checkbox" name="menstruation_problem" >
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="menstruation_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <!-- part 2 -->
@@ -1258,13 +1265,13 @@
                     <div class="row radiobox justify-content-between">
                         <label class="col-lg-5 radio">
                             بله
-                            <input type="radio" name="r">
+                            <input type="radio" name="Feminine_secretions">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" name="r">
+                            <input type="radio" name="Feminine_secretions">
                         </label>
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="Feminine_secretions_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -1282,18 +1289,18 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             گرم مزاج
-                            <input type="radio" name="r">
+                            <input type="radio" name="cold_temper">
                         </label>
                         <label class="col-lg-5 radio">
                             سرد
-                            <input type="radio" name="r">
+                            <input type="radio" name="cold_temper">
                         </label>
                         <label class="col-lg-5 radio">
                             متوسط
-                            <input type="radio" name="r">
+                            <input type="radio" name="cold_temper">
                         </label>
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="cold_temper_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -1315,7 +1322,7 @@
                                 <input type="hidden" id="image" name="image">
                             </div>
                             <p class="text-center">
-                            توجه! با توجه به اینکه سؤالات لازم برای تشخیص طبع و مزاج شما به اندازه کافی گویا بود، ارسال تصویر اختیاری است و الزامی برای ارسال تصویر وجود ندارد </p>
+                                توجه! با توجه به اینکه سؤالات لازم برای تشخیص طبع و مزاج شما به اندازه کافی گویا بود، ارسال تصویر اختیاری است و الزامی برای ارسال تصویر وجود ندارد </p>
                         </label>
 
                     </div>
@@ -1336,13 +1343,13 @@
                     </label>
                     <div class="row   justify-content-between ">
 
-                        <textarea placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="comment" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
 
 
 
-                <div class="col-lg-12"><button class="next-button  ">بعدی</button> <button class="prev-button">قبلی</button></div>
+                <div class="col-lg-12"><button type="submit"  class=" ">ثبت</button> <button class="prev-button">قبلی</button></div>
 
             </div>
         </section>

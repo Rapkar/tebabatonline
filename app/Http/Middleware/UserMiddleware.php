@@ -22,7 +22,8 @@ class UserMiddleware
         }
     
        
-    
-     abort(401, 'This action is unauthorized.');
+        $title = __("auth.Login");
+        return response()->view('auth.login', compact('title'));
+
     }
 }

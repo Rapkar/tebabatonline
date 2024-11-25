@@ -255,3 +255,25 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 }
+$("select[name='states']").on('change', function () {
+  var state_id = $(this).val();
+  $.ajax({
+    url: '/getCityByState',
+    type: 'POST',
+    data: {
+      state_id: state_id,
+      '_token': $('input[name="_token"]').val(),// Include CSRF token
+    },
+    success: function (response) {
+      var elements = '';
+      response.forEach(element => {
+        elements += "<option value'" + element.id + "'>" + element.name + "</option>";
+      });
+      $('select[name="cities"]').html(elements);
+    },
+    error: function (xhr) {
+      console.log(xhr)
+      alert('خطایی وجود دارد لطفا بعدا امتجان کنید' );
+    }
+  });
+});

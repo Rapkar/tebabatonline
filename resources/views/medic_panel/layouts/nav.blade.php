@@ -124,35 +124,25 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>بیماران</a>
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts">
-                        <a class="dropdown-item" href="{{ route('Dashboard') }}">فرم های جدید</a>
-                        <a class="dropdown-item" href="{{ route('Dashboard') }}">سوابق ویزیت ها</a>
-                        <a class="dropdown-item" href="{{ route('Dashboard') }}">محاسبه قیمت دارو</a>
-                        <a class="dropdown-item" href="{{ route('Dashboard') }}">واریزی ها </a>
+                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">فرم های جدید</a>
+                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">سوابق ویزیت ها</a>
+                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">محاسبه قیمت دارو</a>
+                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">واریزی ها </a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> داروها و توصیه ها</a>
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts">
-                        <a class="dropdown-item" href="{{ route('Dashboard') }}">داروها</a>
-                        <a class="dropdown-item" href="{{ route('Dashboard') }}">اقلام</a>
-                        <a class="dropdown-item" href="{{ route('Dashboard') }}">ساخت داروی جدید</a>
-                        <a class="dropdown-item" href="{{ route('Dashboard') }}">توصیه های درمانی</a>
-                        <a class="dropdown-item" href="{{ route('Dashboard') }}">مشکلات</a>
+                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">داروها</a>
+                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">اقلام</a>
+                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">ساخت داروی جدید</a>
+                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">توصیه های درمانی</a>
+                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">مشکلات</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>کاربران</a>
-                    <div class="dropdown-menu dropdown-menu-right " aria-labelledby="users">
-                        <a class="dropdown-item" href="{{ route('users') }}">لیست کاربران</a>
-                    </div>
-                </li>
+ 
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>سفارشات</a>
-                    <div class="dropdown-menu dropdown-menu-right " aria-labelledby="users">
-                        <a class="dropdown-item" href="#">لیست سفارشات</a>
-                    </div>
-                </li>
+ 
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
