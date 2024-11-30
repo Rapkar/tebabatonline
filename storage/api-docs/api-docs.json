@@ -1,0 +1,34 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API",
+        "description": "API documentation",
+        "contact": {
+            "name": "API Team",
+            "email": "team@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://example.localhost/api",
+            "description": "API server"
+        }
+    ],
+    "paths": {
+        "/getuser": {
+            "get": {
+                "summary": "Get user information",
+                "operationId": "00308cf68e33ec2162228ba10873b5d2",
+                "responses": {
+                    "200": {
+                        "description": "User data retrieved successfully"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        }
+    }
+}

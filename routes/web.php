@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+Route::get('/getuser', [App\Http\Controllers\HomeController::class, 'getuser'])->name('getuser');
 
 Auth::routes();
 

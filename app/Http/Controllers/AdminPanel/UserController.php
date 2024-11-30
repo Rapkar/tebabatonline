@@ -10,10 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-use function Ramsey\Uuid\v1;
-
 class UserController extends Controller
 {
+
     public function index(Request $request)
     {
         // $users = User::all();
@@ -132,4 +131,9 @@ class UserController extends Controller
         // echo json_encode(view('admin_panel.users.list-user', compact('users', 'roles')));
         return view('admin_panel.users.parts.list', compact('users', 'roles'));
     }
+    public function getUser($id)
+    {
+        // Your method implementation
+    }
+    
 }

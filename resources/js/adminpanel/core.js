@@ -5,6 +5,7 @@ import 'bootstrap-rtl/dist/css/bootstrap-rtl.min.css';
 import 'bootstrap/dist/css/bootstrap-utilities.css';
 import 'bootstrap/dist/css/bootstrap-utilities.rtl.css';
 import $ from 'jquery';
+import * as bootstrap from 'bootstrap';
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 import TomSelect from "tom-select";
 import "tom-select/dist/css/tom-select.css";
@@ -30,8 +31,13 @@ import 'tinymce/plugins/preview';
 import 'tinymce/plugins/emoticons';
 import 'tinymce/plugins/directionality';
 import 'tinymce/plugins/emoticons/js/emojiimages';
-import 'bootstrap/js/dist/alert';
-
+ 
+document.addEventListener('DOMContentLoaded', function() {
+  var myModal = document.getElementById('exampleModal');
+  var modal = new bootstrap.Modal(myModal, {
+    keyboard: false
+  });
+});
 
 $("#access").on("change", function () {
   $.ajax({

@@ -215,3 +215,8 @@ a.navbar-brand {
     display: block;
     background-image: url('../../images/upload.png');
 }
+.patient-detail{
+    max-height: 320px;
+    height: 320px;
+    overflow: scroll;
+}

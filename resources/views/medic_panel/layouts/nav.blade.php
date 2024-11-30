@@ -79,6 +79,7 @@
 
 </nav>
 @endauth
+@if(Route::currentRouteName() != 'patient_examination')
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm ">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
@@ -113,6 +114,7 @@
         </div>
     </div>
 </nav>
+@endif
 <div class="container-fluid">
     @auth
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

@@ -170,7 +170,8 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#"></a>
                         <a class="dropdown-item" target="_new" href="{{route('home')}}">وبسایت</a>
-                        <a class="dropdown-item" href="#">فروشگاه</a>
+                        <a class="dropdown-item" href="{{route('shop')}}">فروشگاه</a>
+                        <a class="dropdown-item" href="{{route('medicDashboard')}}">طبیب</a>
                     </div>
                 </li>
             </ul>

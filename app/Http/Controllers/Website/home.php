@@ -29,16 +29,18 @@ class home extends Controller
             $query->where('name', 'home-product');
         })->get();
         $orderitems = [];
+        $cart=0;
         if (Auth::user()) {
             $orderitems = Cart::where('user_id', $user->id)->with('products')->get();
+            $cart = Cart::where('user_id', $user->id)->with('products')->first();
+            if ($cart) {
+                $cart =  count($cart->products);
+            } else{
+                $cart =0;
+            }
         }
 
-        $cart = Cart::where('user_id', $user->id)->with('products')->first();
-        if ($cart ) {
-            $cart =  count($cart->products);
-        } else {
-            $cart = 0;
-        }
+        
         $comments = Comment::limit(8)->get();
         return view('website.home', compact('posts', 'products', 'cart', 'orderitems', 'comments'));
     }

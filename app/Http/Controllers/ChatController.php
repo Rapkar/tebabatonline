@@ -8,6 +8,7 @@ use App\Models\AdminPanel\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Pusher\Pusher;
+
 class ChatController extends Controller
 {
     public function getUserIp() {
@@ -63,5 +64,8 @@ class ChatController extends Controller
     public function getMessages() {
         return Message::all(); // Fetch all messages from the database
     }
-    
+    public function index()
+    {
+        return User::all();
+    }
 }
