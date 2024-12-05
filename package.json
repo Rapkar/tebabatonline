@@ -23,6 +23,7 @@
         "font-awesome": "^4.7.0",
         "jquery": "^3.7.1",
         "jquery-nice-select": "^1.1.0",
+        "lightbox2": "^2.11.5",
         "slim-select": "^2.8.2",
         "sortablejs": "^1.15.2",
         "swiper": "^11.1.9",

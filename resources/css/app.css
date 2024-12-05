@@ -220,3 +220,6 @@ a.navbar-brand {
     height: 320px;
     overflow: scroll;
 }
+.patient-img{
+    width: 300px;
+}

@@ -119,6 +119,7 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
     Route::get('/visits', [App\Http\Controllers\MedicPanel\VisitControllr::class, 'visits'])->name('visits');
 
     Route::get('/patient_examination/{id}', [App\Http\Controllers\MedicPanel\PatientController::class, 'patient_examination'])->middleware('auth')->name('patient_examination');
+    Route::post('/addproducttopatient', [App\Http\Controllers\MedicPanel\PatientController::class, 'addproducttopatient'])->middleware('auth')->name('addproducttopatient');
 
 });
 

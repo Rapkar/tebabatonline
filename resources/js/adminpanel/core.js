@@ -31,13 +31,11 @@ import 'tinymce/plugins/preview';
 import 'tinymce/plugins/emoticons';
 import 'tinymce/plugins/directionality';
 import 'tinymce/plugins/emoticons/js/emojiimages';
+
+import 'lightbox2/dist/css/lightbox.css';
+import 'lightbox2/dist/js/lightbox';
+
  
-document.addEventListener('DOMContentLoaded', function() {
-  var myModal = document.getElementById('exampleModal');
-  var modal = new bootstrap.Modal(myModal, {
-    keyboard: false
-  });
-});
 
 $("#access").on("change", function () {
   $.ajax({
@@ -99,18 +97,18 @@ if (mainContainer) {
 // });
 
 if (document.getElementById('category')) {
-new TomSelect("#category", {
-  maxItems: 3
-});
+  new TomSelect("#category", {
+    maxItems: 3
+  });
 }
 if (document.getElementById('status')) {
-new TomSelect("#status", {
-  create: true,
-  sortField: {
-    field: "text",
-    direction: "asc"
-  }
-});
+  new TomSelect("#status", {
+    create: true,
+    sortField: {
+      field: "text",
+      direction: "asc"
+    }
+  });
 }
 
 const myDropzoneElement = document.getElementById('postimg');
@@ -134,132 +132,133 @@ if (myDropzoneElement) {
         $("#image").val(responseText.location)
       });
       this.on("addedfile", function (file) {
-      
+
 
       });
 
     }
   });
 }
-let images=[];
-document.addEventListener('DOMContentLoaded', function() {
+let images = [];
+document.addEventListener('DOMContentLoaded', function () {
   const mulltiimg = document.getElementsByClassName('postimg');
   if (mulltiimg.length > 0) {
-  const mulltiimgs = new Dropzone('div.postimg', {
-    url: '/adminpanel/upload/',
-    maxFiles: 5,
-    acceptedFiles: '.jpg, .jpeg, .png, .webp',
-    addRemoveLinks: true,
-    clickable: true,
-    autoProcessQueue: true,
-    dictDefaultMessage: "تصاویر مورد نظر را آپلود کنید",
-    headers: {
-      'X-CSRF-Token': $('input[name="_token"]').val() // Function to retrieve CSRF token
-    },
-    init: function () {
-      this.on("sending", function (file, xhr, formData) {
+    const mulltiimgs = new Dropzone('div.postimg', {
+      url: '/adminpanel/upload/',
+      maxFiles: 5,
+      acceptedFiles: '.jpg, .jpeg, .png, .webp',
+      addRemoveLinks: true,
+      clickable: true,
+      autoProcessQueue: true,
+      dictDefaultMessage: "تصاویر مورد نظر را آپلود کنید",
+      headers: {
+        'X-CSRF-Token': $('input[name="_token"]').val() // Function to retrieve CSRF token
+      },
+      init: function () {
+        this.on("sending", function (file, xhr, formData) {
 
-      });
-      this.on("success", function (file, responseText) {
-        images.push(responseText.location);
-        $("#gallery").val(images)
-      });
-      console.log( $("#gallery").val());
-      this.on("addedfile", function (file) {
-     
-      
+        });
+        this.on("success", function (file, responseText) {
+          images.push(responseText.location);
+          $("#gallery").val(images)
+        });
+        console.log($("#gallery").val());
+        this.on("addedfile", function (file) {
 
-      });
 
-    }
-  });
-}
+
+        });
+
+      }
+    });
+  }
 
 })
 // // Initialize TinyMCE
 const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 if (document.getElementById('status')) {
-window.addEventListener('DOMContentLoaded', () => {
-  tinymce.init({
-    selector: '#postcontent',
+  window.addEventListener('DOMContentLoaded', () => {
+    tinymce.init({
+      selector: '#postcontent',
 
-    autosave_ask_before_unload: true,
-    autosave_interval: '30s',
-    autosave_prefix: '{path}{query}-{id}-',
-    autosave_restore_when_empty: false,
-    autosave_retention: '2m',
-    skin: useDarkMode ? 'oxide-dark' : 'oxide',
-    content_css: useDarkMode ? 'dark' : 'default',
-    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
-    height: 600,
-    plugins: [
-      'link', 'autoresize', 'codesample', 'lists', 'media', 'directionality', 'table', 'image', 'quickbars', 'preview', 'emoticons'
-    ],
+      autosave_ask_before_unload: true,
+      autosave_interval: '30s',
+      autosave_prefix: '{path}{query}-{id}-',
+      autosave_restore_when_empty: false,
+      autosave_retention: '2m',
+      skin: useDarkMode ? 'oxide-dark' : 'oxide',
+      content_css: useDarkMode ? 'dark' : 'default',
+      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+      height: 600,
+      plugins: [
+        'link', 'autoresize', 'codesample', 'lists', 'media', 'directionality', 'table', 'image', 'quickbars', 'preview', 'emoticons'
+      ],
 
-    toolbar: [
-      "undo redo | styles | fontsize | forecolor hilitecolor | bold italic underline strikethrough | align | directionality",
-      "link image bullist numlist | emoticons | preview"
-    ],
+      toolbar: [
+        "undo redo | styles | fontsize | forecolor hilitecolor | bold italic underline strikethrough | align | directionality",
+        "link image bullist numlist | emoticons | preview"
+      ],
 
-    automatic_uploads: true,
-    images_upload_url: '/adminpanel/upload/', // Adjust this URL as needed
-     images_upload_base_path: '/storage/public/images/',
-    file_picker_types: 'image',
-    image_title: true,
-    visualblocks_default_state: true,
+      automatic_uploads: true,
+      images_upload_url: '/adminpanel/upload/', // Adjust this URL as needed
+      images_upload_base_path: '/storage/public/images/',
+      file_picker_types: 'image',
+      image_title: true,
+      visualblocks_default_state: true,
 
-    file_picker_callback: function (callback, value, meta) {
-      if (meta.filetype == 'image') {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-        input.onchange = function () {
-          var file = this.files[0];
-          var reader = new FileReader();
-          reader.onload = function () {
-            var id = 'blobid' + (new Date()).getTime();
-            var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-            var base64 = reader.result.split(',')[1];
-            var blobInfo = blobCache.create(id, file, base64);
-            blobCache.add(blobInfo);
-            console.log(file);
-            callback(blobInfo.blobUri(), { title: file.name });
+      file_picker_callback: function (callback, value, meta) {
+        if (meta.filetype == 'image') {
+          var input = document.createElement('input');
+          input.setAttribute('type', 'file');
+          input.setAttribute('accept', 'image/*');
+          input.onchange = function () {
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function () {
+              var id = 'blobid' + (new Date()).getTime();
+              var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+              var base64 = reader.result.split(',')[1];
+              var blobInfo = blobCache.create(id, file, base64);
+              blobCache.add(blobInfo);
+              console.log(file);
+              callback(blobInfo.blobUri(), { title: file.name });
+            };
+            reader.readAsDataURL(file);
           };
-          reader.readAsDataURL(file);
-        };
-        input.click();
-      }},
-    images_upload_handler: function (blobInfo, success, failure) {
-     
-      var xhr, formData;
-      xhr = new XMLHttpRequest();
-      xhr.withCredentials = false;
-      xhr.open('POST', '/adminpanel/upload/');
-      var token = $('input[name="_token"]').val();
-      xhr.setRequestHeader("X-CSRF-Token", token);
-      xhr.onload = function () {
-        var json;
-        if (xhr.status != 200) {
-          failure('HTTP Error: ' + xhr.status);
-          return;
+          input.click();
         }
-        json = JSON.parse(xhr.responseText);
-        if (!json || typeof json.location != 'string') {
-          failure('Invalid JSON: ' + xhr.responseText);
-          return; 
-        }
-       
-        success(json.location);
-      };
-      formData = new FormData();
-      formData.append('file', blobInfo.blob(), blobInfo.filename());
-       console.log(blobInfo)
-      xhr.send(formData);
-    },
-    
+      },
+      images_upload_handler: function (blobInfo, success, failure) {
 
+        var xhr, formData;
+        xhr = new XMLHttpRequest();
+        xhr.withCredentials = false;
+        xhr.open('POST', '/adminpanel/upload/');
+        var token = $('input[name="_token"]').val();
+        xhr.setRequestHeader("X-CSRF-Token", token);
+        xhr.onload = function () {
+          var json;
+          if (xhr.status != 200) {
+            failure('HTTP Error: ' + xhr.status);
+            return;
+          }
+          json = JSON.parse(xhr.responseText);
+          if (!json || typeof json.location != 'string') {
+            failure('Invalid JSON: ' + xhr.responseText);
+            return;
+          }
+
+          success(json.location);
+        };
+        formData = new FormData();
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+        console.log(blobInfo)
+        xhr.send(formData);
+      },
+
+
+    });
   });
-});
 }
 $("select[name='states']").on('change', function () {
   var state_id = $(this).val();
@@ -279,7 +278,26 @@ $("select[name='states']").on('change', function () {
     },
     error: function (xhr) {
       console.log(xhr)
-      alert('خطایی وجود دارد لطفا بعدا امتجان کنید' );
+      alert('خطایی وجود دارد لطفا بعدا امتجان کنید');
+    }
+  });
+});
+
+// patient
+$("#addproducttopatient").on("click", function (e) {
+  e.preventDefault();
+  $.ajax({
+    type: 'post',
+    url: '/medicpanel/addproducttopatient/',
+    data: {
+      'visit_id': $('input[name="visit_id"]').val(),
+      'product_id': $('select[name="product"]').val(),
+      'count': $('input[name="productcount"]').val(),
+      '_token': $('input[name="_token"]').val()
+    },
+    success: function (data) {
+      console.log(data)
+      alert("با موفقیت اصافه شد");
     }
   });
 });

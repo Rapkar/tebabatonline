@@ -67,132 +67,132 @@
             </tr>
             <tr>
                 <th> مشکلات گوارشی </th>
-                <td> {{$item['data']->digestive_problems}} </td>
-                <td> {{$item['data']->digestive_problems_des}} </td>
+                <td> {{$item['data']->digestive_problems ?? ''}} </td>
+                <td> {{$item['data']->digestive_problems_des ?? ''}} </td>
             </tr>
             <tr>
                 <th>کار کرد شکم در طول روز</th>
-                <td> {{$item['data']->bowel_movement}} </td>
-                <td> {{$item['data']->bowel_movement_des}} </td>
+                <td> {{$item['data']->bowel_movement?? ''}} </td>
+                <td> {{$item['data']->bowel_movement_des ?? ''}} </td>
             </tr>
             <tr>
                 <th>دیابت</th>
-                <td> {{$item['data']->diabetes}} </td>
-                <td> {{$item['data']->diabetes_des}} </td>
+                <td> {{$item['data']->diabetes ?? '' }} </td>
+                <td> {{$item['data']->diabetes_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>فشار خون بالا </th>
-                <td> {{$item['data']->Hypertension}} </td>
-                <td> {{$item['data']->Hypertension_des}} </td>
+                <td> {{$item['data']->Hypertension ?? '' }} </td>
+                <td> {{$item['data']->Hypertension_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>چربی خون بالا </th>
-                <td> {{$item['data']->Hyperlipidemia}} </td>
-                <td> {{$item['data']->Hyperlipidemia_des}} </td>
+                <td> {{$item['data']->Hyperlipidemia ?? '' }} </td>
+                <td> {{$item['data']->Hyperlipidemia_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا شب‌ها کف پایتان داغ می‌شود؟ به گونه‌ای که بخواهید از زیر پتو بیرون بدهید؟
                 </th>
-                <td> {{$item['data']->hotfeet}} </td>
-                <td> {{$item['data']->hotfeet_des}} </td>
+                <td> {{$item['data']->hotfeet ?? '' }} </td>
+                <td> {{$item['data']->hotfeet_des ?? '' }} </td>
             </tr>
             <tr>
                 <th> آیا مشکل کم کاری یا پر کاری تیرویید دارید؟
                 </th>
-                <td> {{$item['data']->thyroid}} </td>
-                <td> {{$item['data']->thyroid_des}} </td>
+                <td> {{$item['data']->thyroid ?? '' }} </td>
+                <td> {{$item['data']->thyroid_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>رنگ پوست
                 </th>
-                <td> {{$item['data']->color}} </td>
-                <td> {{$item['data']->color_des}} </td>
+                <td> {{$item['data']->color ?? '' }} </td>
+                <td> {{$item['data']->color_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا خواب رفتگی دست و پا دارید؟
                 </th>
-                <td> {{$item['data']->Numbness}} </td>
-                <td> {{$item['data']->Numbness_des}} </td>
+                <td> {{$item['data']->Numbness ?? '' }} </td>
+                <td> {{$item['data']->Numbness_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا اسپاسم، انقباض، درد و گرفتگی عضلات دارید؟
 
                 </th>
-                <td> {{$item['data']->Spasms}} </td>
-                <td> {{$item['data']->Spasms_des}} </td>
+                <td> {{$item['data']->Spasms ?? '' }} </td>
+                <td> {{$item['data']->Spasms_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا در قسمت‌هایی از بدن خارش دارید؟
                 </th>
-                <td> {{$item['data']->itching}} </td>
-                <td> {{$item['data']->itching_des}} </td>
+                <td> {{$item['data']->itching ?? '' }} </td>
+                <td> {{$item['data']->itching_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>در کدام قسمت از بدن خارش دارید؟
                 </th>
-                <td> {{$item['data']->itchingw_des}} </td>
+                <td> {{$item['data']->itchingw_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا خستگی، کسالت، بی حالی، بی رمقی و بی انرژی بودن دارید؟
 
                 </th>
-                <td> {{$item['data']->lethargy}} </td>
-                <td> {{$item['data']->lethargy_des}} </td>
+                <td> {{$item['data']->lethargy ?? '' }} </td>
+                <td> {{$item['data']->lethargy_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا خواب سنگین دارید یا مدام چرتی و خواب آلود هستید؟
 
                 </th>
-                <td> {{$item['data']->heavy_sleep}} </td>
-                <td> {{$item['data']->heavy_sleep_des}} </td>
+                <td> {{$item['data']->heavy_sleep ?? '' }} </td>
+                <td> {{$item['data']->heavy_sleep_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>کم خونی دار د؟ زیر پلک چشم شما سفید یا صورتی کم رنگ است؟
 
                 </th>
-                <td> {{$item['data']->anemia}} </td>
-                <td> {{$item['data']->anemia_des}} </td>
+                <td> {{$item['data']->anemia ?? '' }} </td>
+                <td> {{$item['data']->anemia_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>داغی بدن یا گر گرفتگی دارد؟ عدم تحمل گرما، لذت بردن از باد سرد و هوای خنک؟
 
                 </th>
-                <td> {{$item['data']->hotflash}} </td>
-                <td> {{$item['data']->hotflash_des}} </td>
+                <td> {{$item['data']->hotflash ?? '' }} </td>
+                <td> {{$item['data']->hotflash_des ?? ''}} </td>
             </tr>
             <tr>
                 <th> زیاد تشنه می‌شو د و دائما دوست دارید آب یا مایعات بنوشد
 
                 </th>
-                <td> {{$item['data']->Polydipsia}} </td>
-                <td> {{$item['data']->Polydipsia_des}} </td>
+                <td> {{$item['data']->Polydipsia ?? '' }} </td>
+                <td> {{$item['data']->Polydipsia_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>روزانه چند لیوان آب، چای یا مایعات دیگه می‌نوشد
 
                 </th>
-                <td> {{$item['data']->daily_water_intake}} </td>
-                <td> {{$item['data']->daily_water_intakeـdes}} </td>
+                <td> {{$item['data']->daily_water_intake ?? '' }} </td>
+                <td> {{$item['data']->daily_water_intakeـdes ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا تعریق زیاد بدن دارید؟
 
                 </th>
-                <td> {{$item['data']->sweating}} </td>
-                <td> {{$item['data']->sweating_des}} </td>
+                <td> {{$item['data']->sweating ?? '' }} </td>
+                <td> {{$item['data']->sweating_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا تلخی دهان دارید؟ مخصوصاً صبح‌ها که از خواب پا می‌شوید؟
                 </th>
-                <td> {{$item['data']->bitter_mouth}} </td>
-                <td> {{$item['data']->bitter_mouth_des}} </td>
+                <td> {{$item['data']->bitter_mouth ?? '' }} </td>
+                <td> {{$item['data']->bitter_mouth_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا زود عصبانی می‌شوید و داد و بیداد و پرخاش می‌کنید و زود هم آرام می‌شوید؟
 
                 </th>
-                <td> {{$item['data']->angry}} </td>
-                <td> {{$item['data']->angry_des}} </td>
+                <td> {{$item['data']->angry ?? '' }} </td>
+                <td> {{$item['data']->angry_des ?? ''}} </td>
             </tr>
             <tr>
             <tr>
@@ -206,33 +206,33 @@
                 <th> آیا بدن‌تان پر مو است؟
 
                 </th>
-                <td> {{$item['data']->hairy_body}} </td>
-                <td> {{$item['data']->hairy_body_des}} </td>
+                <td> {{$item['data']->hairy_body ?? '' }} </td>
+                <td> {{$item['data']->hairy_body_des ?? ''}} </td>
             </tr>
             <tr>
                 <th> آیا در بدن‌تان خال زیاد دارید؟ یا اخیراً زیاد شده باشد؟
 
                 </th>
-                <td> {{$item['data']->a_mole}} </td>
-                <td> {{$item['data']->a_mole_des}} </td>
+                <td> {{$item['data']->a_mole ?? '' }} </td>
+                <td> {{$item['data']->a_mole_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا شب‌ها خیلی راحت تا سرتونو بذارید روی بالشت به خواب میرید؟
                 </th>
-                <td> {{$item['data']->sleep}} </td>
-                <td> {{$item['data']->sleep_des}} </td>
+                <td> {{$item['data']->sleep ?? '' }} </td>
+                <td> {{$item['data']->sleep_des ?? ''}} </td>
             </tr>
             <tr>
                 <th>چقدر طول می‌کشه توی بستر تا به خواب برید؟
                 </th>
-                <td> {{$item['data']->sleep_time}} </td>
-                <td> {{$item['data']->sleep_time_des}} </td>
+                <td> {{$item['data']->sleep_time ?? '' }} </td>
+                <td> {{$item['data']->sleep_time_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>آیا خواب راحت، آرامش بخش و ریلکسی دارید؟
                 </th>
-                <td> {{$item['data']->sleep_relax}} </td>
-                <td> {{$item['data']->sleep_relax_des}} </td>
+                <td> {{$item['data']->sleep_relax ?? '' }} </td>
+                <td> {{$item['data']->sleep_relax_des ?? '' }} </td>
             </tr>
             <tr>
                 <th>اگر خواب آرامش بخشی ندارید، چه مشکلی در خواب‌تون دارید؟
@@ -315,7 +315,9 @@
             <tr>
                 <th> مدارک پزشکی
                 </th>
-                <td> <img calss="w-25" src="{{$item['data']->image}}"> </td>
+                <td>
+                    <a class="example-image-link" href="{{$item['data']->image}}" data-lightbox="example-1"><img class="example-image patient-img" src="{{$item['data']->image}}" alt="image-1" /></a>
+                </td>
             </tr>
             <tr>
                 <th> توضیحات
@@ -339,6 +341,7 @@
 <hr>
 <div class="container-fluid position-relative " style="z-index:999">
     <table class="w-100  table table-striped table-bordered table-rtl">
+        <input type="hidden" value="{{$item['id']}}" name="visit_id">
         <tbody>
             <tr>
                 <th>تشخیص طبیب</th>
@@ -359,7 +362,45 @@
                         افزودن دارو
                     </button>
                 </td>
-                <td></td>
+                <td class="w-100">
+                    <table class="w-100">
+                        <thead>
+                            <th>نام</th>
+                            <th>قیمت</th>
+                            <th>تعداد</th>
+                            <th>قیمت کل</th>
+                            <th>عملیات</th>
+                        </thead>
+                        <tbody>
+                           
+                        .
+                            @foreach($selected_products as $item)
+                            <tr>
+                                <td>{{$item->name}}</td>
+                                <td>{{$price=$item->price}} تومان</td>
+                                <td>{{$count=$item->pivot->count}} </td>
+                                <td>{{$total[]=$price *  $count}}تومان </td>
+                                <td><a href="#">حذف</a></td>
+
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <thead>
+                            قیمت کل
+                        </thead>
+                        <tbody>
+                            <td>
+                                {{ array_sum($total) }}
+
+                            </td>
+
+                        </tbody>
+                    </table>
+                </td>
             </tr>
             <tr>
                 <th> توصیه‌های درمانی</th>
@@ -391,24 +432,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row" >  
+                <form class="row">
                     @csrf
                     <label class="col-lg-3">
                         نام محصول
-                        <select>
+                        <select name="product">
                             @foreach($products as $product)
                             <option value="{{$product->id}}"> {{$product->name}}</option>
                             @endforeach
                         </select>
                     </label>
-                    <label class="col-lg-7" >تعداد
-                        <input type="number" min="1">
+                    <label class="col-lg-7">تعداد
+                        <input name="productcount" type="number" min="1">
                     </label>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                <button type="button" class="btn btn-primary">افزودن محصول</button>
+                <button type="button" id="addproducttopatient" class="btn btn-primary">افزودن محصول</button>
             </div>
         </div>
     </div>

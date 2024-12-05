@@ -27,7 +27,7 @@
                     <div class="row">
 
                         <div class="col-lg-6 d-flex align-items-center justify-content-center flex-column ">
-                            <h2>تا زمانی که طبیبت آنلاینه</h2>
+                        <h2>تا زمانی که طبیبت آنلاینه</h2>
                             <h3>تو نباید از هیچ بیماری ای درد بکشی !</h3>
                             <p>میتونی همه ی مشکلاتت رو به طبابت آنلاین بگی و براشون راهکار بگیری</p>
                             <a href="#">ویزیت آنلاین</a>
