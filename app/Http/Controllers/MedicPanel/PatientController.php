@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Visit;
 use Hekmatinasser\Verta\Verta;
+use  App\Models\Recommendation;
 
 class PatientController extends Controller
 {
@@ -31,8 +32,10 @@ class PatientController extends Controller
         $result[] = ['data' => json_decode($items->content), 'date' => $formattedDate, 'id' => $items->id];
         // dd($result);
         $products = Product::all();
+        $Recommendations=[];
+        $Recommendations = Recommendation::All();
 
-        return view('medic_panel.patient.patient', compact('title', 'result', 'products', 'selected_products'));
+        return view('medic_panel.patient.patient', compact('title', 'result', 'products', 'selected_products', 'Recommendations'));
     }
     public function Totlaprice($relatedproducta)
     {
@@ -49,7 +52,7 @@ class PatientController extends Controller
         $product = Product::all()->find($product_id); //find the product
         $visit = Visit::all()->find($visit_id); //find the visit
         // $items = Visit::find($id);
-       
+
         if ($visit->products()->where('product_id', $product_id)->exists()) {
             return response()->json(['error' => 'Product already added to this visit'], 400);
         }

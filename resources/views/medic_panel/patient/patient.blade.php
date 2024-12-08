@@ -345,7 +345,9 @@
         <tbody>
             <tr>
                 <th>تشخیص طبیب</th>
-                <td><textarea></textarea></td>
+                <td>                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#medicine">
+                        افزودن تشخیص
+                    </button></td>
             </tr>
             <tr>
                 <th>توصیه‌های اختصاصی</th>
@@ -409,12 +411,13 @@
             </tr>
             <tr>
                 <th> توصیه‌های درمانی</th>
-                <td><textarea></textarea></td>
+                <td>            
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Recommendation">
+                        افزودن توصیه
+                    </button>
+           </td>
             </tr>
-            <tr>
-                <th>انتخاب توصیه</th>
-                <td><textarea></textarea></td>
-            </tr>
+ 
             <tr>
                 <th> تاریخ ویزیت</th>
                 <td><textarea></textarea></td>
@@ -423,7 +426,7 @@
             </tr>
             <tr>
                 <th>تایید و ارسال</th>
-                <td><a>ارسال نسخه</a></td>
+                <td><a href="#" >ارسال نسخه</a></td>
                 <th>ذخیره پیش نویس</th>
                 <td><a href="#">ذخیره نسخه</a></td>
             </tr>
@@ -465,5 +468,31 @@
     </div>
 </div>
 
-
+<div class="modal fade" id="Recommendation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">لیست توصیه ها</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row">
+                    @csrf
+                    <label class="col-lg-3">
+                        توصیه
+                        <select name="product">
+                            @foreach($Recommendations as $item)
+                            <option value="{{$item->id}}"> {{$item->content}}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">بستن</button>
+                <button type="button" id="addproducttopatient" class="btn btn-primary">افزودن محصول</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

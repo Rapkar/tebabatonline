@@ -133,13 +133,10 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> داروها و توصیه ها</a>
+                    <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> توصیه ها</a>
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts">
-                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">داروها</a>
-                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">اقلام</a>
-                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">ساخت داروی جدید</a>
-                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">توصیه های درمانی</a>
-                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">مشکلات</a>
+                        <a class="dropdown-item" href="{{ route('recommendation') }}">توصیه ها</a>
+                        <a class="dropdown-item" href="{{ route('createRecommendation') }}">ایجاد توصیه جدید</a>
                     </div>
                 </li>
  

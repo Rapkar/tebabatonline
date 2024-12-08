@@ -126,6 +126,12 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
         ->name('removeproducttopatient');
 });
 
+Route::get('/recommendation', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'index'])->middleware('auth')->name('recommendation');
+Route::get('/recommendation/create', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'create'])->middleware('auth')->name('createRecommendation');
+Route::post('/recommendation/create', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'store'])->middleware('auth')->name('storeRecommendation');
+Route::get('/recommendation/delete/{id}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'destroy'])->middleware('auth')->name('deleteRecommendation');
+Route::get('/recommendation/edit/{id}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'edit'])->middleware('auth')->name('editRecommendation');
+Route::post('/recommendation/update', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'update'])->middleware('auth')->name('updateRecommendation');
 
 
 
