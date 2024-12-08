@@ -371,16 +371,20 @@
                             <th>قیمت کل</th>
                             <th>عملیات</th>
                         </thead>
-                        <tbody>
-                           
-                        .
+                        <tbody id="products" >
+
+                            @php $total=[] @endphp
                             @foreach($selected_products as $item)
                             <tr>
                                 <td>{{$item->name}}</td>
                                 <td>{{$price=$item->price}} تومان</td>
                                 <td>{{$count=$item->pivot->count}} </td>
-                                <td>{{$total[]=$price *  $count}}تومان </td>
-                                <td><a href="#">حذف</a></td>
+                                <td>{{$subtotal = $item->price * $item->pivot->count}}تومان </td>
+                                <td>
+                                    <a href="{{ route('removeproducttopatient', ['visit_id' => $item->pivot->visit_id, 'product_id' => $item->pivot->product_id]) }}">
+                                        حذف
+                                    </a>
+                                </td>
 
                             </tr>
                             @endforeach
@@ -392,11 +396,12 @@
                         <thead>
                             قیمت کل
                         </thead>
-                        <tbody>
-                            <td>
-                                {{ array_sum($total) }}
-
-                            </td>
+                        <tbody id="totalprice">
+                            <tr>
+                                <td>{{ $total = collect($selected_products)->sum(function($item) {
+                return $item->price * $item->pivot->count;
+            }) }} تومان</td> <!-- Calculate total using collection -->
+                            </tr>
 
                         </tbody>
                     </table>
@@ -416,7 +421,12 @@
                 <th> نوبت بعدی ویزیت</th>
                 <td><textarea></textarea></td>
             </tr>
-
+            <tr>
+                <th>تایید و ارسال</th>
+                <td><a>ارسال نسخه</a></td>
+                <th>ذخیره پیش نویس</th>
+                <td><a href="#">ذخیره نسخه</a></td>
+            </tr>
         </tbody>
     </table>
 </div>
@@ -443,12 +453,12 @@
                         </select>
                     </label>
                     <label class="col-lg-7">تعداد
-                        <input name="productcount" type="number" min="1">
+                        <input name="productcount" type="number" min="1" value="1">
                     </label>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">بستن</button>
                 <button type="button" id="addproducttopatient" class="btn btn-primary">افزودن محصول</button>
             </div>
         </div>

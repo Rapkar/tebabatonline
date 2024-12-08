@@ -34,8 +34,9 @@ import 'tinymce/plugins/emoticons/js/emojiimages';
 
 import 'lightbox2/dist/css/lightbox.css';
 import 'lightbox2/dist/js/lightbox';
+import jquery from 'jquery';
 
- 
+
 
 $("#access").on("change", function () {
   $.ajax({
@@ -297,7 +298,15 @@ $("#addproducttopatient").on("click", function (e) {
     },
     success: function (data) {
       console.log(data)
-      alert("با موفقیت اصافه شد");
+      alert(data.success);
+      jquery(".btn-close").click();
+      $("#products").empty();
+      $("#products").append(data.data);
+      $("#totalprice td").html(data.total)
+    },
+    error: function (data) {
+      alert(data.responseText);
+
     }
   });
 });

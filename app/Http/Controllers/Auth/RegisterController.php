@@ -78,7 +78,7 @@ class RegisterController extends Controller
 
         $user->password = Hash::make($data['password']); // hash the password
         $user->save();
-        $user->roles()->attach('1');
+        $user->roles()->attach('4');
         return $user;
     }
     public function showRegistrationForm()

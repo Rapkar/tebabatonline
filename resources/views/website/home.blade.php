@@ -32,7 +32,7 @@
                             <p>میتونی همه ی مشکلاتت رو به طبابت آنلاین بگی و براشون راهکار بگیری</p>
                             <a href="#">ویزیت آنلاین</a>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6"> 
                             <img src="{{asset('images/website/slide1.webp')}}">
                         </div>
                     </div>

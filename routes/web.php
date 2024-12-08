@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+
 Route::get('/getuser', [App\Http\Controllers\HomeController::class, 'getuser'])->name('getuser');
 
 Auth::routes();
@@ -120,7 +121,9 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
 
     Route::get('/patient_examination/{id}', [App\Http\Controllers\MedicPanel\PatientController::class, 'patient_examination'])->middleware('auth')->name('patient_examination');
     Route::post('/addproducttopatient', [App\Http\Controllers\MedicPanel\PatientController::class, 'addproducttopatient'])->middleware('auth')->name('addproducttopatient');
-
+    Route::get('/removeproducttopatient/{visit_id}/{product_id}', [App\Http\Controllers\MedicPanel\PatientController::class, 'removeProductFromPatient'])
+        ->middleware('auth')
+        ->name('removeproducttopatient');
 });
 
 
