@@ -135,13 +135,27 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> توصیه ها</a>
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts">
-                        <a class="dropdown-item" href="{{ route('recommendation') }}">توصیه ها</a>
-                        <a class="dropdown-item" href="{{ route('createRecommendation') }}">ایجاد توصیه جدید</a>
+                        <a class="dropdown-item" href="{{ route('recommendation','recomendation') }}">توصیه ها</a>
+                        <a class="dropdown-item" href="{{ route('createRecommendation','recomendation') }}">ایجاد توصیه جدید</a>
                     </div>
                 </li>
- 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> مشکلات</a>
+                    <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts">
+                        <a class="dropdown-item" href="{{ route('recommendation','problems') }}">مشکلات</a>
+                        <a class="dropdown-item" href="{{ route('createRecommendation','problems') }}">ایجاد مشکل جدید</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> توصیه ها دارویی</a>
+                    <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts">
+                        <a class="dropdown-item" href="{{ route('recommendation','medicinerecomendation') }}"> توصیه های دارویی</a>
+                        <a class="dropdown-item" href="{{ route('createRecommendation','medicinerecomendation') }}">ایجاد توصیه دارویی جدید</a>
+                    </div>
+                </li>
 
- 
+
+
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

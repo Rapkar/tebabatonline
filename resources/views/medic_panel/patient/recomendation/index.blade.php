@@ -19,7 +19,7 @@
                 <td>{{ $item->id  }}</td>
                 <td>   {{ substr($item->content,0,50)}} </td>
                 <td>
-                    <a href="{{route('patient_examination',$item->id)}}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> بررسی </a>
+                    <a href="{{route('editRecommendation',$item->id)}}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> بررسی </a>
                     <a href="{{ route('deleteRecommendation',$item->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="حذف"> حذف </a>
                 </td>
             </tr>

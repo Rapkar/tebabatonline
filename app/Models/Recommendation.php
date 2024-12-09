@@ -9,4 +9,7 @@ class Recommendation extends Model
     protected $fillable = [
         'content'
     ];
+    public function describtions(){
+        return $this->hasMany(Describtion::class);
+    }
 }
