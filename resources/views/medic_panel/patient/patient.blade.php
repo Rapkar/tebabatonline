@@ -345,7 +345,7 @@
         <tbody>
             <tr>
                 <th>تشخیص طبیب</th>
-                <td>                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#medicine">
+                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#medicine">
                         افزودن تشخیص
                     </button></td>
             </tr>
@@ -373,7 +373,7 @@
                             <th>قیمت کل</th>
                             <th>عملیات</th>
                         </thead>
-                        <tbody id="products" >
+                        <tbody id="products">
 
                             @php $total=[] @endphp
                             @foreach($selected_products as $item)
@@ -411,13 +411,13 @@
             </tr>
             <tr>
                 <th> توصیه‌های درمانی</th>
-                <td>            
+                <td>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Recommendation">
                         افزودن توصیه
                     </button>
-           </td>
+                </td>
             </tr>
- 
+
             <tr>
                 <th> تاریخ ویزیت</th>
                 <td><textarea></textarea></td>
@@ -426,7 +426,7 @@
             </tr>
             <tr>
                 <th>تایید و ارسال</th>
-                <td><a href="#" >ارسال نسخه</a></td>
+                <td><a href="#">ارسال نسخه</a></td>
                 <th>ذخیره پیش نویس</th>
                 <td><a href="#">ذخیره نسخه</a></td>
             </tr>
@@ -478,19 +478,23 @@
             <div class="modal-body">
                 <form class="row">
                     @csrf
-                    <label class="col-lg-3">
+                    <label class="col-lg-4">
                         توصیه
-                        <select name="product">
+                        <select id="Recommendations" name="Recommendations">
                             @foreach($Recommendations as $item)
                             <option value="{{$item->id}}"> {{$item->content}}</option>
                             @endforeach
+                        </select>
+                    </label>
+                    <label class="col-lg-8">
+                        <select multiple attr-target="Recommendations" name="Recommendationsdes" class="w-100">
                         </select>
                     </label>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">بستن</button>
-                <button type="button" id="addproducttopatient" class="btn btn-primary">افزودن محصول</button>
+                <button type="button" id="addproducttopatient" class="btn btn-primary">افزودن توصیه</button>
             </div>
         </div>
     </div>

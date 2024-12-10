@@ -7,6 +7,6 @@ use App\Models\Recommendation;
 class Describtion extends Model
 {
     public function recommendation(){
-        return $this->belongsTo(Recommendation::class);
+        return $this->belongsTo(Recommendation::class,'describtion_recommendation');
     }
 }

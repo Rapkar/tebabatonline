@@ -35,6 +35,7 @@ import 'tinymce/plugins/emoticons/js/emojiimages';
 import 'lightbox2/dist/css/lightbox.css';
 import 'lightbox2/dist/js/lightbox';
 import jquery from 'jquery';
+import { parse } from '@fortawesome/fontawesome-svg-core';
 
 
 
@@ -303,6 +304,33 @@ $("#addproducttopatient").on("click", function (e) {
       $("#products").empty();
       $("#products").append(data.data);
       $("#totalprice td").html(data.total)
+    },
+    error: function (data) {
+      alert(data.responseText);
+
+    }
+  });
+});
+
+$("#Recommendations").on("change", function () {
+  $.ajax({
+    type: 'post',
+    url: '/medicpanel/getdescribtions/',
+    data: {
+      'recommendation_id': $('select[name="Recommendations"]').val(),
+      '_token': $('input[name="_token"]').val()
+    },
+    success: function (data) {
+      $('select[attr-target="Recommendations"]').empty();
+      $('select[attr-target="Recommendations"]').html(data);
+      data=JSON.parse(data);
+  var t='';
+     if(data){
+      data.forEach((item)=>{
+        t +="<option value='"+item.id+"'>"+item.content+"</option>"
+      })
+     }
+     $('select[attr-target="Recommendations"]').html( t);
     },
     error: function (data) {
       alert(data.responseText);

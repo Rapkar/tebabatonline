@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MedicPanel;
 
 use App\Http\Controllers\Controller;
+use App\Models\Describtion;
 use App\Models\Recommendation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +23,7 @@ class RecomendationController extends Controller
     }
     protected function validateType($type)
     {
-        $title='';
+        $title = '';
         switch ($type) {
             case 'recomendation':
                 $type = 'recomendation';
@@ -40,7 +41,7 @@ class RecomendationController extends Controller
                 $type = 'recomendation';
                 break;
         }
-        return ['type'=>$type, 'title'=>$title];
+        return ['type' => $type, 'title' => $title];
     }
     public function index($type)
     {
@@ -52,7 +53,7 @@ class RecomendationController extends Controller
     {
         $title = $this->validateType($type)['title'];
         $type = $this->validateType($type)['type'];
-        $result = Recommendation::where( 'type', $type)->get();
+        $result = Recommendation::where('type', $type)->get();
 
         return view('medic_panel.patient.recomendation.create', compact('title', 'result', 'type'));
     }
@@ -62,20 +63,23 @@ class RecomendationController extends Controller
         $this->validator($request, [
             'content' => ['required'] // Corrected 'requred' to 'required'
         ]);
-        $type=$request->input('type');
+        $type = $request->input('type');
         $Recommendation->content = $request->input('content');
         $Recommendation->type =   $type;
         $Recommendation->save();
-        $result = Recommendation::where( 'type', $type)->get();
+        $result = Recommendation::where('type', $type)->get();
         return redirect()->route('recommendation');
     }
     public function show($id) {}
     public function edit($id)
     {
- 
+
         $Recommendation = Recommendation::find($id);
+        $describtions = [];
+        $describtions = $Recommendation->describtions;
+        // dd( $Recommendation, $describtions);
         // $Recommendation->delete();
-        return view('medic_panel.patient.recomendation.edit', compact('Recommendation'));
+        return view('medic_panel.patient.recomendation.edit', compact('describtions', 'Recommendation'));
     }
     public function update(Request $request, $id)
     {

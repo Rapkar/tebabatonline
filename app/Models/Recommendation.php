@@ -10,6 +10,6 @@ class Recommendation extends Model
         'content'
     ];
     public function describtions(){
-        return $this->hasMany(Describtion::class);
+        return $this->belongsToMany(Describtion::class,'describtion_recommendation');
     }
 }
