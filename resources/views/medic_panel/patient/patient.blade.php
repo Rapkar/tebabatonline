@@ -345,7 +345,7 @@
         <tbody>
             <tr>
                 <th>تشخیص طبیب</th>
-                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#medicine">
+                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#problems">
                         افزودن تشخیص
                     </button></td>
             </tr>
@@ -416,6 +416,32 @@
                         افزودن توصیه
                     </button>
                 </td>
+                <td>
+                    <table class="w-100">
+                        <thead>
+                            <th>توصیه ها</th>
+                            <th>جزییات</th>
+                            <th>عملیات</th>
+                        </thead>
+                        <tbody id="recommendation">
+                            @foreach ($selected_recommendations as $item )
+                            <tr>
+                                <td>{{$item->content }}</td>
+                                <td><a href="#">نمایش</a></td>
+                                <td>
+                                    <form method="post" action="{{route("invisitrmdrecom")}}">
+                                        @csrf
+                                        <input type="hidden" name="recommendation_id" value="{{$item->id }}">
+                                        <input type="hidden" name="visit_id" value="{{$visit_id }}">
+                                        <button type="submit">حذف</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </td>
+        
             </tr>
 
             <tr>
@@ -436,7 +462,7 @@
 <!-- Button to trigger the modal -->
 
 
-<!-- The modal itself -->
+<!-- The modal medicine -->
 <div class="modal fade" id="medicine" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -458,6 +484,12 @@
                     <label class="col-lg-7">تعداد
                         <input name="productcount" type="number" min="1" value="1">
                     </label>
+                    <label class="col-lg-12 mt-3">
+                        <textarea class="w-100">
+
+                        </textarea>
+                    </label>
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -468,6 +500,7 @@
     </div>
 </div>
 
+<!-- The modal Recommendation -->
 <div class="modal fade" id="Recommendation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -481,7 +514,7 @@
                     <label class="col-lg-4">
                         توصیه
                         <select id="Recommendations" name="Recommendations">
-                            @foreach($Recommendations as $item)
+                            @foreach($recomendation as $item)
                             <option value="{{$item->id}}"> {{$item->content}}</option>
                             @endforeach
                         </select>
@@ -490,11 +523,54 @@
                         <select multiple attr-target="Recommendations" name="Recommendationsdes" class="w-100">
                         </select>
                     </label>
+                    <label class="col-lg-12 mt-3">
+                        <textarea class="w-100" name="recommendationdescribe">
+
+                        </textarea>
+                    </label>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">بستن</button>
-                <button type="button" id="addproducttopatient" class="btn btn-primary">افزودن توصیه</button>
+                <button type="button" id="addrecommendationtopatient" class="btn btn-primary">افزودن توصیه</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The modal problems -->
+<div class="modal fade" id="problems" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">لیست مشکلات</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row">
+                    @csrf
+                    <label class="col-lg-4">
+                        مشکل
+                        <select id="Recommendations" name="Recommendations">
+                            @foreach($problems as $item)
+                            <option value="{{$item->id}}"> {{$item->content}}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                    <label class="col-lg-8">
+                        <select multiple attr-target="Recommendations" name="Recommendationsdes" class="w-100">
+                        </select>
+                    </label>
+                    <label class="col-lg-12 mt-3">
+                        <textarea class="w-100" name="problemdescribe">
+
+                        </textarea>
+                    </label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">بستن</button>
+                <button type="button" id="addrecommendationtopatient" class="btn btn-primary">افزودن مشکل</button>
             </div>
         </div>
     </div>

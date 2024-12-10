@@ -7,10 +7,11 @@ use App\Models\Describtion;
 use App\Models\Recommendation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Controllers\MedicPanel\Helper\MedicHelper;
 class RecomendationController extends Controller
 {
 
+    use MedicHelper;
     protected function validator($request)
     {
         $data = $request->all();
@@ -21,28 +22,7 @@ class RecomendationController extends Controller
             'name.string' => __('admin.The name must be a string.'),
         ]);
     }
-    protected function validateType($type)
-    {
-        $title = '';
-        switch ($type) {
-            case 'recomendation':
-                $type = 'recomendation';
-                $title = "توصیه ها";
-                break;
-            case 'problems':
-                $type = 'problems';
-                $title = "مشکلات";
-                break;
-            case 'medicinerecomendation':
-                $type = 'medicinerecomendation';
-                $title = "توصیه های دارویی";
-                break;
-            default:
-                $type = 'recomendation';
-                break;
-        }
-        return ['type' => $type, 'title' => $title];
-    }
+
     public function index($type)
     {
 

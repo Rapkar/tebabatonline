@@ -124,8 +124,11 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
     Route::get('/removeproducttopatient/{visit_id}/{product_id}', [App\Http\Controllers\MedicPanel\PatientController::class, 'removeProductFromPatient'])
         ->middleware('auth')
         ->name('removeproducttopatient');
-Route::post('/getdescribtions', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'getdescribtions'])->middleware('auth')->name('getdescribtions');
+    Route::post('/getdescribtions', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'getdescribtions'])->middleware('auth')->name('getdescribtions');
+    Route::post('/setdescribtions', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'setdescribtions'])->middleware('auth')->name('setdescribtions');
 
+    //    remove descibtion from recommendation in visit page
+    Route::post('/visit/recommendation/describtion', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'invisitrmdrecom'])->middleware('auth')->name('invisitrmdrecom');
 });
 
 Route::get('/recommendation/{type}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'index'])->middleware('auth')->name('recommendation');

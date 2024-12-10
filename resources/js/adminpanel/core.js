@@ -323,14 +323,14 @@ $("#Recommendations").on("change", function () {
     success: function (data) {
       $('select[attr-target="Recommendations"]').empty();
       $('select[attr-target="Recommendations"]').html(data);
-      data=JSON.parse(data);
-  var t='';
-     if(data){
-      data.forEach((item)=>{
-        t +="<option value='"+item.id+"'>"+item.content+"</option>"
-      })
-     }
-     $('select[attr-target="Recommendations"]').html( t);
+      data = JSON.parse(data);
+      var t = '';
+      if (data) {
+        data.forEach((item) => {
+          t += "<option value='" + item.id + "'>" + item.content + "</option>"
+        })
+      }
+      $('select[attr-target="Recommendations"]').html(t);
     },
     error: function (data) {
       alert(data.responseText);
@@ -338,3 +338,29 @@ $("#Recommendations").on("change", function () {
     }
   });
 });
+$("#addrecommendationtopatient").on("click", function (e) {
+
+  e.preventDefault();
+  console.log( $('select[name="Recommendationsdes"]').val())
+  $.ajax({
+    type: 'post',
+    url: '/medicpanel/setdescribtions/',
+    data: {
+      'visit_id': $('input[name="visit_id"]').val(),
+      'recommendation_id': $('select[name="Recommendations"]').val(),
+      'Recommendationsdes': $('select[name="Recommendationsdes"]').val(),
+      '_token': $('input[name="_token"]').val()
+    },
+    success: function (data) {
+      console.log(data)
+      alert(data.message);
+      jquery(".btn-close").click();
+      $("#recommendation").empty();
+      $("#recommendation").append(data.data);
+    },
+    error: function (data) {
+      alert(data.responseText);
+
+    }
+  });
+})

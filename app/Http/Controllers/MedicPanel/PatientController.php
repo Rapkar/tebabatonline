@@ -8,34 +8,35 @@ use Illuminate\Http\Request;
 use App\Models\Visit;
 use Hekmatinasser\Verta\Verta;
 use  App\Models\Recommendation;
-
+use App\Http\Controllers\MedicPanel\Helper\MedicHelper;
 class PatientController extends Controller
 {
-
+    
+    use MedicHelper;
+    
     public function patient_examination($id)
     {
         // dd($id);
         $title = __("medic.Medic Page");
         $items = Visit::find($id);
         $selected_products = $items->products()->get();
-
-        // dd($selected_products);
-        // dd( $selected_products);
-        //  dd($items->created_at);
+        $selected_recommendations = $items->recommendations()->get();
+        $selected_descibtions = $items->descibtions()->get();
         $result = [];
-
-        // dd($item->content);
         $j_date = verta($items->created_at);
         $formattedDate = $j_date->format('Y/m/d H:i:s');
-        // or
         $formattedDate = $j_date->formatJalaliDateTime();
         $result[] = ['data' => json_decode($items->content), 'date' => $formattedDate, 'id' => $items->id];
-        // dd($result);
+        $visit_id=$items->id;
         $products = Product::all();
-        $Recommendations=[];
+        $Recommendations = [];
         $Recommendations = Recommendation::All();
 
-        return view('medic_panel.patient.patient', compact('title', 'result', 'products', 'selected_products', 'Recommendations'));
+        $recomendation = Recommendation::where('type', 'recomendation')->get();
+        $problems = Recommendation::where('type', 'problems')->get();
+        $medicinerecomendation = Recommendation::where('type', 'medicinerecomendation')->get();
+
+        return view('medic_panel.patient.patient', compact('title','visit_id','problems','recomendation','medicinerecomendation', 'result', 'products', 'selected_products', 'Recommendations', 'selected_recommendations', 'selected_descibtions'));
     }
     public function Totlaprice($relatedproducta)
     {
