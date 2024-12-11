@@ -9,34 +9,39 @@ use App\Models\Visit;
 use Hekmatinasser\Verta\Verta;
 use  App\Models\Recommendation;
 use App\Http\Controllers\MedicPanel\Helper\MedicHelper;
+
 class PatientController extends Controller
 {
-    
+
     use MedicHelper;
-    
+
     public function patient_examination($id)
     {
         // dd($id);
         $title = __("medic.Medic Page");
         $items = Visit::find($id);
-        $selected_products = $items->products()->get();
-        $selected_recommendations = $items->recommendations()->get();
-        $selected_descibtions = $items->descibtions()->get();
         $result = [];
+        $selected_recommendations = $items->recommendations()->where('type','recomendation')->withPivot('comment')->get();
+        $selected_problems = $items->recommendations()->where('type','problems')->withPivot('comment')->get();
+        $selected_descibtions = $items->descibtions()->get();
+        $selected_products = $items->products()->get();
+        // foreach($selected_products as $product){
+        //     dump($product->recommendation);
+        // }
         $j_date = verta($items->created_at);
         $formattedDate = $j_date->format('Y/m/d H:i:s');
         $formattedDate = $j_date->formatJalaliDateTime();
         $result[] = ['data' => json_decode($items->content), 'date' => $formattedDate, 'id' => $items->id];
-        $visit_id=$items->id;
-        $products = Product::all();
-        $Recommendations = [];
-        $Recommendations = Recommendation::All();
-
+        $medicinerecomendation = Recommendation::where('type', 'medicinerecomendation')->get();
         $recomendation = Recommendation::where('type', 'recomendation')->get();
         $problems = Recommendation::where('type', 'problems')->get();
-        $medicinerecomendation = Recommendation::where('type', 'medicinerecomendation')->get();
+        $Recommendations = Recommendation::All();
+        $visit_id = $items->id;
+        $products = Product::all();
+        // $Recommendations = [];
 
-        return view('medic_panel.patient.patient', compact('title','visit_id','problems','recomendation','medicinerecomendation', 'result', 'products', 'selected_products', 'Recommendations', 'selected_recommendations', 'selected_descibtions'));
+
+        return view('medic_panel.patient.patient', compact('title', 'visit_id', 'problems', 'recomendation', 'medicinerecomendation', 'result', 'products', 'selected_products', 'Recommendations', 'selected_recommendations', 'selected_problems','selected_descibtions'));
     }
     public function Totlaprice($relatedproducta)
     {

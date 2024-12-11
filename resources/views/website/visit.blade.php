@@ -209,7 +209,7 @@
                             کدام یک از مشکلات گوارشی زیر را دارید؟
                         </div>
                     </label>
-                    <div class="row radiobox ">
+                    <div class="row radiobox  justify-content-between ">
                         <label class="col-lg-5 radio">
                             نفخ
                             <input type="checkbox" value="نفخ" name="digestive_problems">
@@ -256,7 +256,7 @@
                         </label>
                         <label class="col-lg-6 radio">
                             1 یا 2 مرتبه
-                            <input type="checkbox" value=" 1 یا 2 مرتبه" name="bowel_movement">
+                            <input type="radio" value=" 1 یا 2 مرتبه" name="bowel_movement">
                         </label>
                         <label class="col-lg-6 radio">
                             کمتر از دو بار و گاهی هم روز در میان
@@ -419,7 +419,7 @@
                             رنگ پوست
                         </div>
                     </label>
-                    <div class="row radiobox ">
+                    <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             سفید
                             <input type="checkbox" value="سفید" name="color">
@@ -460,7 +460,7 @@
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" value="خیر" name="Numbness">
+                            <input type="radio" value="خیر" name="Numbness">
                         </label>
 
                         <textarea name="Numbness_des" placeholder="توضیحات بیشتر"></textarea>
@@ -664,7 +664,7 @@
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" value="خیر" name="Polydipsia">
+                            <input type="radio" value="خیر" name="Polydipsia">
                         </label>
 
                         <textarea name="Polydipsia_des" placeholder="توضیحات بیشتر"></textarea>
@@ -840,7 +840,7 @@
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input type="checkbox" value="خیر" name="hairy_body">
+                            <input type="radio" value="خیر" name="hairy_body">
                         </label>
 
                         <textarea name="hairy_body_des" placeholder="توضیحات بیشتر"></textarea>
@@ -1032,7 +1032,7 @@
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input value="خیر" type="checkbox" name="drooling_pillow">
+                            <input value="خیر" type="radio" name="drooling_pillow">
                         </label>
 
                         <textarea name="drooling_pillow_des" placeholder="توضیحات بیشتر"></textarea>

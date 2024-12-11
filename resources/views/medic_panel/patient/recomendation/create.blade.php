@@ -5,8 +5,17 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h1>افزودن {{$title}} جدید</h1>
+            
             <form action="{{ route('storeRecommendation') }}" method="post" enctype="multipart/form-data" class="row">
                 @csrf
+                @if($type=="medicinerecomendation")
+                توصیه مربوط به محصول :
+                <select name="product" >
+                    @foreach($products as $product)
+                        <option value="{{$product->id}}" >{{$product->name}}</option>
+                    @endforeach
+                </select>
+                @endif
                 <input type="hidden" name="type"value="{{$type}}">
                 <div class="form-group mb-4 col-lg-12">
                     <label for="body">محتوا:</label>

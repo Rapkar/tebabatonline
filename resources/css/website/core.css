@@ -1531,6 +1531,10 @@ h2.greentitle {
     margin: 0;
     min-width: 2rem;
     margin-left: 1rem;
+    position: absolute;
+    right: 5px;
+    height: 37px;
+    top: 2px;
 }
 
 .visit .radiobox textarea {
@@ -1575,7 +1579,8 @@ h2.greentitle {
 }
 
 .visit section button.next-button,
-.visit section button.prev-button {
+.visit section button.prev-button,
+.visit section button[type='submit'] {
     background: #017072;
     width: 100px;
     height: 45px;
@@ -1828,8 +1833,8 @@ table tr td {
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 2;
-    top: 1px;
-    bottom: 0;
+    top: 12px;
+
     left: auto;
     right: 10px;
     margin: auto;

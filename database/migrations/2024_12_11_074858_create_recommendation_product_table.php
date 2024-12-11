@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('visits', function (Blueprint $table) {
+        Schema::create('recommendation_product', function (Blueprint $table) {
             $table->id();
-            $table->longText('content');
-            $table->tinyInteger('completed')->default(0);
+            $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade'); // Reference to the product
+            $table->foreignId('recommendation_id')->references('id')->on('recommendations')->onDelete('cascade'); 
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('visits');
+        Schema::dropIfExists('recommendation_product');
     }
 };

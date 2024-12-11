@@ -8,6 +8,8 @@ use App\Models\Recommendation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\MedicPanel\Helper\MedicHelper;
+use App\Models\Product;
+
 class RecomendationController extends Controller
 {
 
@@ -34,8 +36,9 @@ class RecomendationController extends Controller
         $title = $this->validateType($type)['title'];
         $type = $this->validateType($type)['type'];
         $result = Recommendation::where('type', $type)->get();
+        $products = Product::all();
 
-        return view('medic_panel.patient.recomendation.create', compact('title', 'result', 'type'));
+        return view('medic_panel.patient.recomendation.create', compact('title', 'result', 'type', 'products'));
     }
     public function store(Request $request)
     {
@@ -46,9 +49,19 @@ class RecomendationController extends Controller
         $type = $request->input('type');
         $Recommendation->content = $request->input('content');
         $Recommendation->type =   $type;
+
         $Recommendation->save();
+        if ($type == "medicinerecomendation") {
+            $product = Product::find($request->input('product'));
+            // $Recommendation->product()->attach($product);
+            // dd($product->id);
+            // $Recommendation= $Recommendation->product;
+            // dd($Recommendation->product);
+            $Recommendation->product()->attach($product); 
+            $Recommendation->save();
+        }
         $result = Recommendation::where('type', $type)->get();
-        return redirect()->route('recommendation');
+        return redirect()->route('recommendation', $type);
     }
     public function show($id) {}
     public function edit($id)
@@ -59,7 +72,10 @@ class RecomendationController extends Controller
         $describtions = $Recommendation->describtions;
         // dd( $Recommendation, $describtions);
         // $Recommendation->delete();
-        return view('medic_panel.patient.recomendation.edit', compact('describtions', 'Recommendation'));
+        $products = Product::all();
+        $product_id = $Recommendation->product_id;
+        dd($Recommendation->product_id);
+        return view('medic_panel.patient.recomendation.edit', compact('describtions', 'product_id', 'products', 'Recommendation'));
     }
     public function update(Request $request, $id)
     {
@@ -70,8 +86,11 @@ class RecomendationController extends Controller
     }
     public function destroy($id)
     {
+
+
         $Recommendation = Recommendation::find($id);
+
         $Recommendation->delete();
-        return redirect()->route('recommendation');
+        return redirect()->back();
     }
 }

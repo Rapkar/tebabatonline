@@ -127,9 +127,6 @@
                     <a class="nav-link dropdown-toggle" href="#" aria-labelledby="posts" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>بیماران</a>
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="posts">
                         <a class="dropdown-item" href="{{ route('medicDashboard') }}">فرم های جدید</a>
-                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">سوابق ویزیت ها</a>
-                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">محاسبه قیمت دارو</a>
-                        <a class="dropdown-item" href="{{ route('medicDashboard') }}">واریزی ها </a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

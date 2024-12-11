@@ -10,9 +10,9 @@
         </thead>
         <tbody>
             <!-- Users list goes here -->
-
+            {{$date=""}}
             @foreach($result as $item)
-
+            {{$date=$item['date']}}
             <tr>
                 <th>نام</th>
                 <td> {{$item['data']->name}} </td>
@@ -340,7 +340,7 @@
 <hr>
 <hr>
 <div class="container-fluid position-relative " style="z-index:999">
-    <table class="w-100  table table-striped table-bordered table-rtl">
+    <table class="w-100  table table-striped table-bordered table-rtl hasbtnborder">
         <input type="hidden" value="{{$item['id']}}" name="visit_id">
         <tbody>
             <tr>
@@ -348,15 +348,85 @@
                 <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#problems">
                         افزودن تشخیص
                     </button></td>
+                <td class="w-100">
+                    <table class="w-100">
+                        <thead>
+                            <th>مشکلات</th>
+                            <th>دیدگاه</th>
+                            <th>توضیحات</th>
+                            <th>عملیات</th>
+                        </thead>
+                        <tbody id="problemsd">
+                            @foreach ($selected_problems as $item )
+                            <tr>
+                                <td>{{$item->content }}</td>
+                                <td>{{$item->pivot->comment }}</td>
+                                <td>
+                                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#Problems{{$item->id}}">
+                                        نمایش
+                                    </button>
+                                </td>
+
+                                <td>
+                                    <form method="post" action="{{route('invisitrmdrecom')}}">
+                                        @csrf
+                                        <input type="hidden" name="recommendation_id" value="{{$item->id }}">
+                                        <input type="hidden" name="visit_id" value="{{$visit_id }}">
+                                        <button class="btn btn-danger" type="submit">حذف</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </td>
             </tr>
+
             <tr>
-                <th>توصیه‌های اختصاصی</th>
-                <td><textarea></textarea></td>
+                <th> توصیه‌های درمانی</th>
+                <td>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Recommendation">
+                        افزودن توصیه
+                    </button>
+                </td>
+                <td>
+                    <table class="w-100">
+                        <thead>
+                            <th>توصیه ها</th>
+                            <th>دیدگاه</th>
+                            <th></th>
+                            <th>توضیحات</th>
+                            <th></th>
+                            <th>عملیات</th>
+                        </thead>
+                        <tbody id="recommendation">
+                            @foreach ($selected_recommendations as $item )
+                            <tr>
+                                <td>{{$item->content }}</td>
+                                <td>{{$item->pivot->comment }}</td>
+                                <td></td>
+                                <td>
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#Recommendation{{$item->id}}">
+                                        نمایش
+                                    </button>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <form method="post" action="{{route('invisitrmdrecom')}}">
+                                        @csrf
+                                        <input type="hidden" name="recommendation_id" value="{{$item->id }}">
+                                        <input type="hidden" name="visit_id" value="{{$visit_id }}">
+                                        <button class="btn btn-danger" type="submit">حذف</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </td>
+
             </tr>
-            <tr>
-                <th> مشکلاتی که دارید</th>
-                <td><textarea></textarea></td>
-            </tr>
+
             <tr>
                 <th> داروهای تجویزی</th>
                 <td>
@@ -367,9 +437,10 @@
                 <td class="w-100">
                     <table class="w-100">
                         <thead>
-                            <th>نام</th>
+                            <th>داروها</th>
                             <th>قیمت</th>
                             <th>تعداد</th>
+                            <th>توضیحات</th>
                             <th>قیمت کل</th>
                             <th>عملیات</th>
                         </thead>
@@ -381,9 +452,17 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$price=$item->price}} تومان</td>
                                 <td>{{$count=$item->pivot->count}} </td>
+                                <td>
+                                    @if(count($item->recommendation)>0 )
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#descibe{{$item->id}}">
+                                        نمایش
+                                    </button>
+                                    @endif
+
+                                </td>
                                 <td>{{$subtotal = $item->price * $item->pivot->count}}تومان </td>
                                 <td>
-                                    <a href="{{ route('removeproducttopatient', ['visit_id' => $item->pivot->visit_id, 'product_id' => $item->pivot->product_id]) }}">
+                                    <a class="btn btn-danger" href="{{ route('removeproducttopatient', ['visit_id' => $item->pivot->visit_id, 'product_id' => $item->pivot->product_id]) }}">
                                         حذف
                                     </a>
                                 </td>
@@ -400,94 +479,129 @@
                         </thead>
                         <tbody id="totalprice">
                             <tr>
-                                <td>{{ $total = collect($selected_products)->sum(function($item) {
-                return $item->price * $item->pivot->count;
-            }) }} تومان</td> <!-- Calculate total using collection -->
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <th> توصیه‌های درمانی</th>
-                <td>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Recommendation">
-                        افزودن توصیه
-                    </button>
-                </td>
-                <td>
-                    <table class="w-100">
-                        <thead>
-                            <th>توصیه ها</th>
-                            <th>جزییات</th>
-                            <th>عملیات</th>
-                        </thead>
-                        <tbody id="recommendation">
-                            @foreach ($selected_recommendations as $item )
-                            <tr>
-                                <td>{{$item->content }}</td>
-                                <td><a href="#">نمایش</a></td>
                                 <td>
-                                    <form method="post" action="{{route("invisitrmdrecom")}}">
-                                        @csrf
-                                        <input type="hidden" name="recommendation_id" value="{{$item->id }}">
-                                        <input type="hidden" name="visit_id" value="{{$visit_id }}">
-                                        <button type="submit">حذف</button>
-                                    </form>
-                                </td>
+                                    <p class="btn btn-success"> {{ $total = collect($selected_products)->sum(function($item) {
+                return $item->price * $item->pivot->count;
+            }) }} تومان</p>
+                                </td> <!-- Calculate total using collection -->
                             </tr>
-                            @endforeach
+
                         </tbody>
                     </table>
                 </td>
-        
-            </tr>
-
-            <tr>
-                <th> تاریخ ویزیت</th>
-                <td><textarea></textarea></td>
-                <th> نوبت بعدی ویزیت</th>
-                <td><textarea></textarea></td>
             </tr>
             <tr>
                 <th>تایید و ارسال</th>
-                <td><a href="#">ارسال نسخه</a></td>
+                <td><a class="btn btn-success" href="#">ارسال نسخه</a></td>
                 <th>ذخیره پیش نویس</th>
-                <td><a href="#">ذخیره نسخه</a></td>
+                <td><a class="btn btn-secondary" href="#">ذخیره نسخه</a></td>
             </tr>
         </tbody>
     </table>
 </div>
 <!-- Button to trigger the modal -->
+@foreach($selected_products as $item)
+@if(count($item->recommendation)>0 )
+<div class="modal fade" id="descibe{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @foreach($item->recommendation as $recom)
+                <li>{{ $recom->content}}</li>
+                @endforeach
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+@endforeach
 
+
+<!--recommendation  -->
+@foreach ($selected_recommendations as $item )
+
+<div class="modal fade" id="Recommendation{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+             
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @foreach($item->describtions as $des)
+                {{$des->content}}
+                @endforeach
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endforeach
+
+
+<!--problems  -->
+@foreach ($selected_problems as $item )
+
+<div class="modal fade" id="Problems{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+             
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @foreach($item->describtions as $des)
+                {{$des->content}}
+                @endforeach
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">بستن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endforeach
 
 <!-- The modal medicine -->
 <div class="modal fade" id="medicine" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">لیست محصولات</h5>
+            
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form class="row">
                     @csrf
-                    <label class="col-lg-3">
-                        نام محصول
-                        <select name="product">
+                    <label class="col-lg-6">نام محصول
+                        <select class="w-100" name="product">
                             @foreach($products as $product)
                             <option value="{{$product->id}}"> {{$product->name}}</option>
                             @endforeach
                         </select>
                     </label>
-                    <label class="col-lg-7">تعداد
-                        <input name="productcount" type="number" min="1" value="1">
+                    <label class="col-lg-6">تعداد
+                        <input class="w-100" name="productcount" type="number" min="1" value="1">
+                    </label>
+                    <label class="col-lg-12">
+                        توصیه
+                        <select class="w-100" id="Recommendationproduct" name="Recommendationproduct">
+                        </select>
                     </label>
                     <label class="col-lg-12 mt-3">
-                        <textarea class="w-100">
-
-                        </textarea>
+                        دیدگاه
+                        <textarea class="w-100" class="w-100"></textarea>
                     </label>
 
                 </form>
@@ -505,7 +619,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">لیست توصیه ها</h5>
+               
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -543,7 +657,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">لیست مشکلات</h5>
+               
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -551,26 +665,23 @@
                     @csrf
                     <label class="col-lg-4">
                         مشکل
-                        <select id="Recommendations" name="Recommendations">
+                        <select id="problems" name="problems">
                             @foreach($problems as $item)
                             <option value="{{$item->id}}"> {{$item->content}}</option>
                             @endforeach
                         </select>
                     </label>
                     <label class="col-lg-8">
-                        <select multiple attr-target="Recommendations" name="Recommendationsdes" class="w-100">
-                        </select>
+                        <select multiple attr-target="problemsdes" name="problemsdes" class="w-100"></select>
                     </label>
                     <label class="col-lg-12 mt-3">
-                        <textarea class="w-100" name="problemdescribe">
-
-                        </textarea>
+                        <textarea class="w-100" name="problemdescribe"></textarea>
                     </label>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">بستن</button>
-                <button type="button" id="addrecommendationtopatient" class="btn btn-primary">افزودن مشکل</button>
+                <button type="button" id="addproblemsrecommendationtopatient" class="btn btn-primary">افزودن مشکل</button>
             </div>
         </div>
     </div>

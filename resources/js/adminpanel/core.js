@@ -262,6 +262,7 @@ if (document.getElementById('status')) {
     });
   });
 }
+
 $("select[name='states']").on('change', function () {
   var state_id = $(this).val();
   $.ajax({
@@ -284,6 +285,9 @@ $("select[name='states']").on('change', function () {
     }
   });
 });
+
+
+
 
 // patient
 $("#addproducttopatient").on("click", function (e) {
@@ -312,6 +316,7 @@ $("#addproducttopatient").on("click", function (e) {
   });
 });
 
+// get recommendatio ajax
 $("#Recommendations").on("change", function () {
   $.ajax({
     type: 'post',
@@ -338,25 +343,136 @@ $("#Recommendations").on("change", function () {
     }
   });
 });
+
+
+// get problems ajax
+$("select#problems").on("change", function () {
+  $.ajax({
+    type: 'post',
+    url: '/medicpanel/getdescribtions/',
+    data: {
+      'recommendation_id': $('select[name="problems"]').val(),
+      '_token': $('input[name="_token"]').val()
+    },
+    success: function (data) {
+      console.log(data)
+      $('select[attr-target="problemsdes"]').empty();
+      $('select[attr-target="problemsdes"]').html(data);
+      data = JSON.parse(data);
+      var t = '';
+      if (data) {
+        data.forEach((item) => {
+          t += "<option value='" + item.id + "'>" + item.content + "</option>"
+        })
+      }
+      $('select[attr-target="problemsdes"]').html(t);
+    },
+    error: function (data) {
+      alert(data.responseText);
+
+    }
+  });
+});
+
+
+
+// get recommendatio ajax
+$("select[name='product']").on("change", function () {
+  $.ajax({
+    type: 'post',
+    url: '/medicpanel/getrecommendationproduct/',
+    data: {
+      'product_id': $('select[name="product"]').val(),
+      'visit_id': $('select[name="visit_id"]').val(),
+      '_token': $('input[name="_token"]').val()
+    },
+    success: function (data) {
+      $('select[attr-target="Recommendations"]').empty();
+      $('select[attr-target="Recommendations"]').html(data);
+      // data = JSON.parse(data);
+      console.log(data);
+      var t = '';
+      if (data) {
+        data.forEach((item) => {
+          t += "<option value='" + item.id + "'>" + item.content + "</option>"
+        })
+      }
+      $('select#Recommendationproduct').html(t);
+    },
+    error: function (data) {
+      alert(data.responseText);
+
+    }
+  });
+});
+
+
+
+
 $("#addrecommendationtopatient").on("click", function (e) {
 
   e.preventDefault();
-  console.log( $('select[name="Recommendationsdes"]').val())
+  console.log($('select[name="Recommendationsdes"]').val())
   $.ajax({
     type: 'post',
     url: '/medicpanel/setdescribtions/',
     data: {
       'visit_id': $('input[name="visit_id"]').val(),
+      'comment': $('textarea[name="recommendationdescribe"]').val(),
       'recommendation_id': $('select[name="Recommendations"]').val(),
       'Recommendationsdes': $('select[name="Recommendationsdes"]').val(),
       '_token': $('input[name="_token"]').val()
     },
     success: function (data) {
       console.log(data)
-      alert(data.message);
+      // data = JSON.parse(data);
+      var t = '';
+      // if (data) {
+      //   data.forEach((item) => {
+      //     t += "<tr value='" + item.id + "'>" + item.content + "</option>"
+      //   })
+      // }
+      $('select[attr-target="Recommendations"]').html(data.data);
       jquery(".btn-close").click();
       $("#recommendation").empty();
       $("#recommendation").append(data.data);
+    },
+    error: function (data) {
+      alert(data.responseText);
+
+    }
+  });
+})
+
+// problems
+
+$("#addproblemsrecommendationtopatient").on("click", function (e) {
+
+  e.preventDefault();
+  
+  $.ajax({
+    type: 'post',
+    url: '/medicpanel/setdescribtions/',
+    data: {
+      'visit_id': $('input[name="visit_id"]').val(),
+      'comment': $('textarea[name="problemdescribe"]').val(),
+      'recommendation_id': $('select[name="problems"]').val(),
+      'Recommendationsdes': $('select[name="problemsdes"]').val(),
+      '_token': $('input[name="_token"]').val()
+    },
+    success: function (data) {
+      console.log(data)
+      // data = JSON.parse(data);
+      var t = '';
+      // if (data) {
+      //   data.forEach((item) => {
+      //     t += "<tr value='" + item.id + "'>" + item.content + "</option>"
+      //   })
+      // }
+      // $('select[attr-target="Recommendations"]').html(data.data);
+      jquery(".btn-close").click();
+      $("#problemsd").empty();
+      $("#problemsd").append(data.data);
     },
     error: function (data) {
       alert(data.responseText);

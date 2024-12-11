@@ -12,4 +12,7 @@ class Recommendation extends Model
     public function describtions(){
         return $this->belongsToMany(Describtion::class,'describtion_recommendation');
     }
+    public function product(){
+        return $this->belongsToMany(Product::class,'recommendation_product');
+    }
 }

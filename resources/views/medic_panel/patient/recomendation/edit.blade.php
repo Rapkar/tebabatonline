@@ -7,7 +7,15 @@
             <h1>اصلاح توصیه </h1>
             <form action="{{ route('updateRecommendation',$Recommendation->id) }}" method="post" enctype="multipart/form-data" class="row">
                 @csrf
+                @if($Recommendation->type=="medicinerecomendation")
+                توصیه مربوط به محصول :
+                <select name="product" >
+                    @foreach($products as $product)
+                        <option value="{{ $product->id }}" {{$product_id}}{{ $product_id == $product->id ? 'selected' : '' }}>{{ $product->name }}</option>
 
+                        @endforeach
+                </select>
+                @endif
                 <div class="form-group mb-4 col-lg-12">
                     <label for="body">محتوا:</label>
                     <textarea rows="5" cols="40" class="w-100" id="content" value="{{ $Recommendation->content}}" name="content">{{ $Recommendation->content}}</textarea>
@@ -21,6 +29,7 @@
         </div>
     </div>
 </div>
+@if($Recommendation->type!="medicinerecomendation")
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -44,7 +53,6 @@
     <table class="table table-striped table-bordered table-rtl">
         <thead>
             <tr>
-                <th>شماره</th>
                 <th>توضیح</th>
                 <th>عملیات</th>
             </tr>
@@ -55,11 +63,9 @@
             @foreach($describtions as $item)
 
             <tr>
-                <td>{{ $item->id  }}</td>
                 <td> {{ substr($item->content,0,50)}} </td>
                 <td>
-                    <a href="{{route('editRecommendation',$item->id)}}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> بررسی </a>
-                    <a href="{{ route('deleteRecommendation',$item->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="حذف"> حذف </a>
+                    <a href="{{ route('deleteDescribtion',$item->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="حذف"> حذف </a>
                 </td>
             </tr>
             @endforeach
@@ -68,4 +74,5 @@
         </tbody>
     </table>
 </div>
+@endif
 @endsection

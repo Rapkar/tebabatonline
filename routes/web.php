@@ -124,7 +124,17 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
     Route::get('/removeproducttopatient/{visit_id}/{product_id}', [App\Http\Controllers\MedicPanel\PatientController::class, 'removeProductFromPatient'])
         ->middleware('auth')
         ->name('removeproducttopatient');
+
+
+    //    get descibtion from recommendation  ajax
     Route::post('/getdescribtions', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'getdescribtions'])->middleware('auth')->name('getdescribtions');
+
+
+    //    get descibtion from recommendation  ajax
+    Route::post('/getrecommendationproduct', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'getrecommendationproduct'])->middleware('auth')->name('getrecommendationproduct');
+
+
+    //    set descibtion & recommendation  in visit page
     Route::post('/setdescribtions', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'setdescribtions'])->middleware('auth')->name('setdescribtions');
 
     //    remove descibtion from recommendation in visit page
@@ -216,3 +226,8 @@ Route::get('/migrate', function () {
     // return "Migrations completed successfully.";
 
 });
+
+Route::get('/caches/clear', function () {
+    Artisan::call('route:cache');
+    dd('route cache removed');
+})->name('routecache');

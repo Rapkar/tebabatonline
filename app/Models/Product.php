@@ -35,7 +35,9 @@ class Product extends Model
     {
         $this->update(['quantity' => $newQuantity]);
     }
-
+    public function recommendation(){
+        return $this->belongsToMany(Recommendation::class,'recommendation_product');
+    }
     public function isInStock()
     {
         return $this->quantity > 0;

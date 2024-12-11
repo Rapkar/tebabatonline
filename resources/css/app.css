@@ -223,3 +223,21 @@ a.navbar-brand {
 .patient-img{
     width: 300px;
 }
+.hasbtnborder > tbody > tr{
+    border-bottom:5px solid #7000F73B;
+    padding: 15px;
+}
+.hasbtnborder   button,.hasbtnborder   a
+{
+    min-width: 150px;
+}
+.hasbtnborder  th{
+    min-width: 150px;
+}
+#totalprice p{
+    white-space: nowrap;
+}
+#products tr:nth-child(odd) {
+    background-color: #7575754a;
+    color: #000;
+  }
