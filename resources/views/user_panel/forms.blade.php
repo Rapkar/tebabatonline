@@ -11,7 +11,7 @@
                             <h2>{{ Auth::user()->name }}</h2>
                             <p>{{ Auth::user()->phone }}</p>
                         </td>
-                        <td><img src="{{ asset('images/edit.svg') }}"></td>
+                        <td><a href="{{route('editprofile',Auth::user()->id)}}"><img src="{{ asset('images/edit.svg') }}"></a></td>
                     </tr>
                     <tr>
                         <td><a href="">سفارش ها</a></td>
@@ -55,7 +55,7 @@
                         <li class="col-lg-3">
                             <div>
                                 <img src="{{ asset('images/calender.svg') }}">
-                                <p>{{$item['data']->name}}<br>{{$item['date']}}</p>
+                                <p>{{$item['data']->name}}<br>{{$item['date']}}=={{$item['completed']}}</p>
                             </div>
                         </li>
                         @endforeach
@@ -65,7 +65,7 @@
                     <ul class="row vistiitems">
 
                         @foreach($result as $t=>$item)
-                        <li class="col-lg-3">
+                        <li class="col-lg-3  @if($item['completed'] == 1) completed @endif ">
                             <div>
                                 <img src="{{ asset('images/calender.svg') }}">
                                 <p>{{$item['data']->name}}<br>{{$item['date']}}</p>
@@ -79,4 +79,4 @@
     </div>
 </div>
 
-        @endsection
+@endsection

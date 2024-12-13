@@ -237,80 +237,80 @@
             <tr>
                 <th>اگر خواب آرامش بخشی ندارید، چه مشکلی در خواب‌تون دارید؟
                 </th>
-                <td> {{$item['data']->sleep_problem}} </td>
-                <td> {{$item['data']->sleep_problem_des}} </td>
+                <td> {{$item['data']->sleep_problem ?? 'وارد نشده' }} </td>
+                <td> {{$item['data']->sleep_problem_des ?? 'وارد نشده'  }} </td>
             </tr>
             <tr>
                 <th>آیا آب دهان‌تان زیاد است؟
                 </th>
-                <td> {{$item['data']->drooling}} </td>
-                <td> {{$item['data']->drooling_des}} </td>
+                <td> {{$item['data']->drooling ?? 'وارد نشده'  }} </td>
+                <td> {{$item['data']->drooling_des ?? 'وارد نشده'  }} </td>
             </tr>
             <tr>
                 <th>آیا موقع خواب آب دهان‌تان روی بالشت می‌ریزد؟
                 </th>
-                <td> {{$item['data']->drooling_pillow}} </td>
-                <td> {{$item['data']->drooling_pillow_des}} </td>
+                <td> {{$item['data']->drooling_pillow ?? 'وارد نشده'  }} </td>
+                <td> {{$item['data']->drooling_pillow_des ?? 'وارد نشده'  }} </td>
             </tr>
             <tr>
                 <th> آیا آب دهان‌تان لزج و چسبنده است؟
                 </th>
-                <td> {{$item['data']->drooling_slimy}} </td>
-                <td> {{$item['data']->drooling_slimy_des}} </td>
+                <td> {{$item['data']->drooling_slimy ?? 'وارد نشده'  }} </td>
+                <td> {{$item['data']->drooling_slimy_des ?? 'وارد نشده'  }} </td>
             </tr>
             <tr>
                 <th> آیا خلط داخل گلو دارید؟
                 </th>
-                <td> {{$item['data']->sputum}} </td>
-                <td> {{$item['data']->sputum_des}} </td>
+                <td> {{$item['data']->sputum ?? 'وارد نشده'  }} </td>
+                <td> {{$item['data']->sputum_des ?? 'وارد نشده'  }} </td>
             </tr>
             <tr>
                 <th>آیا انگشتان دست و پایتان سرد یا یخ است؟
                 </th>
-                <td> {{$item['data']->coldhand}} </td>
-                <td> {{$item['data']->coldhand_des}} </td>
+                <td> {{$item['data']->coldhand ?? 'وارد نشده'  }} </td>
+                <td> {{$item['data']->coldhand_des ?? 'وارد نشده'  }} </td>
             </tr>
             <tr>
                 <th>آیا در هوای سرد اذیت می‌شوید و تحمل هوای سرد رو ندارید و بیشتر عاشق هوای گرم هستید؟
                 </th>
-                <td> {{$item['data']->love_he_heat}} </td>
-                <td> {{$item['data']->love_the_heat}} </td>
+                <td> {{$item['data']->love_he_heat ?? 'وارد نشده'  }} </td>
+                <td> {{$item['data']->love_the_heat ?? 'وارد نشده'  }} </td>
             </tr>
             <tr>
                 <th>آیا مقدار ادرارتان در طول روز زیاد هست؟
                 </th>
-                <td> {{$item['data']->urine}} </td>
-                <td> {{$item['data']->urine_des}} </td>
+                <td> {{$item['data']->urine ?? 'وارد نشده' }} </td>
+                <td> {{$item['data']->urine_des ?? 'وارد نشده'}} </td>
             </tr>
             <tr>
                 <th>اگر بلند می‌شوید چند نوبت؟
                 </th>
-                <td> {{$item['data']->wake_count_des}} </td>
+                <td> {{$item['data']->wake_count_des ?? 'وارد نشده' }} </td>
             </tr>
             <tr>
                 <th>آیا برنامه عادت ماهیانه منظم دارید یا خیر؟
                 </th>
-                <td> {{$item['data']->menstruation}} </td>
-                <td> {{$item['data']->menstruation_des}} </td>
+                <td> {{$item['data']->menstruation ?? 'وارد نشده' }} </td>
+                <td> {{$item['data']->menstruation_des ?? 'وارد نشده' }} </td>
             </tr>
             <tr>
                 <th> عادت ماهیانه نامنظمی دارد، لطفاً دقیق بفرمایید چه مشکلی دارید؟ آیا دیر به دیر و با تأخیر اتفاق می‌افتد و یا زود به زود و یا لکه بینی دارد؟
 
                 </th>
-                <td> {{$item['data']->menstruation}} </td>
-                <td> {{$item['data']->menstruation_des}} </td>
+                <td> {{$item['data']->menstruation ?? 'وارد نشده' }} </td>
+                <td> {{$item['data']->menstruation_des ?? 'وارد نشده' }} </td>
             </tr>
             <tr>
                 <th>ترشحات یا عفونت زنانگی هم دارید یا خیر؟
                 </th>
-                <td> {{$item['data']->Feminine_secretions}} </td>
-                <td> {{$item['data']->Feminine_secretions_des}} </td>
+                <td> {{$item['data']->Feminine_secretions ?? 'وارد نشده' }} </td>
+                <td> {{$item['data']->Feminine_secretions_des ?? 'وارد نشده' }} </td>
             </tr>
             <tr>
                 <th> از لحاظ مسایل جنسی میل کافی در بدن‌تون وجود دارد یا خیر، آدم سرد مزاجی هستید؟
                 </th>
-                <td> {{$item['data']->cold_temper}} </td>
-                <td> {{$item['data']->cold_temper_des}} </td>
+                <td> {{$item['data']->cold_temper ?? 'وارد نشده' }} </td>
+                <td> {{$item['data']->cold_temper_des ?? 'وارد نشده' }} </td>
             </tr>
             <tr>
                 <th> مدارک پزشکی
@@ -322,7 +322,7 @@
             <tr>
                 <th> توضیحات
                 </th>
-                <td> {{$item['data']->comment}} </td>
+                <td> {{$item['data']->comment ?? 'وارد نشده'}} </td>
             </tr>
             <tr>
                 <th>عملیات</th>
@@ -362,7 +362,7 @@
                                 <td>{{$item->content }}</td>
                                 <td>{{$item->pivot->comment }}</td>
                                 <td>
-                                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#Problems{{$item->id}}">
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#Problems{{$item->id}}">
                                         نمایش
                                     </button>
                                 </td>
@@ -492,9 +492,22 @@
             </tr>
             <tr>
                 <th>تایید و ارسال</th>
-                <td><a class="btn btn-success" href="#">ارسال نسخه</a></td>
+                <td>
+                    <form method="post" action="{{route('completevisit')}}">
+                        @csrf
+                        <input type="hidden" name="visit_id" value="{{$visit_id }}" >
+                        <button type="submit" class="btn btn-success" href="#">ارسال نسخه</a>
+                    </form>
+                </td>
                 <th>ذخیره پیش نویس</th>
-                <td><a class="btn btn-secondary" href="#">ذخیره نسخه</a></td>
+                <td>
+                    
+                <form method="post" action="{{route('uncompletevisit')}}">
+                        @csrf
+                        <input type="hidden" name="visit_id" value="{{$visit_id }}" >
+                        <button type="submit" class="btn btn-secondary" href="#">ذخیره نسخه</a>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -506,7 +519,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -531,7 +544,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-             
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -556,7 +569,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-             
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -578,7 +591,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -619,7 +632,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -657,7 +670,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-               
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -686,4 +699,7 @@
         </div>
     </div>
 </div>
+
+
+
 @endsection

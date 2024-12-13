@@ -19,44 +19,19 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-bell"></i>
-                    <span class="badge bg-danger rounded-pill">3</span>
+                    <span class="badge bg-danger rounded-pill">{{count($notifications)}}</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li>
-                        <a class="dropdown-item" href="#">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>John Doe</strong> sent you a message
-                                </div>
-                                <small class="text-muted">2 minutes ago</small>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>Jane Smith</strong> has joined the chat
-                                </div>
-                                <small class="text-muted">5 minutes ago</small>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>Bob Johnson</strong> has left the chat
-                                </div>
-                                <small class="text-muted">10 minutes ago</small>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-menu-item" href="#">Clear all notifications</a></li>
-                </ul>
+                @if($notifications->isNotEmpty())
+                    <ul class="dropdown-menu dropdown-menu-end px-4 py-3" aria-labelledby="navbarDropdown">
+                        @foreach (notifications as $notification)
+                        <li class="mb-2">
+                          <a href="{{route('patient_examination',$notification->data['visit_id'])}}">  {{ $notification->data['message'] }} - {{ $notification->created_at->diffForHumans() }}</a>
+                        </li>
+                        @endforeach
+                    </ul>
+                @endif
+
+              
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">

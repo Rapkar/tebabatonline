@@ -57,7 +57,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-    public function visits(){
-        return $this->belongsToMany(Visit::class,'visit_user');
+    public function visits()
+    {
+        return $this->belongsToMany(Visit::class, 'visit_user');
+    }
+    public function usermetas()
+    {
+        return $this->hasOne(UserMeta::class, 'user_id');
     }
 }

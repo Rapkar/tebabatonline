@@ -46,7 +46,7 @@
 
                         <label class="col-lg-6">
                             نام خانوادگی
-                            <input type='text' placeholder="نام خانوادگی" name="family">
+                            <input type='text' placeholder="نام خانوادگی" name="family" value="{{ Auth::user()->usermetas->lastname }}">
                         </label>
                     </div>
 
@@ -56,16 +56,18 @@
                         <label class="col-lg-6">
                             استان وشهرستان
                             <select name="states" class="text-center">
+
                                 @foreach($states as $state)
-                                <option value="{{$state->id}}">{{$state->name}}</option>
+
+                                <option value="{{$state->id}}" {{ (Auth::user()->usermetas && Auth::user()->usermetas->state == $state->id) ? 'selected=true' : '' }}>{{$state->name}}</option>
                                 @endforeach
                             </select>
                         </label>
 
                         <label class="col-lg-6">
                             شهر
-                            <select name="cities" class="text-center">
-                                <option>لطفا یک استان را انتخاب کنید</option>
+                            <select name="cities" class="text-center" value="{{ Auth::user()->usermetas->city }}">
+                                <option>{{ Auth::user()->usermetas->city }}</option>
                             </select>
                         </label>
                     </div>
@@ -88,7 +90,7 @@
                     <div class="row">
                         <label class="col-lg-12">
                             شغل و فعالیت روزانه
-                            <input type='text' placeholder="معلم هستم متوسط" name="jobs">
+                            <input type='text' placeholder="معلم هستم متوسط" name="jobs" value="{{ Auth::user()->usermetas->job }}">
                         </label>
 
                     </div>
@@ -98,7 +100,7 @@
                     <div class="row">
                         <label class="col-lg-12">
                             وزن
-                            <input type='number' placeholder="72" min="10" dir="ltr" name="weight">
+                            <input type='number' placeholder="72" min="10" dir="ltr" name="weight" value="{{ Auth::user()->usermetas->height }}">
                         </label>
 
                     </div>
@@ -125,10 +127,10 @@
 
                         <label class="col-lg-6">
                             وضعیت تاهل
-                            <select name="relationship">
-                                <option value="مجرد">مجرد</option>
-                                <option value="متاهل">متاهل</option>
-                                <option value="مطلقه">مطلقه</option>
+                            <select name="relationship" class="text-center" value="{{ Auth::user()->usermetas->relationship }}">
+                                <option value="متاهل" {{ (Auth::user()->usermetas && Auth::user()->usermetas->relationship == 'متاهل') ? 'selected=true' : '' }}>متاهل</option>
+                                <option value="مجرد" {{ (Auth::user()->usermetas && Auth::user()->usermetas->relationship == 'مجرد') ? 'selected=true' : '' }}>مجرد</option>
+                                <option value="متارکه" {{ (Auth::user()->usermetas && Auth::user()->usermetas->relationship == 'متارکه') ? 'selected=true' : '' }}>متارکه</option>
                             </select>
                         </label>
                     </div>
@@ -185,8 +187,7 @@
                         <label class="col-lg-12">
                             <div class="titlebox">
                                 <audio attr-c="2" preload="none">
-                                    <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                    <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                    <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/1.mp3">
                                     کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                                 </audio>
                                 <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -201,7 +202,6 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
                                 <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
@@ -241,8 +241,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/3.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -278,8 +277,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/4.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -303,8 +301,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/5.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -328,8 +325,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/6.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -354,8 +350,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/7.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -379,8 +374,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/8.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -411,8 +405,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/9.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -445,8 +438,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/10.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -471,8 +463,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/11.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -496,8 +487,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/12.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -507,11 +497,11 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بلی
-                            <input type="radio" value="بلی"  name="itching">
+                            <input type="radio" value="بلی" name="itching">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
-                            <input type="radio" value="خیر"  name="itching">
+                            <input type="radio" value="خیر" name="itching">
                         </label>
 
                         <textarea name="itching_des" placeholder="توضیحات بیشتر"></textarea>
@@ -521,8 +511,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/13.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -541,8 +530,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/14.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -566,8 +554,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/15.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -592,8 +579,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/16.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -625,8 +611,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/17.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -649,8 +634,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/18.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -675,8 +659,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/19.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -707,8 +690,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/20.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -725,15 +707,14 @@
                             <input type="radio" value="خیر" name="sweating">
                         </label>
 
-                        <textarea  name="sweating_des" placeholder="توضیحات بیشتر"></textarea>
+                        <textarea name="sweating_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/21.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -759,8 +740,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/22.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -772,7 +752,7 @@
                         <label class="col-lg-12 radio">
                             بله، زود از کوره در میروم و زود هم آرام میشم و همه چیز رو سریع فراموش می‌کنم
                             <input type="radio" value="بله، زود از کوره در میروم و زود هم آرام میشم و همه چیز رو سریع فراموش می‌کنم
-"  name="angry">
+" name="angry">
                         </label>
                         <label class="col-lg-6 radio">
                             بله، زود عصبانی میشم، اما سریع آروم نمیشم و مدتی طول می‌کشه تا عصبانیتم فروکش کنه
@@ -801,8 +781,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/23.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -825,8 +804,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/24.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -851,8 +829,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/25.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -875,8 +852,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/26.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -900,8 +876,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/27.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -935,8 +910,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/28.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -960,8 +934,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/29.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -993,8 +966,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/30.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1017,8 +989,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/31.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1043,8 +1014,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/32.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1067,8 +1037,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/33.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1092,8 +1061,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/34.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1127,8 +1095,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/35.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1139,7 +1106,7 @@
                     <div class="row radiobox justify-content-between ">
                         <label class="col-lg-5 radio">
                             بله
-                            <input value="بله"  type="radio" name="love_he_heat">
+                            <input value="بله" type="radio" name="love_he_heat">
                         </label>
                         <label class="col-lg-5 radio">
                             خیر
@@ -1152,8 +1119,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/36.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1173,12 +1139,35 @@
                         <textarea name="urine_des" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    <label class="col-lg-12">
+                        <div class="titlebox">
+                            <audio attr-c="2" preload="none">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/37.mp3">
+                                کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
+                            </audio>
+                            <button class="play-button play" attr-c="2"> <span class="play"></span></button>
+                            آیا شب‌ها برای ادرار از خواب بلند می‌شوید؟ (برای سرویس رفتن)
+
+                        </div>
+                    </label>
+                    <div class="row radiobox justify-content-between ">
+                        <label class="col-lg-5 radio">
+                            بله
+                            <input value="بله" type="radio" name="weekupurine">
+                        </label>
+                        <label class="col-lg-5 radio">
+                            خیر
+                            <input value="خیر" type="radio" name="weekupurine">
+                        </label>
+                        <textarea name="weekupurine_des" placeholder="توضیحات بیشتر"></textarea>
+                    </div>
+                </div>
                 <div class="col-lg-12">
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/38.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1204,8 +1193,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/39.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1228,8 +1216,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/40.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1243,7 +1230,7 @@
                         </label>
                         <label class="col-lg-6 radio">
                             خیر
-                            <input value="خیر" type="checkbox" name="menstruation_problem" >
+                            <input value="خیر" type="checkbox" name="menstruation_problem">
                         </label>
 
                         <textarea name="menstruation_des" placeholder="توضیحات بیشتر"></textarea>
@@ -1254,8 +1241,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/41.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1278,8 +1264,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/42.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1307,8 +1292,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/43.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1332,8 +1316,7 @@
                     <label class="col-lg-12">
                         <div class="titlebox">
                             <audio attr-c="2" preload="none">
-                                <source type="audio/wav" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.wav">
-                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/2.mp3">
+                                <source type="audio/mpeg" src="https://tebabat-online.ir/wp-content/uploads/visit_form/44.mp3">
                                 کاربر عزیز! مرورگر شما از این فایل صوتی پشتیبانی نمی کند.
                             </audio>
                             <button class="play-button play" attr-c="2"> <span class="play"></span></button>
@@ -1349,7 +1332,7 @@
 
 
 
-                <div class="col-lg-12"><button type="submit"  class=" ">ثبت</button> <button class="prev-button">قبلی</button></div>
+                <div class="col-lg-12"><button type="submit" class=" ">ثبت</button> <button class="prev-button">قبلی</button></div>
 
             </div>
         </section>

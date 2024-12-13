@@ -9,6 +9,7 @@ use App\Models\Visit;
 use Hekmatinasser\Verta\Verta;
 use  App\Models\Recommendation;
 use App\Http\Controllers\MedicPanel\Helper\MedicHelper;
+use Illuminate\Support\Facades\Auth;
 
 class PatientController extends Controller
 {
@@ -21,8 +22,8 @@ class PatientController extends Controller
         $title = __("medic.Medic Page");
         $items = Visit::find($id);
         $result = [];
-        $selected_recommendations = $items->recommendations()->where('type','recomendation')->withPivot('comment')->get();
-        $selected_problems = $items->recommendations()->where('type','problems')->withPivot('comment')->get();
+        $selected_recommendations = $items->recommendations()->where('type', 'recomendation')->withPivot('comment')->get();
+        $selected_problems = $items->recommendations()->where('type', 'problems')->withPivot('comment')->get();
         $selected_descibtions = $items->descibtions()->get();
         $selected_products = $items->products()->get();
         // foreach($selected_products as $product){
@@ -41,7 +42,12 @@ class PatientController extends Controller
         // $Recommendations = [];
 
 
-        return view('medic_panel.patient.patient', compact('title', 'visit_id', 'problems', 'recomendation', 'medicinerecomendation', 'result', 'products', 'selected_products', 'Recommendations', 'selected_recommendations', 'selected_problems','selected_descibtions'));
+        $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
+        foreach ($notifications as $notification) {
+            $notification->markAsRead();
+        }
+
+        return view('medic_panel.patient.patient', compact('title', 'visit_id', 'problems',  'recomendation', 'medicinerecomendation', 'result', 'products', 'selected_products', 'Recommendations', 'selected_recommendations', 'selected_problems', 'selected_descibtions'))->with('notifications', $notifications);
     }
     public function Totlaprice($relatedproducta)
     {

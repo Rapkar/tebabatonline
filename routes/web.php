@@ -139,6 +139,12 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
 
     //    remove descibtion from recommendation in visit page
     Route::post('/visit/recommendation/describtion', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'invisitrmdrecom'])->middleware('auth')->name('invisitrmdrecom');
+
+    //    completevisit in visit page by admin 
+    Route::post('/completevisit', [App\Http\Controllers\MedicPanel\VisitControllr::class, 'completevisit'])->middleware('auth')->name('completevisit');
+
+    //    uncompletevisit in visit page by admin 
+    Route::post('/uncompletevisit', [App\Http\Controllers\MedicPanel\VisitControllr::class, 'uncompletevisit'])->middleware('auth')->name('uncompletevisit');
 });
 
 Route::get('/recommendation/{type}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'index'])->middleware('auth')->name('recommendation');
@@ -168,7 +174,7 @@ Route::get('products/{slug}', [App\Http\Controllers\Website\home::class, 'produc
 Route::post('addtocart/{id}', [App\Http\Controllers\UserPanel\CartController::class, 'addproduct'])->name('addtocart');
 Route::post('removefromcart/{cartid}/{productid}', [App\Http\Controllers\UserPanel\CartController::class, 'removefromcart'])->name('removefromcart');
 Route::get('shop', [App\Http\Controllers\Website\home::class, 'shop'])->name('shop');
-Route::get('visit', [App\Http\Controllers\Website\home::class, 'visit'])->name('visit');
+
 Route::get('diseases-based-on-body-parts', [App\Http\Controllers\Website\home::class, 'diseases'])->name('diseases');
 
 
@@ -181,7 +187,12 @@ Route::prefix('userpanel')->middleware([UserMiddleware::class])->group(function 
     Route::get('/payment', [App\Http\Controllers\UserPanel\PaymentController::class, 'payment'])->name('payment');
     Route::post('/storecomment', [App\Http\Controllers\Website\CommentController::class, 'storecomment'])->middleware('auth')->name('storecomment');
     Route::post('/storevisit', [App\Http\Controllers\UserPanel\VisitControllr::class, 'storevisit'])->middleware('auth')->name('storevisit');
-    Route::get('/forms', [App\Http\Controllers\UserPanel\VisitControllr::class, 'forms'])->middleware('auth')->name('forms');
+    Route::get('/forms', [App\Http\Controllers\UserPanel\VisitControllr::class, 'forms'])->name('forms');
+    Route::get('/edit/user/{id}', [App\Http\Controllers\UserPanel\UserPanelController::class, 'editprofile'])->middleware('auth')->name('editprofile');
+
+    Route::get('visit', [App\Http\Controllers\Website\home::class, 'visit'])->name('visit');
+    //profile mangment
+    Route::post('/profile/update', [App\Http\Controllers\UserPanel\UserPanelController::class, 'updateprofile'])->middleware('auth')->name('updateprofile');
 });
 
 Route::post('/send-message{friend}', [App\Http\Controllers\ChatController::class, 'sendMessage'])->middleware('auth')->name('sendmessage');

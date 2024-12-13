@@ -11,7 +11,7 @@
                         <h2>{{ Auth::user()->name }}</h2>
                         <p>{{ Auth::user()->phone }}</p>
                     </td>
-                    <td><img src="{{ asset('images/edit.svg') }}"></td>
+                    <td><a href="{{route('editprofile',Auth::user()->id)}}"><img src="{{ asset('images/edit.svg') }}"></a></td>
                 </tr>
                 <tr>
                     <td><a href="">سفارش ها</a></td>

@@ -37,7 +37,7 @@ import 'lightbox2/dist/js/lightbox';
 import jquery from 'jquery';
 import { parse } from '@fortawesome/fontawesome-svg-core';
 
-
+import Echo from 'laravel-echo';
 
 $("#access").on("change", function () {
   $.ajax({
@@ -409,6 +409,7 @@ $("select[name='product']").on("change", function () {
 
 
 
+
 $("#addrecommendationtopatient").on("click", function (e) {
 
   e.preventDefault();
@@ -449,7 +450,7 @@ $("#addrecommendationtopatient").on("click", function (e) {
 $("#addproblemsrecommendationtopatient").on("click", function (e) {
 
   e.preventDefault();
-  
+
   $.ajax({
     type: 'post',
     url: '/medicpanel/setdescribtions/',
@@ -480,3 +481,8 @@ $("#addproblemsrecommendationtopatient").on("click", function (e) {
     }
   });
 })
+Echo.channel('channel-visit') // Assuming User 2 is subscribed to this channel
+  .notification((notification) => {
+    console.log(notification.message);
+    // Display notification in your UI as needed
+  });

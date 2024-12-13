@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\User;
 use Hekmatinasser\Verta\Verta;
+use App\Notifications\VisitNotification;
 
 class VisitControllr extends Controller
 {
@@ -20,9 +22,18 @@ class VisitControllr extends Controller
         // dd($data);
         if ($Visit->save()) {
             auth()->user()->visits()->attach($Visit);
+            $medicuserss = User::whereHas('roles', function ($query) {
+                $query->whereIn('name', ['Medic', 'Admin']);
+            })->get();
+    
+            foreach ($medicuserss as $user) {
+    
+                $user->notify(new VisitNotification( $user,$Visit->id ));
+            }
+    
+
             return redirect()->route('forms'); // redirect to the users index page
 
-        } else {
         }
     }
     public function forms()
@@ -55,7 +66,7 @@ class VisitControllr extends Controller
             $formattedDate = $j_date->format('Y/m/d H:i:s');
             // or
             $formattedDate = $j_date->formatJalaliDateTime();
-            $result[] = ['data' => json_decode($item->content), 'date' => $formattedDate];
+            $result[] = ['data' => json_decode($item->content), 'date' => $formattedDate,'completed'=>$item->completed];
         }
 
         return view('user_panel.forms', compact('title', 'products', 'cart', 'orderitems', 'result'));
