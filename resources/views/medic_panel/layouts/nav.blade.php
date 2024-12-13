@@ -19,19 +19,23 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-bell"></i>
-                    <span class="badge bg-danger rounded-pill">{{count($notifications)}}</span>
+                    <span class="badge bg-danger rounded-pill">
+                        @if(is_array($notifications))
+                        {{count($notifications)}}
+                        @endif
+                    </span>
                 </a>
-                @if($notifications->isNotEmpty())
-                    <ul class="dropdown-menu dropdown-menu-end px-4 py-3" aria-labelledby="navbarDropdown">
-                        @foreach (notifications as $notification)
-                        <li class="mb-2">
-                          <a href="{{route('patient_examination',$notification->data['visit_id'])}}">  {{ $notification->data['message'] }} - {{ $notification->created_at->diffForHumans() }}</a>
-                        </li>
-                        @endforeach
-                    </ul>
+                @if(!empty($notifications))
+                <ul class="dropdown-menu dropdown-menu-end px-4 py-3" aria-labelledby="navbarDropdown">
+                    @foreach ($notifications as $notification)
+                    <li class="mb-2">
+                        <a href="{{route('patient_examination',$notification->data['visit_id'])}}"> {{ $notification->data['message'] }} - {{ $notification->created_at->diffForHumans() }}</a>
+                    </li>
+                    @endforeach
+                </ul>
                 @endif
 
-              
+
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">

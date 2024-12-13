@@ -7,30 +7,34 @@
     <div class="row">
         <div class="col-lg-2 pt-5">
             <div class="pt-4">
-                <div class="sidebar    ">
-                    <h2>
-                        فیلتر ها
-                    </h2>
-                    <div class="d-flex justify-content-between">
-                        فقط کالاهای موجود
-                        <label class="switch">
+                <div class="sidebar">
+                    <form method="post" id="productfilter" action="{{route('getproductbyprice')}}">
+                        @csrf
+                        <h2>
+                            فیلتر ها
+                        </h2>
+                        <div class="d-flex justify-content-between">
+                            فقط کالاهای موجود
+                            <label class="switch">
 
-                            <input type="checkbox">
-                            <span class="sliderw round"></span>
-                        </label>
-                    </div>
+                                <input type="checkbox" name="existproduct" id="existproduct">
+                                <span class="sliderw round"></span>
+                            </label>
+                        </div>
+                        <hr>
+                        <h3>فیلتر بر اساس قیمت</h3>
+                        <div class=" position-relative d-flex flex-column slidecontainer mt-4">
 
+                            <input type="range" min="0" max="590000" value="0" step="50000"  class="slider" name="min-price" id="min-price">
+                            <p class="min-price">از ۱۰ هزار تومان</p>
 
-                    <hr>
-                    <h3>فیلتر بر اساس قیمت</h3>
-                    <div class=" position-relative d-flex flex-column slidecontainer mt-4">
-                      
-                        <input type="range" min="1" max="100" value="10" class="slider" id="min-price">
-                        <p>از 0 تومان</p>
-                       
-                        <input type="range" min="1" max="600" value="100" class="slider" id="max-price">
-                        <p>تا 600/000 تومان</p>
-                    </div>
+                            <input type="range" min="50000" max="600000" value="50000" step="50000" class="slider" name="max-price" id="max-price">
+                            <p class="max-price">تا ۶۰۰ هزار تومان</p>
+                            <button type="submit" class="btn btn-dark">جستجو</button>
+
+                        </div>
+
+                    </form>
                     <hr>
                     <h4>اخرین دیدگاه ها</h4>
                     @foreach($comments as $comment)

@@ -80,7 +80,7 @@ if (commetsslider != null && commetsslider) {
 }
 
 var productsliders = document.querySelector('.swiper.productslider');
-console.log(typeof(productsliders),productsliders);
+
 if (productsliders != null && productsliders) {
   var productslider = new Swiper(".swiper.productslider", {
     slidesPerView: 4,
@@ -116,7 +116,7 @@ if (productsliders != null && productsliders) {
 
 if ($('form[name="addtocart"]').length) {
   // Attach a submit event handler to the form
-  $('form[name="addtocart"]').on('submit', function (event) {
+  $(document).on('submit', 'form[name="addtocart"]', function(event) {
     var self = $(this);
     event.preventDefault(); // Prevent default form submission
 
@@ -135,12 +135,12 @@ if ($('form[name="addtocart"]').length) {
         product_id: productId // Send product ID
       },
       success: function (response) {
-        console.log(response);
+   
         $('.cart-box .quanity').html(response.cart);
         $('.minicart').remove();
         $(".cart-box,.headerslider").append(response.out);
         self.addClass("added");
-        setTimeout(function(){
+        setTimeout(function () {
           self.find('button').html('افزودن به سبد خرید');
           self.removeClass("added");
         }, 5000);
@@ -173,11 +173,11 @@ $(document).on('submit', 'form.removefromcart', function (event) {
     type: 'POST',
     data: {
       '_token': $('input[name="_token"]').val(), // Include CSRF token
-      product_id: productId ,// Send product ID
+      product_id: productId,// Send product ID
       cart_id: productId // Send product ID
     },
     success: function (response) {
-      console.log(response.out);
+
       $('.cart-box .quanity').html(response.cart);
       $('.minicart').remove();
       $(".cart-box,.headerslider").append(response.out);
@@ -541,31 +541,62 @@ $("select[name='states']").on('change', function () {
   });
 });
 
+
+$("#min-price").on("change", function () {
+  $(".min-price").html($(this).val() + " هزار تومان");
+});
+$("#max-price").on("change", function () {
+  $(".max-price").html($(this).val() + " هزار تومان");
+});
+$("form#productfilter").on("submit", function (e) {
+  let minprice=$("#min-price").val();
+  let maxprice=$("#max-price").val();
+  let existproduct=$("#existproduct").val();
+  e.preventDefault();
+  $.ajax({
+    url: '/getproductbyprice',
+    type: 'POST',
+    data: {
+        existproduct: existproduct,
+        minprice: minprice,
+        maxprice: maxprice,
+      '_token': $('meta[name="csrf-token"]').attr('content'), // Include CSRF token
+    },
+    success: function (response) {
+     $(".productslider .row").empty();
+     $(".productslider .row").html(response.data);
+    },
+    error: function (xhr) {
+      alert('An error occurred. Please try again later.');
+    }
+  });
+})
 // product qunity
 // product quantity
-$("input.count").on("change", function() {
+$("input.count").on("change", function () {
   var product_id = $(this).attr('attr-id'); // Assuming you have a data attribute for product_id
   var val = $(this).val();
-  console.log("ss");
+  
   $.ajax({
-      url: '/update-quantity',
-      type: 'POST',
-      data: {
-        product_id: product_id,
-        quantity: val,
-          '_token': $('meta[name="csrf-token"]').attr('content'), // Include CSRF token
-      },
-      success: function(response) {
-          if (response.success) {
-              alert(response.message);
-              // Update the quantity display if needed
-              $(this).val(response.new_quantity);
-          } else {
-              alert('Error updating quantity');
-          }
-      },
-      error: function(xhr) {
-          alert('An error occurred. Please try again later.');
+    url: '/update-quantity',
+    type: 'POST',
+    data: {
+      product_id: product_id,
+      quantity: val,
+      '_token': $('meta[name="csrf-token"]').attr('content'), // Include CSRF token
+    },
+    success: function (response) {
+      if (response.success) {
+        alert(response.message);
+        // Update the quantity display if needed
+        $(this).val(response.new_quantity);
+      } else {
+        alert('Error updating quantity');
       }
+    },
+    error: function (xhr) {
+      alert('An error occurred. Please try again later.');
+    }
   });
 });
+

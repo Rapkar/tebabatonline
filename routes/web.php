@@ -183,7 +183,7 @@ Route::prefix('userpanel')->middleware([UserMiddleware::class])->group(function 
     /*************** User Manager *******************/
     /********************* *************************/
     Route::get('/', [App\Http\Controllers\UserPanel\UserController::class, 'index'])->name('userDashboard');
-    Route::get('/cart', [App\Http\Controllers\UserPanel\CartController::class, 'cart'])->name('cart');
+    Route::get('/cart', [App\Http\Controllers\UserPanel\CartController::class, 'index'])->name('cart');
     Route::get('/payment', [App\Http\Controllers\UserPanel\PaymentController::class, 'payment'])->name('payment');
     Route::post('/storecomment', [App\Http\Controllers\Website\CommentController::class, 'storecomment'])->middleware('auth')->name('storecomment');
     Route::post('/storevisit', [App\Http\Controllers\UserPanel\VisitControllr::class, 'storevisit'])->middleware('auth')->name('storevisit');
@@ -199,6 +199,7 @@ Route::post('/send-message{friend}', [App\Http\Controllers\ChatController::class
 Route::get('/messages', [App\Http\Controllers\ChatController::class, 'getMessages'])->name('getmessage');
 Route::post('/update-quantity', [ProductController::class, 'updateQuantity'])->name('products.updateQuantity');
 
+Route::post('/getproductbyprice', [App\Http\Controllers\AdminPanel\ProductController::class, 'getproductbyprice'])->name('getproductbyprice');
 
 Route::post('/getCityByState', [App\Http\Controllers\Website\EventController::class, 'getcitybystate'])->name('getcitybystate');
 

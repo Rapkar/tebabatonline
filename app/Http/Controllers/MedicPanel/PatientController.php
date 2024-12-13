@@ -15,7 +15,24 @@ class PatientController extends Controller
 {
 
     use MedicHelper;
+    public function __construct()
+    {
 
+        $medicinerecomendation = Recommendation::where('type', 'medicinerecomendation')->get();
+        $recomendation = Recommendation::where('type', 'recomendation')->get();
+        $problems = Recommendation::where('type', 'problems')->get();
+        $Recommendations = Recommendation::All();
+        if (Auth::check()) {
+            $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
+        }
+        view()->share([
+            'medicinerecomendation' =>  $medicinerecomendation,
+            'recomendation' => $recomendation,
+            'problems' => $problems,
+            'Recommendations' => $Recommendations,
+            'notifications'=>$notifications 
+        ]);
+    }
     public function patient_examination($id)
     {
         // dd($id);
@@ -33,21 +50,26 @@ class PatientController extends Controller
         $formattedDate = $j_date->format('Y/m/d H:i:s');
         $formattedDate = $j_date->formatJalaliDateTime();
         $result[] = ['data' => json_decode($items->content), 'date' => $formattedDate, 'id' => $items->id];
-        $medicinerecomendation = Recommendation::where('type', 'medicinerecomendation')->get();
-        $recomendation = Recommendation::where('type', 'recomendation')->get();
-        $problems = Recommendation::where('type', 'problems')->get();
-        $Recommendations = Recommendation::All();
+
         $visit_id = $items->id;
         $products = Product::all();
         // $Recommendations = [];
 
+        if (Auth::check()) {
+            $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
 
-        $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
-        foreach ($notifications as $notification) {
-            $notification->markAsRead();
+            foreach ($notifications as $notification) {
+                if($notification->data['visit_id']==$id)
+                {
+                    $notification->markAsRead();
+
+                }
+            }
+            
         }
 
-        return view('medic_panel.patient.patient', compact('title', 'visit_id', 'problems',  'recomendation', 'medicinerecomendation', 'result', 'products', 'selected_products', 'Recommendations', 'selected_recommendations', 'selected_problems', 'selected_descibtions'))->with('notifications', $notifications);
+
+        return view('medic_panel.patient.patient', compact('title', 'visit_id', 'result', 'products', 'selected_products', 'selected_recommendations', 'selected_problems', 'selected_descibtions'))->with('notifications', $notifications);
     }
     public function Totlaprice($relatedproducta)
     {

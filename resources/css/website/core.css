@@ -1609,6 +1609,10 @@ h2.greentitle {
     display: flex;
     justify-content: center;
     align-items: center;
+    filter: grayscale();
+}
+.vistiitems li.completed{
+    filter: unset;
 }
 
 .vistiitems li div {

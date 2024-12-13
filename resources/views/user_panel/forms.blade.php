@@ -3,40 +3,7 @@
 @section('content')
 <div class="container pt-5 mt-5">
     <div class="row">
-        <div class="col-lg-4">
-            <table dir="rtl">
-                <tbody>
-                    <tr>
-                        <td>
-                            <h2>{{ Auth::user()->name }}</h2>
-                            <p>{{ Auth::user()->phone }}</p>
-                        </td>
-                        <td><a href="{{route('editprofile',Auth::user()->id)}}"><img src="{{ asset('images/edit.svg') }}"></a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="">سفارش ها</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="">علاقه مندی ها</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="{{route('forms')}}">فرم های ویزیت</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="">لیست علاقه مندی ها</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">خروج</a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    @include('user_panel.layouts.layout')
         <div class="col-lg-8">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -52,12 +19,17 @@
                     <ul class="row vistiitems">
 
                         @foreach($result as $t=>$item)
-                        <li class="col-lg-3">
+                        @if($item['completed']==0 )
+                        <li class="col-lg-3 mb-3 ">
+                    
+                       
                             <div>
                                 <img src="{{ asset('images/calender.svg') }}">
-                                <p>{{$item['data']->name}}<br>{{$item['date']}}=={{$item['completed']}}</p>
+
+                                <p>{{$item['data']->name}}<br>{{$item['date']}} </p>
                             </div>
                         </li>
+                        @endif
                         @endforeach
                     </ul>
                 </div>
@@ -65,12 +37,14 @@
                     <ul class="row vistiitems">
 
                         @foreach($result as $t=>$item)
-                        <li class="col-lg-3  @if($item['completed'] == 1) completed @endif ">
+                        @if(($item['completed']) )
+                        <li class="col-lg-3 mb-3  {{ ($item['completed']) ? 'completed':''  }} ">
                             <div>
                                 <img src="{{ asset('images/calender.svg') }}">
                                 <p>{{$item['data']->name}}<br>{{$item['date']}}</p>
                             </div>
                         </li>
+                        @endif
                         @endforeach
                     </ul>
                 </div>

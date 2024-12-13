@@ -53,7 +53,7 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-  
+
 
         $Product = new Product();
         $Product->name = $request->input('name');
@@ -133,7 +133,7 @@ class ProductController extends Controller
 
         $Product->gallery = $request->input('gallery')[0];
         $Product->status = $request->input('status');
-    
+
         $Product->save();
         #  $user->address = $request->input('address');
 
@@ -147,16 +147,33 @@ class ProductController extends Controller
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:0',
         ]);
-    
+
         $product = Product::findOrFail($request->product_id);
         $product->update(['quantity' => $request->quantity]);
-    
+
         return response()->json([
             'success' => true,
             'message' => 'Quantity updated successfully',
             'new_quantity' => $product->quantity
         ]);
     }
-    
-    
+    public function getproductbyprice(Request $request)
+    {
+
+
+        // Retrieve minimum and maximum price from request
+        $min_price = intval($request->minprice);
+        $max_price = intval($request->maxprice);
+
+        // Ensure min_price is less than max_price
+        if ($min_price > $max_price) {
+            return response()->json(['error' => 'Minimum price must be less than maximum price.'], 400);
+        }
+
+        // Query the products within the specified price range
+        $products = Product::whereBetween('price', [$min_price, $max_price])->get();
+        $result = view('website.part.products', compact('products'))->render();
+        // Return the results as a JSON response
+        return response()->json(['data' => $result], 200);
+    }
 }

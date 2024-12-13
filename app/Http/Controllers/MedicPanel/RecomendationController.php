@@ -9,11 +9,32 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\MedicPanel\Helper\MedicHelper;
 use App\Models\Product;
-
+use Illuminate\Support\Facades\Auth;
 class RecomendationController extends Controller
 {
 
     use MedicHelper;
+    public function __construct()
+    {
+
+        $medicinerecomendation = Recommendation::where('type', 'medicinerecomendation')->get();
+        $recomendation = Recommendation::where('type', 'recomendation')->get();
+        $problems = Recommendation::where('type', 'problems')->get();
+        $Recommendations = Recommendation::All();
+
+        if (Auth::check()) {
+            $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
+        }else{
+            $notifications=[];
+        }
+        view()->share([
+            'medicinerecomendation' =>  $medicinerecomendation,
+            'recomendation' => $recomendation,
+            'problems' => $problems,
+            'Recommendations' => $Recommendations,
+            'notifications'=>$notifications 
+        ]);
+    }
     protected function validator($request)
     {
         $data = $request->all();
@@ -73,8 +94,9 @@ class RecomendationController extends Controller
         // dd( $Recommendation, $describtions);
         // $Recommendation->delete();
         $products = Product::all();
-        $product_id = $Recommendation->product_id;
-        dd($Recommendation->product_id);
+        $product_id = $Recommendation->product()->first()->id;
+         
+      
         return view('medic_panel.patient.recomendation.edit', compact('describtions', 'product_id', 'products', 'Recommendation'));
     }
     public function update(Request $request, $id)
@@ -91,6 +113,6 @@ class RecomendationController extends Controller
         $Recommendation = Recommendation::find($id);
 
         $Recommendation->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success','با موفقیت حذف شد');
     }
 }

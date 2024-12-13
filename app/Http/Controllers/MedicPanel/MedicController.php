@@ -6,8 +6,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Visit;
 use Hekmatinasser\Verta\Verta;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Recommendation;
 class MedicController extends Controller
 {
+    public function __construct()
+    {
+
+        $medicinerecomendation = Recommendation::where('type', 'medicinerecomendation')->get();
+        $recomendation = Recommendation::where('type', 'recomendation')->get();
+        $problems = Recommendation::where('type', 'problems')->get();
+        $Recommendations = Recommendation::All();
+        if (Auth::check()) {
+            $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
+        }
+        view()->share([
+            'medicinerecomendation' =>  $medicinerecomendation,
+            'recomendation' => $recomendation,
+            'problems' => $problems,
+            'Recommendations' => $Recommendations,
+            'notifications'=>$notifications 
+        ]);
+    }
     public function index(){
         $title = __("medic.Medic Page");
         $items=Visit::all();
@@ -21,9 +41,9 @@ class MedicController extends Controller
             $formattedDate = $j_date->formatJalaliDateTime();
             $result[] = ['data' => json_decode($item->content), 'date' => $formattedDate,'original'=>$item];
         }
-
+        $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
     
-        return view('medic_panel.home',compact('title','result'));
+        return view('medic_panel.home',compact('notifications','title','result'));
 
     }
 
