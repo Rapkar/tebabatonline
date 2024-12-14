@@ -143,18 +143,19 @@ class ProductController extends Controller
     }
     public function updateQuantity(Request $request)
     {
-        $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:0',
-        ]);
+        // $request->validate([
+        //     'product_id' => 'required|exists:products,id',
+        //     'quantity' => 'required|integer|min:0',
+        // ]);
 
         $product = Product::findOrFail($request->product_id);
-        $product->update(['quantity' => $request->quantity]);
-
+        // $product->updateQuantity(['quantity' => $request->quantity]);
+        // $product->carts->updateQuantity( $request->quantity);
+        $product->carts()->updateExistingPivot($request->cart_id, ['quantity' => $request->quantity]);
         return response()->json([
             'success' => true,
             'message' => 'Quantity updated successfully',
-            'new_quantity' => $product->quantity
+            'new_quantity' => $product->carts->first()->pivot->quantity
         ]);
     }
     public function getproductbyprice(Request $request)

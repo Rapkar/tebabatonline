@@ -495,16 +495,16 @@
                 <td>
                     <form method="post" action="{{route('completevisit')}}">
                         @csrf
-                        <input type="hidden" name="visit_id" value="{{$visit_id }}" >
+                        <input type="hidden" name="visit_id" value="{{$visit_id }}">
                         <button type="submit" class="btn btn-success" href="#">ارسال نسخه</a>
                     </form>
                 </td>
                 <th>ذخیره پیش نویس</th>
                 <td>
-                    
-                <form method="post" action="{{route('uncompletevisit')}}">
+
+                    <form method="post" action="{{route('uncompletevisit')}}">
                         @csrf
-                        <input type="hidden" name="visit_id" value="{{$visit_id }}" >
+                        <input type="hidden" name="visit_id" value="{{$visit_id }}">
                         <button type="submit" class="btn btn-secondary" href="#">ذخیره نسخه</a>
                     </form>
                 </td>
@@ -549,7 +549,7 @@
             </div>
             <div class="modal-body">
                 @foreach($item->describtions as $des)
-                {{$des->content}}
+                {{$des->content}}<br>
                 @endforeach
             </div>
             <div class="modal-footer">
@@ -562,7 +562,7 @@
 @endforeach
 
 
-<!--problems  -->
+<!--selected_problems  -->
 @foreach ($selected_problems as $item )
 
 <div class="modal fade" id="Problems{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -574,7 +574,7 @@
             </div>
             <div class="modal-body">
                 @foreach($item->describtions as $des)
-                {{$des->content}}
+                {{$des->content}}<br>
                 @endforeach
             </div>
             <div class="modal-footer">
@@ -609,8 +609,8 @@
                     </label>
                     <label class="col-lg-12">
                         توصیه
-                        <select class="w-100" id="Recommendationproduct" name="Recommendationproduct">
-                        </select>
+                        <div class="w-100" id="Recommendationproduct" name="Recommendationproduct">
+                        </div>
                     </label>
                     <label class="col-lg-12 mt-3">
                         دیدگاه
@@ -647,8 +647,8 @@
                         </select>
                     </label>
                     <label class="col-lg-8">
-                        <select multiple attr-target="Recommendations" name="Recommendationsdes" class="w-100">
-                        </select>
+                        <div multiple attr-target="Recommendations" name="Recommendationsdes" class="w-100">
+                        </div>
                     </label>
                     <label class="col-lg-12 mt-3">
                         <textarea class="w-100" name="recommendationdescribe">
@@ -685,7 +685,7 @@
                         </select>
                     </label>
                     <label class="col-lg-8">
-                        <select multiple attr-target="problemsdes" name="problemsdes" class="w-100"></select>
+                        <div multiple attr-target="problemsdes" name="problemsdes" class="w-100"></div>
                     </label>
                     <label class="col-lg-12 mt-3">
                         <textarea class="w-100" name="problemdescribe"></textarea>

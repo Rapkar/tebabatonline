@@ -32,8 +32,9 @@ class Product extends Model
     }
 
     public function updateQuantity($newQuantity)
-    {
-        $this->update(['quantity' => $newQuantity]);
+    {   if ($this->cart()->exists()) {
+        $this->cart()->update(['quantity' => $newQuantity]);
+    }
     }
     public function recommendation(){
         return $this->belongsToMany(Recommendation::class,'recommendation_product');
@@ -42,4 +43,8 @@ class Product extends Model
     {
         return $this->quantity > 0;
     }
+    public function carts(){
+        return $this->belongsToMany(Cart::class)->withPivot( 'quantity');
+    }
+  
 }

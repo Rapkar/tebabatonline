@@ -6,16 +6,37 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Illuminate\Container\Attributes\Auth;
-
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserPanel\Helper\UserHelper;
 class CartController extends Controller
 {
+
+    use UserHelper;
+
+    public function index()
+    {
+        $user = Auth::user();
+        $orderitems = [];
+        $cart = 0;
+        if (Auth::user()) {
+            $orderitems = Cart::where('user_id', $user->id)->with('products')->get();
+            $cart_id = Cart::where('user_id', $user->id)->with('products')->first();
+            $cart = Cart::where('user_id', $user->id)->with('products')->first();
+            if ($cart) {
+                $cart =  count($cart->products);
+            } else {
+                $cart = 0;
+            }
+        }
+        $totalprice = $this->totalprice($cart_id->id);
+        return view("user_panel.cart", compact("cart", "totalprice", "orderitems"));
+    }
     public function addproduct($id)
     {
         $product = Product::findOrFail($id);
 
         // Get the current user's ID
-        $userId =  auth()->user()->id;
+        $userId = Auth::user()->id;
 
         // Find or create a cart for the user
         $cart = Cart::firstOrCreate(['user_id' => $userId]);
@@ -42,10 +63,10 @@ class CartController extends Controller
     // } 
 
 
-    public function removefromcart( $cartid, $productid)
+    public function removefromcart($cartid, $productid)
     {
-       
-        
+
+
         $cart = new Cart;
         $userid = auth()->user()->id;
         $orderitems = Cart::where('user_id', $userid)->first();
@@ -53,17 +74,17 @@ class CartController extends Controller
         if ($orderitems->products()->count() == 0) {
             $orderitems->delete();
         }
- 
-     
+
+
         $product = Product::findOrFail($productid);
         // dd($product);
         $orderitems = Cart::where('user_id', $userid)->with('products')->get();
 
         $out = view('website.layouts.minicart', compact('orderitems'))->render();
-        if($cart->products){
-        $cart=  count($cart->products);
-        }else{
-            $cart=0;
+        if ($cart->products) {
+            $cart =  count($cart->products);
+        } else {
+            $cart = 0;
         }
         // Optional: Provide feedback to the user
         return response()->json([
@@ -72,5 +93,4 @@ class CartController extends Controller
             'out' => $out
         ]);
     }
- 
 }

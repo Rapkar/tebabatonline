@@ -292,12 +292,16 @@ $("select[name='states']").on('change', function () {
 // patient
 $("#addproducttopatient").on("click", function (e) {
   e.preventDefault();
+  var selectedValues = $("input[name='Recommendationproduct[]']:checked").map(function () {
+    return this.value; // Get the value of each checked checkbox
+  }).get(); // Convert jQuery object to a regular array
   $.ajax({
     type: 'post',
     url: '/medicpanel/addproducttopatient/',
     data: {
       'visit_id': $('input[name="visit_id"]').val(),
       'product_id': $('select[name="product"]').val(),
+      'selectedValues': selectedValues,
       'count': $('input[name="productcount"]').val(),
       '_token': $('input[name="_token"]').val()
     },
@@ -326,16 +330,17 @@ $("#Recommendations").on("change", function () {
       '_token': $('input[name="_token"]').val()
     },
     success: function (data) {
-      $('select[attr-target="Recommendations"]').empty();
-      $('select[attr-target="Recommendations"]').html(data);
+      $('div[attr-target="Recommendations"]').empty();
+      // $('select[attr-target="Recommendations"]').html(data);
       data = JSON.parse(data);
       var t = '';
       if (data) {
         data.forEach((item) => {
-          t += "<option value='" + item.id + "'>" + item.content + "</option>"
+          t += "<input type='checkbox' name='Recommendations[]' value='" + item.id + "'> " + item.content + " </input><br>"
         })
       }
-      $('select[attr-target="Recommendations"]').html(t);
+      $('div[attr-target="Recommendations"]').empty();
+      $('div[attr-target="Recommendations"]').html(t);
     },
     error: function (data) {
       alert(data.responseText);
@@ -356,16 +361,16 @@ $("select#problems").on("change", function () {
     },
     success: function (data) {
       console.log(data)
-      $('select[attr-target="problemsdes"]').empty();
-      $('select[attr-target="problemsdes"]').html(data);
+      $('div[attr-target="problemsdes"]').empty();
+      // $('select[attr-target="problemsdes"]').html(data);
       data = JSON.parse(data);
       var t = '';
       if (data) {
         data.forEach((item) => {
-          t += "<option value='" + item.id + "'>" + item.content + "</option>"
+          t += "<input type='checkbox' name='problemsdes[]' value='" + item.id + "'> " + item.content + " </input><br>"
         })
       }
-      $('select[attr-target="problemsdes"]').html(t);
+      $('div[attr-target="problemsdes"]').html(t);
     },
     error: function (data) {
       alert(data.responseText);
@@ -394,10 +399,13 @@ $("select[name='product']").on("change", function () {
       var t = '';
       if (data) {
         data.forEach((item) => {
-          t += "<option value='" + item.id + "'>" + item.content + "</option>"
+          t += "<input type='checkbox' name='Recommendationproduct[]' value='" + item.id + "'> " + item.content + " </input><br>"
         })
       }
-      $('select#Recommendationproduct').html(t);
+      console.log(t);
+      $('#Recommendationproduct').empty();
+      $('#Recommendationproduct').html(t);
+        
     },
     error: function (data) {
       alert(data.responseText);
@@ -411,9 +419,10 @@ $("select[name='product']").on("change", function () {
 
 
 $("#addrecommendationtopatient").on("click", function (e) {
-
+  var selectedValues = $("input[name='Recommendations[]']:checked").map(function () {
+    return this.value; // Get the value of each checked checkbox
+  }).get();
   e.preventDefault();
-  console.log($('select[name="Recommendationsdes"]').val())
   $.ajax({
     type: 'post',
     url: '/medicpanel/setdescribtions/',
@@ -421,18 +430,18 @@ $("#addrecommendationtopatient").on("click", function (e) {
       'visit_id': $('input[name="visit_id"]').val(),
       'comment': $('textarea[name="recommendationdescribe"]').val(),
       'recommendation_id': $('select[name="Recommendations"]').val(),
-      'Recommendationsdes': $('select[name="Recommendationsdes"]').val(),
+      'Recommendationsdes': selectedValues,
       '_token': $('input[name="_token"]').val()
     },
     success: function (data) {
       console.log(data)
       // data = JSON.parse(data);
       var t = '';
-      // if (data) {
+      if (data) {
       //   data.forEach((item) => {
       //     t += "<tr value='" + item.id + "'>" + item.content + "</option>"
       //   })
-      // }
+       }
       $('select[attr-target="Recommendations"]').html(data.data);
       jquery(".btn-close").click();
       $("#recommendation").empty();
@@ -448,7 +457,9 @@ $("#addrecommendationtopatient").on("click", function (e) {
 // problems
 
 $("#addproblemsrecommendationtopatient").on("click", function (e) {
-
+  var selectedValues = $("input[name='problemsdes[]']:checked").map(function () {
+    return this.value; // Get the value of each checked checkbox
+  }).get();
   e.preventDefault();
 
   $.ajax({
@@ -458,7 +469,7 @@ $("#addproblemsrecommendationtopatient").on("click", function (e) {
       'visit_id': $('input[name="visit_id"]').val(),
       'comment': $('textarea[name="problemdescribe"]').val(),
       'recommendation_id': $('select[name="problems"]').val(),
-      'Recommendationsdes': $('select[name="problemsdes"]').val(),
+      'Recommendationsdes': selectedValues,
       '_token': $('input[name="_token"]').val()
     },
     success: function (data) {
@@ -481,8 +492,4 @@ $("#addproblemsrecommendationtopatient").on("click", function (e) {
     }
   });
 })
-Echo.channel('channel-visit') // Assuming User 2 is subscribed to this channel
-  .notification((notification) => {
-    console.log(notification.message);
-    // Display notification in your UI as needed
-  });
+ 

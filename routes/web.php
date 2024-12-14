@@ -145,17 +145,18 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
 
     //    uncompletevisit in visit page by admin 
     Route::post('/uncompletevisit', [App\Http\Controllers\MedicPanel\VisitControllr::class, 'uncompletevisit'])->middleware('auth')->name('uncompletevisit');
+    Route::get('/recommendation/{type}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'index'])->middleware('auth')->name('recommendation');
+    Route::get('/recommendation/create/{type}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'create'])->middleware('auth')->name('createRecommendation');
+    Route::post('/recommendation/create', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'store'])->middleware('auth')->name('storeRecommendation');
+    Route::get('/recommendation/delete/{id}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'destroy'])->middleware('auth')->name('deleteRecommendation');
+    Route::get('/recommendation/edit/{id}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'edit'])->middleware('auth')->name('editRecommendation');
+    Route::post('/recommendation/update/{id}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'update'])->middleware('auth')->name('updateRecommendation');
+
+    Route::post('/describtion/create/{id}', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'store'])->middleware('auth')->name('storeDescribtion');
+    Route::get('/describtion/delete/{id}', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'destroy'])->middleware('auth')->name('deleteDescribtion');
 });
 
-Route::get('/recommendation/{type}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'index'])->middleware('auth')->name('recommendation');
-Route::get('/recommendation/create/{type}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'create'])->middleware('auth')->name('createRecommendation');
-Route::post('/recommendation/create', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'store'])->middleware('auth')->name('storeRecommendation');
-Route::get('/recommendation/delete/{id}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'destroy'])->middleware('auth')->name('deleteRecommendation');
-Route::get('/recommendation/edit/{id}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'edit'])->middleware('auth')->name('editRecommendation');
-Route::post('/recommendation/update/{id}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'update'])->middleware('auth')->name('updateRecommendation');
 
-Route::post('/describtion/create/{id}', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'store'])->middleware('auth')->name('storeDescribtion');
-Route::get('/describtion/delete/{id}', [App\Http\Controllers\MedicPanel\DescribtionController::class, 'destroy'])->middleware('auth')->name('deleteDescribtion');
 // Route::get('/describtion/edit/{id}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'edit'])->middleware('auth')->name('editRecommendation');
 // Route::post('/describtion/update/{id}', [App\Http\Controllers\MedicPanel\RecomendationController::class, 'update'])->middleware('auth')->name('updateRecommendation');
 
@@ -191,13 +192,14 @@ Route::prefix('userpanel')->middleware([UserMiddleware::class])->group(function 
     Route::get('/edit/user/{id}', [App\Http\Controllers\UserPanel\UserPanelController::class, 'editprofile'])->middleware('auth')->name('editprofile');
 
     Route::get('visit', [App\Http\Controllers\Website\home::class, 'visit'])->name('visit');
+    Route::get('visit/{id}', [App\Http\Controllers\UserPanel\VisitControllr::class, 'visit'])->name('visitdetails');
     //profile mangment
     Route::post('/profile/update', [App\Http\Controllers\UserPanel\UserPanelController::class, 'updateprofile'])->middleware('auth')->name('updateprofile');
 });
 
 Route::post('/send-message{friend}', [App\Http\Controllers\ChatController::class, 'sendMessage'])->middleware('auth')->name('sendmessage');
 Route::get('/messages', [App\Http\Controllers\ChatController::class, 'getMessages'])->name('getmessage');
-Route::post('/update-quantity', [ProductController::class, 'updateQuantity'])->name('products.updateQuantity');
+Route::post('/update-quantity', [App\Http\Controllers\AdminPanel\ProductController::class, 'updateQuantity'])->name('updateQuantity');
 
 Route::post('/getproductbyprice', [App\Http\Controllers\AdminPanel\ProductController::class, 'getproductbyprice'])->name('getproductbyprice');
 

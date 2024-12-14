@@ -1,32 +1,42 @@
 @extends('website.layouts.app')
+
 @section('content')
+
 <div class="container  cart mt-5 mb-4">
 
     <div class="row pt-5">
         <div class=" col-lg-8 hasborder pb-4">
             <h2 class="d-flex justify-content-start px-3 py-3">سبد خرید</h2>
-            @foreach($orderitems as $product)
+            @foreach($orderitems as $items )
+
+            @foreach($items->products as $item )
+            @if($item)
+
             <div class="col-lg-12 d-flex align-items-center  px-4 py-4">
-                <img class="cart-img" src="{{$product->image}}">
+                <img class="cart-img" src="{{$item->image}}">
                 <div class="d-flex flex-column align-items-start">
                     <h2 class="text-left pb-3">
-                        {{$product->name}}
+                        {{$item->name}}
                     </h2>
-                    <p>{{$product->expert}}</p><br>
+                    <p>{{$item->expert}}</p><br>
 
                 </div>
 
             </div>
             <div class="col-lg-12 d-flex align-items-center">
-                <p class="count"><input class="count" attr-id="{{$product->id}}" name="quanity" type="number" value="1"></p>
-                <form method="post" class="removefromcart" name="removefromcart" action="{{ route('removefromcart',$product->id)}}">
+                <p class="count"><input class="count" attr-id="{{$item->id}}" name="quanity" type="number" value="{{$item->pivot->quantity}}"></p>
+                <form method="post" class="removefromcart" name="removefromcart" action="{{ route('removefromcart', ['cartid' =>$cart, 'productid' =>  $item->id ]) }}">
                     @csrf
-                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                    <input type="hidden" name="product_id" value="{{$item->id}}">
                     <button type="submit">&#128465; </button>
                 </form>
-                <p class="mb-0">{{$product->price}}</p><br>
+                <p class="mb-0">{{$item->price}} هزار تومان</p><br>
 
             </div>
+            @else
+            <li>محصولی وجود ندارد</li>
+            @endif
+            @endforeach
 
             @endforeach
         </div>
@@ -35,7 +45,7 @@
             <table dir="rtl" class="pt-5">
                 <tr>
                     <td>قیمت کل</td>
-                    <td>130/000 تومان</td>
+                    <td>{{$totalprice}}</td>
                 </tr>
                 <tr>
                     <td>مالیات</td>

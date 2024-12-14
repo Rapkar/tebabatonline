@@ -22,15 +22,11 @@ class PatientController extends Controller
         $recomendation = Recommendation::where('type', 'recomendation')->get();
         $problems = Recommendation::where('type', 'problems')->get();
         $Recommendations = Recommendation::All();
-        if (Auth::check()) {
-            $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
-        }
         view()->share([
             'medicinerecomendation' =>  $medicinerecomendation,
             'recomendation' => $recomendation,
             'problems' => $problems,
             'Recommendations' => $Recommendations,
-            'notifications'=>$notifications 
         ]);
     }
     public function patient_examination($id)
@@ -55,7 +51,7 @@ class PatientController extends Controller
         $products = Product::all();
         // $Recommendations = [];
 
-        if (Auth::check()) {
+        
             $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
 
             foreach ($notifications as $notification) {
@@ -66,10 +62,10 @@ class PatientController extends Controller
                 }
             }
             
-        }
+        
 
 
-        return view('medic_panel.patient.patient', compact('title', 'visit_id', 'result', 'products', 'selected_products', 'selected_recommendations', 'selected_problems', 'selected_descibtions'))->with('notifications', $notifications);
+        return view('medic_panel.patient.patient', compact('title', 'visit_id', 'result', 'products', 'selected_products', 'selected_recommendations', 'selected_problems','notifications', 'selected_descibtions'));
     }
     public function Totlaprice($relatedproducta)
     {

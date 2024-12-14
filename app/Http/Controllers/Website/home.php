@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\helper;
 use App\Models\Comment;
 use App\Models\Cart;
-
+use App\Http\Controllers\UserPanel\Helper\UserHelper;
 class home extends Controller
 {
+    use UserHelper;
     public function index()
     {
 
         $user = Auth::user();
+        $cart_id = Cart::where('user_id', $user->id)->with('products')->first();
 
         $posts = Post::whereHas('categories', function ($query) {
             $query->where('name', 'home-post');
@@ -30,6 +32,7 @@ class home extends Controller
         })->get();
         $orderitems = [];
         $cart=0;
+        $totalprice=0;
         if (Auth::user()) {
             $orderitems = Cart::where('user_id', $user->id)->with('products')->get();
             $cart = Cart::where('user_id', $user->id)->with('products')->first();
@@ -38,11 +41,12 @@ class home extends Controller
             } else{
                 $cart =0;
             }
+            $totalprice = $this->totalprice($cart_id->id);
         }
 
-        
+      
         $comments = Comment::limit(8)->get();
-        return view('website.home', compact('posts', 'products', 'cart', 'orderitems', 'comments'));
+        return view('website.home', compact('posts','totalprice', 'products', 'cart', 'orderitems', 'comments'));
     }
     public function chat()
     {

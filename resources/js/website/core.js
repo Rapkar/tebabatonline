@@ -1,6 +1,6 @@
 import '../bootstrap';
-import Echo from 'laravel-echo';
-import Pusher from 'pusher-js';
+// import Echo from 'laravel-echo';
+// import Pusher from 'pusher-js';
 import '../../css/website/core.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -350,84 +350,20 @@ if (myDropzoneElement) {
   });
 }
 
+// window.Pusher = Pusher;
 
-// Enable pusher logging - don't include this in production
 // Pusher.logToConsole = true;
-
-// var pusher = new Pusher('723614bfcaeb1ebf3619', {
-//   cluster: 'ap2'
-// });
-
-// var channel = pusher.subscribe('chat');
-// channel.bind('my-event', function(data) {
-//   console.log(JSON.stringify(data));
-// });
-
-
-
-
-window.Pusher = Pusher;
-
-// window.Echo = new Echo({
-//     broadcaster: 'reverb',
-//     key: import.meta.env.VITE_REVERB_APP_KEY,
-//     wsHost: import.meta.env.VITE_REVERB_HOST,
-//     wsPort: import.meta.env.VITE_REVERB_PORT ?? 8080,
-//     wssPort: import.meta.env.VITE_REVERB_PORT ?? 443,
-//     forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
-//     enabledTransports: ['ws', 'wss'],
-// });
-
-// window.Echo = new Echo({
-//   broadcaster: 'pusher',
-//   key: '723614bfcaeb1ebf3619',
+// const userId = document.querySelector('meta[name="user-id"]').getAttribute('content');
+// var pusher = new Pusher("723614bfcaeb1ebf3619", {
 //   cluster: 'ap2',
-//   forceTLS: true
+//   channelAuthorization: {
+//     endpoint: "/pusher_auth.php",
+//     headers: { "X-CSRF-Token": "" + $('input[name="_token"]').val() + "" },
+//   },
 // });
-// const userId = 2;
-// var channel = window.Echo.channel(`private-chat.${userId}`);
-// channel.listen('.my-event', function (data) {
-//   $("#messages").append(`<div>${data.message}</div>`); 
-
-// });
-
-
-// window.Echo.private(`private-chat.${userId}`)
-//     .listen('MessageSent', (e) => {
-//         console.log(`New message from ${e.message.sender_id}: ${e.message.text}`);
-//         $("#messages").append(`<div>${e.message.text}</div>`);
-
-//         // Update your chat UI here with the new message
-//     });
-
-Pusher.logToConsole = true;
-// const userId = parseInt($('select[name="users"]').val());
-const userId = document.querySelector('meta[name="user-id"]').getAttribute('content');
-// var pusher = new Pusher('723614bfcaeb1ebf3619', {
-//   cluster: 'ap2'
-// });
-var pusher = new Pusher("723614bfcaeb1ebf3619", {
-  cluster: 'ap2',
-  channelAuthorization: {
-    endpoint: "/pusher_auth.php",
-    headers: { "X-CSRF-Token": "" + $('input[name="_token"]').val() + "" },
-  },
-});
-// Replace this with the actual user ID dynamically
-var channel = pusher.subscribe('chat' + userId);
-channel.bind('message.sent', function (data) {
-  var classes = 'ref';
-  if (data.sender_id == userId) {
-    classes = 'self';
-  }
-  $("#messages").append(`<div class="` + classes + `">${data.text}</div>`);
-});
-// var channel = pusher.subscribe('channel_for_everyone');
-// // var channel = pusher.subscribe('channel_for_everyone');
+// // Replace this with the actual user ID dynamically
+// var channel = pusher.subscribe('chat' + userId);
 // channel.bind('message.sent', function (data) {
-//   alert(JSON.stringify(data));
-//   console.log('sss')
-//   // if(userId==text.sender)
 //   var classes = 'ref';
 //   if (data.sender_id == userId) {
 //     classes = 'self';
@@ -576,12 +512,14 @@ $("form#productfilter").on("submit", function (e) {
 $("input.count").on("change", function () {
   var product_id = $(this).attr('attr-id'); // Assuming you have a data attribute for product_id
   var val = $(this).val();
+  var cart_id = $('input[name="cart_id"]').val();
   
   $.ajax({
     url: '/update-quantity',
     type: 'POST',
     data: {
       product_id: product_id,
+      cart_id: cart_id,
       quantity: val,
       '_token': $('meta[name="csrf-token"]').attr('content'), // Include CSRF token
     },
@@ -590,6 +528,7 @@ $("input.count").on("change", function () {
         alert(response.message);
         // Update the quantity display if needed
         $(this).val(response.new_quantity);
+        console.log(response.new_quantity);
       } else {
         alert('Error updating quantity');
       }

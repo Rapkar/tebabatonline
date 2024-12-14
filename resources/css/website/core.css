@@ -1429,8 +1429,8 @@ form.added button {
 
 .cart p {
     color: #017072;
-    font-size: 24px;
-    font-weight: 275;
+    font-size: 16px;
+    font-weight: 700;
     line-height: 40px;
     text-align: right;
 
@@ -1615,7 +1615,7 @@ h2.greentitle {
     filter: unset;
 }
 
-.vistiitems li div {
+.vistiitems li a ,.vistiitems li div {
     padding-top: 1rem;
     width: 100%;
     height: 250px;

@@ -11,9 +11,11 @@ use App\Models\Product;
 use App\Models\User;
 use Hekmatinasser\Verta\Verta;
 use App\Notifications\VisitNotification;
-
+use App\Models\Cart;
+use App\Http\Controllers\UserPanel\Helper\UserHelper;
 class VisitControllr extends Controller
 {
+    use UserHelper;
     public function storevisit()
     {
         $data = json_encode($_POST, JSON_UNESCAPED_UNICODE);
@@ -25,12 +27,12 @@ class VisitControllr extends Controller
             $medicuserss = User::whereHas('roles', function ($query) {
                 $query->whereIn('name', ['Medic', 'Admin']);
             })->get();
-    
+
             foreach ($medicuserss as $user) {
-    
-                $user->notify(new VisitNotification( $user,$Visit->id ));
+
+                $user->notify(new VisitNotification($user, $Visit->id));
             }
-    
+
 
             return redirect()->route('forms'); // redirect to the users index page
 
@@ -66,9 +68,36 @@ class VisitControllr extends Controller
             $formattedDate = $j_date->format('Y/m/d H:i:s');
             // or
             $formattedDate = $j_date->formatJalaliDateTime();
-            $result[] = ['data' => json_decode($item->content), 'date' => $formattedDate,'completed'=>$item->completed];
+            $result[] = ['data' => json_decode($item->content), 'date' => $formattedDate, 'completed' => $item->completed, 'id' => $item->id];
         }
 
         return view('user_panel.forms', compact('title', 'products', 'cart', 'orderitems', 'result'));
+    }
+    public function visit($id)
+    {
+        $title="نسخه شما";
+        $Visit = Visit::find($id);
+        $descibtions = $Visit->descibtions;
+        $recomendation = $Visit->recommendations;
+        $products = $Visit->products;
+        // $recommendations=$products->pivot->pivotParent->recommendations;
+        $user = Auth::user();
+        $orderitems = [];
+        $cart = 0;
+        if (Auth::user()) {
+            $orderitems = Cart::where('user_id', $user->id)->with('products')->get();
+            $cart_id = Cart::where('user_id', $user->id)->with('products')->first();
+            $cart = Cart::where('user_id', $user->id)->with('products')->first();
+            if ($cart) {
+                $cart =  count($cart->products);
+            } else {
+                $cart = 0;
+            }
+        }
+        $totalprice = $this->totalprice($cart_id->id);
+   
+
+     
+        return view('user_panel.visitdetails', compact('title','products', 'orderitems','totalprice','cart','products'));
     }
 }

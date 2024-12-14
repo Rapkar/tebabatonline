@@ -3,7 +3,7 @@
 @section('content')
 <div class="container pt-5 mt-5">
     <div class="row">
-    @include('user_panel.layouts.layout')
+        @include('user_panel.layouts.layout')
         <div class="col-lg-8">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -21,8 +21,6 @@
                         @foreach($result as $t=>$item)
                         @if($item['completed']==0 )
                         <li class="col-lg-3 mb-3 ">
-                    
-                       
                             <div>
                                 <img src="{{ asset('images/calender.svg') }}">
 
@@ -39,10 +37,10 @@
                         @foreach($result as $t=>$item)
                         @if(($item['completed']) )
                         <li class="col-lg-3 mb-3  {{ ($item['completed']) ? 'completed':''  }} ">
-                            <div>
+                            <a href="{{route('visitdetails',$item['id'])}}">
                                 <img src="{{ asset('images/calender.svg') }}">
                                 <p>{{$item['data']->name}}<br>{{$item['date']}}</p>
-                            </div>
+                            </a>
                         </li>
                         @endif
                         @endforeach

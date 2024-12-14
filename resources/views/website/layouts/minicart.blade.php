@@ -10,7 +10,7 @@
         <li class="d-flex justify-content-between">
             <a href="{{$item->slug}}">{{$item->name}}</a>
             <img class="mw-100 w-50" src="{{$item->image}}">
-            <p class="count"><input class="count" name="quanity" type="number" value="{{$item->pivot->quantity}}"></p>
+            <p class="count"><input class="count" attr-id="{{$item->id}}"  name="quanity" type="number" value="{{$item->pivot->quantity}}"></p>
             <form method="post" class="removefromcart" name="removefromcart"action="{{ route('removefromcart', ['cartid' =>$cart->id, 'productid' =>  $item->id ]) }}"  >
 
                 @csrf
@@ -33,7 +33,7 @@
         <div class="col-lg-6 d-flex">
             <a href="{{route('cart')}}" class="buy"> پرداخت</a>
         </div>
-        <div class="col-lg-6 d-flex">145000</div>
+        <div class="col-lg-6 d-flex">{{$totalprice}}</div>
     </div>
 
 </div>

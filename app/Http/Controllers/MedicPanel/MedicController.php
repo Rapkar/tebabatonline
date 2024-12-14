@@ -17,16 +17,16 @@ class MedicController extends Controller
         $recomendation = Recommendation::where('type', 'recomendation')->get();
         $problems = Recommendation::where('type', 'problems')->get();
         $Recommendations = Recommendation::All();
-        if (Auth::check()) {
-            $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
-        }
+ 
+        
         view()->share([
             'medicinerecomendation' =>  $medicinerecomendation,
             'recomendation' => $recomendation,
             'problems' => $problems,
             'Recommendations' => $Recommendations,
-            'notifications'=>$notifications 
+        
         ]);
+    
     }
     public function index(){
         $title = __("medic.Medic Page");
@@ -42,8 +42,7 @@ class MedicController extends Controller
             $result[] = ['data' => json_decode($item->content), 'date' => $formattedDate,'original'=>$item];
         }
         $notifications = Auth::user()->notifications()->whereNull('read_at')->get();
-    
-        return view('medic_panel.home',compact('notifications','title','result'));
+        return view('medic_panel.home',compact('notifications','title','result','notifications'));
 
     }
 

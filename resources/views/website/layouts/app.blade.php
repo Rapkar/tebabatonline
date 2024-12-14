@@ -90,6 +90,7 @@
 
                                 <li class="col-lg-3 d-flex align-items-center pt-2  cart-box "><a href="">
                                         <img class="cart-icon" src="{{ asset('images/cart.svg') }}" alt="cart-icon">
+                                        
                                         <span class="quanity">{{$cart}}</span>
 
                                     </a>
