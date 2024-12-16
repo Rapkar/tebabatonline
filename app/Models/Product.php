@@ -53,4 +53,7 @@ class Product extends Model
     {
         return $this->belongsToMany(Visit::class, 'visit_product')->withPivot('count');
     }
+    public function visitrecommendation(){
+        return $this->belongsToMany(Recommendation::class,'visit_recommendation')->withPivot('product_id');
+    }
 }

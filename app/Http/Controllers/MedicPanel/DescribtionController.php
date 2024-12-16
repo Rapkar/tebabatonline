@@ -65,18 +65,18 @@ class DescribtionController extends Controller
 
         // Check Visti recommendations Exist
         $exists = $visit->recommendations()->where('recommendation_id', $recommendation_id)->exists();
-    
+
         if (!$exists && is_array($request->Recommendationsdes)) {
 
             //Assign Describtinos to variable
             $Recommendationsdes = $request->Recommendationsdes;
-            
+
             //Attach Describtinos to recommendations relate table
-            $visit->recommendations()->attach($recommendation_id, ['comment' => $request->comment]) ;
-           
+            $visit->recommendations()->attach($recommendation_id, ['comment' => $request->comment]);
+
             //Attach Describtinos to visit relate table
             foreach ($Recommendationsdes as $item) {
-                 $visit->describtions()->attach($item,['recommendation_id'=>$recommendation_id]);
+                $visit->describtions()->attach($item, ['recommendation_id' => $recommendation_id]);
             }
 
             // Get the Recommendation object from id
@@ -111,7 +111,12 @@ class DescribtionController extends Controller
 
         // detach recommendation of visit
         $visit->recommendations()->detach($recommendation_id);
-
+        // $visit->describtions()->detach($recommendation_id);
+        if (is_array($request->describtion_id)) {
+            foreach ($request->describtion_id  as $item) {
+                $visit->describtions()->detach($item);
+            }
+        }
         return redirect()->route('patient_examination', $visit_id);
     }
 

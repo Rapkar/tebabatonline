@@ -370,6 +370,9 @@
                                 <td>
                                     <form method="post" action="{{route('invisitrmdrecom')}}">
                                         @csrf
+                                        @foreach($item->visitdescribtions as $des)
+                                        <input type="hidden" name="describtion_id[]" value="{{ $des->id }}">
+                                        @endforeach
                                         <input type="hidden" name="recommendation_id" value="{{$item->id }}">
                                         <input type="hidden" name="visit_id" value="{{$visit_id }}">
                                         <button class="btn btn-danger" type="submit">حذف</button>
@@ -414,6 +417,9 @@
                                 <td>
                                     <form method="post" action="{{route('invisitrmdrecom')}}">
                                         @csrf
+                                        @foreach($item->visitdescribtions as $des)
+                                        <input type="hidden" name="describtion_id[]" value="{{ $des->id }}">
+                                        @endforeach
                                         <input type="hidden" name="recommendation_id" value="{{$item->id }}">
                                         <input type="hidden" name="visit_id" value="{{$visit_id }}">
                                         <button class="btn btn-danger" type="submit">حذف</button>
@@ -513,8 +519,7 @@
     </table>
 </div>
 <!-- Button to trigger the modal -->
-@foreach($selected_products as $item)
-@if(count($item->recommendation)>0 )
+@foreach($visitproducts as $item)
 <div class="modal fade" id="descibe{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -523,7 +528,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                @foreach($item->recommendation as $recom)
+                @foreach($item->visitrecommendation as $recom)
                 <li>{{ $recom->content}}</li>
                 @endforeach
             </div>
@@ -533,7 +538,6 @@
         </div>
     </div>
 </div>
-@endif
 @endforeach
 
 

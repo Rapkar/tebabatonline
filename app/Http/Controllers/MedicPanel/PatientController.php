@@ -34,9 +34,10 @@ class PatientController extends Controller
         // dd($id);
         $title = __("medic.Medic Page");
         $items = Visit::with('recommendations.product')->find($id);
+        $visitproducts = Visit::with('products.visitrecommendation')->find($id)->products;
 
         // Get  visitdescribtions of  recommendations
-        $items2 = Visit::with('recommendations.visitdescribtions')->find($id);
+        // $items2 = Visit::with('recommendations.visitdescribtions')->find($id);
         //  $recommendations = $items->productRecommendations;
         
 
@@ -48,6 +49,9 @@ class PatientController extends Controller
         $selected_descibtions = $items->describtions()->get();
         $selected_products = $items->products()->get();
 
+
+
+        // dd($visitproducts);
         // $selected_recommendations2 = $items2->recommendations;
         // dd($selected_recommendations2);
 
@@ -82,7 +86,7 @@ class PatientController extends Controller
         
 
 
-        return view('medic_panel.patient.patient', compact('title'  ,'visit_id', 'result', 'products', 'selected_products', 'selected_recommendations', 'selected_problems','notifications', 'selected_descibtions'));
+        return view('medic_panel.patient.patient', compact('title','visitproducts'  ,'visit_id', 'result', 'products', 'selected_products', 'selected_recommendations', 'selected_problems','notifications', 'selected_descibtions'));
     }
     public function Totlaprice($relatedproducta)
     {
@@ -107,10 +111,10 @@ class PatientController extends Controller
 
         $visit->products()->attach($product, ['count' => $count]);
 
-        // foreach($selectedValues as $recomm){
-        //    $rcm= Recommendation::find($recomm)->first();
-        //     $visit->productrecommendations()->saveMany($rcm);
-        // }
+        foreach($selectedValues as $recomm){
+            $visit->recommendations()->attach($recomm,['product_id'=>$product_id]);
+            
+        }
         // $visit->productrecommendations()->attach($product,$selectedValues);
         
         

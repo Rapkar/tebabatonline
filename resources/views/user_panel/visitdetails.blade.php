@@ -49,7 +49,7 @@
 
                                         </div>
                                         <div class="modal-body">
-                                            @foreach($product->recommendation as $item)
+                                            @foreach($product->visitrecommendation as $item)
                                             <ul>
                                                 <li>{{$item->content}}</li>
                                             </ul>

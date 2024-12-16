@@ -13,13 +13,15 @@ class Visit extends Model
         return $this->belongsTo(User::class);
     }
     public function products(){
-        return $this->belongsToMany(Product::class,'visit_product')->withPivot('count','id','visit_id','product_id');
+        return $this->belongsToMany(Product::class,'visit_product')->withPivot('count' ,'product_id');
     }
     public function recommendations(){
-        return $this->belongsToMany(Recommendation::class,'visit_recommendation')->withPivot('comment');
+        return $this->belongsToMany(Recommendation::class,'visit_recommendation')->withPivot('comment','product_id');
     }
     public function describtions(){
         return $this->belongsToMany(Describtion::class,'visit_describtion')->withPivot('recommendation_id');
     }
- 
+    // public function visitrecommendation(){
+    //     return $this->belongsToMany(Recommendation::class,'visit_recommendation')->withPivot('product_id');
+    // }
 }

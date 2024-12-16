@@ -13,9 +13,10 @@ class Recommendation extends Model
         return $this->belongsToMany(Describtion::class,'describtion_recommendation');
     }
     public function product(){
-        return $this->belongsToMany(Product::class,'recommendation_product');
+        return $this->belongsToMany(Product::class,'recommendation_product')->withPivot('recommendation_id');
     }
     public function visitdescribtions(){
         return $this->belongsToMany(Describtion::class,'visit_describtion')->withPivot('recommendation_id');
     }
+
 }
