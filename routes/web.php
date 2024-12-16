@@ -172,7 +172,7 @@ Route::prefix('medicpanel')->middleware(MedicMiddleware::class)->group(function 
 Route::get('/', [App\Http\Controllers\Website\home::class, 'index'])->name('home');
 Route::get('articles/{slug}', [App\Http\Controllers\Website\home::class, 'articles'])->name('articles');
 Route::get('products/{slug}', [App\Http\Controllers\Website\home::class, 'products'])->name('products');
-Route::post('addtocart/{id}', [App\Http\Controllers\UserPanel\CartController::class, 'addproduct'])->name('addtocart');
+Route::post('addtocart/{id}/{type?}', [App\Http\Controllers\UserPanel\CartController::class, 'addproduct'])->name('addtocart');
 Route::post('removefromcart/{cartid}/{productid}', [App\Http\Controllers\UserPanel\CartController::class, 'removefromcart'])->name('removefromcart');
 Route::get('shop', [App\Http\Controllers\Website\home::class, 'shop'])->name('shop');
 

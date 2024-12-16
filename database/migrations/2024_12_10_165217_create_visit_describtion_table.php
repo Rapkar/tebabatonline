@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('visit_id')->references('id')->on('visits')->onDelete('cascade'); // Reference to the product
             $table->foreignId('describtion_id')->references('id')->on('describtions')->onDelete('cascade'); // Reference to the product
+            $table->foreignId('recommendation_id')->references('id')->on('recommendations')->onDelete('cascade'); // Reference to the product
 
             $table->timestamps();
         });

@@ -44,6 +44,7 @@ class RecomendationController extends Controller
             'name.required' => __("admin.The name field is required."),
             'name.string' => __('admin.The name must be a string.'),
         ]);
+    
     }
 
     public function index($type)
@@ -69,11 +70,14 @@ class RecomendationController extends Controller
         ]);
         $type = $request->input('type');
         $Recommendation->content = $request->input('content');
+       
+
         $Recommendation->type =   $type;
 
         $Recommendation->save();
         if ($type == "medicinerecomendation") {
             $product = Product::find($request->input('product'));
+            $Recommendation->product_id =$product->id;
             // $Recommendation->product()->attach($product);
             // dd($product->id);
             // $Recommendation= $Recommendation->product;
@@ -94,7 +98,10 @@ class RecomendationController extends Controller
         // dd( $Recommendation, $describtions);
         // $Recommendation->delete();
         $products = Product::all();
-        $product_id = $Recommendation->product()->first()->id;
+        $product_id=null;
+        
+            $product_id = $Recommendation->product->first()->id ?? null;
+        
          
       
         return view('medic_panel.patient.recomendation.edit', compact('describtions', 'product_id', 'products', 'Recommendation'));
@@ -103,6 +110,7 @@ class RecomendationController extends Controller
     {
         $Recommendation = Recommendation::find($id);
         $Recommendation->content = $request->input('content');
+        $Recommendation->product_id = $request->input('product');
         $Recommendation->save();
         return redirect()->route('recommendation', $Recommendation->type);
     }

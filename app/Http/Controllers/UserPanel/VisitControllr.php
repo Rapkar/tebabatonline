@@ -13,6 +13,7 @@ use Hekmatinasser\Verta\Verta;
 use App\Notifications\VisitNotification;
 use App\Models\Cart;
 use App\Http\Controllers\UserPanel\Helper\UserHelper;
+
 class VisitControllr extends Controller
 {
     use UserHelper;
@@ -75,8 +76,9 @@ class VisitControllr extends Controller
     }
     public function visit($id)
     {
-        $title="نسخه شما";
+        $title = "نسخه شما";
         $Visit = Visit::find($id);
+        $Visit_id=$Visit->id;
         $descibtions = $Visit->descibtions;
         $recomendation = $Visit->recommendations;
         $products = $Visit->products;
@@ -94,10 +96,14 @@ class VisitControllr extends Controller
                 $cart = 0;
             }
         }
-        $totalprice = $this->totalprice($cart_id->id);
-   
+        if (!is_null($cart_id)) {
+            $totalprice = $this->totalprice($cart_id->id);
+        } else {
+            $totalprice = 0;
+        }
 
-     
-        return view('user_panel.visitdetails', compact('title','products', 'orderitems','totalprice','cart','products'));
+        // dd( $products);
+
+        return view('user_panel.visitdetails', compact('title','Visit_id','recomendation', 'orderitems', 'totalprice', 'cart', 'products'));
     }
 }

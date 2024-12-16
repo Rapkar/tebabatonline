@@ -1329,11 +1329,7 @@
                         <textarea name="comment" placeholder="توضیحات بیشتر"></textarea>
                     </div>
                 </div>
-
-
-
                 <div class="col-lg-12"><button type="submit" class=" ">ثبت</button> <button class="prev-button">قبلی</button></div>
-
             </div>
         </section>
     </form>

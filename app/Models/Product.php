@@ -31,20 +31,26 @@ class Product extends Model
         $this->decrement('quantity', $amount);
     }
 
-    public function updateQuantity($newQuantity)
-    {   if ($this->cart()->exists()) {
-        $this->cart()->update(['quantity' => $newQuantity]);
+    // public function updateQuantity($newQuantity)
+    // {   if ($this->cart()->exists()) {
+    //     $this->cart()->update(['quantity' => $newQuantity]);
+    // }
+    // }
+    public function recommendation()
+    {
+        return $this->belongsToMany(Recommendation::class, 'recommendation_product');
     }
-    }
-    public function recommendation(){
-        return $this->belongsToMany(Recommendation::class,'recommendation_product');
-    }
+
     public function isInStock()
     {
         return $this->quantity > 0;
     }
-    public function carts(){
-        return $this->belongsToMany(Cart::class)->withPivot( 'quantity');
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class)->withPivot('quantity');
     }
-  
+    public function visits()
+    {
+        return $this->belongsToMany(Visit::class, 'visit_product')->withPivot('count');
+    }
 }

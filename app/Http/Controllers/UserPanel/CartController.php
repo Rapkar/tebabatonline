@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserPanel\Helper\UserHelper;
+
 class CartController extends Controller
 {
 
@@ -28,10 +29,14 @@ class CartController extends Controller
                 $cart = 0;
             }
         }
-        $totalprice = $this->totalprice($cart_id->id);
+        if (!is_null($cart_id)) {
+            $totalprice = $this->totalprice($cart_id->id);
+        } else {
+            $totalprice = 0;
+        }
         return view("user_panel.cart", compact("cart", "totalprice", "orderitems"));
     }
-    public function addproduct($id)
+    public function addproduct($id, $type = "purchase")
     {
         $product = Product::findOrFail($id);
 
@@ -39,7 +44,10 @@ class CartController extends Controller
         $userId = Auth::user()->id;
 
         // Find or create a cart for the user
-        $cart = Cart::firstOrCreate(['user_id' => $userId]);
+        $cart = Cart::firstOrCreate(
+            ['user_id' => $userId],
+            ['type' => $type ?? 'purchase'] // Set a default type if none is provided
+        );
 
         // Check if the product is already in the cart
         $existingCartProduct = $cart->products()->where('product_id', $product->id)->first();
@@ -51,8 +59,14 @@ class CartController extends Controller
             // If the product is not in the cart, attach it with quantity 1
             $cart->products()->attach($product->id, ['quantity' => 1]);
         }
-        $orderitems = Cart::where('user_id', $userId)->with('products')->get();
-        $out = view('website.layouts.minicart', compact('orderitems'))->render();
+        $orderitems = Cart::where('user_id', $userId)->orWhere('type', 'purchase')->with('products')->get();
+        if (!is_null($cart->id)) {
+            $totalprice = $this->totalprice($cart->id);
+        } else {
+            $totalprice = 0;
+        }
+        $out = view('website.layouts.minicart', compact('orderitems','totalprice'))->render();
+        
         // Optional: Provide feedback to the user
         return response()->json([
             'message' => "Product '{$product->name}' has been added to your cart.",

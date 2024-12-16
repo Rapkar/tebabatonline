@@ -15,4 +15,7 @@ class Recommendation extends Model
     public function product(){
         return $this->belongsToMany(Product::class,'recommendation_product');
     }
+    public function visitdescribtions(){
+        return $this->belongsToMany(Describtion::class,'visit_describtion')->withPivot('recommendation_id');
+    }
 }

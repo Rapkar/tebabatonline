@@ -5,7 +5,10 @@ import '../../css/website/core.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-rtl/dist/css/bootstrap-rtl.min.css';
+import 'bootstrap/dist/css/bootstrap-utilities.css';
+import 'bootstrap/dist/css/bootstrap-utilities.rtl.css';
 import $ from 'jquery';
+import * as bootstrap from 'bootstrap';
 import Swiper from 'swiper';
 import Dropzone from 'dropzone';
 import 'swiper/swiper-bundle.css';
@@ -511,14 +514,18 @@ $("form#productfilter").on("submit", function (e) {
 // product quantity
 $("input.count").on("change", function () {
   var product_id = $(this).attr('attr-id'); // Assuming you have a data attribute for product_id
+  var visit_id = $(this).attr('attr-visit'); // Assuming you have a data attribute for product_id
   var val = $(this).val();
   var cart_id = $('input[name="cart_id"]').val();
+  var section = $(this).attr("attr-sec");
   
   $.ajax({
     url: '/update-quantity',
     type: 'POST',
     data: {
       product_id: product_id,
+      visit_id:visit_id,
+      section: section,
       cart_id: cart_id,
       quantity: val,
       '_token': $('meta[name="csrf-token"]').attr('content'), // Include CSRF token

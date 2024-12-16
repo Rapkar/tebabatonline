@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->longText('content');
             $table->tinyInteger('completed')->default(0);
+            // $table->foreignId('medic_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

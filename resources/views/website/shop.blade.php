@@ -24,16 +24,12 @@
                         <hr>
                         <h3>فیلتر بر اساس قیمت</h3>
                         <div class=" position-relative d-flex flex-column slidecontainer mt-4">
-
                             <input type="range" min="0" max="590000" value="0" step="50000"  class="slider" name="min-price" id="min-price">
                             <p class="min-price">از ۱۰ هزار تومان</p>
-
                             <input type="range" min="50000" max="600000" value="50000" step="50000" class="slider" name="max-price" id="max-price">
                             <p class="max-price">تا ۶۰۰ هزار تومان</p>
                             <button type="submit" class="btn btn-dark">جستجو</button>
-
                         </div>
-
                     </form>
                     <hr>
                     <h4>اخرین دیدگاه ها</h4>

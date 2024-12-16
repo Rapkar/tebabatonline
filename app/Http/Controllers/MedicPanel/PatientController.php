@@ -33,12 +33,29 @@ class PatientController extends Controller
     {
         // dd($id);
         $title = __("medic.Medic Page");
-        $items = Visit::find($id);
+        $items = Visit::with('recommendations.product')->find($id);
+
+        // Get  visitdescribtions of  recommendations
+        $items2 = Visit::with('recommendations.visitdescribtions')->find($id);
+        //  $recommendations = $items->productRecommendations;
+        
+
+
+
         $result = [];
-        $selected_recommendations = $items->recommendations()->where('type', 'recomendation')->withPivot('comment')->get();
-        $selected_problems = $items->recommendations()->where('type', 'problems')->withPivot('comment')->get();
-        $selected_descibtions = $items->descibtions()->get();
+        $selected_recommendations = $items->recommendations()->where('type', 'recomendation')->get();
+        $selected_problems = $items->recommendations()->where('type', 'problems')->get();
+        $selected_descibtions = $items->describtions()->get();
         $selected_products = $items->products()->get();
+
+        // $selected_recommendations2 = $items2->recommendations;
+        // dd($selected_recommendations2);
+
+        // foreach( $items as $key => $value ) {
+        //     dump($value->descibtions );
+        // }
+        // dd($items->productRecommendations);
+        // dd($items->descibtions);
         // foreach($selected_products as $product){
         //     dump($product->recommendation);
         // }
@@ -65,7 +82,7 @@ class PatientController extends Controller
         
 
 
-        return view('medic_panel.patient.patient', compact('title', 'visit_id', 'result', 'products', 'selected_products', 'selected_recommendations', 'selected_problems','notifications', 'selected_descibtions'));
+        return view('medic_panel.patient.patient', compact('title'  ,'visit_id', 'result', 'products', 'selected_products', 'selected_recommendations', 'selected_problems','notifications', 'selected_descibtions'));
     }
     public function Totlaprice($relatedproducta)
     {
@@ -78,6 +95,7 @@ class PatientController extends Controller
     {
         $visit_id = $request->input('visit_id');
         $product_id = $request->input('product_id');
+        $selectedValues= $request->input('selectedValues');
         $count = $request->input('count');
         $product = Product::all()->find($product_id); //find the product
         $visit = Visit::all()->find($visit_id); //find the visit
@@ -88,6 +106,14 @@ class PatientController extends Controller
         }
 
         $visit->products()->attach($product, ['count' => $count]);
+
+        // foreach($selectedValues as $recomm){
+        //    $rcm= Recommendation::find($recomm)->first();
+        //     $visit->productrecommendations()->saveMany($rcm);
+        // }
+        // $visit->productrecommendations()->attach($product,$selectedValues);
+        
+        
         $selected_products = $visit->products()->get();
         $mesage = view('medic_panel.patient.part.product', compact('selected_products'))->render();
         $totalprice = $this->Totlaprice($selected_products);
@@ -107,7 +133,7 @@ class PatientController extends Controller
 
         // Detach the product from the visit
         $visit->products()->detach($product_id);
-
-        return  redirect()->route('patient_examination', $visit_id);
+        
+        return  redirect()->back()->with('success','باموفقیت حذف شد');
     }
 }

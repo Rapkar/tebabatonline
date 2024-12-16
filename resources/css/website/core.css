@@ -838,6 +838,7 @@ padding: 1rem; */
     line-height: 20px;
     text-align: center;
     color: #0000007D;
+    margin: 0;
 
 }
 
@@ -871,7 +872,9 @@ padding: 1rem; */
     object-position: center;
     border-radius: 15px;
 }
-
+.products .removefromcart button {
+background-color: transparent;
+}
 .shop-header li a {
     color: #017072;
     font-size: 16px;
@@ -1234,6 +1237,7 @@ form.added button {
     margin: 0;
     align-items: center;
     display: flex;
+    height: 30px;
 }
 
 .minicart .buy {
@@ -1604,6 +1608,29 @@ h2.greentitle {
 }
 
 /* user panel */
+.visitdetails{
+    margin-top: -3rem;
+    /* z-index: 99; */
+    /* position: relative; */
+    background-color: #FFF;
+    border-radius: 40px;
+    box-shadow: 6px 8px 18px;
+}
+.visitdetailsbanner{
+    z-index: -1;
+    position: relative;
+}
+.problemview th{
+    padding: 10px;
+}
+.problemview td{
+    font-weight: 400;
+    font-size: 16px;
+}
+.problemview{
+    background-color: #C4E1E1;
+    border-radius: 50px;
+}
 .vistiitems li {
     list-style: none;
     display: flex;

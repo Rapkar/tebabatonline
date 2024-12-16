@@ -10,9 +10,8 @@
         <li class="d-flex justify-content-between">
             <a href="{{$item->slug}}">{{$item->name}}</a>
             <img class="mw-100 w-50" src="{{$item->image}}">
-            <p class="count"><input class="count" attr-id="{{$item->id}}"  name="quanity" type="number" value="{{$item->pivot->quantity}}"></p>
-            <form method="post" class="removefromcart" name="removefromcart"action="{{ route('removefromcart', ['cartid' =>$cart->id, 'productid' =>  $item->id ]) }}"  >
-
+            <p class="count"><input class="count" attr-id="{{$item->id}}" name="quanity" type="number" value="{{$item->pivot->quantity}}"></p>
+            <form method="post" class="removefromcart" name="removefromcart" action="{{ route('removefromcart', ['cartid' =>$cart->id, 'productid' =>  $item->id ]) }}">
                 @csrf
                 <input type="hidden" name="product_id" value="{{$item->id}}">
                 <input type="hidden" name="cart_id" value="{{$cart->id}}">

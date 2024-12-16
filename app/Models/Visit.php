@@ -16,9 +16,10 @@ class Visit extends Model
         return $this->belongsToMany(Product::class,'visit_product')->withPivot('count','id','visit_id','product_id');
     }
     public function recommendations(){
-        return $this->belongsToMany(Recommendation::class,'visit_recommendation')->withPivot("comment");
+        return $this->belongsToMany(Recommendation::class,'visit_recommendation')->withPivot('comment');
     }
-    public function descibtions(){
-        return $this->belongsToMany(Describtion::class,'visit_describtion');
+    public function describtions(){
+        return $this->belongsToMany(Describtion::class,'visit_describtion')->withPivot('recommendation_id');
     }
+ 
 }

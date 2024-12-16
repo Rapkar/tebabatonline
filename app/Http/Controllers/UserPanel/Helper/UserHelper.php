@@ -10,7 +10,7 @@ trait UserHelper
     {
         // Retrieve the cart using the provided cart ID
         $cart = Cart::with('products')->find($cartid);
-
+        // dd($cart);
         // Initialize total price
         $totalPrice = 0;
 
@@ -18,7 +18,7 @@ trait UserHelper
         if ($cart && $cart->products) {
             foreach ($cart->products as $product) {
                 // Assuming each product has a 'price' attribute
-                $totalPrice += $product->price;
+                $totalPrice += $product->price * $product->pivot->quantity;
             }
         }
         if ($html == true) {

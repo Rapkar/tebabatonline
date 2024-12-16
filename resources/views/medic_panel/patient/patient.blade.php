@@ -548,7 +548,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                @foreach($item->describtions as $des)
+                @foreach($item->visitdescribtions as $des)
                 {{$des->content}}<br>
                 @endforeach
             </div>
@@ -573,7 +573,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                @foreach($item->describtions as $des)
+                @foreach($item->visitdescribtions as $des)
                 {{$des->content}}<br>
                 @endforeach
             </div>
@@ -632,7 +632,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -652,7 +651,6 @@
                     </label>
                     <label class="col-lg-12 mt-3">
                         <textarea class="w-100" name="recommendationdescribe">
-
                         </textarea>
                     </label>
                 </form>
@@ -670,7 +668,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

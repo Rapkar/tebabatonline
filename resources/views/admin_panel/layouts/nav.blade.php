@@ -159,8 +159,6 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#">ویزیت</a>
-                        <a class="dropdown-item" href="#">ویزیت</a>
-                        <a class="dropdown-item" href="#">محصولات</a>
                         <a class="dropdown-item" href="{{route('routecache')}}">پاک کردن کش</a>
                     </div>
                 </li>

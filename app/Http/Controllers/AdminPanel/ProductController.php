@@ -143,19 +143,27 @@ class ProductController extends Controller
     }
     public function updateQuantity(Request $request)
     {
-        // $request->validate([
-        //     'product_id' => 'required|exists:products,id',
-        //     'quantity' => 'required|integer|min:0',
-        // ]);
+        $Visit_id= $request->input('visit_id');
+        if (empty($request->section)) {
+            $section = "cart";
+        } else {
+            $section = "mediccart";
+        }
 
         $product = Product::findOrFail($request->product_id);
-        // $product->updateQuantity(['quantity' => $request->quantity]);
-        // $product->carts->updateQuantity( $request->quantity);
-        $product->carts()->updateExistingPivot($request->cart_id, ['quantity' => $request->quantity]);
+        // dd($product->visit->first()->pivot->count);
+        if ($section == "cart") {
+            $product->carts()->updateExistingPivot($request->cart_id, ['quantity' => $request->quantity]);
+            $newquanity = $product->carts->first()->pivot->quantity;
+        } else {
+            $product->visits()->updateExistingPivot( $Visit_id, ['count' => $request->quantity]);
+            $newquanity = $product->visits->first()->pivot->count;
+        }
+        
         return response()->json([
             'success' => true,
             'message' => 'Quantity updated successfully',
-            'new_quantity' => $product->carts->first()->pivot->quantity
+            'new_quantity' => $newquanity
         ]);
     }
     public function getproductbyprice(Request $request)

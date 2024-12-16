@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MedicPanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Visit;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
 class VisitControllr extends Controller
@@ -24,6 +25,7 @@ class VisitControllr extends Controller
         $item=Visit::find($visit_id);
         if ($item) {
             $item->completed = 1; // Mark as completed
+            // $item->medic_id=Auth::user()->id;
             $item->save();
         }
         return redirect()->back()->with('success','نسخه ارسال شد');

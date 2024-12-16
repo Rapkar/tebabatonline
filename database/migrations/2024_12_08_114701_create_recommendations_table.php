@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
             $table->longText("content");
+            $table->foreignId('product_id')->nullable()->constrained()->onDelete('cascade');
             $table->string("type");
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

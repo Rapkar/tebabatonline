@@ -295,6 +295,7 @@ $("#addproducttopatient").on("click", function (e) {
   var selectedValues = $("input[name='Recommendationproduct[]']:checked").map(function () {
     return this.value; // Get the value of each checked checkbox
   }).get(); // Convert jQuery object to a regular array
+  console.log(selectedValues)
   $.ajax({
     type: 'post',
     url: '/medicpanel/addproducttopatient/',
