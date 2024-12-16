@@ -92,8 +92,7 @@
             <div class="problemview px-5 py-5">
                 <h2 class="greentitle m-auto">تشخیص طبیب شما</h2>
                 <ul class="row list-unstyled mt-5">
-                    @foreach($recomendation as $item )
-                    @if($item->type=='problems')
+                    @foreach($selected_problems as $item )
                     <li class="col-lg-12">
                         <table>
                             <thead>
@@ -119,7 +118,7 @@
 
                                                     </div>
                                                     <div class="modal-body">
-                                                        @foreach($item->describtions as $describtion )
+                                                        @foreach($item->visitdescribtions as $describtion )
                                                         <p>{{ $describtion->content}}</p><br>
                                                         @endforeach
                                                     </div>
@@ -130,15 +129,13 @@
                             </tbody>
                         </table>
                     </li>
-                    @endif
                     @endforeach
                 </ul>
             </div>
             <div class="problemview px-5 py-5 mt-5">
                 <h2 class="greentitle m-auto">توصیه های طبیب شما</h2>
                 <ul class="row list-unstyled   mt-5 ">
-                    @foreach($recomendation as $item )
-                    @if($item->type=='recomendation')
+                    @foreach($selected_recommendations as $item )
                     <li class="col-lg-12">
                         <table>
                             <thead>
@@ -164,7 +161,7 @@
 
                                                     </div>
                                                     <div class="modal-body">
-                                                        @foreach($item->describtions as $describtion )
+                                                        @foreach($item->visitdescribtions as $describtion )
                                                         <p>{{ $describtion->content}}</p><br>
                                                         @endforeach
                                                     </div>
@@ -175,7 +172,6 @@
                             </tbody>
                         </table>
                     </li>
-                    @endif
                     @endforeach
                 </ul>
             </div>

@@ -78,6 +78,7 @@ class VisitControllr extends Controller
     {
         $title = "نسخه شما";
         $Visit = Visit::find($id);
+        $items = Visit::with('recommendations.product')->find($id);
         $Visit_id=$Visit->id;
         $descibtions = $Visit->descibtions;
         $recomendation = $Visit->recommendations;
@@ -102,8 +103,15 @@ class VisitControllr extends Controller
             $totalprice = 0;
         }
 
-        // dd( $products);
+       
 
-        return view('user_panel.visitdetails', compact('title','Visit_id','recomendation', 'orderitems', 'totalprice', 'cart', 'products'));
+
+        $selected_recommendations = $items->recommendations()->where('type', 'recomendation')->get();
+        $selected_problems = $items->recommendations()->where('type', 'problems')->get();
+        $selected_descibtions = $items->describtions()->get();
+        $selected_products = $items->products()->get();
+
+
+        return view('user_panel.visitdetails', compact('title','Visit_id','recomendation', 'orderitems', 'totalprice', 'cart', 'products','selected_recommendations','selected_problems','selected_products'));
     }
 }
