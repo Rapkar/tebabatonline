@@ -32,7 +32,7 @@
         <div class="col-lg-6 d-flex">
             <a href="{{route('cart')}}" class="buy"> پرداخت</a>
         </div>
-        <div class="col-lg-6 d-flex">{{$totalprice}}</div>
+        <div class="col-lg-6 d-flex">{{$totalprice ?? 0}}</div>
     </div>
 
 </div>

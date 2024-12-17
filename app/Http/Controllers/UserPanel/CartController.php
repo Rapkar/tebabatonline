@@ -20,9 +20,9 @@ class CartController extends Controller
         $orderitems = [];
         $cart = 0;
         if (Auth::user()) {
-            $orderitems = Cart::where('user_id', $user->id)->with('products')->get();
-            $cart_id = Cart::where('user_id', $user->id)->with('products')->first();
-            $cart = Cart::where('user_id', $user->id)->with('products')->first();
+            $orderitems = Cart::where('user_id', $user->id)->where('type','purchase')->with('products')->get();
+            $cart_id = Cart::where('user_id', $user->id)->where('type','purchase')->with('products')->first();
+            $cart = Cart::where('user_id', $user->id)->where('type','purchase')->with('products')->first();
             if ($cart) {
                 $cart =  count($cart->products);
             } else {
@@ -44,11 +44,18 @@ class CartController extends Controller
         $userId = Auth::user()->id;
 
         // Find or create a cart for the user
-        $cart = Cart::firstOrCreate(
-            ['user_id' => $userId],
-            ['type' => $type ?? 'purchase'] // Set a default type if none is provided
-        );
 
+        $cart = Cart::where('user_id', $userId)
+            ->where('type',  $type)
+            ->first();
+
+        if (!$cart) {
+            $cart = new Cart;
+
+            $cart->user_id = $userId;
+            $cart->type = $type;
+            $cart->save();
+        }
         // Check if the product is already in the cart
         $existingCartProduct = $cart->products()->where('product_id', $product->id)->first();
 
@@ -59,18 +66,22 @@ class CartController extends Controller
             // If the product is not in the cart, attach it with quantity 1
             $cart->products()->attach($product->id, ['quantity' => 1]);
         }
-        $orderitems = Cart::where('user_id', $userId)->orWhere('type', 'purchase')->with('products')->get();
+        $orderitems = Cart::where('user_id', $userId)->where('type', 'purchase')->with('products')->get();
         if (!is_null($cart->id)) {
             $totalprice = $this->totalprice($cart->id);
         } else {
             $totalprice = 0;
         }
-        $out = view('website.layouts.minicart', compact('orderitems','totalprice'))->render();
-        
+        $out = view('website.layouts.minicart', compact('orderitems', 'totalprice'))->render();
+        if ($cart) {
+            $cart =  count($cart->products);
+        } else {
+            $cart = 0;
+        }
         // Optional: Provide feedback to the user
         return response()->json([
             'message' => "Product '{$product->name}' has been added to your cart.",
-            'cart' => count($orderitems),
+            'cart' => $cart,
             'out' => $out
         ]);
     }

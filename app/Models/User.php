@@ -65,4 +65,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserMeta::class, 'user_id');
     }
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class);
+    }
 }

@@ -79,8 +79,9 @@
                         </tr>
                     </table>
 
-                    <form action="{{route('payment')}}" name="">
+                    <form method="post" action="{{route('medicpayment')}}" name="">
                         @csrf
+                        <input type="hidden" name="visit_id" value="{{$Visit_id}}">
                         <button type="submit">تایید و تکمیل سفارش</button>
                     </form>
                 </div>

@@ -23,8 +23,6 @@ class home extends Controller
     {
 
 
-
-
         $posts = Post::whereHas('categories', function ($query) {
             $query->where('name', 'home-post');
         })->get();
@@ -36,9 +34,9 @@ class home extends Controller
         $totalprice = 0;
         if (Auth::user()) {
             $user = Auth::user();
-            $cart_id = Cart::where('user_id', $user->id)->with('products')->first();
-            $orderitems = Cart::where('user_id', $user->id)->with('products')->get();
-            $cart = Cart::where('user_id', $user->id)->with('products')->first();
+            $cart_id = Cart::where('user_id', $user->id)->where('type','purchase')->with('products')->first();
+            $orderitems = Cart::where('user_id', $user->id)->where('type','purchase')->with('products')->get();
+            $cart = Cart::where('user_id', $user->id)->where('type','purchase')->with('products')->first();
             if ($cart) {
                 $cart =  count($cart->products);
             } else {
@@ -51,7 +49,7 @@ class home extends Controller
             }
         }
 
-
+        // dd( $orderitems = Cart::where('user_id', $cart_id->id)->where('type', 'purchase')->with('products')->get());
         $comments = Comment::limit(8)->get();
         return view('website.home', compact('posts', 'totalprice', 'products', 'cart', 'orderitems', 'comments'));
     }

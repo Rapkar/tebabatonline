@@ -185,7 +185,11 @@ Route::prefix('userpanel')->middleware([UserMiddleware::class])->group(function 
     /********************* *************************/
     Route::get('/', [App\Http\Controllers\UserPanel\UserController::class, 'index'])->name('userDashboard');
     Route::get('/cart', [App\Http\Controllers\UserPanel\CartController::class, 'index'])->name('cart');
-    Route::get('/payment', [App\Http\Controllers\UserPanel\PaymentController::class, 'payment'])->name('payment');
+    Route::post('/payment', [App\Http\Controllers\UserPanel\PaymentController::class, 'payment'])->name('payment');
+    Route::post('/medicpayment', [App\Http\Controllers\UserPanel\PaymentController::class, 'medicpayment'])->name('medicpayment');
+    
+    
+    
     Route::post('/storecomment', [App\Http\Controllers\Website\CommentController::class, 'storecomment'])->middleware('auth')->name('storecomment');
     Route::post('/storevisit', [App\Http\Controllers\UserPanel\VisitControllr::class, 'storevisit'])->middleware('auth')->name('storevisit');
     Route::get('/forms', [App\Http\Controllers\UserPanel\VisitControllr::class, 'forms'])->name('forms');
