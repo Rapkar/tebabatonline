@@ -167,6 +167,10 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
 
     Route::get('Notifications', [App\Http\Controllers\Website\EventController::class, 'index'])->name('events.show');
     Route::post('Notifications', [App\Http\Controllers\Website\EventController::class, 'store'])->name('events.store');
+
+
+    Route::get('/robots', [BotController::class, 'index'])->name('get.robot');
+    Route::post('/robots', [BotController::class, 'update'])->name('update.robot');
 });
 
 
@@ -320,12 +324,6 @@ Route::get('/caches/clear', function () {
     Artisan::call('route:cache');
     return redirect()->back()->with('success', 'cache removed');
 })->name('routecache');
-Route::get('/robots', [BotController::class, 'index'])->name('get.robot');
-Route::post('/robots', [BotController::class, 'update'])->name('update.robot');
 
 
 
-// Route::get('filemanager', [ FileManagerController::class, 'index']);
-// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-//     \UniSharp\LaravelFilemanager\Lfm::routes();
-// });
