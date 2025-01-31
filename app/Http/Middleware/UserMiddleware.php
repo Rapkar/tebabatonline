@@ -22,8 +22,8 @@ class UserMiddleware
         }
     
        
-        $title = __("auth.Login");
-        return response()->view('auth.login', compact('title'));
+        // $title = __("auth.Login");
+        return redirect()->route('login');
 
     }
 }

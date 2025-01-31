@@ -17,17 +17,12 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        
-     
-            if (Auth::check() &&  Auth::user()->hasRole('admin')) {
-                Log::info('UserMiddleware executed', ['admin' => Auth::user()]);
 
-                return $next($request);
-            }
-            $title = __("auth.Login");
-            return response()->view('auth.login', compact('title'));
 
-        
-
+        if (Auth::check() &&  Auth::user()->hasRole('admin')) {
+            Log::info('UserMiddleware executed', ['admin' => Auth::user()]);
+            return $next($request);
+        }
+        return redirect()->route('login');
     }
 }

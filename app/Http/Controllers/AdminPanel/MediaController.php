@@ -17,7 +17,7 @@ class MediaController extends Controller
             $file = $request->file('image');
         }
         $imageName = time() . ' ' . $file->getClientOriginalName();
-        $url = $request->file('file')->storeAs('images', $imageName);
+        $url = $request->file('file')->storeAs('files/1', $imageName);
         sleep(1);
         return response()->json([
             'success' => true,

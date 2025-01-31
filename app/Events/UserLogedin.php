@@ -10,16 +10,16 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class GotMessage
+class UserLogedin
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $message;
+
     /**
      * Create a new event instance.
      */
-    public function __construct($message)
+    public function __construct()
     {
-        $this->message = $message;
+        //
     }
 
     /**
@@ -29,10 +29,8 @@ class GotMessage
      */
     public function broadcastOn(): array
     {
-        
-        // $this->message is available here
         return [
-            new PrivateChannel('channel_for_everyone'),
+            new PrivateChannel('channel-name'),
         ];
     }
 }

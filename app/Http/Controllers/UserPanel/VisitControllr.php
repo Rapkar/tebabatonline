@@ -41,6 +41,15 @@ class VisitControllr extends Controller
     }
     public function forms()
     {
+        $medicuserss = User::whereHas('roles', function ($query) {
+            $query->whereIn('name', ['Medic', 'Admin']);
+        })->get();
+
+        foreach ($medicuserss as $user) {
+
+            $user->notify(new VisitNotification($user,2));
+        }
+
         $user = Auth::user();
         // dd(Auth::user()->hasRole('user'));
         // $posts = Post::all();

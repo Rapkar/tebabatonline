@@ -30,18 +30,20 @@ class CommentController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        // S
-        $Comment = new Comment();
-        $Comment->content = $request->input('content');
-        $Comment->post_id = $request->input('post_id');
-        $Comment->user_id = Auth::user()->id;
-        $Comment->status = 'draft';
-        $Comment->save();
-        $post = Post::where('id',$Comment->post_id)->first();
+        $post = Post::find($request->post_id);
+        if ($post) {
+            $Comment = new Comment();
+            $Comment->content = $request->input('content');
+            $Comment->status = 'draft';
+            $Comment->user_id = Auth::user()->id;
+            $post->comments()->save($Comment);
+        }
+
+        $post = Post::where('id', $request->post_id)->first();
         if (!$post) {
             return abort(404);
         }
-        return redirect()->route('articles', $post->slug ); // redirect to the users index page
+        return redirect()->route('articles', $post->slug); // redirect to the users index page
 
 
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Website;
 
+use App\Events\UserLogedin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -15,12 +16,19 @@ use App\Http\Controllers\helper;
 use App\Models\Comment;
 use App\Models\Cart;
 use App\Http\Controllers\UserPanel\Helper\UserHelper;
+use App\Notifications\NotifyAllUsers;
+use Illuminate\Support\Facades\Notification;
 
 class home extends Controller
 {
     use UserHelper;
     public function index()
     {
+        event(new UserLogedin);
+
+        // ارسال رویداد
+
+        // return response()->json(['status' => 'Notification sent!']);
 
 
         $posts = Post::whereHas('categories', function ($query) {
@@ -34,9 +42,9 @@ class home extends Controller
         $totalprice = 0;
         if (Auth::user()) {
             $user = Auth::user();
-            $cart_id = Cart::where('user_id', $user->id)->where('type','purchase')->with('products')->first();
-            $orderitems = Cart::where('user_id', $user->id)->where('type','purchase')->with('products')->get();
-            $cart = Cart::where('user_id', $user->id)->where('type','purchase')->with('products')->first();
+            $cart_id = Cart::where('user_id', $user->id)->where('type', 'purchase')->with('products')->first();
+            $orderitems = Cart::where('user_id', $user->id)->where('type', 'purchase')->with('products')->get();
+            $cart = Cart::where('user_id', $user->id)->where('type', 'purchase')->with('products')->first();
             if ($cart) {
                 $cart =  count($cart->products);
             } else {
@@ -185,6 +193,9 @@ class home extends Controller
     }
     public function shop()
     {
+        // broadcast(new NotifyAllUsers("testtt"));
+        event(new NotifyAllUsers("testtt"));
+
         $user = Auth::user();
         // dd(Auth::user()->hasRole('user'));
         // $posts = Post::all();

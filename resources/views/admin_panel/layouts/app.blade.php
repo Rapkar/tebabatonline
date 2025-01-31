@@ -14,6 +14,7 @@
 
     <!-- Scripts -->
     @vite([ 'resources/js/adminpanel/core.js','resources/css/app.css'])
+
 </head>
 
 <body>

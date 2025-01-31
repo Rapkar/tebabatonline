@@ -241,4 +241,9 @@ a.navbar-brand {
     background-color: #7575754a;
     color: #000;
   }
- 
+ .form-switch{
+    width: fit-content;
+ }
+ .logoimg{
+    max-width: 200px;
+ }

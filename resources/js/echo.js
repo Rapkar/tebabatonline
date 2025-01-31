@@ -1,18 +1,22 @@
 import Echo from 'laravel-echo';
-import $ from 'jquery';
-// import Pusher from 'pusher-js';
-// window.Pusher = Pusher;
-var receiverId=$('select[name="users"]').val();
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: '723614bfcaeb1ebf3619',
-//     cluster: 'ap2',
-//     forceTLS: true
-// });
+import Pusher from 'pusher-js'; // Import Pusher library
  
+window.Pusher = Pusher;
 
-// window.Echo = new Echo({ broadcaster: 'pusher', key: '723614bfcaeb1ebf3619', cluster: 'ap2', forceTLS: true });
-// window.Echo.channel(`chat.${receiverId}`)
-//     .listen('message.sent', (e) => {
-//         console.log(e);
-//     });
+window.Echo = new Echo({
+    broadcaster: 'reverb',
+    key: import.meta.env.VITE_REVERB_APP_KEY,// Adjust as necessary; may not be needed for Reverb
+    wsHost: import.meta.env.VITE_REVERB_HOST,
+    wsPort:import.meta.env.VITE_REVERB_PORT, // Default port for Reverb; adjust if necessary
+    forceTLS: false,
+    disableStats: true,
+    enabledTransports: ['ws', 'wss'],
+    authEndpoint: '/broadcasting/auth',
+    auth: {
+        headers: {
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    }
+});
+
+// console.log(document.querySelector('meta[name="csrf-token"]').getAttribute('content'))

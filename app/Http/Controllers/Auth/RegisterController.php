@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\helper;
+use App\Models\Option;
 class RegisterController extends Controller
 {
     /*
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-
+    public $logoimg;
     /**
      * Create a new controller instance.
      *
@@ -37,6 +38,11 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        $options = Option::whereIn('key', ['showSecurityQuestion', 'logoimg'])->pluck('value', 'key');
+        $this->logoimg = $options->get('logoimg');
+        view()->share([
+            'logourl' =>  $this->logoimg
+        ]);
         $this->middleware('guest');
     }
 

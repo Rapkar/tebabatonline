@@ -39,7 +39,11 @@ return [
             'driver' => 'local',
             'root' => 'public/uploads/images',
         ],
-
+        'lfm' => [
+            'driver' => 'local',
+            'root' => 'storage/',
+            'throw' => false,
+        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

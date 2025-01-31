@@ -494,3 +494,62 @@ $("#addproblemsrecommendationtopatient").on("click", function (e) {
   });
 })
  
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("Attempting to listen to notifications channel...");
+  var userId=1;
+   window.Echo.private('admin.1')
+  .listen('AdminStream', (e) => {
+    console.log('11111111111111111111111')
+    alert("has message");
+  });
+ 
+});
+
+$("#logoUpload").on("change", function (e) {
+
+  const logoPreview = document.getElementById('logoPreview');
+  const fileInput = event.target;
+
+  if (fileInput.files && fileInput.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+          logoPreview.src = e.target.result;
+      }
+
+      reader.readAsDataURL(fileInput.files[0]);
+  }
+});
+  const logoimgbox = document.getElementById('logoimgbox');
+  if (logoimgbox) {
+   new Dropzone('div#logoimgbox', {
+      url: '/adminpanel/upload/',
+      maxFiles: 1,
+      acceptedFiles: '.jpg, .jpeg, .png, .webp',
+      addRemoveLinks: true,
+      clickable: true,
+      autoProcessQueue: true,
+      dictDefaultMessage: "تصاویر مورد نظر را آپلود کنید",
+      headers: {
+        'X-CSRF-Token': $('input[name="_token"]').val() // Function to retrieve CSRF token
+      },
+      init: function () {
+        this.on("sending", function (file, xhr, formData) {
+
+        });
+        this.on("success", function (file, responseText) {
+          images.push(responseText.location);
+          $("#logoimg").val(images)
+        });
+        console.log($("#logoimg").val());
+        this.on("addedfile", function (file) {
+          console.log($("#logoimg").val());
+
+
+
+        });
+
+      }
+    });
+  }
+

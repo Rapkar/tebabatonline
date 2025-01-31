@@ -9,7 +9,7 @@
 @endif
 
 @auth
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary   ps-5">
+<nav class="navbar navbar-expand-lg navbar-dark  bg-dark   ps-5">
     <a class="navbar-brand" href="#">چت <span class="badge bg-danger rounded-pill">1</span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -82,7 +82,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm ">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img class="logo" src="{{ asset('images/logo.png') }}" alt="Image">
+            <img class="logo" src="{{ $logourl }}" alt="Image">
 
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -153,12 +153,17 @@
                         <a class="dropdown-item" href="#">لیست سفارشات</a>
                     </div>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link " href="{{route('unisharp.lfm.show')}}" aria-labelledby="files"     >مدیریت فایل ها</a>
+ 
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         تنظیمات
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">ویزیت</a>
+                        <a class="dropdown-item" href="{{route('events.show')}}">ارسال نوتیف</a>
+                        <a class="dropdown-item" href="{{ route('options.login') }}">تنظیمات لاگین</a>
                         <a class="dropdown-item" href="{{route('routecache')}}">پاک کردن کش</a>
                     </div>
                 </li>

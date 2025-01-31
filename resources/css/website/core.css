@@ -91,6 +91,13 @@ input {
     font-family: 'Yekan', 'Yekan Bakh FaNum' !important;
 }
 
+body {
+    overflow: auto;
+    max-height: 1900px;
+    height: 100vh;
+
+}
+
 .logo {
     width: 130px;
     height: 70px;
@@ -872,9 +879,11 @@ padding: 1rem; */
     object-position: center;
     border-radius: 15px;
 }
+
 .products .removefromcart button {
-background-color: transparent;
+    background-color: transparent;
 }
+
 .shop-header li a {
     color: #017072;
     font-size: 16px;
@@ -1005,9 +1014,11 @@ background-color: transparent;
     width: 100%;
     min-height: 400px;
 }
-.slidecontainer p{
+
+.slidecontainer p {
     color: #017072;
 }
+
 .slider {
     -webkit-appearance: none;
     width: 100%;
@@ -1271,19 +1282,23 @@ form.added button {
     display: flex;
     justify-content: space-between;
 }
-.cart-detail table{
+
+.cart-detail table {
     border-collapse: separate;
 
     border: none;
 }
-.cart-detail{
+
+.cart-detail {
     border: 3px solid #F4F4F4;
 }
-.cart-detail form{
+
+.cart-detail form {
     display: flex;
     justify-content: center;
 }
-.cart-detail button{
+
+.cart-detail button {
     transition: all 0.3s ease-in;
     opacity: 1;
     color: #fff;
@@ -1439,19 +1454,23 @@ form.added button {
     text-align: right;
 
 }
-.cart .removefromcart{
+
+.cart .removefromcart {
     width: 48px;
     margin-right: 10px;
     display: flex;
 }
-.cart .removefromcart button{
-background-color: transparent;
-border: none;
+
+.cart .removefromcart button {
+    background-color: transparent;
+    border: none;
 }
-.cart  .count .count{
+
+.cart .count .count {
     border: none;
     color: #017072;
 }
+
 .hasborder {
     border: 3px solid #F4F4F4;
     border-radius: 10px !important;
@@ -1608,7 +1627,7 @@ h2.greentitle {
 }
 
 /* user panel */
-.visitdetails{
+.visitdetails {
     margin-top: -3rem;
     /* z-index: 99; */
     /* position: relative; */
@@ -1616,21 +1635,26 @@ h2.greentitle {
     border-radius: 40px;
     box-shadow: 6px 8px 18px;
 }
-.visitdetailsbanner{
+
+.visitdetailsbanner {
     z-index: -1;
     position: relative;
 }
-.problemview th{
+
+.problemview th {
     padding: 10px;
 }
-.problemview td{
+
+.problemview td {
     font-weight: 400;
     font-size: 16px;
 }
-.problemview{
+
+.problemview {
     background-color: #C4E1E1;
     border-radius: 50px;
 }
+
 .vistiitems li {
     list-style: none;
     display: flex;
@@ -1638,11 +1662,13 @@ h2.greentitle {
     align-items: center;
     filter: grayscale();
 }
-.vistiitems li.completed{
+
+.vistiitems li.completed {
     filter: unset;
 }
 
-.vistiitems li a ,.vistiitems li div {
+.vistiitems li a,
+.vistiitems li div {
     padding-top: 1rem;
     width: 100%;
     height: 250px;
@@ -1662,11 +1688,11 @@ h2.greentitle {
     position: relative;
     width: 100%;
     height: 50px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .vistiitems ul {
@@ -1993,4 +2019,21 @@ table tr td {
     padding: 1rem;
     color: #fff;
     border: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .menu{
+        overflow: hidden;
+        position: sticky !important; /* Sticky positioning */
+        bottom: 0;          /* Stick to the top */
+        z-index: 100;
+        background-color: #F4F4F4;
+        height: 70px;
+        align-items: center;
+    
+    }
+    .menu a{
+        color: #017072;
+        text-decoration: none;
+    }
 }

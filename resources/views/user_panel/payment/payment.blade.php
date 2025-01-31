@@ -4,33 +4,34 @@
 
     <div class="row pt-5">
 
-        <div class="col-lg-8" > 
-<div class="col-lg-8 hasborder pb-4">
-    آدرس
-</div>
-<div class=" col-lg-8 hasborder pb-4">
-            <h2 class="d-flex justify-content-start px-3 py-3">آدرس و زمان ارسال</h2>
-            @foreach($visitproducts as $product)
-            <div class="col-lg-12 d-flex align-items-center  px-4 py-4">
-                <img class="cart-img" src="{{$product->image}}">
-                <div class="d-flex flex-column align-items-start">
-                    <h2 class="text-left pb-3">
-                        {{$product->name}}
-                    </h2>
-                    <p>{{$product->expert}}</p><br>
+        <div class="col-lg-8">
+            <div class="col-lg-8 hasborder pb-4">
+                <h2 class="greentitle"> آدرس تحویل سفارش</h2>
+                <p>{{ $usermeta->city .' ' . $usermeta->address}}</p><a href="{{route('editprofile', Auth::user()->id)}}"><img src="{{ asset('images/edit.svg') }}">ویرایش آدرس</a>
+            </div>
+            <div class=" col-lg-8 hasborder pb-4">
+                
+                @foreach($visitproducts as $product)
+                <div class="col-lg-12 d-flex align-items-center  px-4 py-4">
+                    <img class="cart-img" src="{{$product->image}}">
+                    <div class="d-flex flex-column align-items-start">
+                        <h2 class="text-left pb-3">
+                            {{$product->name}}
+                        </h2>
+                        <p>{{$product->expert}}</p><br>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-12 d-flex align-items-center">
+                    <p class="count"><input class="count" name="quanity" type="number" value="1"></p>
+
+                    <p class="mb-0">{{$product->price}}</p><br>
 
                 </div>
 
+                @endforeach
             </div>
-            <div class="col-lg-12 d-flex align-items-center">
-                <p class="count"><input class="count" name="quanity" type="number" value="1"></p>
-
-                <p class="mb-0">{{$product->price}}</p><br>
-
-            </div>
-
-            @endforeach
-        </div>
         </div>
         <div class="col-lg-4 cart-detail">
 

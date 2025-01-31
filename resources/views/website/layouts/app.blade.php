@@ -19,6 +19,7 @@
     <!-- <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet"> -->
 
     <!-- Scripts -->
+
     @vite([ 'resources/js/website/core.js'])
 </head>
 
@@ -39,7 +40,7 @@
                             </button>
                         </form>
                     </div>
-                    <div class="col-lg-5 align-items-center d-flex">
+                    <div class="col-lg-5 align-items-center d-md-flex d-none ">
                         <nav class="navbar navbar-expand-lg   ">
                             <ul class="navbar-nav ">
                                 <li class="nav-item dropdown">
@@ -56,7 +57,7 @@
                                         </a>
                                         <a class="dropdown-item" href="{{route('diseases')}}">
                                             <img src="{{ asset('images/website/menu_b.webp') }}">
-                                           بیماری ها بر اساس اعضای بدن 
+                                            بیماری ها بر اساس اعضای بدن
                                             <p>می تونی بر اساس تک تک اعضای بدن، بیماری ها رو بررسی کنی و راهکار های درمانی شو بخونی</p>
                                         </a>
                                         <a class="dropdown-item" href="{{route('shop')}}">
@@ -77,7 +78,7 @@
                             </ul>
                         </nav>
                     </div>
-                    <div class="col-lg-3 menu">
+                    <div class="col-lg-3 menu d-md-flex d-none">
                         <div class="   d-flex align-items-center shoppingcard">
                             @auth
                             <ul class="col-lg-12 d-flex">
@@ -90,7 +91,7 @@
 
                                 <li class="col-lg-3 d-flex align-items-center pt-2  cart-box "><a href="">
                                         <img class="cart-icon" src="{{ asset('images/cart.svg') }}" alt="cart-icon">
-                                        
+
                                         <span class="quanity">{{$cart}}</span>
 
                                     </a>
@@ -138,6 +139,14 @@
         @yield('content')
     </div>
 
+    <div class="col-lg-3 menu d-flex d-md-none">
+     <div class="row w-100">
+        <div class="col-3 text-center "><a href="#" >خانه</a></div>
+        <div class="col-3 text-center"><a href="#" >دسته بندی</a></div>
+        <div class="col-3 text-center"><a href="#" >سبدخرید</a></div>
+        <div class="col-3 text-center"><a href="#" >من</a></div>
+     </div>
+    </div>
     <footer>
         <div class="container">
             <div class="row px-5 py-5">
@@ -165,6 +174,12 @@
             </div>
         </div>
     </footer>
+    <script>
+    window.User = {
+        id: {{ optional(auth()->user())->id }},
+        // You can add more user data here if needed
+    };
+</script>
 </body>
 
 </html>

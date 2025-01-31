@@ -1,5 +1,7 @@
 import '../bootstrap';
+
 // import Echo from 'laravel-echo';
+// import { io } from "socket.io-client";
 // import Pusher from 'pusher-js';
 import '../../css/website/core.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -119,7 +121,7 @@ if (productsliders != null && productsliders) {
 
 if ($('form[name="addtocart"]').length) {
   // Attach a submit event handler to the form
-  $(document).on('submit', 'form[name="addtocart"]', function(event) {
+  $(document).on('submit', 'form[name="addtocart"]', function (event) {
     var self = $(this);
     event.preventDefault(); // Prevent default form submission
 
@@ -138,7 +140,7 @@ if ($('form[name="addtocart"]').length) {
         product_id: productId // Send product ID
       },
       success: function (response) {
-   
+
         $('.cart-box .quanity').html(response.cart);
         $('.minicart').remove();
         $(".cart-box,.headerslider").append(response.out);
@@ -353,26 +355,7 @@ if (myDropzoneElement) {
   });
 }
 
-// window.Pusher = Pusher;
 
-// Pusher.logToConsole = true;
-// const userId = document.querySelector('meta[name="user-id"]').getAttribute('content');
-// var pusher = new Pusher("723614bfcaeb1ebf3619", {
-//   cluster: 'ap2',
-//   channelAuthorization: {
-//     endpoint: "/pusher_auth.php",
-//     headers: { "X-CSRF-Token": "" + $('input[name="_token"]').val() + "" },
-//   },
-// });
-// // Replace this with the actual user ID dynamically
-// var channel = pusher.subscribe('chat' + userId);
-// channel.bind('message.sent', function (data) {
-//   var classes = 'ref';
-//   if (data.sender_id == userId) {
-//     classes = 'self';
-//   }
-//   $("#messages").append(`<div class="` + classes + `">${data.text}</div>`);
-// });
 
 $('#chat-form').on('submit', function (e) {
   e.preventDefault();
@@ -488,22 +471,22 @@ $("#max-price").on("change", function () {
   $(".max-price").html($(this).val() + " هزار تومان");
 });
 $("form#productfilter").on("submit", function (e) {
-  let minprice=$("#min-price").val();
-  let maxprice=$("#max-price").val();
-  let existproduct=$("#existproduct").val();
+  let minprice = $("#min-price").val();
+  let maxprice = $("#max-price").val();
+  let existproduct = $("#existproduct").val();
   e.preventDefault();
   $.ajax({
     url: '/getproductbyprice',
     type: 'POST',
     data: {
-        existproduct: existproduct,
-        minprice: minprice,
-        maxprice: maxprice,
+      existproduct: existproduct,
+      minprice: minprice,
+      maxprice: maxprice,
       '_token': $('meta[name="csrf-token"]').attr('content'), // Include CSRF token
     },
     success: function (response) {
-     $(".productslider .row").empty();
-     $(".productslider .row").html(response.data);
+      $(".productslider .row").empty();
+      $(".productslider .row").html(response.data);
     },
     error: function (xhr) {
       alert('An error occurred. Please try again later.');
@@ -518,13 +501,13 @@ $("input.count").on("change", function () {
   var val = $(this).val();
   var cart_id = $('input[name="cart_id"]').val();
   var section = $(this).attr("attr-sec");
-  
+
   $.ajax({
     url: '/update-quantity',
     type: 'POST',
     data: {
       product_id: product_id,
-      visit_id:visit_id,
+      visit_id: visit_id,
       section: section,
       cart_id: cart_id,
       quantity: val,
@@ -545,4 +528,60 @@ $("input.count").on("change", function () {
     }
   });
 });
+// window.Echo = new Echo({
+//   broadcaster: 'socket.io',
+//   client: io,
+//   host: '127.0.0.1:6001', // Ensure the port is correct
+//   forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'http') === 'https',
+// });
 
+// Listen for notifications on the specified channel
+// window.Echo.channel('notifications').listen('NotificationSent', (event) => {
+//   alert(1);
+// }); 
+// window.Echo.channel('notifications')
+// .listen('NotificationSent', (e) => {
+//     console.log(e.message); // Check if this logs the message
+// });
+// document.addEventListener('DOMContentLoaded', function () {
+//   window.Echo.channel('notifications')
+//       .listen('NotificationSent', (e) => {
+//           console.log(e.message); // This should log the message to the console
+//           alert(e.message); // This should show an alert with the message
+//       });
+// });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("Attempting to listen to notifications channel...");
+  
+  window.Echo.channel('notifications')
+      .listen('NotificationSent', (e) => {
+          console.log("Received notification:", e.message);
+          alert(e.message);
+      });
+      const userId = window.User.id;
+      window.Echo.channel('admin-stream.'+userId)
+      .listen('AdminStream', (e) => {
+          console.log("Received notification:", e.message);
+          alert(e.message);
+      });
+  
+  console.log("Listening for notifications...");
+});
+// window.Echo.channel('channel_for_er')
+// .listen('NotifyAllUsers', (e) => {
+//     console.log("Received notification:", e.message);
+//     alert(e.message);
+// }); 
+ 
+// document.addEventListener('DOMContentLoaded', function () {
+//   console.log("Attempting to listen to notifications channel...");
+//   var userId=1;
+//    window.Echo.private('admin-stream.1')
+//   .listen('AdminStream', (e) => {
+//     console.log('11111111111111111111111')
+//     alert("has message");
+//   });
+//   console.log("Listening for notifications...");
+// });

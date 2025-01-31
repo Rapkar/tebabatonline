@@ -12,7 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
+    'failed'=>'خطایی وجود دارد',
     'Email' => 'آدرس ایمیل',
     'Name' => 'نام',
     'Address'=>'آدرس',
@@ -25,5 +25,7 @@ return [
     'Forgot' => 'رمز عبور رو فراموش کردم !',
     'Remember' => 'منو یادت باشه!',
     'Logout' => 'خروج',
-    'You are logged in'=>'با موفقیت وارد شدید'
+    'You are logged in'=>'با موفقیت وارد شدید',
+    'Incorrect answer to the security quiz.'=>'پاسخ ارسالی برای این سوال درست نیست!',
+    'write correct value'=>'پاسخ درست را وارد کنید'
 ];

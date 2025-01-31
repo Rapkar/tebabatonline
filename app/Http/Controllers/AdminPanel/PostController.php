@@ -7,9 +7,21 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Option;
+use Illuminate\Support\Facades\Auth;
+
 class PostController extends Controller
 {
-    protected function validator( $request)
+    public $logoimg;
+    public function __construct()
+    {
+        $this->logoimg = Option::where('key', '=', 'logoimg')->value('value');
+        view()->share([
+            'logourl' =>  $this->logoimg
+        ]);
+    }
+
+    protected function validator($request)
     {
         $data = $request->all();
         return Validator::make($data, [
@@ -32,16 +44,20 @@ class PostController extends Controller
     }
     public function index(Request $request)
     {
-        $title=__("admin.Post Page");
-        $posts = Post::take(10)->get();
+        // $url = 'filemanager';
+        // $route = app('router')->getRoutes()->match(app('request')->create($url));
+        // $routeName = $route->getName();
+        // dd($routeName);
+        $title = __("admin.Post Page");
+        $posts = Post::where('user_id', auth()->id())->take(10)->get();
         $items = Post::paginate(10);
-        return view('admin_panel.posts.list-post',compact('posts','title','items'));
+        return view('admin_panel.posts.list-post', compact('posts', 'title', 'items'));
     }
     public function create(Request $request)
     {
-        $title=__("admin.Create Post Page");
-        $categories = Category::where('type','=','posts')->get();
-        return view('admin_panel.posts.create-post',compact('categories','title'));
+        $title = __("admin.Create Post Page");
+        $categories = Category::where('type', '=', 'posts')->get();
+        return view('admin_panel.posts.create-post', compact('categories', 'title'));
     }
     public function store(Request $request)
     {
@@ -55,19 +71,20 @@ class PostController extends Controller
         $Post->content = $request->input('content');
         $Post->expert = $request->input('expert');
         $Slug = $request->input('slug');
-        $Post->slug = str_replace(" ","_",$Slug);
-        $Post->image =$request->input('image');
+        $Post->slug = str_replace(" ", "_", $Slug);
+        $Post->image = $request->input('image');
         $Post->status = $request->input('status');
+        $Post->user_id = Auth::user()->id;
         $Post->save();
-        if($request->input('category')){
+        if ($request->input('category')) {
             $categories = $request->input('category');
             $Post = Post::find($Post->id);
-            foreach($categories as $category) {
+            foreach ($categories as $category) {
                 $category = Category::find($category);
                 $Post->categories()->attach($category->id);
             }
         }
-        
+
 
         return redirect()->route('posts'); // redirect to the users index page
     }
@@ -81,52 +98,94 @@ class PostController extends Controller
             // handle error
         }
     }
-    public function edit($id){
+    public function edit($id)
+    {
         $post = Post::all()->find($id);
-        $categories = Category::where('type','=','posts')->get();
-          $cats=$post->categories()->get();
-          $ids=[];
-          foreach($cats as $cat){
-            $ids[]=$cat->id;
-          }
-         
-        $title=__("admin.Edit Post Page");  
-         return view('admin_panel.posts.edit-post',compact('post','categories','ids','title'));
+        $categories = Category::where('type', '=', 'posts')->get();
+        $cats = $post->categories()->get();
+        $ids = [];
+        foreach ($cats as $cat) {
+            $ids[] = $cat->id;
+        }
+
+        $title = __("admin.Edit Post Page");
+        return view('admin_panel.posts.edit-post', compact('post', 'categories', 'ids', 'title'));
     }
     public function update(Request $request, $id)
     {
-        $Post =Post::find($id);
+        $Post = Post::find($id);
 
         $Post->name = $request->input('name');
         $Post->content = $request->input('content');
         $Post->expert = $request->input('expert');
         $Post->slug = $request->input('slug');
-        $Post->image =$request->input('image');
- 
-        
+        $Post->image = $request->input('image');
+
+
         // $Post->image =$url;
         $Post->status = $request->input('status');
-        
-      #  $user->address = $request->input('address');
-      if ($request->input('category')) {
-        $categories = $request->input('category');
 
-        // Detach all current categories
-        $Post->categories()->detach();
+        #  $user->address = $request->input('address');
+        if ($request->input('category')) {
+            $categories = $request->input('category');
 
-        // Attach new categories
-        foreach ($categories as $categoryId) {
-            $category = Category::find($categoryId);
-            if ($category) {
-                 $Post->categories()->attach($categoryId);
+            // Detach all current categories
+            $Post->categories()->detach();
+
+            // Attach new categories
+            foreach ($categories as $categoryId) {
+                $category = Category::find($categoryId);
+                if ($category) {
+                    $Post->categories()->attach($categoryId);
+                }
             }
+        } else {
+            $Post->categories()->detach();
         }
-    }else{
-        $Post->categories()->detach();
+        $Post->save();
 
-    }
-    $Post->save();
-  
         return redirect()->route('posts'); // redirect to the users index page
     }
+
+    public function byfilter(Request $request)
+{
+    // Retrieve filter inputs with default empty values
+    $date = $request->input('date') ?? '';
+    $name = $request->input('name') ?? '';
+    $statuses = $request->input('status') ?? 2; // Default to 'All'
+
+    // Start building the query
+    $query = Post::query();
+    $query->where('user_id', '=', Auth::user()->id);
+
+    // Apply filters if they are provided
+    if (!empty($date)) {
+        // Assuming 'created_at' is the date column you want to filter by
+        $query->whereDate('created_at', '=', $date);
+    }
+
+    if (!empty($name)) {
+        // Filter by name (assuming 'name' is a column in the posts table)
+        $query->where('name', 'LIKE', '%' . $name . '%');
+    }
+
+    // Only apply status filter if it's not 'All'
+    if ($statuses != 2) {
+        // Filter by selected status
+        $query->where('status', '=', $statuses);
+    }
+
+    // Execute the query and get the results, using pagination
+    $posts = $query->paginate(10); // Use pagination directly on the filtered query
+    $items= $query->paginate(10);
+    // Set a title for the view (make sure to define this variable)
+    $title = 'Filtered Posts'; // You can customize this as needed
+
+    // Return a view with the filtered posts
+    return view('admin_panel.posts.list-post', compact('posts', 'title','items'));
+}
+
+    
+    
+    
 }
