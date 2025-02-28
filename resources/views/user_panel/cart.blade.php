@@ -58,7 +58,7 @@
                 </tr>
             </table>
 
-            <form action="{{route('payment')}}" name="">
+            <form action="{{route('payment')}}" method="post" name="">
                 @csrf
                 <button type="submit">تایید و تکمیل سفارش</button>
             </form>

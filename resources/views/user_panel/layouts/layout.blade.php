@@ -12,7 +12,7 @@
                         <td><a href="">سفارش ها</a></td>
                     </tr>
                     <tr>
-                        <td><a href="">سبدخرید</a></td>
+                        <td><a href="{{route(name: 'cart')}}">سبدخرید</a></td>
                     </tr>
                     <tr>
                         <td><a href="{{route('forms')}}">فرم های ویزیت</a></td>

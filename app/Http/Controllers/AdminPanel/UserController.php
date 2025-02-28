@@ -9,9 +9,18 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Option;
 
 class UserController extends Controller
 {
+    public $logoimg;
+    public function __construct()
+    {
+        $this->logoimg = Option::where('key', '=', 'logoimg')->value('value');
+        view()->share([
+            'logourl' =>  $this->logoimg
+        ]);
+    }
 
     public function index(Request $request)
     {

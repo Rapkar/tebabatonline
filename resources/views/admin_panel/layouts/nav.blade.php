@@ -150,7 +150,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" aria-labelledby="users" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>سفارشات</a>
                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="users">
-                        <a class="dropdown-item" href="#">لیست سفارشات</a>
+                        <a class="dropdown-item" href="{{route('order.list')}}">لیست سفارشات</a>
                     </div>
                 </li>
                 <li class="nav-item ">
@@ -163,7 +163,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{route('events.show')}}">ارسال نوتیف</a>
-                        <a class="dropdown-item" href="{{ route('options.login') }}">تنظیمات لاگین</a>
+                        <a class="dropdown-item" href="{{ route('options.login') }}">تنظیمات </a>
                         <a class="dropdown-item" href="{{route('routecache')}}">پاک کردن کش</a>
                     </div>
                 </li>

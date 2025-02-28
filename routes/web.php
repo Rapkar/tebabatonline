@@ -138,6 +138,9 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     Route::get('deletecat/catid={id}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'delete'])->name('deletecat');
 
 
+ 
+  
+
     //Ajax
     // Route::post('getusersbyrole', [App\Http\Controllers\AdminPanel\PostController::class, 'getusersbyrole'])->name('getusersbyrole');
 
@@ -161,7 +164,8 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     // Route::get('neworder', [App\Http\Controllers\AdminPanel\ProductController::class, 'create'])->name('newproduct');
     // Route::get('edit/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'edit'])->name('editproduct');
     // Route::post('update/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'update'])->name('update');
-    Route::get('orders', [App\Http\Controllers\AdminPanel\OrderController::class, 'index'])->name('orderlist');
+    Route::get('orders', [App\Http\Controllers\AdminPanel\OrderController::class, 'index'])->name('order.list');
+    Route::get('order/{id}', [App\Http\Controllers\AdminPanel\OrderController::class, 'edit'])->name('order.progress');
     // Route::post('store', [App\Http\Controllers\AdminPanel\ProductController::class, 'store'])->name('productstore');
     // Route::get('delete/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'delete'])->name('deleteproduct');
 
@@ -324,6 +328,3 @@ Route::get('/caches/clear', function () {
     Artisan::call('route:cache');
     return redirect()->back()->with('success', 'cache removed');
 })->name('routecache');
-
-
-

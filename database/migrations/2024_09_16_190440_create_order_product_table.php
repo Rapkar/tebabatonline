@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_product', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->id(); // Auto-incrementing ID for the order item
             $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade'); // Reference to the order
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade'); // Reference to the product
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_product');
+        Schema::dropIfExists('order_products');
     }
 };

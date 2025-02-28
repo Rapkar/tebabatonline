@@ -5,26 +5,29 @@
   <table class="table table-striped table-bordered table-rtl">
     <thead>
       <tr>
-        <th>نام پست</th>
-        <th>وضعیت انتشار</th>
-        <th>تعداد بازدید</th>
+        <th>شماره سفارش</th>
+        <th>تاریخ سفارش</th>
+        <th>نام خریدار </th>
+        <th>وضعیت سفارش</th>
+        <th>مبلغ(تومان)</th>
         <th>عملیات</th>
       </tr>
     </thead>
     <tbody>
       <!-- Users list goes here -->
 
-      @foreach($posts as $post)
+      @foreach($orders as $order)
       <tr>
-        <td>{{ $post->name }}</td>
+        <td>{{ $order->id }}</td>
+        <td>@Jdate($order->created_at)</td>
+        <td>{{ $order->user->name }}</td>
         <td>
-          <span class="status {{ $post->status == 1 ? 'green' : 'red' }} "> </span>
+          <span class="status {{ $order->status == 1 ? 'green' : 'red' }} "> </span>
         </td>
-        <td>{{ $post->count }}</td>
+        <td>{{ number_format($order->total_amount) }}</td>
         <td>
-          <a href="{{ route('editpost', $post->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> ویرایش </a>
-          <a href="{{ route('delete', $post->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="حذف"> حذف </a>
-          <a   href="{{ route('articles', $post->slug) }}" target="_new" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="نمایش پست"> نمایش </a>
+          <a href="{{ route('order.progress', $order->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> بررسی </a>
+          <a href="{{ route('delete', $order->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="حذف"> حذف </a>
         </td>
       </tr>
 
