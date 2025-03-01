@@ -56,5 +56,7 @@ return [
     'by status' => 'براساس وضعیت',
     'by result' => 'مشاهده نتیجه',
     'search' => 'جستجو',
-    'show result'=>'بررسی نتیجه'
+    'show result'=>'بررسی نتیجه',
+    'Order Page'=>'سفارشات',
+    'direct'=>'پرداخت مستقیم'
 ];

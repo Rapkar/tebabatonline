@@ -1,16 +1,18 @@
 .logo {
-    width: 300px;
-    height: 100px;
+    width: 65px;
+    height: 65px;
     object-fit: contain;
     max-width: 300px;
     display: block;
     position: relative;
 }
-.navbar{
+
+.navbar {
     transition: all 1s;
     opacity: 1;
 
 }
+
 a.navbar-brand {
     position: relative;
     max-width: 300px;
@@ -215,35 +217,62 @@ a.navbar-brand {
     display: block;
     background-image: url('../../images/upload.png');
 }
-.patient-detail{
+
+.patient-detail {
     max-height: 320px;
     height: 320px;
     overflow: scroll;
 }
-.patient-img{
+
+.patient-img {
     width: 300px;
 }
-.hasbtnborder > tbody > tr{
-    border-bottom:5px solid #7000F73B;
+
+.hasbtnborder>tbody>tr {
+    border-bottom: 5px solid #7000F73B;
     padding: 15px;
 }
-.hasbtnborder   button,.hasbtnborder   a
-{
+
+.hasbtnborder button,
+.hasbtnborder a {
     min-width: 150px;
 }
-.hasbtnborder  th{
+
+.hasbtnborder th {
     min-width: 150px;
 }
-#totalprice p{
+
+#totalprice p {
     white-space: nowrap;
 }
+
 #products tr:nth-child(odd) {
     background-color: #7575754a;
     color: #000;
-  }
- .form-switch{
+}
+
+.form-switch {
     width: fit-content;
- }
- .logoimg{
+}
+
+.logoimg {
     max-width: 200px;
- }
+}
+
+.sidebar {
+    left: 0;
+    height: 100%;
+    backdrop-filter: blur(28px);
+    background-color: #212529;
+    z-index: 9;
+}
+
+#chatbox a {
+    margin: auto;
+    top: 1rem;
+
+}
+#chatbox .full{
+visibility: hidden;
+pointer-events: none;
+}

@@ -26,7 +26,7 @@
         </td>
         <td>{{ number_format($order->total_amount) }}</td>
         <td>
-          <a href="{{ route('order.progress', $order->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> بررسی </a>
+          <a href="{{ route('order.review', $order->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="ویرایش"> بررسی </a>
           <a href="{{ route('delete', $order->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="حذف"> حذف </a>
         </td>
       </tr>

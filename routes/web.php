@@ -21,7 +21,8 @@ use App\Http\Middleware\LimitLoginAttempts;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\FileManagerController;
-
+use Haruncpi\LaravelSimpleFilemanager\Model\Filemanager;
+ 
 // Route::get('/send-notification', function () {
 //     // Log::info('Broadcasting NotificationSent event');
 //     $user=Auth::user();
@@ -79,6 +80,7 @@ Route::get('/getuser', [App\Http\Controllers\HomeController::class, 'getuser'])-
 
 Route::middleware(LimitLoginAttempts::class)->group(function () {
     Auth::routes();
+
 });
 
 Route::get('/tebateba1', [App\Http\Controllers\HomeController::class, 'index'])->name('auth');
@@ -95,7 +97,7 @@ Route::get('/tebateba1', [App\Http\Controllers\HomeController::class, 'index'])-
 
 // Grouping admin panel routes with AdminMiddleware
 Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function () {
-
+  
     /********************* *************************/
     /*************** User Manager *******************/
     /********************* *************************/
@@ -165,7 +167,9 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     // Route::get('edit/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'edit'])->name('editproduct');
     // Route::post('update/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'update'])->name('update');
     Route::get('orders', [App\Http\Controllers\AdminPanel\OrderController::class, 'index'])->name('order.list');
-    Route::get('order/{id}', [App\Http\Controllers\AdminPanel\OrderController::class, 'edit'])->name('order.progress');
+    Route::get('orders/chart', [App\Http\Controllers\AdminPanel\OrderController::class, 'chart'])->name('order.chart');
+    Route::get('order/{id}', [App\Http\Controllers\AdminPanel\OrderController::class, 'edit'])->name('order.review');
+    Route::post('order/{id}', [App\Http\Controllers\AdminPanel\OrderController::class, 'update'])->name('order.progress');
     // Route::post('store', [App\Http\Controllers\AdminPanel\ProductController::class, 'store'])->name('productstore');
     // Route::get('delete/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'delete'])->name('deleteproduct');
 
@@ -175,6 +179,12 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
 
     Route::get('/robots', [BotController::class, 'index'])->name('get.robot');
     Route::post('/robots', [BotController::class, 'update'])->name('update.robot');
+
+
+ 
+        // Include the package routes
+
+    
 });
 
 

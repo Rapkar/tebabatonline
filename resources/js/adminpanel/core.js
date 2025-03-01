@@ -38,6 +38,78 @@ import jquery from 'jquery';
 import { parse } from '@fortawesome/fontawesome-svg-core';
 
 import Echo from 'laravel-echo';
+import Chart from 'chart.js/auto';
+import { getRelativePosition } from 'chart.js/helpers';
+
+if (document.getElementById('chart1')) {
+  const datas = {
+    labels: [2010, 2011, 2012, 2013, 2014, 2015, 2016], // X-axis labels
+    datasets: [{
+      label: 'Count', // Label for the dataset
+      data: [10, 20, 15, 25, 22, 30, 28], // Y-axis data
+      borderColor: 'rgb(150, 35, 64)', // Line color
+      borderWidth: 2, // Line width
+      fill: false // Do not fill under the line
+    }]
+  };
+
+  const ctxz = document.getElementById('chart1');
+  const chart = new Chart(ctxz, {
+    type: 'line',
+    data: datas,
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: ['تعداد فروش', 'زمان'], // Array of titles
+          font: {
+            size: 16 // Font size for the titles
+          },
+          padding: {
+            top: 10,
+            bottom: 20 // Adjust padding as needed
+          },
+          align: 'center' // Align titles to the center
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'زمان', // Y-axis title
+            font: {
+              size: 14
+            }
+          },
+          type: 'linear', // Use 'linear' for numeric x-axis
+          position: 'bottom'
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'تعداد سفارشات', // Y-axis title
+            font: {
+              size: 14
+            }
+          },
+          beginAtZero: true // Start y-axis from 0
+        }
+      },
+      onClick: (e) => {
+        const canvasPosition = getRelativePosition(e, chart);
+
+        // Substitute the appropriate scale IDs
+        const dataX = chart.scales.x.getValueForPixel(canvasPosition.x);
+        const dataY = chart.scales.y.getValueForPixel(canvasPosition.y);
+        console.log(`Clicked at X: ${dataX}, Y: ${dataY}`);
+      }
+    }
+  });
+}
+
+
+
 
 $("#access").on("change", function () {
   $.ajax({
