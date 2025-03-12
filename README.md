@@ -1,9 +1,9 @@
 # TCRM
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
-[![GitHub Stars](https://img.shields.io/github/stars/[Your Username]/TCRM.svg)](https://github.com/[Your Username]/TCRM/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/[Your Username]/TCRM.svg)](https://github.com/[Your Username]/TCRM/network)
-[![GitHub Issues](https://img.shields.io/github/issues/[Your Username]/TCRM.svg)](https://github.com/[Your Username]/TCRM/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/Rapkar/TCRM.svg)](https://github.com/Rapkar/TCRM/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/Rapkar/TCRM.svg)](https://github.com/Rapkar/TCRM/network)
+[![GitHub Issues](https://img.shields.io/github/issues/Rapkar/TCRM.svg)](https://github.com/Rapkar/TCRM/issues)
 
 ## Description
 
