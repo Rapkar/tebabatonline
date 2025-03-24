@@ -642,3 +642,14 @@ $("#title").on("keyup", function() {
   console.log(slug); // Debug: Check the generated slug
   $("#permalink").val(slug); // Set the value of #permalink
 });
+
+
+
+
+// const container = document.getElementById('chatboxmessages');
+
+// function scrollToBottom() {
+//     container.scrollTop = container.scrollHeight;
+// }
+// document.addEventListener('DOMContentLoaded', scrollToBottom);
+// container.addEventListener('DOMNodeInserted', scrollToBottom);

@@ -18,7 +18,7 @@ class PostController extends Controller
     public $messages;
     public function __construct()
     {
-    
+
         $this->logoimg = Option::where('key', '=', 'logoimg')->value('value');
         view()->share([
             'logourl' =>  $this->logoimg
@@ -48,20 +48,21 @@ class PostController extends Controller
     }
     public function index(Request $request)
     {
-        $sendmessages=Message::where('sender_id', Auth::id())
-        ->whereNotNull('text')
-        ->get();
+        // $sendmessages=Message::where('receiver_id', Auth::id())
+        // ->whereNotNull('text')
+        // ->groupBy('sender_id')
+        // ->get();
+
+
+        $sendmessages  = Message::where('receiver_id', Auth::id())
+            ->whereNotNull('text')
+            ->get()
+            ->groupBy('sender_id');
  
-    
-  
-        // $url = 'filemanager';
-        // $route = app('router')->getRoutes()->match(app('request')->create($url));
-        // $routeName = $route->getName();
-        // dd($routeName);
         $title = __("admin.Post Page");
         $posts = Post::where('user_id', auth()->id())->take(10)->get();
         $items = Post::paginate(10);
-        return view('admin_panel.posts.list-post', compact('posts', 'title', 'items','sendmessages'));
+        return view('admin_panel.posts.list-post', compact('posts', 'title', 'items', 'sendmessages'));
     }
     public function create(Request $request)
     {
@@ -158,44 +159,40 @@ class PostController extends Controller
     }
 
     public function byfilter(Request $request)
-{
-    // Retrieve filter inputs with default empty values
-    $date = $request->input('date') ?? '';
-    $name = $request->input('name') ?? '';
-    $statuses = $request->input('status') ?? 2; // Default to 'All'
+    {
+        // Retrieve filter inputs with default empty values
+        $date = $request->input('date') ?? '';
+        $name = $request->input('name') ?? '';
+        $statuses = $request->input('status') ?? 2; // Default to 'All'
 
-    // Start building the query
-    $query = Post::query();
-    $query->where('user_id', '=', Auth::user()->id);
+        // Start building the query
+        $query = Post::query();
+        $query->where('user_id', '=', Auth::user()->id);
 
-    // Apply filters if they are provided
-    if (!empty($date)) {
-        // Assuming 'created_at' is the date column you want to filter by
-        $query->whereDate('created_at', '=', $date);
+        // Apply filters if they are provided
+        if (!empty($date)) {
+            // Assuming 'created_at' is the date column you want to filter by
+            $query->whereDate('created_at', '=', $date);
+        }
+
+        if (!empty($name)) {
+            // Filter by name (assuming 'name' is a column in the posts table)
+            $query->where('name', 'LIKE', '%' . $name . '%');
+        }
+
+        // Only apply status filter if it's not 'All'
+        if ($statuses != 2) {
+            // Filter by selected status
+            $query->where('status', '=', $statuses);
+        }
+
+        // Execute the query and get the results, using pagination
+        $posts = $query->paginate(10); // Use pagination directly on the filtered query
+        $items = $query->paginate(10);
+        // Set a title for the view (make sure to define this variable)
+        $title = 'Filtered Posts'; // You can customize this as needed
+
+        // Return a view with the filtered posts
+        return view('admin_panel.posts.list-post', compact('posts', 'title', 'items'));
     }
-
-    if (!empty($name)) {
-        // Filter by name (assuming 'name' is a column in the posts table)
-        $query->where('name', 'LIKE', '%' . $name . '%');
-    }
-
-    // Only apply status filter if it's not 'All'
-    if ($statuses != 2) {
-        // Filter by selected status
-        $query->where('status', '=', $statuses);
-    }
-
-    // Execute the query and get the results, using pagination
-    $posts = $query->paginate(10); // Use pagination directly on the filtered query
-    $items= $query->paginate(10);
-    // Set a title for the view (make sure to define this variable)
-    $title = 'Filtered Posts'; // You can customize this as needed
-
-    // Return a view with the filtered posts
-    return view('admin_panel.posts.list-post', compact('posts', 'title','items'));
-}
-
-    
-    
-    
 }

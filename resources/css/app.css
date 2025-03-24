@@ -374,3 +374,18 @@ fieldset{
   border-radius: 10px;
   padding: 1rem !important;
 }
+.chatboxmessages{
+    padding: 2rem !important;
+    overflow: scroll;
+    background-color: #474f57;
+    max-height: 500px;
+    display: flex;
+  flex-direction: column;
+}
+li.self{
+    text-align: center;
+    width: fit-content;
+    display: flex !important;
+    justify-content: flex-end !important;
+    float: right;
+}
