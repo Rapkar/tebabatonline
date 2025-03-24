@@ -37,7 +37,7 @@ import 'lightbox2/dist/js/lightbox';
 import jquery from 'jquery';
 import { parse } from '@fortawesome/fontawesome-svg-core';
 
-import Echo from 'laravel-echo';
+// import Echo from 'laravel-echo';
 import Chart from 'chart.js/auto';
 import { getRelativePosition } from 'chart.js/helpers';
 
@@ -478,7 +478,7 @@ $("select[name='product']").on("change", function () {
       console.log(t);
       $('#Recommendationproduct').empty();
       $('#Recommendationproduct').html(t);
-        
+
     },
     error: function (data) {
       alert(data.responseText);
@@ -511,10 +511,10 @@ $("#addrecommendationtopatient").on("click", function (e) {
       // data = JSON.parse(data);
       var t = '';
       if (data) {
-      //   data.forEach((item) => {
-      //     t += "<tr value='" + item.id + "'>" + item.content + "</option>"
-      //   })
-       }
+        //   data.forEach((item) => {
+        //     t += "<tr value='" + item.id + "'>" + item.content + "</option>"
+        //   })
+      }
       $('select[attr-target="Recommendations"]').html(data.data);
       jquery(".btn-close").click();
       $("#recommendation").empty();
@@ -565,16 +565,14 @@ $("#addproblemsrecommendationtopatient").on("click", function (e) {
     }
   });
 })
- 
+
 document.addEventListener('DOMContentLoaded', function () {
-  console.log("Attempting to listen to notifications channel...");
-  var userId=1;
-   window.Echo.private('admin.1')
-  .listen('AdminStream', (e) => {
-    console.log('11111111111111111111111')
-    alert("has message");
-  });
- 
+  var receiverId=1;
+  Echo.private(`messages.${receiverId}`)
+     .listen('MessageSent', (event) => {
+      alert("s");
+         console.log(event.message);
+     });
 });
 
 $("#logoUpload").on("change", function (e) {
@@ -583,45 +581,64 @@ $("#logoUpload").on("change", function (e) {
   const fileInput = event.target;
 
   if (fileInput.files && fileInput.files[0]) {
-      const reader = new FileReader();
+    const reader = new FileReader();
 
-      reader.onload = function(e) {
-          logoPreview.src = e.target.result;
-      }
+    reader.onload = function (e) {
+      logoPreview.src = e.target.result;
+    }
 
-      reader.readAsDataURL(fileInput.files[0]);
+    reader.readAsDataURL(fileInput.files[0]);
   }
 });
-  const logoimgbox = document.getElementById('logoimgbox');
-  if (logoimgbox) {
-   new Dropzone('div#logoimgbox', {
-      url: '/adminpanel/upload/',
-      maxFiles: 1,
-      acceptedFiles: '.jpg, .jpeg, .png, .webp',
-      addRemoveLinks: true,
-      clickable: true,
-      autoProcessQueue: true,
-      dictDefaultMessage: "تصاویر مورد نظر را آپلود کنید",
-      headers: {
-        'X-CSRF-Token': $('input[name="_token"]').val() // Function to retrieve CSRF token
-      },
-      init: function () {
-        this.on("sending", function (file, xhr, formData) {
+const logoimgbox = document.getElementById('logoimgbox');
+if (logoimgbox) {
+  new Dropzone('div#logoimgbox', {
+    url: '/adminpanel/upload/',
+    maxFiles: 1,
+    acceptedFiles: '.jpg, .jpeg, .png, .webp',
+    addRemoveLinks: true,
+    clickable: true,
+    autoProcessQueue: true,
+    dictDefaultMessage: "تصاویر مورد نظر را آپلود کنید",
+    headers: {
+      'X-CSRF-Token': $('input[name="_token"]').val() // Function to retrieve CSRF token
+    },
+    init: function () {
+      this.on("sending", function (file, xhr, formData) {
 
-        });
-        this.on("success", function (file, responseText) {
-          images.push(responseText.location);
-          $("#logoimg").val(images)
-        });
+      });
+      this.on("success", function (file, responseText) {
+        images.push(responseText.location);
+        $("#logoimg").val(images)
+      });
+      console.log($("#logoimg").val());
+      this.on("addedfile", function (file) {
         console.log($("#logoimg").val());
-        this.on("addedfile", function (file) {
-          console.log($("#logoimg").val());
 
 
 
-        });
+      });
 
-      }
-    });
-  }
+    }
+  });
+}
 
+$(".mini.open.chatbtn a").on("click", function () {
+  $(".chatboxfull").slideDown();
+  $(this).parent().css("display", "none");
+  $(".mini.close").css("display", "block");
+})
+$(".mini.close.chatbtn a").on("click", function () {
+  $(".chatboxfull").slideUp();
+  $(this).parent().css("display", "none");
+  $(".mini.open").css("display", "block");
+})
+
+$("#title").on("keyup", function() {
+  var slug = $(this).val()
+    .toLowerCase() // Convert to lowercase
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/[^\w\-\u0600-\u06FF]+/g, ''); // Allow Persian characters (Unicode range for Persian)
+  console.log(slug); // Debug: Check the generated slug
+  $("#permalink").val(slug); // Set the value of #permalink
+});

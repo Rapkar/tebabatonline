@@ -7,12 +7,14 @@
 <div id="catlist">
   @foreach($categories as $category)
     <div id="{{$category->id}}" class="sortable">
+      @if(! $category->order > 0)
       <h2>{{ $category->Label }}</h2>
       @foreach($category->subcategory as $subcategory)
         <div class="subcategory" >
           <p>{{ $subcategory->Label }}</p>
         </div>
       @endforeach
+      @endif
     </div>
   @endforeach
 </div>

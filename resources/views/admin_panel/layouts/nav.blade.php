@@ -9,10 +9,9 @@
 @endif
 
 @auth
-<div class="col-lg-1 position-fixed float-left ms-auto sidebar">
-    <section id="chatbox">
-        <div class="mini"> <a class="navbar-brand text-white w-100 text-center" href="#">چت <span class="badge bg-danger rounded-pill">1</span></a></div>
-        <div class="container py-5 full ">
+<div class="col-lg-10 position-fixed float-left ms-auto sidebar chatboxfull" style="display:none">
+    <section >
+        <div class="container py-5  " >
 
             <div class="row">
 
@@ -206,6 +205,8 @@
     </section>
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark  bg-dark   ps-5">
+<div class="mini chatbtn open" style="" > <a class="navbar-brand text-white w-100 text-center" href="#">چت <span class="badge bg-danger rounded-pill">1</span></a></div>
+<div class="mini chatbtn close" style="display:none" > <a class="navbar-brand text-white w-100 text-center" href="#">چت <span class="badge bg-danger rounded-pill">1</span></a></div>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -335,6 +336,8 @@
                         <a class="dropdown-item" href="{{ route('productlist') }}">لیست محصولات</a>
                         <a class="dropdown-item" href="{{ route('product_newcat','products') }}">افزودن دسته بندی</a>
                         <a class="dropdown-item" href="{{ route('productscats','products') }}">لیست دسته بندی ها </a>
+                        <a class="dropdown-item" href="{{route('medicDashboard')}}">پرطرفدار ترینها</a>
+                  
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -384,7 +387,7 @@
                         <a class="dropdown-item" href="#"></a>
                         <a class="dropdown-item" target="_new" href="{{route('home')}}">وبسایت</a>
                         <a class="dropdown-item" href="{{route('shop')}}">فروشگاه</a>
-                        <a class="dropdown-item" href="{{route('medicDashboard')}}">طبیب</a>
+                        <a class="dropdown-item" href="{{route('medicDashboard')}}">Api</a>
                     </div>
                 </li>
             </ul>

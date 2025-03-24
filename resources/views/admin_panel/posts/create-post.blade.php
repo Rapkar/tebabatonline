@@ -9,7 +9,7 @@
                 @csrf
                 <div class="form-group mb-4">
                     <label for="title">تیتر:</label>
-                    <input required type="text" value="{{ old('name') }}" name="name"  class="form-control" >
+                    <input required  id="title" type="text" value="{{ old('name') }}" name="name"  class="form-control" >
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">محتوا:</label>
@@ -31,7 +31,8 @@
                     <label for="body">آدرس لینک:</label> 
                     website.com/<b>post1</b><br>
                    
-                        <input required  type="text"  value="{{ old('slug') }}" class="form-control" placeholder="آدرس پست من " name="slug" />
+                        <input required id="permalink" type="text"  value="{{ old('slug') }}" class="form-control" placeholder="آدرس پست من " name="slug" />
+                        <small class="form-text text-muted">آدرس لینک</small>
                    
                 </div>
                 <div class="form-group mb-4">
@@ -46,6 +47,8 @@
                         <option value="0">عدم انتشار</option>
                         <option value="1">انتشار</option>
                     </select>
+                    <small class="form-text text-muted">وضعیت فعلی پست خود را انتخاب کنید.</small>
+
                 </div>
 
                 <div class="form-group">

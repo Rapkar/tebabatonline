@@ -175,10 +175,10 @@
         </div>
     </footer>
     <script>
-    window.User = {
-        id: {{ optional(auth()->user())->id }},
-        // You can add more user data here if needed
-    };
+    // window.User = {
+    //     id: {{ optional(auth()->user())->id }},
+    //     // You can add more user data here if needed
+    // };
 </script>
 </body>
 

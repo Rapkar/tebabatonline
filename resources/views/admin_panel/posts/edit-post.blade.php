@@ -44,6 +44,7 @@
                     <div  class="dropzone" id="postimg">
                         <input type="hidden" value="{{$post->image}}" id="image" name="image">
                     </div>
+                    <small class="form-text text-muted">تصویر شاخص پست خود را انتخاب کنید</small>
                 </div>
                 <div class="form-group mb-4">
                     <label for="body">وضعیت:</label>
@@ -51,6 +52,7 @@
                         <option {{ $post->status == 0 ? 'selected' : '' }} value="0">عدم انتشار</option>
                         <option {{ $post->status == 1 ? 'selected' : '' }} value="1">انتشار</option>
                     </select>
+                    <small class="form-text text-muted">وضعیت انتشار پست خود را انتخاب کنید.</small>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">اصلاح پست</button>

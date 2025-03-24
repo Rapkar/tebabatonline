@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\AdminPanel;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Option;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public $logoimg;
+    public $messages;
     public function __construct()
     {
+    
         $this->logoimg = Option::where('key', '=', 'logoimg')->value('value');
         view()->share([
             'logourl' =>  $this->logoimg
@@ -44,6 +48,12 @@ class PostController extends Controller
     }
     public function index(Request $request)
     {
+        $sendmessages=Message::where('sender_id', Auth::id())
+        ->whereNotNull('text')
+        ->get();
+ 
+    
+  
         // $url = 'filemanager';
         // $route = app('router')->getRoutes()->match(app('request')->create($url));
         // $routeName = $route->getName();
@@ -51,7 +61,7 @@ class PostController extends Controller
         $title = __("admin.Post Page");
         $posts = Post::where('user_id', auth()->id())->take(10)->get();
         $items = Post::paginate(10);
-        return view('admin_panel.posts.list-post', compact('posts', 'title', 'items'));
+        return view('admin_panel.posts.list-post', compact('posts', 'title', 'items','sendmessages'));
     }
     public function create(Request $request)
     {

@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Cart::class);
     }
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+    
 }

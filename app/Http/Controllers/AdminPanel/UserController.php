@@ -39,12 +39,12 @@ class UserController extends Controller
         $roles = Role::all();
         return view('admin_panel.users.create-user', compact('roles', 'title'));
     }
-    protected function validator($request)
+    protected function validator($request,$id = null)
     {
         $data = $request->all();
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $id],
             'phone' => ['required', 'string', 'max:20']
         ], [
             'name.required' => __("admin.The name field is required."),
@@ -63,27 +63,26 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $validator = $this->validator($request);
+        $validator = $this->validator($request,$user->id);
         // dd($user);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
         if ($user) {
             $user->name = $request->input('name');
-            $user->email = $request->input('email');
             $user->phone = $request->input('phone');
-            $user->address = $request->input('address');
+            $user->address = $request->input('address') ?? '';
             if ($request->input('password')) {
                 $user->password = bcrypt($request->input('password')); // hash the password
             }
 
-            $user->save();
+            $user->update();
         }
 
         // Update the user's role
         $role = Role::find($request->input('role'));
-        if ($user->hasRole($role)) {
-            $user->roles()->detach();
+        if ($user->roles->isNotEmpty()) {
+            $user->roles()->detach(); // Detach all roles
         }
         if ($role) {
             $user->roles()->attach($role);

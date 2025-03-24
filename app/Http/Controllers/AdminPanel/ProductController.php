@@ -193,4 +193,41 @@ class ProductController extends Controller
         // Return the results as a JSON response
         return response()->json(['data' => $result], 200);
     }
+    public function byfilter(Request $request)
+    {
+        // Retrieve filter inputs with default empty values
+        $date = $request->input('date') ?? '';
+        $name = $request->input('name') ?? '';
+        $statuses = $request->input('status') ?? 2; // Default to 'All'
+    
+        // Start building the query
+        $query = Product::query();
+        $query->where('user_id', '=', Auth::user()->id);
+    
+        // Apply filters if they are provided
+        if (!empty($date)) {
+            // Assuming 'created_at' is the date column you want to filter by
+            $query->whereDate('created_at', '=', $date);
+        }
+    
+        if (!empty($name)) {
+            // Filter by name (assuming 'name' is a column in the posts table)
+            $query->where('name', 'LIKE', '%' . $name . '%');
+        }
+    
+        // Only apply status filter if it's not 'All'
+        if ($statuses != 2) {
+            // Filter by selected status
+            $query->where('status', '=', $statuses);
+        }
+    
+        // Execute the query and get the results, using pagination
+        $products = $query->paginate(10); // Use pagination directly on the filtered query
+        $items= $query->paginate(10);
+        // Set a title for the view (make sure to define this variable)
+        $title = 'Filtered Posts'; // You can customize this as needed
+    
+        // Return a view with the filtered posts
+        return view('admin_panel.products.list-product', compact('products', 'title','items'));
+    }
 }

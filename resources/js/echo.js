@@ -1,22 +1,20 @@
 import Echo from 'laravel-echo';
-import Pusher from 'pusher-js'; // Import Pusher library
- 
+
+import Pusher from 'pusher-js';
 window.Pusher = Pusher;
 
 window.Echo = new Echo({
     broadcaster: 'reverb',
-    key: import.meta.env.VITE_REVERB_APP_KEY,// Adjust as necessary; may not be needed for Reverb
+    key: import.meta.env.VITE_REVERB_APP_KEY,
     wsHost: import.meta.env.VITE_REVERB_HOST,
-    wsPort:import.meta.env.VITE_REVERB_PORT, // Default port for Reverb; adjust if necessary
-    forceTLS: false,
-    disableStats: true,
+    wsPort: import.meta.env.VITE_REVERB_PORT ?? 80,
+    wssPort: import.meta.env.VITE_REVERB_PORT ?? 443,
+    forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
-    authEndpoint: '/broadcasting/auth',
     auth: {
         headers: {
-            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            // 'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
         }
     }
 });
-
-// console.log(document.querySelector('meta[name="csrf-token"]').getAttribute('content'))

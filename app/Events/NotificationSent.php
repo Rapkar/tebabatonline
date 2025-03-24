@@ -11,6 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 
 class NotificationSent extends Notification implements ShouldBroadcast
 {
@@ -28,6 +29,7 @@ class NotificationSent extends Notification implements ShouldBroadcast
     }
     public function broadcastOn()
     {
+
         return new Channel('notifications'); // Ensure this matches what you're listening for
     }
     public function toDatabase($notifiable)

@@ -24,6 +24,7 @@ class home extends Controller
     use UserHelper;
     public function index()
     {
+       
         event(new UserLogedin);
 
         // ارسال رویداد

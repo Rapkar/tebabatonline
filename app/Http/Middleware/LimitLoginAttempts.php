@@ -18,9 +18,9 @@ class LimitLoginAttempts
     {
         $ipAddress = FRequest::ip();
         $key = 'alogin_attempts:' . $ipAddress;
-        if (Cache::has($key) && Cache::get($key) >= $this->maxAttempts) {
-            return response()->json(['message' => 'Too many login attempts. Please try again later.'], 429);
-        }
+        // if (Cache::has($key) && Cache::get($key) >= $this->maxAttempts) {
+        //     return response()->json(['message' => 'Too many login attempts. Please try again later.'], 429);
+        // }
 
         return $next($request);
     }

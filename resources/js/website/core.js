@@ -15,6 +15,9 @@ import Swiper from 'swiper';
 import Dropzone from 'dropzone';
 import 'swiper/swiper-bundle.css';
 import { Pagination, Navigation, EffectFade } from "swiper/modules";
+
+
+
 var headersliderd = document.querySelector('.headerslider');
 if (headersliderd != null && headersliderd) {
   var headerslider = new Swiper(".headerslider", {
@@ -357,33 +360,6 @@ if (myDropzoneElement) {
 
 
 
-$('#chat-form').on('submit', function (e) {
-  e.preventDefault();
-  const message = $('#messageInput').val(); // Ensure this matches your input ID
-
-  // Send AJAX POST request with CSRF token
-  $.ajax({
-    url: '/send-message',
-    type: 'POST',
-    data: {
-      receiver_id: $('select[name="users"]').val(),
-      message: message,
-      '_token': $('input[name="_token"]').val(),// Include CSRF token
-    },
-    success: function (response) {
-      // $("#messages").append(`<div>${response.text}</div>`);
-      var classes = 'ref';
-      if (response.sender_id == userId) {
-        classes = 'self';
-      }
-      $("#messages").append(`<div class="` + classes + `">${response.text}</div>`);
-      $('#messageInput').val(''); // Clear input field on success
-    },
-    error: function (xhr) {
-      console.error('Error:', xhr.responseText); // Handle error response
-    }
-  });
-});
 
 $(".chat-icon").on("click", function () {
   $("#chat-form").slideDown();
@@ -528,60 +504,124 @@ $("input.count").on("change", function () {
     }
   });
 });
-// window.Echo = new Echo({
-//   broadcaster: 'socket.io',
-//   client: io,
-//   host: '127.0.0.1:6001', // Ensure the port is correct
-//   forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'http') === 'https',
-// });
-
-// Listen for notifications on the specified channel
-// window.Echo.channel('notifications').listen('NotificationSent', (event) => {
-//   alert(1);
-// }); 
-// window.Echo.channel('notifications')
-// .listen('NotificationSent', (e) => {
-//     console.log(e.message); // Check if this logs the message
-// });
-// document.addEventListener('DOMContentLoaded', function () {
-//   window.Echo.channel('notifications')
-//       .listen('NotificationSent', (e) => {
-//           console.log(e.message); // This should log the message to the console
-//           alert(e.message); // This should show an alert with the message
-//       });
-// });
 
 
-document.addEventListener('DOMContentLoaded', function () {
-  console.log("Attempting to listen to notifications channel...");
-  
-  window.Echo.channel('notifications')
-      .listen('NotificationSent', (e) => {
-          console.log("Received notification:", e.message);
-          alert(e.message);
-      });
-      const userId = window.User.id;
-      window.Echo.channel('admin-stream.'+userId)
-      .listen('AdminStream', (e) => {
-          console.log("Received notification:", e.message);
-          alert(e.message);
-      });
-  
-  console.log("Listening for notifications...");
-});
-// window.Echo.channel('channel_for_er')
-// .listen('NotifyAllUsers', (e) => {
-//     console.log("Received notification:", e.message);
-//     alert(e.message);
-// }); 
- 
+
 // document.addEventListener('DOMContentLoaded', function () {
 //   console.log("Attempting to listen to notifications channel...");
-//   var userId=1;
-//    window.Echo.private('admin-stream.1')
-//   .listen('AdminStream', (e) => {
-//     console.log('11111111111111111111111')
-//     alert("has message");
-//   });
+
+//   window.Echo.channel('notifications')
+//       .listen('NotificationSent', (e) => {
+//           console.log("Received notification:", e.message);
+//           alert(e.message);
+//       });
+//       const userId = window.User.id;
+//       window.Echo.channel('admin-stream.'+userId)
+//       .listen('AdminStream', (e) => {
+//           console.log("Received notification:", e.message);
+//           alert(e.message);
+//       });
+
 //   console.log("Listening for notifications...");
 // });
+
+$('#chat-form').on('submit', function (e) {
+  e.preventDefault();
+  // const message = $('#messageInput').val(); // Ensure this matches your input ID
+  const message = 'adssads'; // Ensure this matches your input ID
+
+  // Send AJAX POST request with CSRF token
+  $.ajax({
+    xhrFields: {
+      withCredentials: true  // Send session cookies
+    },
+    url: '/send-message',
+    type: 'POST',
+    data: {
+      'receiver_id': $('select[name="users"]').val(),
+      'message': message,
+      '_token': $('input[name="_token"]').val(),// Include CSRF token
+    },
+    success: function (response) {
+      // $("#messages").append(`<div>${response.text}</div>`);
+      var classes = 'ref';
+      if (response.sender_id == 1) {
+        classes = 'self';
+      }
+      $("#messages").append(`<div class="` + classes + `">${response.text}</div>`);
+      $('#messageInput').val(''); // Clear input field on success
+    },
+    error: function (xhr) {
+      console.error('Error:', xhr.responseText); // Handle error response
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  // console.log("Attempting to listen to channels...");
+
+  // تنظیمات Laravel Echo
+  const userId = 1; // شناسه کاربر (فرض می‌کنیم این مقدار از backend به frontend منتقل شده است)
+  const otherUserId = 4; // شناسه کاربر دیگر (برای کانال private-chat)
+
+  // // گوش دادن به کانال عمومی notifications
+  // window.Echo.channel('notifications')
+  //   .listen('NotificationSent', (e) => {
+  //     // console.log("Received notification:", e.message);
+  //     alert(`Notification: ${e.message}`);
+  //   })
+  //   .error((error) => {
+  //     console.error("Error listening to notifications channel:", error);
+  //   });
+
+  //  console.log(`private.private-chat.${userId}.${otherUserId}`);
+  const channelName = `chat.${userId}.${otherUserId}`;
+  const channelName2 = `PrivateChat`;
+  const channelName3 = `chat4`;
+
+  // window.Echo.private(channelName2)
+  //     .listen('PrivateChatMessage', (e) => { // Notice the dot prefix
+  //         console.log("Received:", e.message);
+  //         alert(`Notification: ${e.message}`);
+  //     })
+  //     .error((error) => {
+  //         console.error("Channel error:", error);
+  //     });
+
+
+
+  // window.Echo.private('PrivateChat.' + userId)
+  // .listen('PrivateChatMessage', (e) => {
+  //     console.log("Received:", e.message);
+  //     alert(`Notification: ${e.message}`);
+  // })
+  // .error((error) => {
+  //     console.error("Channel error:", error);
+  // });
+
+  // window.Echo.channel('PrivateChat.' + userId)
+  //   .listen('PrivateChatMessage', (e) => {
+  //     // console.log("Received notification:", e.message);
+  //     alert(`Notification: ${e.message}`);
+  //   })
+  //   .error((error) => {
+  //     console.error("Error lزمistening to notifications channel:", error);
+  //   });
+
+
+  // window.Echo.private(`PrivateChat.${userId}`)
+  //   .listen('PrivateChatMessage', (e) => {
+  //     console.log(e.message);
+  //     // Handle the received message
+  //   });
+
+    
+  // console.log("Listening for notifications, admin messages, and private chat messages...");
+});
+
+var receiverId=1;
+Echo.private(`messages.${receiverId}`)
+   .listen('MessageSent', (event) => {
+    alert("s");
+       console.log(event.message);
+   });

@@ -105,6 +105,7 @@ class LoginController extends Controller
                 return redirect()->back()->withErrors(['quiz_answer' => __('auth.Incorrect answer to the security quiz.')]);
             }
         }
+        
         // Clear the session variable
         session()->forget('security_quiz_answer');
 

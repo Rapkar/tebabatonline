@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\AdminStream;
+use App\Events\MessageSent;
 use App\Http\Controllers\AdminPanel\ProductController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\MedicMiddleware;
@@ -22,65 +23,16 @@ use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\FileManagerController;
 use Haruncpi\LaravelSimpleFilemanager\Model\Filemanager;
- 
-// Route::get('/send-notification', function () {
-//     // Log::info('Broadcasting NotificationSent event');
-//     $user=Auth::user();
-//     event(new NotificationSent('Hello! This is a test notification.'));
 
-//     $user->notify(new NotificationSent('Hello! This is a test notification.'));
-
-//     // $medicuserss = User::whereHas('roles', function ($query) {
-//     //     $query->whereIn('name', ['Medic', 'Admin']);
-//     // })->get();
-
-//     // foreach ($medicuserss as $user) {
-
-//     //     $user->notify(new VisitNotification($user, 2));
-//     // }
-//     // event(new NotificationSent('Hello! This is a test notification.'));
-//     // event(new NotifyAllUsers('Hello! This is a test notification.'));
-//     //    broadcast(new NotificationSent('Hello! This is a test notification.'));
-//     return 'Notification sent!';
-// });
-// Route::get('/send-notification-admin', function () {
-//     Log::info('admin NotificationSent event');
-
-//     event(new AdminStream(Auth::user()->id, "test messages"));
-//     // event(new NotifyAllUsers('Hello! This is a test notification.'));
-//     //    broadcast(new NotificationSent('Hello! This is a test notification.'));
-//     return 'Notification sent to admin ' . Auth::user()->id;
-// });
-
-
-Route::get('/test-cache', function (Request $request) {
-    $ipAddress = Request::ip(); // Use $request instead of Request::ip()
-    $key = 'alogin_attempts:' . $ipAddress;
-    $decayMinutes = 15;
-    Cache::forget($key);
-    // Check if the key exists in the cache
-    // if (!Cache::has($key)) {
-    //     // If it doesn't exist, set it with an initial value of 1 and an expiration time
-    //     Cache::put($key, 1, now()->addMinutes($decayMinutes));
-    // } else {
-    //     // If it exists, increment the value
-    //     Cache::increment($key);
-    // }
-
-    // // Optionally, return the current number of attempts
-    // return response()->json([
-    //     'attempts' => Cache::get($key),
-    //     'message' => 'Login attempts recorded.'
-    // ]);
+Route::get('/messages/{friend}', function (User $friend) {
+    broadcast(new MessageSent(1))->toOthers();
 });
-
 
 
 Route::get('/getuser', [App\Http\Controllers\HomeController::class, 'getuser'])->name('getuser');
 
 Route::middleware(LimitLoginAttempts::class)->group(function () {
     Auth::routes();
-
 });
 
 Route::get('/tebateba1', [App\Http\Controllers\HomeController::class, 'index'])->name('auth');
@@ -97,7 +49,7 @@ Route::get('/tebateba1', [App\Http\Controllers\HomeController::class, 'index'])-
 
 // Grouping admin panel routes with AdminMiddleware
 Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function () {
-  
+
     /********************* *************************/
     /*************** User Manager *******************/
     /********************* *************************/
@@ -140,8 +92,8 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     Route::get('deletecat/catid={id}', [App\Http\Controllers\AdminPanel\CategoryController::class, 'delete'])->name('deletecat');
 
 
- 
-  
+
+
 
     //Ajax
     // Route::post('getusersbyrole', [App\Http\Controllers\AdminPanel\PostController::class, 'getusersbyrole'])->name('getusersbyrole');
@@ -157,6 +109,7 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     Route::get('products', [App\Http\Controllers\AdminPanel\ProductController::class, 'index'])->name('productlist');
     Route::post('productstore', [App\Http\Controllers\AdminPanel\ProductController::class, 'store'])->name('productstore');
     Route::get('delete/productid={id}', [App\Http\Controllers\AdminPanel\ProductController::class, 'delete'])->name('deleteproduct');
+    Route::post('product_in', [App\Http\Controllers\AdminPanel\ProductController::class, 'byfilter'])->name('products.filter');
 
     Route::get('/settings/login', [OptionController::class, 'index'])->name('options.login');
     Route::post('/settings/login', [OptionController::class, 'store'])->name('options.store');
@@ -181,10 +134,10 @@ Route::prefix('adminpanel')->middleware(AdminMiddleware::class)->group(function 
     Route::post('/robots', [BotController::class, 'update'])->name('update.robot');
 
 
- 
-        // Include the package routes
 
-    
+    // Include the package routes
+
+
 });
 
 
@@ -290,7 +243,9 @@ Route::prefix('userpanel')->middleware([UserMiddleware::class])->group(function 
     Route::post('/profile/update', [App\Http\Controllers\UserPanel\UserPanelController::class, 'updateprofile'])->middleware('auth')->name('updateprofile');
 });
 
-Route::post('/send-message{friend}', [App\Http\Controllers\ChatController::class, 'sendMessage'])->middleware('auth')->name('sendmessage');
+
+
+Route::post('/send-message', [App\Http\Controllers\ChatController::class, 'sendMessage'])->name('sendmessage');
 Route::get('/messages', [App\Http\Controllers\ChatController::class, 'getMessages'])->name('getmessage');
 Route::post('/update-quantity', [App\Http\Controllers\AdminPanel\ProductController::class, 'updateQuantity'])->name('updateQuantity');
 
